@@ -1,0 +1,48 @@
+@import '../variable.scss';
+@import '../mixins.scss';
+@import '../default.scss';
+
+#how-it-works {
+    .title {
+        font-family: $font-heading;
+        text-align: center;
+        margin-bottom: 30px;
+    }
+
+    #flex-container {
+        display: flex;
+        justify-content: center;
+        align-items: stretch;
+
+        img {
+            display: block;
+            margin-left: auto;
+            margin-right: auto;
+            width: 90px;
+        }
+
+        .card {
+            border-radius: $border-radius;
+            border: 1px solid $black-o-5;
+            padding: 15px;
+            width: 150px;
+            text-align: center;
+            margin: 0 50px;
+            height: calc(100% - 90px);
+
+            .card-title {
+                font-family: $font-heading;
+                font-weight: bold;
+                font-size: 17px;
+                margin-bottom: 15px;
+                text-transform: uppercase;
+            }
+
+            .card-description {
+                font-family: $font-body;
+                font-size: 13px;
+                color: $black-o-6;
+            }
+        }
+    }
+}

@@ -1,0 +1,14 @@
+.navbar {
+  background-color: transparent;
+  border: none;
+  height: 100px;
+}
+
+.navbar .navbar-brand {
+  padding-left: 0;
+}
+
+.navbar #logo {
+  width: 250px;
+}
+/*# sourceMappingURL=default.css.map */
