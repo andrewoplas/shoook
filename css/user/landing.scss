@@ -1,0 +1,86 @@
+@import '../default.scss';
+
+.slick-dots li button:before {
+    font-size: 10px;
+}
+
+.slick-prev:before, .slick-next:before {
+    color:$pink;
+}
+
+.slick-slide {
+    position: relative;
+}
+
+#testimonial {
+    img {
+        width: 100%;
+        filter: brightness(50%);
+    }
+
+    .text-testimonial {
+        z-index: 1000;
+        color: $white;
+        font-family: $font-body;
+        font-size: 17px;
+        position: absolute;
+        padding: 20px;
+        text-align: center;
+        bottom: 0;
+
+        .from {
+            font-family: $font-body;
+            margin-top: 10px;
+            display: block;
+            font-size: 12px;
+        }
+    }
+}
+
+#how-it-works {
+    margin-top: 100px;
+    margin-bottom: 100px;
+
+    .title {
+        font-family: $font-heading;
+        text-align: center;
+        margin-bottom: 30px;
+    }
+
+    #flex-container {
+        display: flex;
+        justify-content: center;
+        align-items: stretch;
+
+        img {
+            display: block;
+            margin-left: auto;
+            margin-right: auto;
+            width: 90px;
+        }
+
+        .card {
+            border-radius: $border-radius;
+            border: 1px solid $black-o-5;
+            padding: 15px;
+            width: 150px;
+            text-align: center;
+            margin: 0 50px;
+            height: calc(100% - 90px);
+
+            .card-title {
+                font-family: $font-heading;
+                font-weight: bold;
+                font-size: 17px;
+                margin-bottom: 15px;
+                text-transform: uppercase;
+            }
+
+            .card-description {
+                font-family: $font-body;
+                font-size: 13px;
+                color: $black-o-6;
+            }
+        }
+    }
+}
