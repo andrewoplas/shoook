@@ -1,3 +1,17 @@
+/* Large Devices, Wide Screens */
+/* Medium Devices, Desktops */
+/* Small Devices, Tablets */
+/* Extra Small Devices, Phones */
+/* Custom, iPhone Retina */
+/*
+    ===================================
+        BREAKPOINTs AND BELOW
+    ===================================
+*/
+/* Large Devices, Wide Screens */
+/* Medium Devices, Desktops */
+/* Small Devices, Tablets */
+/* Extra Small Devices, Phones */
 .navbar {
   background-color: transparent;
   border: none;
@@ -9,6 +23,33 @@
 }
 
 .navbar #logo {
-  width: 250px;
+  width: 200px;
+}
+
+.navbar .navbar-nav {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+
+.navbar .navbar-nav > li {
+  font-family: Noto Sans;
+  font-size: 15px;
+  color: rgba(0, 0, 0, 0.8);
+}
+
+.navbar .navbar-nav .user-dropdown li a {
+  padding-top: 4px;
+  padding-bottom: 4px;
+  font-size: 14px;
+}
+
+.navbar .navbar-nav .user-dropdown li a i {
+  font-size: 15px;
+  vertical-align: middle;
+  margin-right: 3px;
 }
 /*# sourceMappingURL=default.css.map */

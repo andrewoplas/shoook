@@ -1,3 +1,6 @@
+@import 'variable.scss';
+@import 'mixins.scss';
+
 .navbar {
     background-color: transparent;
     border: none;
@@ -8,6 +11,29 @@
     }
 
     #logo {
-        width: 250px;
+        width: 200px;
+    }
+
+    .navbar-nav {
+        display: flex;
+        align-items: center;
+
+        & > li {
+            font-family: $font-body;
+            font-size: 15px;
+            color: $black-o-8;
+        }
+
+        .user-dropdown li a {
+            padding-top: 4px;
+            padding-bottom: 4px;
+            font-size: 14px;
+
+            i {
+                font-size: 15px;
+                vertical-align: middle;
+                margin-right: 3px;
+            }
+        }
     }
 }

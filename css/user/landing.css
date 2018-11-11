@@ -23,7 +23,75 @@
 }
 
 .navbar #logo {
-  width: 250px;
+  width: 200px;
+}
+
+.navbar .navbar-nav {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+
+.navbar .navbar-nav > li {
+  font-family: Noto Sans;
+  font-size: 15px;
+  color: rgba(0, 0, 0, 0.8);
+}
+
+.navbar .navbar-nav .user-dropdown li a {
+  padding-top: 4px;
+  padding-bottom: 4px;
+  font-size: 14px;
+}
+
+.navbar .navbar-nav .user-dropdown li a i {
+  font-size: 15px;
+  vertical-align: middle;
+  margin-right: 3px;
+}
+
+.slick-dots li button:before {
+  font-size: 10px;
+}
+
+.slick-prev:before, .slick-next:before {
+  color: #ff5a5f;
+}
+
+.slick-slide {
+  position: relative;
+}
+
+#testimonial img {
+  width: 100%;
+  -webkit-filter: brightness(50%);
+          filter: brightness(50%);
+}
+
+#testimonial .text-testimonial {
+  z-index: 1000;
+  color: white;
+  font-family: Noto Sans;
+  font-size: 17px;
+  position: absolute;
+  padding: 20px;
+  text-align: center;
+  bottom: 0;
+}
+
+#testimonial .text-testimonial .from {
+  font-family: Noto Sans;
+  margin-top: 10px;
+  display: block;
+  font-size: 12px;
+}
+
+#how-it-works {
+  margin-top: 100px;
+  margin-bottom: 100px;
 }
 
 #how-it-works .title {

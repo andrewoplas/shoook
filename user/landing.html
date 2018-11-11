@@ -10,7 +10,8 @@
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Fjalla+One|Noto+Sans">
     <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-    <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.css"/>
+    <link rel="stylesheet" href="../plugins/slick/slick.css"/>
+    <link rel="stylesheet" href="../plugins/slick/slick-theme.css"/>
     <link rel="stylesheet" href="../css/user/landing.css">
 </head>
 
@@ -34,15 +35,21 @@
                 <!-- Collect the nav links, forms, and other content for toggling -->
                 <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">                
                     <ul class="nav navbar-nav navbar-right">
-                        <li><a href="#">Link</a></li>
-                        <li class="dropdown">
-                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Dropdown <span class="caret"></span></a>
+                        <li><a href="#">Be a vendor</a></li>
+                        <li><a href="#"><u>Earn while you share</u></a></li>
+                        <li><a href="#">Message</a></li>
+                        <li class="dropdown user-dropdown">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+                                <img src="../image/user.png" class="user">
+                            </a>
                             <ul class="dropdown-menu">
-                                <li><a href="#">Action</a></li>
-                                <li><a href="#">Another action</a></li>
-                                <li><a href="#">Something else here</a></li>
-                                <li role="separator" class="divider"></li>
-                                <li><a href="#">Separated link</a></li>
+                                <li><a href="#"><i class="material-icons">edit</i> Edit Profile</a></li>
+                                <li><a href="#"><i class="material-icons">person_add</i> Invite Friends</a></li>
+                                <li><a href="#"><i class="material-icons">record_voice_over</i> Refer Vendor</a></li>
+                                <li><a href="#"><i class="material-icons">settings</i> Account Settings</a></li>
+                                <li><a href="#"><i class="material-icons">assignment_turned_in</i> My Guidebook</a></li>
+                                <li><a href="#"><i class="material-icons">assignment</i> Gift Cards</a></li>
+                                <li><a href="#"><i class="material-icons">arrow_back</i> Logout</a></li>
                             </ul>
                         </li>
                     </ul>
@@ -50,13 +57,73 @@
             </div><!-- /.container-fluid -->
         </nav>
 
-        <div class="testimonial">
-            <div>your content</div>
-            <div>your content</div>
-            <div>your content</div>
+        <div id="testimonial">
+            <div>
+                <p class="text-testimonial">
+                    Lorem ipsum dolor sit amet, consectetur adipiscing elit
+                    <span class="from">— Andrew</span>
+                </p>
+                <img src="../image/sample/birthday-1.jpg">
+            </div>
+            <div>
+                <p class="text-testimonial">
+                    Lorem ipsum dolor sit amet, consectetur adipiscing elit
+                    <span class="from">— Andrew</span>
+                </p>
+                <img src="../image/sample/event-1.jpg">
+            </div>
+            <div>
+                <p class="text-testimonial">
+                    Lorem ipsum dolor sit amet, consectetur adipiscing elit
+                    <span class="from">— Andrew</span>
+                </p>
+                <img src="../image/sample/birthday-2.jpg">
+            </div>
+            <div>
+                <p class="text-testimonial">
+                    Lorem ipsum dolor sit amet, consectetur adipiscing elit
+                    <span class="from">— Andrew</span>
+                </p>
+                <img src="../image/sample/event-2.jpg">
+            </div>
+            <div>
+                <p class="text-testimonial">
+                    Lorem ipsum dolor sit amet, consectetur adipiscing elit
+                    <span class="from">— Andrew</span>
+                </p>
+                <img src="../image/sample/wedding-1.jpg">
+            </div>
+            <div>
+                <p class="text-testimonial">
+                    Lorem ipsum dolor sit amet, consectetur adipiscing elit
+                    <span class="from">— Andrew</span>
+                </p>
+                <img src="../image/sample/birthday-3.jpg">
+            </div>
+            <div>
+                <p class="text-testimonial">
+                    Lorem ipsum dolor sit amet, consectetur adipiscing elit
+                    <span class="from">— Andrew</span>
+                </p>
+                <img src="../image/sample/event-3.jpg">
+            </div>
+            <div>
+                <p class="text-testimonial">
+                    Lorem ipsum dolor sit amet, consectetur adipiscing elit
+                    <span class="from">— Andrew</span>
+                </p>
+                <img src="../image/sample/event-4.jpg">
+            </div>
+            <div>
+                <p class="text-testimonial">
+                    Lorem ipsum dolor sit amet, consectetur adipiscing elit
+                    <span class="from">— Andrew</span>
+                </p>
+                <img src="../image/sample/wedding-2.jpg">
+            </div>
         </div>
 
-        <!-- <div id="how-it-works">
+        <div id="how-it-works">
             <h2 class="title">HOW IT WORKS?</h2>
 
             <div id="flex-container">
@@ -84,20 +151,25 @@
                     </div>
                 </div>
             </div>
-        </div> -->
+        </div>
     </div>    
     
     <!-- Scripts -->
     <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>  
-    <script type="text/javascript" src="//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js"></script>
+    <script src="../plugins/slick/slick.min.js"></script>
 
     <script>
-        $('.testimonial').slick({
-            infinite: true,
-            slidesToShow: 3,
-            slidesToScroll: 1
+          $(document).ready(function(){
+            $('#testimonial').slick({
+                slidesToShow: 3,
+                slidesToScroll: 1,
+                // autoplay: true,
+                autoplaySpeed: 2000,
+                dots: true,
+            });
         });
+        
     </script>
 </body>
 </html>
