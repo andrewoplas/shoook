@@ -1,0 +1,95 @@
+/* Large Devices, Wide Screens */
+/* Medium Devices, Desktops */
+/* Small Devices, Tablets */
+/* Extra Small Devices, Phones */
+/* Custom, iPhone Retina */
+/*
+    ===================================
+        BREAKPOINTs AND BELOW
+    ===================================
+*/
+/* Large Devices, Wide Screens */
+/* Medium Devices, Desktops */
+/* Small Devices, Tablets */
+/* Extra Small Devices, Phones */
+#landing-background {
+  min-height: 100vh;
+  background-image: url("/image/landing-bg.jpg");
+  background-size: cover;
+  background-position: center;
+  background-color: rgba(0, 0, 0, 0.1);
+  background-blend-mode: darken;
+}
+
+.navbar {
+  background-color: transparent;
+  border: none;
+  height: 100px;
+}
+
+.navbar .navbar-brand {
+  padding-left: 0;
+}
+
+.navbar #logo {
+  width: 250px;
+}
+
+#search-card {
+  background: white;
+  border-radius: 5px;
+  display: inline-block;
+  position: relative;
+  -webkit-box-shadow: 0 10px 20px rgba(0, 0, 0, 0.19), 0 6px 6px rgba(0, 0, 0, 0.23);
+          box-shadow: 0 10px 20px rgba(0, 0, 0, 0.19), 0 6px 6px rgba(0, 0, 0, 0.23);
+  padding: 5px 25px;
+  padding-bottom: 20px;
+  width: 375px;
+  margin-bottom: 30px;
+}
+
+@media (min-width: 480px) and (max-width: 767px) {
+  #search-card {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+  }
+}
+
+@media only screen and (max-width: 479px) {
+  #search-card {
+    width: 100%;
+  }
+}
+
+#search-card label {
+  font-family: Fjalla One;
+}
+
+#search-card .form-control {
+  font-family: Noto Sans;
+  border-color: rgba(0, 0, 0, 0.3);
+  border-radius: 0;
+}
+
+#search-card .title {
+  font-size: 25px;
+  font-family: Fjalla One;
+  font-weight: bold;
+  margin-bottom: 5px;
+}
+
+#search-card .tagline {
+  font-size: 16px;
+  font-family: Noto Sans;
+  margin-bottom: 5px;
+}
+
+#search-card .btnSearch {
+  color: white;
+  font-family: Noto Sans;
+  font-size: 16px;
+  border-radius: 0;
+  background-color: #ff5a5f;
+}
+/*# sourceMappingURL=index.css.map */

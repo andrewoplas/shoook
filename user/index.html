@@ -1,0 +1,117 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <title>Shoook</title>
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- Styles & Fonts -->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Fjalla+One|Noto+Sans">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <link rel="stylesheet" href="../plugins/Timepicki/css/timepicki.css">
+    <link rel="stylesheet" href="../plugins/datepicker/css/datepicker.min.css">
+    <link rel="stylesheet" href="../css/user/index.css">
+</head>
+
+<body>
+    <div id="landing-background">
+        <div class="container">
+            <nav class="navbar navbar-default">
+                <div class="container-fluid">
+                    <!-- Brand and toggle get grouped for better mobile display -->
+                    <div class="navbar-header">
+                        <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+                            <span class="sr-only">Toggle navigation</span>
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                        </button>
+                        <a class="navbar-brand" href="/">
+                            <img id="logo" src="../image/logo.png">
+                        </a>
+                    </div>
+                
+                    <!-- Collect the nav links, forms, and other content for toggling -->
+                    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">                
+                        <ul class="nav navbar-nav navbar-right">
+                            <li><a href="#">Link</a></li>
+                            <li class="dropdown">
+                                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Dropdown <span class="caret"></span></a>
+                                <ul class="dropdown-menu">
+                                    <li><a href="#">Action</a></li>
+                                    <li><a href="#">Another action</a></li>
+                                    <li><a href="#">Something else here</a></li>
+                                    <li role="separator" class="divider"></li>
+                                    <li><a href="#">Separated link</a></li>
+                                </ul>
+                            </li>
+                        </ul>
+                    </div><!-- /.navbar-collapse -->
+                </div><!-- /.container-fluid -->
+            </nav>
+
+            <div id="search-card">
+                <h3 class="title">FIND CATERERS ON SHOOOK</h3>
+                <p class="tagline">Discover an entire lifestyle.</p>
+                <br />
+
+                <form>
+                    <div class="form-group">
+                        <label for="txtOccassion">Type of Occassion</label>
+                        <input type="text" class="form-control" id="txtOccassion" placeholder="e.g. weddings, fiesta, birthdays, debut" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="txtDate">Date</label>
+                        <input type="text" class="form-control" id="txtDate" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="txtTime">Time</label>
+                        <input type="text" class="form-control" id="txtTime" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="txtLocation">Location</label>
+                        <input type="text" class="form-control" id="txtLocation" placeholder="e.g. Cebu City" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="txtGuest">Number of guest</label>
+                        <select class="form-control" id="txtGuest" required>
+                            <option selected disabled>-- Select Number of Guest --</option>
+                            <option value="50">50 Guest</option>
+                            <option value="100">100 Guest</option>
+                            <option value="200">200 Guest</option>
+                            <option value="300">300 Guest</option>
+                            <option value="500">500 Guest</option>
+                        </select>
+                    </div>
+                    
+                    <button type="submit" class="btn btn-block btnSearch">Search</button>
+                </form>
+            </div>
+        </div>
+    </div>
+    
+    
+    <!-- Scripts -->
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <script src="../plugins/Timepicki/js/timepicki.js"></script>
+    <script src="../plugins/datepicker/js/datepicker.js"></script>
+    <script src="../plugins/datepicker/js/i18n/datepicker.en.js"></script>
+
+    <script>
+        $(document).ready(function(){
+            $("#txtTime").timepicki();
+            $('#txtDate').datepicker({
+                minDate: new Date(),
+                language: 'en',
+                dateFormat: 'mm/dd/yyyy'
+            });
+        });
+  </script>
+</body>
+</html>
