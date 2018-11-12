@@ -12,10 +12,19 @@
 /* Medium Devices, Desktops */
 /* Small Devices, Tablets */
 /* Extra Small Devices, Phones */
+.add-border-bottom {
+  border-bottom: 1px solid rgba(0, 0, 0, 0.2);
+}
+
+.add-border-top {
+  border-top: 1px solid rgba(0, 0, 0, 0.2);
+}
+
 .navbar {
   background-color: transparent;
   border: none;
   height: 80px;
+  margin-bottom: 0;
 }
 
 .navbar .navbar-brand {
@@ -66,6 +75,58 @@
   position: absolute;
   left: 0;
   padding: 8px 27px;
+}
+
+.navbar .be-a-vendor {
+  padding: 20px 30px;
+  min-width: 230px;
+}
+
+.navbar .earn {
+  padding: 20px 30px;
+  min-width: 300px;
+}
+
+.navbar .message {
+  padding: 10px 20px;
+  min-width: 350px;
+}
+
+.navbar .message li.line-item {
+  padding: 10px 0;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+}
+
+.navbar .message li.line-item-offer {
+  padding: 20px 0;
+  font-family: Noto Sans;
+  font-weight: bold;
+}
+
+.navbar .message li.line-item-offer i {
+  vertical-align: middle;
+}
+
+.navbar .message .item {
+  font-family: Fjalla One;
+  font-weight: bold;
+}
+
+.navbar ul.nav li.dropdown.hover:hover > ul.dropdown-menu {
+  display: block;
+}
+
+.footer {
+  padding-top: 20px;
+}
+
+.footer .link {
+  font-family: Noto Sans;
+  font-size: 14px;
+  color: rgba(0, 0, 0, 0.5);
+  text-decoration: none !important;
+  display: block;
+  margin-top: 5px;
 }
 
 .font-heading {
@@ -437,7 +498,6 @@
 }
 
 #search-header {
-  border-top: 1px solid rgba(0, 0, 0, 0.2);
   border-bottom: 1px solid rgba(0, 0, 0, 0.2);
   padding: 10px;
   width: 100%;

@@ -5,6 +5,10 @@
     border-bottom: 1px solid rgba(0, 0, 0, 0.2);
 }
 
+.add-border-top {
+    border-top: 1px solid rgba(0, 0, 0, 0.2);
+}
+
 .navbar {
     background-color: transparent;
     border: none;
@@ -56,8 +60,59 @@
             padding: 8px 27px;
         }
     }
+
+    .be-a-vendor {
+        padding: 20px 30px;
+        min-width: 230px;
+    }
+
+    .earn {
+        padding: 20px 30px;
+        min-width: 300px;
+    }
+
+    .message {
+        padding: 10px 20px;
+        min-width: 350px;
+
+        li.line-item {
+            padding: 10px 0;
+            border-bottom: 1px solid $black-o-01;
+        }
+
+        li.line-item-offer {
+            padding: 20px 0;
+            font-family: $font-body;
+            font-weight: bold;
+
+            i {
+                vertical-align: middle;
+            }
+        }
+
+        .item {
+            font-family: $font-heading;
+            font-weight: bold;
+        }
+    }
+
+    ul.nav li.dropdown.hover:hover > ul.dropdown-menu {
+        display: block;    
+    }
 }
 
+.footer {
+    padding-top: 20px;
+
+    .link {
+        font-family: $font-body;
+        font-size: 14px;
+        color: $black-o-5;
+        text-decoration: none !important; 
+        display: block;
+        margin-top: 5px;
+    }
+}
 
 .font-heading {
     font-family: $font-heading;
