@@ -1,0 +1,430 @@
+@import '../default.scss';
+
+#search-header {
+    border-top: 1px solid $black-o-2;
+    border-bottom: 1px solid $black-o-2;
+    padding: 10px;
+    width: 100%;
+
+    .left {
+        display: inline-block;
+    }
+
+    .search-details-text {
+        font-family: $font-heading;
+        margin-right: 25px;
+    }
+
+    .badge-details {
+        font-family: $font-body;
+        color: white;
+        font-size: 14px;
+        font-weight: normal;
+        border-radius: $border-radius;
+        padding: 8px 16px;
+        background-color: $dark-green;
+    }
+    
+    .date {
+        cursor: pointer;
+        
+        .txtDate {
+            width: 0;
+            height: 0;
+            opacity: 0;
+            border: 0;
+        }
+    }
+
+    .map-button-container {
+        span {
+            font-family: $font-heading;
+            margin-right: 5px;
+        }
+
+                
+        @mixin can-toggle-branding(
+        $can-toggle-off-color: #777, 
+        $can-toggle-on-color: #5fc054,
+        $can-toggle-inactive-text: rgba(white, 0.5),
+        $can-toggle-transition: cubic-bezier(0,1,0.5,1)
+        ) 
+        {
+            input[type="checkbox"] {
+                &:checked {
+                    ~ label {
+                        &:hover { color: darken($can-toggle-on-color, 3%); }
+                        
+                        .can-toggle__switch {
+                            background-color: lighten($can-toggle-on-color, 5%);
+                            &:after { color: darken($can-toggle-on-color, 5%); }
+                        }
+                    }
+                    
+                    &:focus, &:hover {
+                        ~ label {
+                            .can-toggle__switch {
+                            background-color: $can-toggle-on-color;
+                            &:after { color: darken($can-toggle-on-color, 10%); }
+                            }
+                        } 
+                    }
+                }
+            }
+        
+            label {    
+                .can-toggle__switch {
+                    transition: background-color 0.3s $can-toggle-transition;
+                    background: lighten($can-toggle-off-color, 5%);
+
+                        &:before { color: $can-toggle-inactive-text; }
+                        &:after {
+                            // Autoprefixer choked here, so making the prefixes explicit
+                            -webkit-transition: -webkit-transform 0.3s $can-toggle-transition;
+                            transition: transform 0.3s $can-toggle-transition;
+                            color: $can-toggle-off-color; 
+                        }
+                }
+            
+            }
+        }
+
+        @mixin can-toggle-appearance 
+        ( 
+        $can-toggle-width: 134px,
+        $can-toggle-height: 36px,
+        $can-toggle-border-radius: 4px,
+        $can-toggle-offset: 2px,
+        $can-toggle-label-font-size: 14px,
+        $can-toggle-switch-font-size: 12px,
+        $can-toggle-shadow: 0 3px 3px rgba(black, 0.4)
+        )
+        {
+            $can-toggle-switch-width: $can-toggle-width/2;
+        
+            input[type="checkbox"] {
+                &:focus ~ label, &:hover ~ label {
+                    .can-toggle__switch {
+                        &:after { 
+                            box-shadow: $can-toggle-shadow; 
+                        } 
+                    }
+                }
+            
+                &:checked {
+                    ~ label {
+                        .can-toggle__switch {
+                            &:after { 
+                                transform: translate3d($can-toggle-width - ($can-toggle-switch-width + $can-toggle-offset),0,0); 
+                            }  
+                        }
+                    }
+                    &:focus, &:hover {
+                        ~ label {
+                            .can-toggle__switch { 
+                                &:after { 
+                                    box-shadow: $can-toggle-shadow; 
+                                } 
+                            }
+                        } 
+                    }
+                }
+            }
+        
+            label {
+                font-size: $can-toggle-label-font-size;
+            
+                .can-toggle__switch {
+                    height: $can-toggle-height;
+                    flex: 0 0 $can-toggle-width;
+                    border-radius: $can-toggle-border-radius;
+                
+                    &:before {
+                        left: $can-toggle-width/2;
+                        font-size: $can-toggle-switch-font-size; 
+                        line-height: $can-toggle-height;
+                        width: $can-toggle-width/2;
+                        padding: 0 12px;
+                    }
+                
+                    &:after {
+                        top: $can-toggle-offset; left: $can-toggle-offset;
+                        border-radius: $can-toggle-border-radius/2;
+                        width: $can-toggle-switch-width - $can-toggle-offset; 
+                        line-height: $can-toggle-height - ($can-toggle-offset*2);
+                        font-size: $can-toggle-switch-font-size;
+                    }
+                
+                    &:hover {
+                        &:after { box-shadow: $can-toggle-shadow; }
+                    }
+                } 
+            }
+        }
+
+        .can-toggle {
+            display: inline-block;
+            width: 60px;
+            vertical-align: middle;
+
+            *, *:before, *:after { 
+                box-sizing: border-box; 
+            }
+        
+            input[type="checkbox"] {
+                opacity: 0;
+                position: absolute;
+                top: 0; left: 0;
+                
+                &[disabled] ~ label {
+                    pointer-events: none;
+                    .can-toggle__switch { opacity: 0.4; }
+                }
+                
+                &:checked {
+                    ~ label {
+                        .can-toggle__switch {
+                        
+                        &:before {
+                            content: attr(data-unchecked);
+                            left: 0;
+                        }
+                        
+                        &:after {
+                            content: attr(data-checked);
+                        }  
+                        }
+                    }
+                }
+            }
+        
+        label {
+            user-select: none;
+            position: relative;
+            display: flex;
+            align-items: center;
+            margin-bottom: 0;
+            vertical-align: middle;
+        
+            .can-toggle__switch {
+                position: relative;
+                
+                &:before {
+                    content: attr(data-checked);
+                    position: absolute;
+                    top: 0;
+                    text-transform: uppercase;
+                    text-align: center;
+                }
+                
+                &:after {
+                    content: attr(data-unchecked);
+                    position: absolute;
+                    z-index: 5;
+                    text-transform: uppercase;
+                    text-align: center;
+                    background: white;
+                    transform: translate3d(0,0,0);
+                }
+            }
+        }
+        
+        // Default values for .can-toggle class
+        @include can-toggle-branding; 
+        @include can-toggle-appearance; 
+
+        &.demo-rebrand-2 {
+            @include can-toggle-branding
+            (
+                #444,  // Off state color
+                $dark-green,  // On state color
+                rgba(white, 0.7),  // Off state text color
+                cubic-bezier(0.860, 0.000, 0.070, 1.000)  // Transition timing function
+            );
+            @include can-toggle-appearance
+            (
+                60px, // Toggle width
+                30px,  // Toggle height
+                60px,   // Toggle border radius
+                2px,   // Offset (distance btw switch and box)
+                13px,  // Label font size
+                13px,  // Switch font size
+                0 4px 4px rgba(black, 0.4) // Switch shadow on hover/focus
+            ); 
+        }
+
+        }
+    }
+}
+
+.quantity-container {
+    background-color: $black-o-01;
+    padding: 10px;
+    margin-top: 10px;
+    border-radius: $border-radius;
+
+    .how-many-text {
+        font-family: $font-heading;
+        font-size: 18px;
+    }
+
+    #frmQuantity {
+        span {
+            font-family: $font-heading;
+            color: $black-o-8;
+        }
+
+        input.form-control {
+            width: 65px;
+            display: inline-block;
+            border-radius: 0;
+            margin-left: 5px;
+            text-align: center;
+        }
+
+        .btnSearch {
+            background-color: $pink;
+            border-radius: $border-radius;
+            padding: 10px;
+            color: white;
+        }
+    }
+}
+
+#results-text {
+    font-family: $font-heading;
+    font-size: 30px;
+    margin-top: 30px;
+    margin-bottom: 20px;
+}
+
+#results-text {
+    font-family: $font-heading;
+    font-size: 30px;
+    margin-top: 30px;
+    margin-bottom: 20px;
+}
+
+#pinpoint-text {
+    font-family: $font-heading;
+    font-size: 20px;
+    margin-top: 30px;
+    margin-bottom: 20px;
+}
+
+
+.results-container {
+    display: flex;
+    justify-content: flex-start;
+    flex-wrap: wrap;    
+    align-content: flex-start;
+
+    .item {
+        cursor: pointer;
+        width: 245px;
+        margin-bottom: 50px;
+
+        span {
+            display: block;
+            font-family: $font-body;
+
+            &.title {
+                font-family: $font-heading;
+                font-size: 20px;
+                margin-top: 10px;
+            }
+
+            &.description {
+                font-size: 14px;
+                margin-bottom: 10px;
+            }
+
+            &.price {
+                font-size: 20px;
+                font-family: $font-heading;
+            }
+
+            &.lay-away {
+                font-weight: bold;
+            }
+        }
+
+        img {
+            width: 100%;
+        }
+    }
+        
+}
+
+#itemBook {
+
+}
+    
+#itemBook {
+    text-align: center;
+    padding: 0!important;
+
+    &:before {
+        content: '';
+        display: inline-block;
+        height: 100%;
+        vertical-align: middle;
+        margin-right: -4px; /* Adjusts for spacing */
+    }
+
+    .modal-content {
+        width: 380px;
+        margin-left: auto;
+        margin-right: auto;
+    }
+        
+    .modal-dialog {
+        display: inline-block;
+        text-align: left;
+        vertical-align: middle;
+    }
+
+    .details-text {
+        font-family: $font-heading;
+        margin-top: 0;
+    }
+
+    .change-menu-text, .add-menu-text {
+        font-family: $font-body;   
+        font-size: 16px;
+        font-weight: bold;
+    }
+
+    .btnBook {
+        font-size: 16px;
+        color: $white;
+        background-color: $pink;
+        padding: 5px 10px;
+        margin-left: auto;
+        margin-right: auto;
+        display: block;
+        width: 100px;
+        margin-top: 30px;
+        margin-bottom: 10px;
+    }
+
+    .menu-container span {
+        border-radius: $border-radius;
+        padding: 5px 10px;  
+        cursor: pointer;
+        margin-bottom: 5px;
+        
+        i {
+            font-size: 14px;
+            vertical-align: middle;
+        }
+    }
+
+    .change-menu-container span {        
+        background-color: $dark-green;
+    }
+
+    .add-menu-container span { 
+        background-color: $blue;
+    }
+}

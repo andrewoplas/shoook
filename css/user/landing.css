@@ -15,7 +15,7 @@
 .navbar {
   background-color: transparent;
   border: none;
-  height: 100px;
+  height: 80px;
 }
 
 .navbar .navbar-brand {
@@ -33,6 +33,7 @@
   -webkit-box-align: center;
       -ms-flex-align: center;
           align-items: center;
+  border-radius: 3px;
 }
 
 .navbar .navbar-nav > li {
@@ -42,15 +43,30 @@
 }
 
 .navbar .navbar-nav .user-dropdown li a {
-  padding-top: 4px;
-  padding-bottom: 4px;
-  font-size: 14px;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  font-size: 16px;
 }
 
 .navbar .navbar-nav .user-dropdown li a i {
-  font-size: 15px;
-  vertical-align: middle;
-  margin-right: 3px;
+  font-size: 21px;
+  vertical-align: bottom;
+  margin-right: 5px;
+}
+
+.navbar .navbar-form {
+  margin-top: 20px;
+}
+
+.navbar .navbar-form .form-control {
+  padding-left: 35px;
+  font-family: Noto Sans;
+}
+
+.navbar .navbar-form .form-control + .glyphicon {
+  position: absolute;
+  left: 0;
+  padding: 8px 27px;
 }
 
 .slick-dots li button:before {
