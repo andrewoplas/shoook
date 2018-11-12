@@ -436,49 +436,150 @@
   padding: 40px;
 }
 
-.customer-details-container hr {
+.payment-details-container {
+  /*  bhoechie tab */
+}
+
+.payment-details-container .btnSubmit {
+  font-family: Noto Sans;
+  background-color: #ff5a5f;
+  padding: 10px 20px;
+  font-size: 17px;
+  color: white;
+  margin-top: 30px;
+  margin-bottom: 20px;
+}
+
+.payment-details-container hr {
   margin-top: 10px;
   margin-bottom: 10px;
   border: 0;
   border-top: 2px solid rgba(0, 0, 0, 0.05);
 }
 
-.customer-details-container .customer-details-text {
+.payment-details-container .payment-details-text {
   font-family: Fjalla One;
 }
 
-.customer-details-container .form-container {
-  background-color: rgba(0, 0, 0, 0.05);
-  padding: 20px;
+.payment-details-container div.bhoechie-tab-container {
+  z-index: 10;
+  background-color: #ffffff;
+  padding: 0 !important;
+  border-radius: 4px;
+  -moz-border-radius: 4px;
+  border: 1px solid #ddd;
+  -webkit-box-shadow: 0 6px 12px rgba(0, 0, 0, 0.175);
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.175);
+  -moz-box-shadow: 0 6px 12px rgba(0, 0, 0, 0.175);
+  background-clip: padding-box;
+  opacity: 0.97;
+  filter: alpha(opacity=97);
 }
 
-.customer-details-container .form-container .gender-label {
+.payment-details-container div.bhoechie-tab-container div.bhoechie-tab div.bhoechie-tab-content:not(.active) {
+  display: none;
+}
+
+.payment-details-container div.bhoechie-tab-menu {
+  padding-right: 0;
+  padding-left: 0;
+  padding-bottom: 0;
+}
+
+.payment-details-container div.bhoechie-tab-menu div.list-group {
+  margin-bottom: 0;
+}
+
+.payment-details-container div.bhoechie-tab-menu div.list-group > a {
+  margin-bottom: 0;
   font-family: Fjalla One;
-  display: inline-block;
-  margin-right: 15px;
-  margin-bottom: 5px;
-  font-weight: 700;
-  color: rgba(0, 0, 0, 0.7);
-  font-size: 16px;
 }
 
-.customer-details-container .form-container .lblInputs {
-  font-family: Fjalla One;
-  color: rgba(0, 0, 0, 0.7);
-  font-size: 16px;
+.payment-details-container div.bhoechie-tab-menu div.list-group > a .material-icons {
+  color: #ff5a5f;
+  font-size: 30px;
 }
 
-.customer-details-container .form-container .form-control, .customer-details-container .form-container .radio-inline {
-  border-radius: 0;
-  font-family: Noto Sans;
+.payment-details-container div.bhoechie-tab-menu div.list-group > a:first-child {
+  border-top-right-radius: 0;
+  -moz-border-top-right-radius: 0;
 }
 
-.customer-details-container .form-container .btnSubmit {
-  font-family: Noto Sans;
+.payment-details-container div.bhoechie-tab-menu div.list-group > a:last-child {
+  border-bottom-right-radius: 0;
+  -moz-border-bottom-right-radius: 0;
+}
+
+.payment-details-container div.bhoechie-tab-menu div.list-group > a.active,
+.payment-details-container div.bhoechie-tab-menu div.list-group > a.active .material-icons {
   background-color: #ff5a5f;
-  padding: 10px 20px;
-  font-size: 17px;
+  background-image: #ff5a5f;
   color: white;
+  border-color: #ff5a5f;
+}
+
+.payment-details-container div.bhoechie-tab-menu div.list-group > a.active:after {
+  content: '';
+  position: absolute;
+  left: 100%;
+  top: 50%;
+  margin-top: -13px;
+  border-left: 0;
+  border-bottom: 13px solid transparent;
+  border-top: 13px solid transparent;
+  border-left: 10px solid #ff5a5f;
+}
+
+.payment-details-container div.bhoechie-tab-menu div.bhoechie-tab-content {
+  background-color: white;
+  padding-left: 20px;
+  padding-top: 10px;
+}
+
+.payment-details-container div.bhoechie-tab-menu div.bhoechie-tab-content * {
+  font-family: Noto Sans;
+}
+
+.payment-details-container .info-container {
+  background-color: rgba(0, 0, 0, 0.05);
+  padding: 10px;
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
+
+.payment-details-container .info-container i {
+  display: inline-block;
+  vertical-align: middle;
+  font-size: 28px;
+}
+
+.payment-details-container .info-container p {
+  margin: 0;
+  display: inline-block;
+}
+
+.payment-details-container .info-container .txtAccountNumber {
+  border-radius: 0;
+  font-size: 25px;
+  padding: 5px;
+  width: 100%;
+  font-weight: bold;
+  text-align: center;
+  font-family: Fjalla One;
+}
+
+.payment-details-container .flex-radio-buttons {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: space-evenly;
+      -ms-flex-pack: space-evenly;
+          justify-content: space-evenly;
+}
+
+.payment-details-container .flex-radio-buttons label {
+  font-family: Fjalla One;
+  font-size: 18px;
 }
 
 .order-container .title-text {
@@ -518,4 +619,54 @@
 .order-container span.lay-away {
   font-weight: bold;
 }
-/*# sourceMappingURL=checkout.css.map */
+
+#printSave {
+  text-align: center;
+  padding: 0 !important;
+}
+
+#printSave:before {
+  content: '';
+  display: inline-block;
+  height: 100%;
+  vertical-align: middle;
+  margin-right: -4px;
+  /* Adjusts for spacing */
+}
+
+#printSave .modal-content {
+  width: 380px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+#printSave .modal-dialog {
+  display: inline-block;
+  text-align: left;
+  vertical-align: middle;
+}
+
+#printSave .btnPrintSave {
+  font-size: 17px;
+  color: white;
+  background-color: #ff5a5f;
+  margin-left: auto;
+  margin-right: auto;
+  display: block;
+  width: 150px;
+  margin-top: 30px;
+  margin-bottom: 10px;
+}
+
+#printSave .price {
+  font-size: 30px;
+  font-family: Fjalla One;
+  margin-top: 20px;
+  margin-bottom: 20px;
+}
+
+#printSave .info-text {
+  font-family: Noto Sans;
+  font-size: 15px;
+}
+/*# sourceMappingURL=payment.css.map */
