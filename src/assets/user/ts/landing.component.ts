@@ -12,6 +12,8 @@ export class LandingComponent implements OnInit {
 
   ngOnInit() { 
     eval("$('#testimonial').slick({slidesToShow: 3,slidesToScroll: 1,autoplay: true,autoplaySpeed: 2000,dots: true})");
+    eval("$('#txtTime').timepicki();");
+    eval("$('#txtDate').datepicker({minDate: new Date(),language: 'en',dateFormat: 'mm/dd/yyyy'});");
   }
   
 }

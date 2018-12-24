@@ -32,7 +32,10 @@
             "scripts": [
               "../shoook/src/plugins/jquery/dist/jquery.min.js",
               "../shoook/src/plugins/bootstrap/dist/js/bootstrap.min.js",
-              "../shoook/src/plugins/slick/slick.min.js"
+              "../shoook/src/plugins/slick/slick.min.js",
+              "../shoook/src/plugins/Timepicki/js/timepicki.js",
+              "../shoook/src/plugins/datepicker/js/datepicker.js",
+              "../shoook/src/plugins/datepicker/js/i18n/datepicker.en.js"
             ]
           },
           "configurations": {

@@ -7,6 +7,7 @@ import { LandingComponent } from '@user/landing.component';
 import { NavbarComponent } from '@user/navbar.component';
 import { InviteComponent } from '@user/invite.component';
 import { FooterComponent } from '@user/footer.component';
+import { SearchComponent } from '@user/search.component';
 
 @NgModule({
   declarations: [
@@ -14,7 +15,8 @@ import { FooterComponent } from '@user/footer.component';
     LandingComponent,
     NavbarComponent,
     InviteComponent,
-    FooterComponent
+    FooterComponent,
+    SearchComponent
   ],
   imports: [
     BrowserModule,
