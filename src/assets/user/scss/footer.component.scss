@@ -1,0 +1,15 @@
+@import './abstract/default.scss';
+
+.footer {
+    padding-top: 20px;
+    padding-bottom: 20px;
+
+    .link {
+        font-family: $font-body;
+        font-size: 14px;
+        color: $black-o-5;
+        text-decoration: none !important; 
+        display: block;
+        margin-top: 5px;
+    }
+}

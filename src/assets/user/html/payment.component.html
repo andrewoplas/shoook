@@ -1,0 +1,159 @@
+<div class="add-border-bottom">
+    <div class="container">
+        <user-navbar></user-navbar>
+    </div>    
+</div>
+
+<div class="container">
+    <div class="row m-b-40">
+        <div class="col-md-8">
+            <div class="payment-details-container">
+                <h2 class="payment-details-text">Payment Details</h2>
+                <hr />
+    
+                <div class="form-container">                        
+                    <div class="col-xs-12 bhoechie-tab-container">
+                        <div class="col-lg-3 col-md-3 col-sm-3 col-xs-3 bhoechie-tab-menu">
+                            <div class="list-group">
+                                <a href="#" class="list-group-item active text-center">
+                                    <i class="material-icons">event_note</i><br/>Lay Away Option
+                                </a>
+                                <a href="#" class="list-group-item text-center">
+                                    <i class="material-icons">store</i><br/>Payment Partner
+                                </a>
+                                <a href="#" class="list-group-item text-center">
+                                    <i class="material-icons">desktop_windows</i><br/>
+                                    Internet Banking <br> (Direct debit)
+                                </a>
+                                <a href="#" class="list-group-item text-center">
+                                    <i class="material-icons">credit_card</i><br/>BigPay
+                                </a>
+                                <a href="#" class="list-group-item text-center">
+                                    <i class="material-icons">desktop_windows</i><br/>Union Pay
+                                </a>
+                            </div>
+                        </div>
+
+                        <div class="col-lg-9 col-md-9 col-sm-9 col-xs-9 bhoechie-tab">
+                            <!-- Lay Away Option -->
+                            <div class="bhoechie-tab-content active">
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <h3 class="font-heading m-b-30">Lay Away Option</h3>
+                                        <div class="info-container">
+                                            <i class="material-icons">notifications</i>
+                                            <p class="font-body">Enjoy zero processing fee if you pay with SHOOOK Lay Away.</p>
+                                        </div>
+
+                                        <h4 class="font-heading m-t-30">Term of Payment</h4>
+                                        <div class="info-container flex-radio-buttons">
+                                            <div>
+                                                <input class="magic-radio" type="radio" name="radio" id="months-6">
+                                                <label for="months-6">6 Months</label>
+                                            </div>
+
+                                            <div>
+                                                <input class="magic-radio" type="radio" name="radio" id="months-12">
+                                                <label for="months-12">12 Months</label>
+                                            </div>
+
+                                            <div>
+                                                <input class="magic-radio" type="radio" name="radio" id="months-15">
+                                                <label for="months-15">15 Months</label>
+                                            </div>
+                                        </div>
+
+                                        <h3 class="text-center font-heading">P1667.00/month</h3>
+
+                                        <h4 class="font-heading m-t-30">Your Account Number</h4>
+                                        <div class="info-container">
+                                            <input type="text" class="txtAccountNumber" />
+                                        </div>
+
+                                        <p class="font-body m-t-20 m-b-15">Use the account number to pay to any branch of M Lhullier, Palawan Pawnshop or click this <a href="#">list to see more payment partner.</a></p>
+
+                                        <button (click)="pay()" type="button" class="btn btn-block btnSubmit">Pay</button>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Payment Partner -->
+                            <div class="bhoechie-tab-content">
+                                <div class="section-center">
+                                    <h1 class="glyphicon glyphicon-road" style="font-size:12em;color:#55518a"></h1>
+                                    <h2 style="margin-top: 0;color:#55518a">Comming Soon</h2>
+                                    <h3 style="margin-top: 0;color:#55518a">Train Reservation</h3>
+                                </div>
+                            </div>
+                
+                            <!-- Internet Banking -->
+                            <div class="bhoechie-tab-content">
+                                <div class="section-center">
+                                    <h1 class="glyphicon glyphicon-home" style="font-size:12em;color:#55518a"></h1>
+                                    <h2 style="margin-top: 0;color:#55518a">Comming Soon</h2>
+                                    <h3 style="margin-top: 0;color:#55518a">Hotel Directory</h3>
+                                </div>
+                            </div>
+
+                            <!-- BigPay -->
+                            <div class="bhoechie-tab-content">
+                                <div class="section-center">
+                                    <h1 class="glyphicon glyphicon-cutlery" style="font-size:12em;color:#55518a"></h1>
+                                    <h2 style="margin-top: 0;color:#55518a">Comming Soon</h2>
+                                    <h3 style="margin-top: 0;color:#55518a">Restaurant Diirectory</h3>
+                                </div>
+                            </div>
+
+                            <!-- UnionPay -->
+                            <div class="bhoechie-tab-content">
+                                <div class="section-center">
+                                    <h1 class="glyphicon glyphicon-credit-card" style="font-size:12em;color:#55518a"></h1>
+                                    <h2 style="margin-top: 0;color:#55518a">Comming Soon</h2>
+                                    <h3 style="margin-top: 0;color:#55518a">Credit Card</h3>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-4">
+            <div class="order-container">
+                <h2 class="title-text">You're almost done!</h2>
+                <img src="../image/sample/dish1.png" />
+
+                <span class="option">Option 1</span>
+                <span class="title">Western Style Dishes</span>
+                <span class="description">Over 30 years of culinary delight experience</span>
+                <span class="price">P16, 000</span>
+                <span class="lay-away">*Available on Lay-Away</span>
+            </div>
+        </div>
+    </div>
+</div>
+
+<user-footer></user-footer>
+
+
+<!-- Modal -->
+<div id="printSave" class="modal fade" role="dialog">
+    <div class="modal-dialog">
+        <!-- Modal content-->
+        <div class="modal-content">
+            <div class="modal-body">
+                <p class="text-center info-text">
+                    Kindly Pay the minimum lay away amount <br />
+                    Within 48 hours (Aug 19, 2018 11:59PM)
+                </p>
+                <h2 class="price text-center">P2,667.00</h2>
+                
+                <p class="text-center info-text">
+                    Please click the list of our partner 
+                    <a href="#"><u>payment center</u></a>.
+                </p>
+                <div class="btn btnPrintSave">Print/Save</div>
+            </div>
+        </div>
+    </div>
+</div>
