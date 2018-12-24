@@ -1,9 +1,0 @@
-{
-    "version": 3,
-    "mappings": "AAAA,iCAAiC;AAOjC,8BAA8B;AAO9B,4BAA4B;AAO5B,iCAAiC;AAOjC,2BAA2B;AAQ3B;;;;EAIE;AAEF,iCAAiC;AAOjC,8BAA8B;AAO9B,4BAA4B;AAO5B,iCAAiC",
-    "sources": [
-        "mixins.scss"
-    ],
-    "names": [],
-    "file": "mixins.css"
-}

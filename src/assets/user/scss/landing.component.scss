@@ -1,0 +1,154 @@
+@import './abstract/default.scss';
+@import '../../../plugins/slick/slick.scss';
+@import '../../../plugins/slick/slick-theme.scss';
+
+#landing-background {
+    min-height: 100vh;
+    background-image: url('../../image/landing-bg.jpg');
+    background-size: cover;
+    background-position: center;
+    background-color: rgba($color: #000000, $alpha: 0.1);
+    background-blend-mode: darken;
+    margin-bottom: 50px;
+}
+
+#search-card { 
+    background: $white;
+    border-radius: $border-radius;
+    display: inline-block;
+    position: relative;
+    box-shadow: 0 10px 20px rgba(0,0,0,0.19), 0 6px 6px rgba(0,0,0,0.23);
+    padding: 5px 25px;
+    padding-bottom: 20px;
+    width: 375px;
+    margin-bottom: 30px;
+    margin-top: 10px;
+
+    @include HSphones {
+        display: block;
+        margin-left: auto;
+        margin-right: auto;
+    }
+
+    @include VSphones {
+        width: 100%;
+    }
+    
+    label {
+        font-family: $font-heading;
+    }
+
+    .form-control {
+        font-family: $font-body;
+        border-color: $black-o-3;
+        border-radius: 0;
+    }
+
+    .title {
+        font-size: 25px;
+        font-family: $font-heading;
+        font-weight: bold;
+        margin-bottom: 5px;
+    }
+
+    .tagline {
+        font-size: 16px;
+        font-family: $font-body;
+        margin-bottom: 5px;
+    }
+
+    .btnSearch {
+        color: $white;
+        font-family: $font-body;
+        font-size: 16px;
+        border-radius: 0;
+        background-color: $pink;
+    }
+}
+
+#how-it-works {
+    margin-top: 100px;
+    margin-bottom: 100px;
+
+    .title {
+        font-family: $font-heading;
+        text-align: center;
+        margin-bottom: 30px;
+    }
+
+    #flex-container {
+        display: flex;
+        justify-content: center;
+        align-items: stretch;
+
+        img {
+            display: block;
+            margin-left: auto;
+            margin-right: auto;
+            width: 90px;
+        }
+
+        .card {
+            border-radius: $border-radius;
+            border: 1px solid $black-o-5;
+            padding: 15px;
+            width: 150px;
+            text-align: center;
+            margin: 0 50px;
+            height: calc(100% - 90px);
+
+            .card-title {
+                font-family: $font-heading;
+                font-weight: bold;
+                font-size: 17px;
+                margin-bottom: 15px;
+                text-transform: uppercase;
+            }
+
+            .card-description {
+                font-family: $font-body;
+                font-size: 13px;
+                color: $black-o-6;
+            }
+        }
+    }
+}
+
+/deep/ {
+    .slick-dots li button:before {
+        font-size: 10px !important;
+    }
+    
+    .slick-prev:before, .slick-next:before {
+        color:$pink;
+    }
+    
+    .slick-slide {
+        position: relative;
+    }
+    
+    #testimonial {
+        img {
+            width: 100%;
+            filter: brightness(50%);
+        }
+    
+        .text-testimonial {
+            z-index: 1000;
+            color: $white;
+            font-family: $font-body;
+            font-size: 17px;
+            position: absolute;
+            padding: 20px;
+            text-align: center;
+            bottom: 0;
+    
+            .from {
+                font-family: $font-body;
+                margin-top: 10px;
+                display: block;
+                font-size: 12px;
+            }
+        }
+    }
+}
