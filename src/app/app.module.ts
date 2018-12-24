@@ -8,6 +8,8 @@ import { NavbarComponent } from '@user/navbar.component';
 import { InviteComponent } from '@user/invite.component';
 import { FooterComponent } from '@user/footer.component';
 import { SearchComponent } from '@user/search.component';
+import { PaymentComponent } from '@user/payment.component';
+import { CheckoutComponent } from '@user/checkout.component';
 
 @NgModule({
   declarations: [
@@ -16,7 +18,9 @@ import { SearchComponent } from '@user/search.component';
     NavbarComponent,
     InviteComponent,
     FooterComponent,
-    SearchComponent
+    SearchComponent,
+    PaymentComponent,
+    CheckoutComponent
   ],
   imports: [
     BrowserModule,
