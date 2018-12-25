@@ -9,12 +9,12 @@ pages:
   script:
   - npm install -g @angular/cli@latest
   - npm install
-  - ng build
+  - ng build --prod --base-href shoook
   - mkdir -p public
   - mv dist/shoook/* public/
   environment:
     name: deploy
-    url: https://shoook.gitlab.io/
+    url: https://andrewmoplas.gitlab.io/shoook
   artifacts:
     paths:
     - public
