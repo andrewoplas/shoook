@@ -8,7 +8,8 @@ pages:
   - npm install -g @angular/cli@6.2.1
   - npm install
   - ng build
-  - mv dist/fossilizer/* public/
+  - mv dist/shoook/* public/
+  - mkdir -p public
   artifacts:
     paths:
     - public
