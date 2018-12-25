@@ -28,7 +28,8 @@
     margin-right: auto;
     margin-top: -35vh;
     margin-bottom: 40px;
-    padding: 20px 50px;
+    padding: 25px 50px;
+    padding-bottom: 40px;
     border-radius: 4px;
     box-shadow: 0 .5rem 1rem rgba(0,0,0,.15);
 
@@ -122,6 +123,7 @@
             background-color:$pink;
             color: white;
             font-size: 15px;
+            font-family: $font-body;
         }
     }
 }
@@ -217,15 +219,15 @@
 .get-started-bg {
     background-image: url('../../image/get-started-bg.jpg');
     background-size: cover;
-    background-position: center;
-    background-color: rgba($color: #000000, $alpha: 0.2);
+    background-position: bottom;
+    background-color: rgba($color: #000000, $alpha: 0.5);
     background-blend-mode: darken;
     margin-top: 50px;
     height: 70vh;
     padding: 75px;
 
     .ready-to-earn-text {
-        font-size: 60px;
+        font-size: 70px;
         font-family: $font-body;
         font-weight: bold;
         color: $white;
@@ -236,7 +238,7 @@
         font-family: $font-body;
         font-weight: bold;
         margin-top: 10px;
-        background-color: white;
-        padding: 10px 20px;
+        background-color: $white;
+        padding: 15px 70px;
     }
 }
