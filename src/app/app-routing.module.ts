@@ -5,6 +5,7 @@ import { InviteComponent } from '@user/invite.component';
 import { SearchComponent } from '@user/search.component';
 import { CheckoutComponent } from '@user/checkout.component';
 import { PaymentComponent } from '@user/payment.component';
+import { VendorModule } from './modules/vendor/vendor.module';
 
 const routes: Routes = [
   { path: '', component: LandingComponent },
@@ -12,6 +13,7 @@ const routes: Routes = [
   { path: 'search', component: SearchComponent },
   { path: 'checkout', component: CheckoutComponent },
   { path: 'payment', component: PaymentComponent },
+  { path: 'vendor', loadChildren: './modules/vendor/vendor.module#VendorModule'}
 ];
 
 @NgModule({
