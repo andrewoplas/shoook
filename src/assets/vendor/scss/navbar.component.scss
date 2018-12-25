@@ -1,0 +1,47 @@
+@import './abstract/default.scss';
+@import './abstract/variable.scss';
+
+.navbar {
+    background-color: transparent;
+    border: none;
+    height: 80px;
+    margin-bottom: 0;
+    
+    .navbar-brand {
+        padding-left: 0;
+    }
+
+    #logo {
+        width: 200px;
+    }
+
+    .navbar-nav {
+        display: flex;
+        align-items: center;
+
+        & > li {
+            font-family: $font-body;
+            font-size: 15px;
+            color: $black-o-8;
+            margin-left: 15px;
+            margin-right: 15px;
+
+            a {
+                padding-left: 0;
+                padding-right: 0;
+            }
+        }
+        
+        .active {
+            a {
+                background-color: transparent;
+                border-bottom: 3px solid $dark-green;
+                color: $dark-green;
+            }
+        }
+    }
+
+    ul.nav li.dropdown.hover:hover > ul.dropdown-menu {
+        display: block;    
+    }
+}
