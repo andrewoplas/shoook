@@ -3,7 +3,7 @@
   "compilerOptions": {
     "baseUrl": "./",
     "paths": {
-      "@admin/*" : ["./src/assets/admin/ts/*"],
+      "@vendor/*" : ["./src/assets/vendor/ts/*"],
       "@user/*" : ["./src/assets/user/ts/*"],
       "@services/*" : ["./src/app/core/services/*"],
       "@models/*" : ["./src/app/models/*"],
