@@ -12,6 +12,9 @@ pages:
   - ng build
   - mkdir -p public
   - mv dist/shoook/* public/
+  environment:
+    name: staging
+    url: https://staging.shoook.com
   artifacts:
     paths:
     - public
