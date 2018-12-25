@@ -11,7 +11,7 @@ pages:
   - npm install
   - ng build
   - mkdir -p public
-  - mv dist/fossilizer/* public/
+  - mv dist/shoook/* public/
   artifacts:
     paths:
     - public
