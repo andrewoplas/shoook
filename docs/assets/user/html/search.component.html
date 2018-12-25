@@ -1,0 +1,166 @@
+<div class="add-border-bottom">
+    <div class="container">
+        <user-navbar></user-navbar>
+    </div>    
+</div>
+
+<div id="search-header">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-8">
+                <span class="search-details-text">Search Details:</span>
+
+                <span class="badge badge-details date m-r-5" (click)="date_click()">
+                    <input type="text" class="txtDate"/>
+                    <span>Aug 20</span>                        
+                </span>
+                
+                <span class="badge badge-details m-r-5">2:00 PM</span>
+                <span class="badge badge-details">50 Guest</span>
+            </div>
+            
+            <div class="col-md-4 text-right map-button-container">
+                <span>Show Map</span>
+            
+                <div class="can-toggle demo-rebrand-2">
+                    <input id="e" type="checkbox">
+                    <label for="e">
+                        <div class="can-toggle__switch" data-checked="✓" data-unchecked="✗"></div>
+                    </label>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="container">
+    <div class="row">
+        <div class="col-md-8">
+            <div class="quantity-container">
+                <p class="how-many-text">How many?</p>
+                <form id="frmQuantity">
+                    <div class="row">
+                        <div class="col-md-3">
+                            <span>Menus</span>
+                            <input type="number" class="form-control" />
+                        </div>
+                        <div class="col-md-3">
+                            <span>Desserts</span>
+                            <input type="number" class="form-control" />
+                        </div>
+                        <div class="col-md-3">
+                            <span>Lechons</span>
+                            <input type="number" class="form-control" />
+                        </div>
+                        <div class="col-md-3">
+                            <button type="button" class="btn btn-block btnSearch">
+                                SEARCH
+                            </button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+
+            <h3 id="results-text">
+                <span>30</span> Caterers in <span>Cebu City</span>
+            </h3>
+
+            <div class="results-container">
+                <div class="item" (click)="item_click()">
+                    <img src="assets/image/sample/dish1.png" />
+                    <span class="option m-t-10">Option 1</span>
+                    <span class="title">Western Style Dishes</span>
+                    <span class="description">Over 30 years of culinary delight experience</span>
+                    <span class="price">P16.00</span>
+                    <span class="lay-away">*Available on Lay Away</span>
+                </div>
+
+                <div class="item" (click)="item_click()">
+                    <img src="assets/image/sample/dish2.png" />
+                    <span class="option m-t-10">Option 1</span>
+                    <span class="title">Western Style Dishes</span>
+                    <span class="description">Over 30 years of culinary delight experience</span>
+                    <span class="price">P16.00</span>
+                    <span class="lay-away">*Available on Lay Away</span>
+                </div>
+
+                <div class="item" (click)="item_click()">
+                    <img src="assets/image/sample/dish3.png" />
+                    <span class="option m-t-10">Option 1</span>
+                    <span class="title">Western Style Dishes</span>
+                    <span class="description">Over 30 years of culinary delight experience</span>
+                    <span class="price">P16.00</span>
+                    <span class="lay-away">*Available on Lay Away</span>
+                </div>
+
+                <div class="item" (click)="item_click()">
+                    <img src="assets/image/sample/dish3.png" />
+                    <span class="option m-t-10">Option 1</span>
+                    <span class="title">Western Style Dishes</span>
+                    <span class="description">Over 30 years of culinary delight experience</span>
+                    <span class="price">P16.00</span>
+                    <span class="lay-away">*Available on Lay Away</span>
+                </div>
+
+                <div class="item" (click)="item_click()">
+                    <img src="assets/image/sample/dish2.png" />
+                    <span class="option m-t-10">Option 1</span>
+                    <span class="title">Western Style Dishes</span>
+                    <span class="description">Over 30 years of culinary delight experience</span>
+                    <span class="price">P16.00</span>
+                    <span class="lay-away">*Available on Lay Away</span>
+                </div>
+
+                <div class="item" (click)="item_click()">
+                    <img src="assets/image/sample/dish3.png" />
+                    <span class="option m-t-10">Option 1</span>
+                    <span class="title">Western Style Dishes</span>
+                    <span class="description">Over 30 years of culinary delight experience</span>
+                    <span class="price">P16.00</span>
+                    <span class="lay-away">*Available on Lay Away</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-4">
+            <h4 id="pinpoint-text">
+                Kindly pinpoint your venue below
+            </h4>
+        </div>
+    </div>
+</div>
+
+<!-- Modal -->
+<div id="itemBook" class="modal fade" role="dialog">
+    <div class="modal-dialog">
+        <!-- Modal content-->
+        <div class="modal-content">
+            <div class="modal-body">
+                <h2 class="details-text">Detail</h2>
+                <hr />
+
+                <p class="change-menu-text">Change Menu</p>
+                <div class="change-menu-container menu-container">
+                    <span class="badge">Kaldereta <i class="material-icons">close</i></span>
+                    <span class="badge">Chicken Roll <i class="material-icons">close</i></span>
+                    <span class="badge">Pansit <i class="material-icons">close</i></span>
+                    <span class="badge">Beef Steak <i class="material-icons">close</i></span>
+                </div>
+
+                <hr/>
+                <p class="add-menu-text">Add Menu</p>
+                <div class="add-menu-container menu-container">
+                    <span class="badge">Kaldereta</span>
+                    <span class="badge">Chicken Roll</span>
+                    <span class="badge">Pansit</span>
+                    <span class="badge">Beef Steak</span>
+                </div>
+
+                <div class="btn btnBook">Book</div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<user-footer></user-footer>

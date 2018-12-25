@@ -1,0 +1,93 @@
+@import './abstract/variable.scss';
+
+.navbar {
+    background-color: transparent;
+    border: none;
+    height: 80px;
+    margin-bottom: 0;
+    
+    .navbar-brand {
+        padding-left: 0;
+    }
+
+    #logo {
+        width: 200px;
+    }
+
+    .navbar-nav {
+        display: flex;
+        align-items: center;
+
+        & > li {
+            font-family: $font-body;
+            font-size: 15px;
+            color: $black-o-8;
+        }
+
+        .user-dropdown li a {
+            padding-top: 8px;
+            padding-bottom: 8px;
+            font-size: 16px;
+
+            i {
+                font-size: 21px;
+                vertical-align: bottom;
+                margin-right: 5px;
+            }
+        }
+    }
+
+    .navbar-form {
+        margin-top: 20px;
+
+        .form-control {
+            padding-left: 35px;
+            font-family: $font-body;
+        }
+        
+        .form-control + .glyphicon {
+            position: absolute;
+            left: 0;
+            padding: 8px 27px;
+        }
+    }
+
+    .be-a-vendor {
+        padding: 20px 30px;
+        min-width: 230px;
+    }
+
+    .earn {
+        padding: 20px 30px;
+        min-width: 300px;
+    }
+
+    .message {
+        padding: 10px 20px;
+        min-width: 350px;
+
+        li.line-item {
+            padding: 10px 0;
+            border-bottom: 1px solid $black-o-01;
+        }
+
+        li.line-item-offer {
+            padding: 20px 0;
+            font-family: $font-body;
+            font-weight: bold;
+
+            i {
+                vertical-align: middle;
+            }
+        }
+
+        .item {
+            font-family: $font-heading;
+            font-weight: bold;
+        }
+    }
+
+    ul.nav li.dropdown.hover:hover > ul.dropdown-menu {
+        display: block;    
+    }
+}
