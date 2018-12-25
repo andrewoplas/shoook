@@ -1,23 +1,15 @@
 image: node:8.12.0
-
 pages:
   cache:
     paths:
-    - node_modules/
-
-  stage: deploy
+      - node_modules/
   script:
-  - npm install -g @angular/cli@latest
-  - npm install
-  - ng build --prod --base-href=shoook
-  - mkdir -p public
-  - mv dist/shoook/* public/
-  environment:
-    name: deploy
-    url: https://andrewmoplas.gitlab.io/shoook
+    - npm install -g @angular/cli@7.1.2
+    - npm install
+    - npm run buildProd
   artifacts:
     paths:
-    - public
+      - public
   only:
-  - master
-  - pages
+    - master
+    - pages
