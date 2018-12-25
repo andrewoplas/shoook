@@ -1,0 +1,242 @@
+@import './abstract/default.scss';
+
+.shoook-text {
+    color: $dark-green;
+}
+
+.small-hr {
+    margin-top: 20px;
+    margin-bottom: 20px;
+    border: 0;
+    border-top: 8px solid $black-o-2;
+    border-radius: 3px;
+    width: 90px;
+}
+
+.landing-bg {
+    background-image: url('../../image/vendor-bg.jpg');
+    background-size: cover;
+    background-position: center;
+    height: 88vh;
+}
+
+.earn-vendor-container {
+    background-color: white;
+    display: block;
+    width: 80%;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: -35vh;
+    margin-bottom: 40px;
+    padding: 20px 50px;
+    border-radius: 4px;
+    box-shadow: 0 .5rem 1rem rgba(0,0,0,.15);
+
+    .first-column {
+        .earn-money-header {
+            font-size: 3.5em;
+            font-family: $font-heading;
+            font-weight: bold;
+        }
+
+        .earn-money-body {
+            font-family: $font-body;
+            font-size: 16px;
+            color: $black-o-8;
+        }
+    }
+
+    .second-column {
+        .form-header {
+            font-family: $font-body;
+            font-size: 20px;
+            font-weight: bold;
+            margin-top: 20px;
+        }
+
+        .form-control {
+            border-radius: 0;
+            padding: 10px;
+            height: auto;
+            font-size: 16px;
+            box-shadow: none !important;
+            font-family: $font-body;
+            color: $black-o-9;
+
+            &#txtChoose {
+                -webkit-appearance: none;
+                -moz-appearance: none;
+                appearance: none;
+            }
+        }
+
+        .select {
+            width: 100%;
+            overflow: hidden;         
+            position: relative;
+            display: block;
+            font-weight: normal;
+
+            &:after {
+                content:"\f078";
+                font-family: 'Font Awesome 5 Free';
+                color: $black-o-7;
+                padding: 12px 8px;
+                position: absolute; right: 0; top: 0;
+                z-index: 1;
+                text-align: center;
+                width: 10%;
+                height: 100%;      
+                pointer-events: none;
+                box-sizing: border-box;   
+                font-weight: bold;
+                font-size: 17px;
+            }
+        }
+
+        .earnings {
+            font-size: 50px;
+            font-family: $font-number;
+            font-weight: bold;
+            color: $black-o-7;
+
+            .peso-sign {
+                font-family: Calibri;
+            }
+
+            .per-month-text {
+                font-family: $font-body;
+                font-size: 14px;
+                color: $black-o-6;
+
+                i {
+                    font-size: 12px;
+                }
+            }
+        }
+
+        .btn-get-started {
+            width: 100%;
+            padding: 13px;
+            font-weight: bold;
+            background-color:$pink;
+            color: white;
+            font-size: 15px;
+        }
+    }
+}
+
+.about-container {
+    margin-top: 75px;
+
+    .about-text-header {
+        text-align: center;
+        font-size: 40px;
+        font-family: $font-heading;
+        color: $black-o-8;
+    }
+
+    .about-text-subheader {
+        font-size: 25px;
+        font-family: $font-heading;
+        color: $black-o-9;
+    }
+
+    .about-text-body {
+        font-size: 15px;
+        font-family: $font-body;
+        color: $black-o-7;
+        padding-right: 30px;
+        text-align: justify;
+    }
+}
+
+.vendor-container {
+    margin-top: 100px;
+
+    .vendor-text-header {
+        text-align: center;
+        font-size: 40px;
+        font-family: $font-heading;
+        color: $black-o-8;
+    }
+
+    .vendor-text-subheader {
+        font-size: 20px;
+        font-family: $font-heading;
+        color: $black-o-9;
+    }
+
+    .vendor-text-body {
+        font-size: 15px;
+        font-family: $font-body;
+        color: $black-o-7;
+    }
+
+    .vendor-steps-number {
+        background-color: $dark-green;
+        color: #fff;
+        width: 40px;
+        height: 40px;
+        line-height: 40px;
+        border-radius: 50%;       
+        text-align: center;
+        font-size: 18px;
+        font-family: $font-number;
+    }
+}
+
+.payment-container {
+    margin-top: 100px;
+
+    .payment-text-header {
+        text-align: center;
+        font-size: 40px;
+        font-family: $font-heading;
+        color: $black-o-8;
+    }
+
+    .payment-text-subheader {
+        font-size: 20px;
+        font-family: $font-heading;
+        color: $black-o-9;
+    }
+
+    .payment-text-body {
+        font-size: 15px;
+        font-family: $font-body;
+        color: $black-o-7;
+    }
+
+    .img-icon {
+        width: 70px;
+        margin-bottom: 18px;
+    }
+}
+
+.get-started-bg {
+    background-image: url('../../image/get-started-bg.jpg');
+    background-size: cover;
+    background-position: center;
+    background-color: rgba($color: #000000, $alpha: 0.2);
+    background-blend-mode: darken;
+    margin-top: 50px;
+    height: 70vh;
+    padding: 75px;
+
+    .ready-to-earn-text {
+        font-size: 60px;
+        font-family: $font-body;
+        font-weight: bold;
+        color: $white;
+    }
+
+    .btn-ready-to-earn {
+        font-size: 15px;
+        font-family: $font-body;
+        font-weight: bold;
+        margin-top: 10px;
+        background-color: white;
+        padding: 10px 20px;
+    }
+}
