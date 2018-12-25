@@ -13,8 +13,8 @@ pages:
   - mkdir -p public
   - mv dist/shoook/* public/
   environment:
-    name: staging
-    url: https://staging.andrewmoplas-shoook.com
+    name: deploy
+    url: https://shoook.gitlab.io/
   artifacts:
     paths:
     - public
