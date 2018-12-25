@@ -1,0 +1,17 @@
+pages:
+  cache:
+    paths:
+    - node_modules/
+
+  stage: deploy
+  script:
+  - npm install -g @angular/cli@6.2.1
+  - npm install
+  - ng build
+  - mv dist/fossilizer/* public/
+  artifacts:
+    paths:
+    - public
+  only:
+  - master
+  - pages
