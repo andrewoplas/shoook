@@ -1,15 +1,20 @@
 image: node:8.12.0
+
 pages:
   cache:
     paths:
-      - node_modules/
+    - node_modules/
+
+  stage: deploy
   script:
-    - npm install -g @angular/cli@7.1.2
-    - npm install
-    - npm run buildProd
+  - npm install -g @angular/cli@6.2.1
+  - npm install
+  - ng build
+  - mkdir -p public
+  - mv dist/fossilizer/* public/
   artifacts:
     paths:
-      - public
+    - public
   only:
-    - master
-    - pages
+  - master
+  - pages
