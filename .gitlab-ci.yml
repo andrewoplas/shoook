@@ -9,7 +9,7 @@ pages:
   script:
   - npm install -g @angular/cli@latest
   - npm install
-  - ng build --base-href /myUrl/
+  - ng build --base-href /shoook/
   - mkdir -p public
   - mv dist/shoook/* public/
   artifacts:
