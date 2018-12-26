@@ -35,7 +35,8 @@
               "../shoook/src/plugins/slick/slick.min.js",
               "../shoook/src/plugins/Timepicki/js/timepicki.js",
               "../shoook/src/plugins/datepicker/js/datepicker.js",
-              "../shoook/src/plugins/datepicker/js/i18n/datepicker.en.js"
+              "../shoook/src/plugins/datepicker/js/i18n/datepicker.en.js",
+              "../shoook/src/plugins/slide-to-captcha-master/js/slide-to-captcha.js"
             ]
           },
           "configurations": {
