@@ -130,10 +130,11 @@ export class RegisterComponent implements OnInit {
           title: 'Redirecting',
           text: 'You will be redirected to the vendor page',
           showConfirmButton: false,
-          timer: 3000
+          timer: 2800
         })
 
-        setInterval(()=>{
+        setTimeout(()=>{
+          $('html, body').animate({scrollTop: 0}, 1);
           this.router.navigate(['/vendor']);  
         },3000)
       }
