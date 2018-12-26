@@ -4,119 +4,452 @@
     </div>    
 </div>
 
-<div class="container">
-    <div class="row">
-        <div class="col-md-12">
+<div class="material-design-bg-color">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
 
-            <section id="wrapper" class="step-register">
-                <div class="register-box">
-                    <div>
-                        <!-- multistep form -->
-                        <form id="msform">
-                            <!-- progressbar -->
-                            <ul id="eliteregister">
-                                <li class="active">Account Setup</li>
-                                <li>Profile Info</li>
-                                <li>Business Info</li>
-                                <li>Bank Info</li>
-                            </ul>
+                <section id="wrapper" class="step-register">
+                    <div class="register-box">
+                        <div>
+                            <!-- multistep form -->
+                            <form id="msform">
+                                <!-- progressbar -->
+                                <ul id="eliteregister">
+                                    <li class="active">Account Setup</li>
+                                    <li>Vendor Information</li>
+                                    <li>Business Information</li>
+                                    <li>Bank Information</li>
+                                </ul>
 
-                            <!-- fieldsets -->
-                            <fieldset class="active first-fieldset">
-                                <h2 class="fs-title">What kind of caterer are you listing?</h2>
-                                <h3 class="fs-subtitle">First. Let's narrow things down.</h3>
+                                <!-- fieldsets -->
+                                <fieldset class="active first-fieldset">
+                                    <h2 class="fs-title">What kind of caterer are you listing?</h2>
+                                    <h3 class="fs-subtitle">First. Let's narrow things down.</h3>
 
-                                <label class="select">
-                                    <select class="form-control" id="txtChoose">
-                                        <option selected disabled>Select one</option>
-                                        <option>Be a fiesta something</option>
-                                    </select>
-                                </label>
+                                    <label class="select">
+                                        <select class="form-control" id="txtChoose">
+                                            <option selected disabled>Select one</option>
+                                            <option>Be a fiesta something</option>
+                                        </select>
+                                    </label>
 
-                                <div class="m-t-40 m-b-30">
-                                    <div class="row m-b-20">
-                                        <div class="col-md-4"><span class="form-label">Account Type</span></div>
-                                        <div class="col-md-8">
-                                            <div class="account-type-container">
-                                                <div>
-                                                    <input class="magic-radio" type="radio" name="radio" id="individual" checked>
-                                                    <label for="individual">Individual</label>
+                                    <div class="m-t-40 m-b-30">
+                                        <div class="row m-b-20">
+                                            <div class="col-md-4">
+                                                <span class="form-label">
+                                                    Account Type
+                                                    <span class="required">*</span>
+                                                </span>
+                                            </div>
+                                            <div class="col-md-8">
+                                                <div class="account-type-container">
+                                                    <div>
+                                                        <input class="magic-radio" type="radio" name="radio" id="individual" checked>
+                                                        <label for="individual">Individual</label>
+                                                    </div>
+        
+                                                    <div>
+                                                        <input class="magic-radio" type="radio" name="radio" id="corporate">
+                                                        <label for="corporate">Corporate</label>
+                                                    </div>
                                                 </div>
-    
-                                                <div>
-                                                    <input class="magic-radio" type="radio" name="radio" id="corporate">
-                                                    <label for="corporate">Corporate</label>
+                                            </div>                                    
+                                        </div>
+
+                                        <div class="row m-b-20">
+                                            <div class="col-md-4">
+                                                <span class="form-label">
+                                                    Shop based in
+                                                    <span class="required">*</span>
+                                                </span>
+                                            </div>
+                                            <div class="col-md-8">
+                                                <label class="country-select">
+                                                    <select class="form-control">
+                                                        <option>Philippines</option>
+                                                        <option>China</option>
+                                                        <option>Japan</option>
+                                                    </select>
+                                                </label>
+                                            </div>                                    
+                                        </div>
+
+                                        <div class="row m-b-20">
+                                            <div class="col-md-4">
+                                                <span class="form-label">
+                                                    Mobile Number
+                                                    <span class="required">*</span>
+                                                </span>
+                                            </div>
+                                            <div class="col-md-8">
+                                                <div class="input-group">
+                                                    <span class="input-group-addon" id="sizing-addon1">+63</span>
+                                                    <input type="text" class="form-control mobile-number">
                                                 </div>
+                                            </div>                                    
+                                        </div>
+
+                                        <div class="row m-b-20">
+                                            <div class="col-md-4">
+                                                <span class="form-label">
+                                                    Slide to verify
+                                                    <span class="required">*</span>
+                                                </span>
                                             </div>
-                                        </div>                                    
+                                            <div class="col-md-8">
+                                                <div class="captcha">
+                                                    <div class="handle"></div>
+                                                </div>
+                                            </div>                                    
+                                        </div>
                                     </div>
 
-                                    <div class="row m-b-20">
-                                        <div class="col-md-4"><span class="form-label">Shop based in</span></div>
-                                        <div class="col-md-8">
-                                            <label class="country-select">
-                                                <select class="form-control">
-                                                    <option>Philippines</option>
-                                                    <option>China</option>
-                                                    <option>Japan</option>
-                                                </select>
-                                            </label>
-                                        </div>                                    
-                                    </div>
+                                    <input type="button" name="next" class="next action-button" value="Next" />
+                                </fieldset>
 
-                                    <div class="row m-b-20">
-                                        <div class="col-md-4"><span class="form-label">Mobile Number</span></div>
-                                        <div class="col-md-8">
-                                            <div class="input-group">
-                                                <span class="input-group-addon" id="sizing-addon1">+63</span>
-                                                <input type="text" class="form-control mobile-number">
+                                <fieldset class="second-fieldset">
+                                    <h2 class="fs-title">Vendor Account Information</h2>
+                                    
+                                    <div class="m-t-40 m-b-30">
+                                        <div class="row m-b-20">
+                                            <div class="col-md-4">
+                                                <span class="form-label">
+                                                    Vendor ID
+                                                    <span class="required">*</span>
+                                                </span>
                                             </div>
-                                        </div>                                    
-                                    </div>
+                                            <div class="col-md-8">
+                                                <div class="form-group">
+                                                    <input type="text" class="form-control" disabled value="PH1XOWOJ">
+                                                </div>
+                                            </div>                                    
+                                        </div>
 
-                                    <div class="row m-b-20">
-                                        <div class="col-md-4"><span class="form-label">Slide to verify</span></div>
-                                        <div class="col-md-8">
-                                            <div class="captcha">
-                                                <div class="handle"></div>
+                                        <div class="row m-b-20">
+                                            <div class="col-md-4">
+                                                <span class="form-label">
+                                                    Name on ID
+                                                    <span class="required">*</span>
+                                                </span>
                                             </div>
-                                        </div>                                    
+                                            <div class="col-md-8">
+                                                <div class="form-group">
+                                                    <input type="text" class="form-control">
+                                                </div>
+                                            </div>                                    
+                                        </div>
+
+                                        <div class="row m-b-20">
+                                            <div class="col-md-4">
+                                                <span class="form-label">
+                                                    Email Address
+                                                    <span class="required">*</span>
+                                                </span>
+                                            </div>
+                                            <div class="col-md-8">
+                                                <div class="form-group">
+                                                    <input type="text" class="form-control">
+                                                </div>
+                                            </div>                                    
+                                        </div>
+
+                                        <div class="row m-b-20">
+                                            <div class="col-md-4">
+                                                <span class="form-label">
+                                                    Phone Number
+                                                    <span class="required">*</span>
+                                                </span>
+                                            </div>
+                                            <div class="col-md-8">
+                                                <div class="form-group">
+                                                    <input type="text" class="form-control">
+                                                </div>
+                                            </div>                                    
+                                        </div>
+
+                                        <div class="row m-b-20">
+                                            <div class="col-md-4">
+                                                <span class="form-label">
+                                                    Business Name
+                                                    <span class="required">*</span>
+                                                </span>
+                                            </div>
+                                            <div class="col-md-8">
+                                                <div class="form-group">
+                                                    <input type="text" class="form-control">
+                                                </div>
+                                            </div>                                    
+                                        </div>
                                     </div>
 
+                                    <input type="button" name="previous" class="previous action-button" value="Previous" />
+                                    <input type="button" name="next" class="next action-button" value="Next" />
+                                </fieldset>
 
-                                </div>
+                                <fieldset class="third-fieldset">
+                                    <h2 class="fs-title">Business Information</h2>
+                                    
+                                    <div class="m-t-40 m-b-30">
+                                        <div class="row m-b-10">
+                                            <div class="col-md-4"><span class="form-label">Legal Name/Company Name</span></div>
+                                            <div class="col-md-8">
+                                                <div class="form-group">
+                                                    <input type="text" class="form-control">
+                                                </div>
+                                            </div>                                    
+                                        </div>
 
+                                        <div class="row m-b-10">
+                                            <div class="col-md-4"><span class="form-label">Address<span class="required">*</span></span></div>
+                                            <div class="col-md-8">
+                                                <div class="form-group">
+                                                    <input type="text" class="form-control">
+                                                </div>
+                                            </div>                                    
+                                        </div>
 
-                                <input type="button" name="next" class="next action-button" value="Next" />
-                            </fieldset>
+                                        <div class="row m-b-10">
+                                            <div class="col-md-4"><span class="form-label">Country<span class="required">*</span></span></div>
+                                            <div class="col-md-8">
+                                                <div class="form-group">
+                                                    <input type="text" class="form-control">
+                                                </div>
+                                            </div>                                    
+                                        </div>
 
-                            <fieldset>
-                                <h2 class="fs-title">Social Profiles</h2>
-                                <h3 class="fs-subtitle">Your presence on the social network</h3>
-                                <input type="text" name="twitter" placeholder="Twitter" />
-                                <input type="text" name="facebook" placeholder="Facebook" />
-                                <input type="text" name="gplus" placeholder="Google Plus" />
-                                <input type="button" name="previous" class="previous action-button" value="Previous" />
-                                <input type="button" name="next" class="next action-button" value="Next" />
-                            </fieldset>
+                                        <div class="row m-b-10">
+                                            <div class="col-md-4"><span class="form-label">Postal Code<span class="required">*</span></span></div>
+                                            <div class="col-md-8">
+                                                <div class="form-group">
+                                                    <input type="text" class="form-control">
+                                                </div>
+                                            </div>                                    
+                                        </div>
 
-                            <fieldset>
-                                <h2 class="fs-title">Personal Details</h2>
-                                <h3 class="fs-subtitle">We will never sell it</h3>
-                                <input type="text" name="fname" placeholder="First Name" />
-                                <input type="text" name="lname" placeholder="Last Name" />
-                                <input type="text" name="phone" placeholder="Phone" />
-                                <textarea name="address" placeholder="Address"></textarea>
-                                <input type="button" name="previous" class="previous action-button" value="Previous" />
-                                <input type="submit" name="submit" class="submit action-button" value="Submit" />
-                            </fieldset>
-                        </form>
+                                        <div class="row m-b-10">
+                                            <div class="col-md-4"><span class="form-label">Person in Charge</span></div>
+                                            <div class="col-md-8">
+                                                <div class="form-group">
+                                                    <input type="text" class="form-control">
+                                                </div>
+                                            </div>                                    
+                                        </div>
 
-                        <div class="clear"></div>
+                                        <div class="row m-b-10">
+                                            <div class="col-md-4"><span class="form-label">Business Registration No.</span></div>
+                                            <div class="col-md-8">
+                                                <div class="form-group">
+                                                    <input type="text" class="form-control">
+                                                </div>
+                                            </div>                                    
+                                        </div>
+
+                                        <div class="row m-b-10">
+                                            <div class="col-md-4"><span class="form-label">Upoad ID - Front Side<span class="required">*</span></span></div>
+                                            <div class="col-md-8">
+                                                <div class="form-group">
+                                                    <input type="text" class="form-control">
+                                                </div>
+                                            </div>                                    
+                                        </div>
+
+                                        <div class="row m-b-10">
+                                            <div class="col-md-4"><span class="form-label">Seller VAT</span></div>
+                                            <div class="col-md-8">
+                                                <div class="form-group">
+                                                    <input type="text" class="form-control">
+                                                </div>
+                                            </div>                                    
+                                        </div>
+
+                                        <div class="row m-b-10">
+                                            <div class="col-md-4"><span class="form-label">VAT Registered</span></div>
+                                            <div class="col-md-8">
+                                                <div class="vat-registered-container">
+                                                    <div>
+                                                        <input class="magic-radio" type="radio" name="radio" id="yes" checked>
+                                                        <label for="yes">Yes</label>
+                                                    </div>
+        
+                                                    <div>
+                                                        <input class="magic-radio" type="radio" name="radio" id="no">
+                                                        <label for="no">No</label>
+                                                    </div>
+                                                </div>
+                                            </div>                                    
+                                        </div>
+                                    </div>
+
+                                    <h2 class="fs-title">Business Information Pt 2</h2>
+
+                                    <div class="m-t-40 m-b-30">
+                                        <div class="row m-b-10">
+                                            <div class="col-md-4"><span class="form-label">First Name</span></div>
+                                            <div class="col-md-8">
+                                                <div class="form-group">
+                                                    <input type="text" class="form-control">
+                                                </div>
+                                            </div>                                    
+                                        </div>
+
+                                        <div class="row m-b-10">
+                                            <div class="col-md-4"><span class="form-label">Last Name</span></div>
+                                            <div class="col-md-8">
+                                                <div class="form-group">
+                                                    <input type="text" class="form-control">
+                                                </div>
+                                            </div>                                    
+                                        </div>
+
+                                        <div class="row m-b-10">
+                                            <div class="col-md-4"><span class="form-label">ID Number<span class="required">*</span></span></div>
+                                            <div class="col-md-8">
+                                                <div class="form-group">
+                                                    <input type="text" class="form-control">
+                                                </div>
+                                            </div>                                    
+                                        </div>
+
+                                        <div class="row m-b-10">
+                                            <div class="col-md-4"><span class="form-label">Religion<span class="required">*</span></span></div>
+                                            <div class="col-md-8">
+                                                <div class="form-group">
+                                                    <input type="text" class="form-control">
+                                                </div>
+                                            </div>                                    
+                                        </div>
+
+                                        <div class="row m-b-10">
+                                            <div class="col-md-4"><span class="form-label">City<span class="required">*</span></span></div>
+                                            <div class="col-md-8">
+                                                <div class="form-group">
+                                                    <input type="text" class="form-control">
+                                                </div>
+                                            </div>                                    
+                                        </div>
+
+                                        <div class="row m-b-10">
+                                            <div class="col-md-4"><span class="form-label">Barangay<span class="required">*</span></span></div>
+                                            <div class="col-md-8">
+                                                <div class="form-group">
+                                                    <input type="text" class="form-control">
+                                                </div>
+                                            </div>                                    
+                                        </div>
+
+                                        <div class="row m-b-10">
+                                            <div class="col-md-4"><span class="form-label">Country Region</span></div>
+                                            <div class="col-md-8">
+                                                <div class="form-group">
+                                                    <input type="text" class="form-control">
+                                                </div>
+                                            </div>                                    
+                                        </div>
+
+                                        <div class="row m-b-10">
+                                            <div class="col-md-4"><span class="form-label">Upload ID - Back Side</span></div>
+                                            <div class="col-md-8">
+                                                <div class="form-group">
+                                                    <input type="text" class="form-control">
+                                                </div>
+                                            </div>                                    
+                                        </div>
+
+                                        <div class="row m-b-10">
+                                            <div class="col-md-4"><span class="form-label">ID Type<span class="required">*</span></span></div>
+                                            <div class="col-md-8">
+                                                <div class="form-group">
+                                                    <input type="text" class="form-control">
+                                                </div>
+                                            </div>                                    
+                                        </div>
+                                    </div>
+
+                                    <input type="button" name="previous" class="previous action-button" value="Previous" />
+                                    <input type="button" name="next" class="next action-button" value="Next" />
+                                </fieldset>
+
+                                <fieldset class="fourth-fieldset">
+                                    <h2 class="fs-title">Bank Account Information</h2>
+                                    
+                                    <div class="m-t-40 m-b-30">
+                                        <div class="row m-b-20">
+                                            <div class="col-md-4"><span class="form-label">Account Name<span class="required">*</span></span></div>
+                                            <div class="col-md-8">
+                                                <div class="form-group">
+                                                    <input type="text" class="form-control">
+                                                </div>
+                                            </div>                                    
+                                        </div>
+
+                                        <div class="row m-b-20">
+                                            <div class="col-md-4"><span class="form-label">Account Number<span class="required">*</span></span></div>
+                                            <div class="col-md-8">
+                                                <div class="form-group">
+                                                    <input type="text" class="form-control">
+                                                </div>
+                                            </div>                                    
+                                        </div>
+
+                                        <div class="row m-b-20">
+                                            <div class="col-md-4"><span class="form-label">Bank Name<span class="required">*</span></span></div>
+                                            <div class="col-md-8">
+                                                <div class="form-group">
+                                                    <input type="text" class="form-control">
+                                                </div>
+                                            </div>                                    
+                                        </div>
+
+                                        <div class="row m-b-20">
+                                            <div class="col-md-4"><span class="form-label">Branch Name<span class="required">*</span></span></div>
+                                            <div class="col-md-8">
+                                                <div class="form-group">
+                                                    <input type="text" class="form-control">
+                                                </div>
+                                            </div>                                    
+                                        </div>
+
+                                        <div class="row m-b-20">
+                                            <div class="col-md-4"><span class="form-label">Bank Code<span class="required">*</span></span></div>
+                                            <div class="col-md-8">
+                                                <div class="form-group">
+                                                    <input type="text" class="form-control">
+                                                </div>
+                                            </div>                                    
+                                        </div>
+
+                                        <div class="row m-b-20">
+                                            <div class="col-md-4"><span class="form-label">SWIFT<span class="required">*</span></span></div>
+                                            <div class="col-md-8">
+                                                <div class="form-group">
+                                                    <input type="text" class="form-control">
+                                                </div>
+                                            </div>                                    
+                                        </div>
+
+                                        <div class="row m-b-20">
+                                            <div class="col-md-4"><span class="form-label">Bank Information Document</span></div>
+                                            <div class="col-md-8">
+                                                <div class="form-group">
+                                                    <input type="text" class="form-control">
+                                                    <span class="help-block">Accepts image files, PDF and MS Word</span>
+                                                </div>
+                                            </div>                                    
+                                        </div>
+                                    </div>
+
+                                    <input type="button" name="previous" class="previous action-button" value="Previous" />
+                                    <input type="submit" name="submit" class="submit action-button" value="Submit" />
+                                </fieldset>
+                            </form>
+
+                            <div class="clear"></div>
+                        </div>
                     </div>
-                </div>
-            </section>
+                </section>
 
+            </div>
         </div>
     </div>
 </div>

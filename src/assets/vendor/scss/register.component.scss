@@ -5,6 +5,10 @@
 @import '../../../plugins/register-steps/steps.css';
 @import '../../../plugins/magic-check/css/magic-check.min.css';
 
+.material-design-bg-color {
+    background-color: #edf1f5;
+}
+
 .step-register {
     margin-top: 70px;
     margin-bottom: 60px;
@@ -14,6 +18,13 @@
     max-width: 700px;
 
     fieldset {
+        .required {
+            font-size: 12px;
+            color: red;
+            font-family: $font-body;
+            font-weight: bold;
+        }
+
         &.active {
             position: relative;
         }
@@ -127,10 +138,46 @@
             }
         }
 
+        &.second-fieldset, &.third-fieldset, &.fourth-fieldset {
+            .magic-radio + label {
+                font-family: $font-body;
+                font-weight: normal !important;
+            }
+            
+            .vat-registered-container {
+                display: flex;
+                justify-content: space-evenly;
+            }
+
+            .help-block {
+                text-align: left;
+            }
+
+            .form-label {
+                font-size: 15px;
+                font-family: $font-body;
+                color: $black-o-8;
+                display: block;
+                text-align: right;
+                padding-right: 10px;
+            }
+
+            input.form-control {
+                border-radius: 0;
+                padding: 5px 10px;
+                font-size: 15px;
+                box-shadow: none !important;
+                font-family: Open Sans;
+                color: rgba(0, 0, 0, 0.9);
+                margin: 0;
+            }
+
+
+        }
+
         .fs-title {
             font-family: $font-heading;
             font-size: 20px;
-
         }
     }
 

@@ -27,6 +27,10 @@ export class RegisterComponent implements OnInit {
       $(".next").click(function(){
         if(animating) return false;
         animating = true;
+
+        $('html, body').animate({
+            scrollTop: $('#eliteregister').offset().top - 10
+        }, 750);
         
         current_fs = $(this).parent();
         next_fs = $(this).parent().next();
@@ -64,6 +68,10 @@ export class RegisterComponent implements OnInit {
       $(".previous").click(function(){
         if(animating) return false;
         animating = true;
+
+        $('html, body').animate({
+          scrollTop: $('#eliteregister').offset().top - 10
+        }, 750);
         
         current_fs = $(this).parent();
         previous_fs = $(this).parent().prev();
