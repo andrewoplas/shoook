@@ -1,0 +1,124 @@
+<div class="add-border-bottom">
+    <div class="container">
+        <vendor-navbar [activeLink]="link"></vendor-navbar>
+    </div>    
+</div>
+
+<div class="container">
+    <div class="row">
+        <div class="col-md-12">
+
+            <section id="wrapper" class="step-register">
+                <div class="register-box">
+                    <div>
+                        <!-- multistep form -->
+                        <form id="msform">
+                            <!-- progressbar -->
+                            <ul id="eliteregister">
+                                <li class="active">Account Setup</li>
+                                <li>Profile Info</li>
+                                <li>Business Info</li>
+                                <li>Bank Info</li>
+                            </ul>
+
+                            <!-- fieldsets -->
+                            <fieldset class="active first-fieldset">
+                                <h2 class="fs-title">What kind of caterer are you listing?</h2>
+                                <h3 class="fs-subtitle">First. Let's narrow things down.</h3>
+
+                                <label class="select">
+                                    <select class="form-control" id="txtChoose">
+                                        <option selected disabled>Select one</option>
+                                        <option>Be a fiesta something</option>
+                                    </select>
+                                </label>
+
+                                <div class="m-t-40 m-b-30">
+                                    <div class="row m-b-20">
+                                        <div class="col-md-4"><span class="form-label">Account Type</span></div>
+                                        <div class="col-md-8">
+                                            <div class="account-type-container">
+                                                <div>
+                                                    <input class="magic-radio" type="radio" name="radio" id="individual" checked>
+                                                    <label for="individual">Individual</label>
+                                                </div>
+    
+                                                <div>
+                                                    <input class="magic-radio" type="radio" name="radio" id="corporate">
+                                                    <label for="corporate">Corporate</label>
+                                                </div>
+                                            </div>
+                                        </div>                                    
+                                    </div>
+
+                                    <div class="row m-b-20">
+                                        <div class="col-md-4"><span class="form-label">Shop based in</span></div>
+                                        <div class="col-md-8">
+                                            <label class="country-select">
+                                                <select class="form-control">
+                                                    <option>Philippines</option>
+                                                    <option>China</option>
+                                                    <option>Japan</option>
+                                                </select>
+                                            </label>
+                                        </div>                                    
+                                    </div>
+
+                                    <div class="row m-b-20">
+                                        <div class="col-md-4"><span class="form-label">Mobile Number</span></div>
+                                        <div class="col-md-8">
+                                            <div class="input-group">
+                                                <span class="input-group-addon" id="sizing-addon1">+63</span>
+                                                <input type="text" class="form-control mobile-number">
+                                            </div>
+                                        </div>                                    
+                                    </div>
+
+                                    <div class="row m-b-20">
+                                        <div class="col-md-4"><span class="form-label">Slide to verify</span></div>
+                                        <div class="col-md-8">
+                                            <div class="captcha">
+                                                <div class="handle"></div>
+                                            </div>
+                                        </div>                                    
+                                    </div>
+
+
+                                </div>
+
+
+                                <input type="button" name="next" class="next action-button" value="Next" />
+                            </fieldset>
+
+                            <fieldset>
+                                <h2 class="fs-title">Social Profiles</h2>
+                                <h3 class="fs-subtitle">Your presence on the social network</h3>
+                                <input type="text" name="twitter" placeholder="Twitter" />
+                                <input type="text" name="facebook" placeholder="Facebook" />
+                                <input type="text" name="gplus" placeholder="Google Plus" />
+                                <input type="button" name="previous" class="previous action-button" value="Previous" />
+                                <input type="button" name="next" class="next action-button" value="Next" />
+                            </fieldset>
+
+                            <fieldset>
+                                <h2 class="fs-title">Personal Details</h2>
+                                <h3 class="fs-subtitle">We will never sell it</h3>
+                                <input type="text" name="fname" placeholder="First Name" />
+                                <input type="text" name="lname" placeholder="Last Name" />
+                                <input type="text" name="phone" placeholder="Phone" />
+                                <textarea name="address" placeholder="Address"></textarea>
+                                <input type="button" name="previous" class="previous action-button" value="Previous" />
+                                <input type="submit" name="submit" class="submit action-button" value="Submit" />
+                            </fieldset>
+                        </form>
+
+                        <div class="clear"></div>
+                    </div>
+                </div>
+            </section>
+
+        </div>
+    </div>
+</div>
+
+<vendor-footer></vendor-footer>

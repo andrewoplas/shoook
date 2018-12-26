@@ -4,8 +4,9 @@ $(function() {
 var current_fs, next_fs, previous_fs; //fieldsets
 var left, opacity, scale; //fieldset properties which we will animate
 var animating; //flag to prevent quick multi-click glitches
-
+console.log('loaded register-init');
 $(".next").click(function(){
+	alert('test');
 	if(animating) return false;
 	animating = true;
 	
