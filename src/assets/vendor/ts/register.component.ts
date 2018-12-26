@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import * as $ from 'jquery';
+import swal from 'sweetalert2';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-register',
@@ -8,7 +10,9 @@ import * as $ from 'jquery';
 })
 export class RegisterComponent implements OnInit {
 
-  constructor() { }
+  constructor(
+    private router:Router
+  ) { }
 
   ngOnInit() {
     this.initializeRegisterSteps();
@@ -105,12 +109,34 @@ export class RegisterComponent implements OnInit {
           // easing: 'easeInBack'
         });
       });
-      
-      $(".submit").click(function(){
-        return false;
-      })
-      
     });
   }
 
+  registerVendor() {
+    swal({
+      title: 'Thank you for signing up!',
+      text: "Would you like to upload your first menu?",
+      type: 'success',
+      showCancelButton: true,
+      cancelButtonText: 'LATER',
+      cancelButtonClass: 'cancel-swal',
+      confirmButtonText: 'YES',
+      confirmButtonClass: 'confirm-swal'
+    }).then((result) => {
+      if (result.value) {
+        this.router.navigate(['menu']);
+      } else {
+        swal({
+          title: 'Redirecting',
+          text: 'You will be redirected to the vendor page',
+          showConfirmButton: false,
+          timer: 3000
+        })
+
+        setInterval(()=>{
+          this.router.navigate(['/vendor']);  
+        },3000)
+      }
+    })
+  }
 }
