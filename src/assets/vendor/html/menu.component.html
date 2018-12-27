@@ -94,16 +94,16 @@
                                     <tr>
                                         <th width="5%">Order No</th>
                                         <th width="10%">Date</th>
-                                        <th width="15%">Address</th>
+                                        <th width="17%">Address</th>
                                         <th width="15%">Cooking Style</th>
                                         <th width="20%">Description</th>
                                         <th widht="5%">Guests</th>
                                         <th width="10%">Status</th>
-                                        <th widht="20%">Action</th>
+                                        <th widht="18%">Action</th>
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <tr>
+                                    <tr *ngFor="let item of [1,2,3,4]">
                                         <td>11MSB45611</td>
                                         <td>20-Aug-2018</td>
                                         <td>F. Cabahug St. Kasambagan</td>
@@ -113,29 +113,11 @@
                                         <td>Over 30 years of culinary delight experience (4 Main Courses & 2 Desserts)</td>
                                         <td>50 PAX</td>
                                         <td>FULL PAID</td>
-                                        <td>Cancel, View, Print</td>
-                                    </tr>
-
-                                    <tr>
-                                        <td>11MSB45611</td>
-                                        <td>20-Aug-2018</td>
-                                        <td>Escario St. Cebu City</td>
-                                        <td>Western Style</td>
-                                        <td>Over 30 years of culinary delight experience (4 Main Courses & 2 Desserts)</td>
-                                        <td>50 PAX</td>
-                                        <td>FULL PAID</td>
-                                        <td>Cancel, View, Print</td>
-                                    </tr>
-
-                                    <tr>
-                                        <td>11MSB45611</td>
-                                        <td>20-Aug-2018</td>
-                                        <td>Mandaue City Hall</td>
-                                        <td>Western Style</td>
-                                        <td>Over 30 years of culinary delight experience (4 Main Courses & 2 Desserts)</td>
-                                        <td>50 PAX</td>
-                                        <td>FULL PAID</td>
-                                        <td>Cancel, View, Print</td>
+                                        <td class="action-buttons">
+                                            <button class="btn-view"><i class="material-icons">description</i>View</button>
+                                            <button class="btn-print"><i class="material-icons">print</i>Print</button>
+                                            <button class="btn-cancel"><i class="material-icons">delete</i>Cancel</button>
+                                        </td>
                                     </tr>
                                 </tbody>
                             </table>
