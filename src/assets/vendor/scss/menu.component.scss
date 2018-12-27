@@ -1,0 +1,451 @@
+@import './abstract/default.scss';
+@import '../../../plugins/dropzone/dropzone.scss';
+
+
+.material-design-bg-color {
+    background-color: #edf1f5;
+}
+
+.sttabs {
+    position: relative;
+    overflow: hidden;
+    margin: 50px auto;
+    width: 100%;
+    font-weight: 300;
+    padding: 10px;
+    background: white;
+    border-radius: 8px;
+    box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.15);
+
+    .content-wrap {
+        background: #fff;
+        position: relative;
+    
+        section {
+            display: none;
+            margin: 0 auto;
+            padding: 25px;
+            min-height: 150px;
+    
+            &.content-current {
+                display: block
+            }
+    
+            p {
+                margin: 0;
+                padding: .75em 0;
+            }
+        }
+    }
+    
+    nav {
+        text-align: center;
+
+        li.tab-current a {
+            color: #f44336
+        }
+
+        a {
+            position: relative;
+            display: block;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+            line-height: 2.5;
+
+            &:focus {
+                outline: 0
+            }
+
+            span {
+                vertical-align: middle;
+                font-weight: 500;
+                font-size: 14px;
+                font-family: $font-heading;
+            }
+
+            i.material-icons {
+                vertical-align: middle;
+                margin-right: 5px;
+            }
+
+            i.fas {
+                font-size: 17px;
+                margin-right: 5px;
+                vertical-align: middle;
+            }
+        }
+
+        ul {
+            position: relative;
+            display: flex;
+            margin: 0 auto;
+            padding: 0;
+            font-family: $font-body;
+            list-style: none;
+            -ms-box-orient: horizontal;
+            -ms-box-pack: center;
+            flex-flow: row wrap;
+            justify-content: center;
+
+            li {
+                position: relative;
+                z-index: 1;
+                display: block;
+                margin: 0;
+                text-align: center;
+                flex: 1
+            }
+        }
+    }
+
+    .sticon::before {
+        display: inline-block;
+        margin: 0 .4em 0 0;
+        vertical-align: middle;
+        font-size: 20px;
+        speak: none;
+        backface-visibility: hidden;
+        -webkit-font-smoothing: antialiased;
+        -moz-osx-font-smoothing: grayscale
+    }
+    
+}
+
+.tabs-style-bar nav ul li a {
+    margin: 0 2px;
+    background-color: #f7fafc;
+    color: #686868;
+    padding: 10px 0;
+    transition: background-color .2s, color .2s;
+    text-decoration: none;
+    border-radius: 8px;
+
+    &:focus, &:hover {
+        color: #f44336;
+    }
+
+    span {
+        text-transform: uppercase;
+        letter-spacing: 1px;
+        font-size: 14px;
+        font-family: Poppins, sans-serif
+    }
+}
+
+.tabs-style-bar nav ul li.tab-current a {
+    background: $pink;
+    color: #fff
+}
+
+.table-ver1 {
+    background-color: #fff;
+    position: relative;
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 0px 15px 0px rgba(0, 0, 0, 0.15);
+    
+    table {
+        width: 100%;
+    }
+
+    th, td {
+        font-weight: unset;
+        padding-right: 10px;
+    }
+
+    thead {
+        width: 100%;
+        top: 0;
+        left: 0;
+
+        th {
+            font-family: $font-body;
+            font-size: 15px;
+            color: $white;
+            line-height: 1.4;
+            background-color: $dark-green;
+            padding-top: 18px;
+            padding-bottom: 18px;
+            font-weight: bold;
+
+            &:first-child {
+                padding-left: 20px;
+            }
+        }
+    }
+    
+    tbody {
+        tr {
+            &:nth-child(even) {
+                background-color: #f8f6ff;
+            }
+
+            td {
+                font-family: $font-body;
+                font-size: 15px;
+                color: #808080;
+                line-height: 1.4;
+                padding-top: 16px;
+                padding-bottom: 16px;
+
+                &:first-child {
+                    padding-left: 20px;
+                }
+
+                &.action-buttons {
+                    padding-right: 15px;
+
+                    button {
+                        display: block;
+                        width: 80%;
+                        border-radius: 4px;
+                        color: $white;
+                        margin: 0 auto 5px auto;
+                        padding: 5px;
+                        font-family: $font-body;
+                        font-size: 13px;
+
+                        i {
+                            vertical-align: middle;
+                            font-size: 16px;
+                            margin-right: 5px;
+                            margin-bottom: 2px;                            
+                        }
+
+                        &.btn-cancel {
+                            border: 2px solid $danger;
+                            color: $danger;
+                            background: $white;
+                        }
+
+                        &.btn-view, &.btn-print {
+                            background-color: $dark-green;
+                            border: 2px solid $dark-green;
+                        }
+                    }
+                }
+
+                .status-active {
+                    padding: 5px 10px;
+                    font-weight: unset;
+                    font-size: 14px;
+                    color: $white;
+                    background-color: $success;
+                }
+
+                .status-hidden {
+                    padding: 5px 10px;
+                    font-weight: unset;
+                    font-size: 14px;
+                    color: $white;
+                    background-color: $danger;
+                }
+            }
+        }
+    }
+}
+
+.date-order-container {
+    margin-top: 30px;
+    position: relative;
+    border-radius: 8px;
+    padding: 10px 20px 10px 20px;
+    box-shadow: 0 0px 15px 0px rgba(0, 0, 0, 0.15);
+
+    .title {
+        font-size: 25px;
+        font-weight: bold;
+        font-family: $font-heading;
+    }
+
+    .subtitle {
+        font-size: 17px;
+        font-weight: bold;
+        font-family: $font-body;
+    }
+
+    .years-container {
+        .item {
+            padding: 5px 10px;
+            font-family: $font-number;
+            font-size: 16px;
+            border-radius: 3px;
+            border: 1px solid $black-o-3;
+            display: inline-block;
+            margin: 0 7px 7px 0;
+            color: $black-o-6;
+            width: 55px;
+            text-align: center;
+            cursor: pointer;
+
+            &.active {
+                font-weight: bold;
+                border-color: $pink;
+                background-color: $pink;
+                color: $white;
+                transition: 300ms;
+            }
+        }
+    }
+
+    .months-container {
+        .item {
+            padding: 5px 10px;
+            font-family: $font-body;
+            font-size: 14.5px;
+            border-radius: 3px;
+            border: 1px solid $black-o-3;
+            display: inline-block;
+            margin: 0 7px 7px 0;
+            color: $black-o-6;
+            width: 55px;
+            text-align: center;
+            cursor: pointer;
+
+            &.active {
+                font-weight: bold;
+                border-color: $pink;
+                background-color: $pink;
+                color: $white;
+                transition: 300ms;
+            }
+        }
+    }
+}
+
+.form-label {
+    font-size: 13px;
+    font-family: $font-body;
+    font-weight: bold;
+    color: $black-o-8;
+    display: block;
+    text-align: right;
+    padding-right: 10px;
+
+    &.form-label-textarea {
+        text-align: left;
+        font-size: 15px;
+
+        i {
+            margin-right: 5px;
+            font-size: 15px;
+        }
+    }
+}
+
+input.form-control {
+    border-radius: 0;
+    padding: 5px 10px;
+    font-size: 15px;
+    box-shadow: none !important;
+    font-family: $font-body;
+    color: rgba(0, 0, 0, 0.9);
+    margin: 0;
+}
+
+textarea.form-control {
+    border-radius: 0;
+    padding: 5px 10px;
+    font-size: 15px;
+    box-shadow: none !important;
+    font-family: $font-body;
+    color: rgba(0, 0, 0, 0.9);
+    margin: 0;
+    resize: vertical;
+    height: 100px;
+}
+
+.dishes-container, .desserts-container, .locations-container {
+    border-radius: 8px;
+    padding: 10px;
+    box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.1);
+    margin-bottom: 20px;
+
+    .title {
+        font-family: $font-heading;
+        font-size: 17px;
+        margin-bottom: 10px;
+        display: block;
+    }
+
+    .btn-add {
+        cursor: pointer;
+        display: block;
+        margin-top: 20px;
+        text-align: center;
+        font-family: $font-heading;
+        font-size: 15px;
+        background-color: $pink;
+        border-radius: 4px;
+        color: white;
+        padding: 5px;
+
+        &.btn-add-location {
+            display: inline-block;
+            padding: 5px 10px;
+            margin-top: 0;
+        }
+
+        i {
+            vertical-align: middle;
+            margin-right: 5px;
+        }
+    }
+
+    .desserts-item-container, .dishes-item-container, .locations-item-container{
+        .item {
+            padding: 5px 7px !important;
+            font-family: $font-body;
+            font-size: 14px;
+            border: 1px solid $pink;
+            margin-right: 5px !important;
+            margin-bottom: 5px !important;
+            border-radius: 4px;
+            color: $pink;
+            display: inline-block;
+
+            .remove-icon {
+                margin-left: 5px;
+                color: $pink;
+                cursor: pointer;
+            }
+        }
+    }
+}
+
+/deep/ {
+    .dropzone {
+        border: 0 !important;
+        box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.1);
+    }
+
+    .swal2-popup {
+        font-size: 1.5rem;
+        
+        .swal2-title {
+            font-family: $font-heading;
+        }
+        
+        .swal2-content {
+            font-family: $font-body;
+        }
+
+        button {
+            font-family: $font-body;
+        }
+
+        .swal2-input {
+            text-align: center;
+        }
+    }
+}
+
+@media screen and (max-width:58em) {
+    .sttabs nav a span {
+        display: none
+    }
+    .sttabs nav a:before {
+        margin-right: 0
+    }
+}
