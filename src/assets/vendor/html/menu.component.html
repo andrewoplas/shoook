@@ -18,7 +18,120 @@
             </nav>
             <div class="content-wrap">
                 <section id="add-menu">
-                    <h2>Tab1</h2>
+                    <div class="row">
+                        <div class="col-md-4 col-xs-12">
+                            <div class="row">
+                                <div class="col-md-8"><span class="form-label">Minimum Customers Required</span></div>
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        <input type="text" class="form-control">
+                                    </div>
+                                </div>    
+                            </div>
+
+                            <div class="row">
+                                <div class="col-md-8"><span class="form-label">Price for four(4) main course</span></div>
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        <input type="text" class="form-control">
+                                    </div>
+                                </div>    
+                            </div>
+                            
+                            <div class="row">
+                                <div class="col-md-8"><span class="form-label">Price for additional menu</span></div>
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        <input type="text" class="form-control">
+                                    </div>
+                                </div>    
+                            </div>
+
+                            <div class="row">
+                                <div class="col-md-8"><span class="form-label">Price for additional dessert</span></div>
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        <input type="text" class="form-control">
+                                    </div>
+                                </div>    
+                            </div>
+
+                            <div class="row">
+                                <div class="col-md-8"><span class="form-label">Price for additional lechon</span></div>
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        <input type="text" class="form-control">
+                                    </div>
+                                </div>    
+                            </div>
+                        </div>
+
+                        <div class="col-md-8 col-xs-12">
+                            <div class="col-md-6 col-xs-12 p-l-10 p-r-10">
+                                <div class="dishes-container">
+                                    <span class="title">DISHES</span>
+                                    
+                                    <div class="dishes-item-container">
+                                        <p *ngFor="let dish of dishes" class="item" >
+                                            {{ dish }} <i class="remove-icon fas fa-times" (click)="removeDish(dish)"></i>
+                                        </p>
+                                    </div>
+        
+                                    <span class="btn-add" (click)="addDish()"><i class="fas fa-plus"></i>Add Dish</span>
+                                </div>
+                            </div>
+                            <div class="col-md-6 col-xs-12 p-l-10 p-r-10">
+                                <div class="desserts-container">
+                                    <span class="title">DESSERTS</span>
+    
+                                    <div class="desserts-item-container">
+                                        <p *ngFor="let dessert of desserts" class="item" >
+                                            {{ dessert }} <i class="remove-icon fas fa-times" (click)="removeDessert(dessert)"></i>
+                                        </p>
+                                    </div>
+    
+                                    <span class="btn-add" (click)="addDessert()"><i class="fas fa-plus"></i>Add Dessert</span>
+                                </div>
+                            </div>
+                            <div class="col-md-12 p-l-10 p-r-10">
+                                <div class="locations-container">
+                                    <span class="title">LOCATIONS COVERED</span>
+    
+                                    <div class="locations-item-container">
+                                        <p *ngFor="let location of locations" class="item" >
+                                            {{ location }} <i class="remove-icon fas fa-times" (click)="removeLocation(location)"></i>
+                                        </p>
+
+                                        <span class="btn-add btn-add-location" (click)="addLocation()"><i class="fas fa-plus"></i>Add Location</span>
+                                    </div>                                    
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row m-t-20">
+                        <div class="col-md-12">
+                            <form action="/upload-target" class="dropzone" id="dropzone">
+                                <div class="fallback">
+                                    <input name="file" type="file" multiple />
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+
+                    <div class="row m-t-40">
+                        <div class="col-md-12">
+                            <div class="form-group m-b-30">
+                                <label class="form-label form-label-textarea"><i class="fas fa-pencil-alt"></i> Describe the Style of Cooking</label>
+                                <textarea class="form-control"></textarea>
+                            </div>
+
+                            <div class="form-group">
+                                <label class="form-label form-label-textarea"><i class="fas fa-pencil-alt"></i> Describe your specialty / Years of experience</label>
+                                <textarea class="form-control"></textarea>
+                            </div>
+                        </div>
+                    </div>
                 </section>
 
                 <section id="manage-menu">
@@ -152,11 +265,11 @@
                 </section>
 
                 <section id="finance">
-                    <h2>Tabbing 4</h2>
+                    <h2>Finance Tab</h2>
                 </section>
 
                 <section id="history">
-                    <h2>Tabbing 5</h2>
+                    <h2>History Tab</h2>
                 </section>
             </div>
         </div>
