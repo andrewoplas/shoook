@@ -124,7 +124,7 @@ export class RegisterComponent implements OnInit {
       confirmButtonClass: 'confirm-swal'
     }).then((result) => {
       if (result.value) {
-        this.router.navigate(['menu']);
+        this.router.navigate(['/vendor/menu']);
       } else {
         swal({
           title: 'Redirecting',
