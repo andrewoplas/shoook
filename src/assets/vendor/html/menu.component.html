@@ -20,15 +20,167 @@
                 <section id="add-menu">
                     <h2>Tab1</h2>
                 </section>
+
                 <section id="manage-menu">
-                    <h2>Tabbing 2</h2>
+                    <div class="table-ver1">
+                        <div class="table-head">
+                            <table>
+                                <thead>
+                                    <tr>
+                                        <th>Image</th>
+                                        <th>Style</th>
+                                        <th>Description</th>
+                                        <th>Created</th>
+                                        <th>Active</th>
+                                        <th>Action</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>Like a butterfly</td>
+                                        <td>Boxing</td>
+                                        <td>9:00 AM - 11:00 AM</td>
+                                        <td>Aaron Chapman</td>
+                                        <td>10</td>
+                                        <td>10</td>
+                                    </tr>
+    
+                                    <tr>
+                                        <td>Like a butterfly</td>
+                                        <td>Boxing</td>
+                                        <td>9:00 AM - 11:00 AM</td>
+                                        <td>Aaron Chapman</td>
+                                        <td>10</td>
+                                        <td>10</td>
+                                    </tr>
+    
+                                    <tr>
+                                        <td>Like a butterfly</td>
+                                        <td>Boxing</td>
+                                        <td>9:00 AM - 11:00 AM</td>
+                                        <td>Aaron Chapman</td>
+                                        <td>10</td>
+                                        <td>10</td>
+                                    </tr>
+    
+                                    <tr>
+                                        <td>Like a butterfly</td>
+                                        <td>Boxing</td>
+                                        <td>9:00 AM - 11:00 AM</td>
+                                        <td>Aaron Chapman</td>
+                                        <td>10</td>
+                                        <td>10</td>
+                                    </tr>
+    
+                                    <tr>
+                                        <td>Like a butterfly</td>
+                                        <td>Boxing</td>
+                                        <td>9:00 AM - 11:00 AM</td>
+                                        <td>Aaron Chapman</td>
+                                        <td>10</td>
+                                        <td>10</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
                 </section>
+
                 <section id="orders">
-                    <h2>Tabbing 3</h2>
+                    <div class="table-ver1">
+                        <div class="table-head">
+                            <table>
+                                <thead>
+                                    <tr>
+                                        <th width="5%">Order No</th>
+                                        <th width="10%">Date</th>
+                                        <th width="15%">Address</th>
+                                        <th width="15%">Cooking Style</th>
+                                        <th width="20%">Description</th>
+                                        <th widht="5%">Guests</th>
+                                        <th width="10%">Status</th>
+                                        <th widht="20%">Action</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>11MSB45611</td>
+                                        <td>20-Aug-2018</td>
+                                        <td>F. Cabahug St. Kasambagan</td>
+                                        <!-- <td>Escario St. Cebu City</td>
+                                        <td>Mandaue City Hall</td> -->
+                                        <td>Western Style</td>
+                                        <td>Over 30 years of culinary delight experience (4 Main Courses & 2 Desserts)</td>
+                                        <td>50 PAX</td>
+                                        <td>FULL PAID</td>
+                                        <td>Cancel, View, Print</td>
+                                    </tr>
+
+                                    <tr>
+                                        <td>11MSB45611</td>
+                                        <td>20-Aug-2018</td>
+                                        <td>Escario St. Cebu City</td>
+                                        <td>Western Style</td>
+                                        <td>Over 30 years of culinary delight experience (4 Main Courses & 2 Desserts)</td>
+                                        <td>50 PAX</td>
+                                        <td>FULL PAID</td>
+                                        <td>Cancel, View, Print</td>
+                                    </tr>
+
+                                    <tr>
+                                        <td>11MSB45611</td>
+                                        <td>20-Aug-2018</td>
+                                        <td>Mandaue City Hall</td>
+                                        <td>Western Style</td>
+                                        <td>Over 30 years of culinary delight experience (4 Main Courses & 2 Desserts)</td>
+                                        <td>50 PAX</td>
+                                        <td>FULL PAID</td>
+                                        <td>Cancel, View, Print</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+
+                    <div class="date-order-container">
+                        <p class="title">View Calendar of Orders</p>
+                        
+                        <div class="row">
+                            <div class="col-md-6">
+                                <p class="subtitle">Years</p>
+                                <div class="years-container">
+                                    <span (click)="chooseYear($event)" class="item">2018</span>
+                                    <span (click)="chooseYear($event)" class="item">2019</span>
+                                    <span (click)="chooseYear($event)" class="item">2020</span>
+                                    <span (click)="chooseYear($event)" class="item">2021</span>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <p class="subtitle">Months</p>
+                                <div class="months-container">
+                                    <span (click)="chooseMonth($event)" class="item">Jan</span>
+                                    <span (click)="chooseMonth($event)" class="item">Feb</span>
+                                    <span (click)="chooseMonth($event)" class="item">Mar</span>
+                                    <span (click)="chooseMonth($event)" class="item">Apr</span>
+                                    <span (click)="chooseMonth($event)" class="item">May</span>
+                                    <span (click)="chooseMonth($event)" class="item">Jun</span>
+                                    <span (click)="chooseMonth($event)" class="item">Jul</span>
+                                    <span (click)="chooseMonth($event)" class="item">Aug</span>
+                                    <span (click)="chooseMonth($event)" class="item">Sep</span>
+                                    <span (click)="chooseMonth($event)" class="item">Oct</span>
+                                    <span (click)="chooseMonth($event)" class="item">Nov</span>
+                                    <span (click)="chooseMonth($event)" class="item">Dec</span>
+                                </div>
+                            </div>
+                        </div>
+                        
+                    </div>
                 </section>
+
                 <section id="finance">
                     <h2>Tabbing 4</h2>
                 </section>
+
                 <section id="history">
                     <h2>Tabbing 5</h2>
                 </section>
