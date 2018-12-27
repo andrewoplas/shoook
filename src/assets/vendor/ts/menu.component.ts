@@ -15,6 +15,14 @@ export class MenuComponent implements OnInit {
     eval("[].slice.call(document.querySelectorAll('.sttabs')).forEach(function(el) {new CBPFWTabs(el);});");
   }
 
+  deleteMenu() {
+
+  }
+
+  cancelOrder() {
+    
+  }
+
   chooseYear(year: Event) {
     let element = $(event.target as Element);
 

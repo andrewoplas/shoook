@@ -27,61 +27,41 @@
                             <table>
                                 <thead>
                                     <tr>
-                                        <th>Image</th>
-                                        <th>Style</th>
-                                        <th>Description</th>
-                                        <th>Created</th>
-                                        <th>Active</th>
-                                        <th>Action</th>
+                                        <th width="17%">Image</th>
+                                        <th width="17%">Style</th>
+                                        <th width="20%">Description</th>
+                                        <th width="15%" class="text-center">Created</th>
+                                        <th width="10%" class="text-center">Status</th>
+                                        <th width="20%" class="text-center">Action</th>
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <tr>
-                                        <td>Like a butterfly</td>
-                                        <td>Boxing</td>
-                                        <td>9:00 AM - 11:00 AM</td>
-                                        <td>Aaron Chapman</td>
-                                        <td>10</td>
-                                        <td>10</td>
-                                    </tr>
-    
-                                    <tr>
-                                        <td>Like a butterfly</td>
-                                        <td>Boxing</td>
-                                        <td>9:00 AM - 11:00 AM</td>
-                                        <td>Aaron Chapman</td>
-                                        <td>10</td>
-                                        <td>10</td>
-                                    </tr>
-    
-                                    <tr>
-                                        <td>Like a butterfly</td>
-                                        <td>Boxing</td>
-                                        <td>9:00 AM - 11:00 AM</td>
-                                        <td>Aaron Chapman</td>
-                                        <td>10</td>
-                                        <td>10</td>
-                                    </tr>
-    
-                                    <tr>
-                                        <td>Like a butterfly</td>
-                                        <td>Boxing</td>
-                                        <td>9:00 AM - 11:00 AM</td>
-                                        <td>Aaron Chapman</td>
-                                        <td>10</td>
-                                        <td>10</td>
-                                    </tr>
-    
-                                    <tr>
-                                        <td>Like a butterfly</td>
-                                        <td>Boxing</td>
-                                        <td>9:00 AM - 11:00 AM</td>
-                                        <td>Aaron Chapman</td>
-                                        <td>10</td>
-                                        <td>10</td>
+                                    <tr *ngFor="let item of [1,2,3,4,5]">
+                                        <td>Image</td>
+                                        <td>Western Style Dishes</td>
+                                        <td class="text-justify">Over 30 years of culinary delight experience (4 Main Courses & 2 Desserts)</td>
+                                        <td class="text-center">20-Aug-2018</td>
+                                        <td class="text-center">
+                                            <span class="badge status-active">Active</span>
+                                            <!-- <span class="badge status-hidden">Hidden</span> -->
+                                        </td>
+                                        <td class="action-buttons text-center">
+                                            <button class="btn-print"><i class="material-icons">edit</i>Edit Menu</button>
+                                            <button class="btn-cancel" [swal]="deleteMenu" (confirm)="deleteMenu()"><i class="material-icons">delete</i>Delete Menu</button>
+                                        </td>
                                     </tr>
                                 </tbody>
                             </table>
+                                <swal 
+                                    #deleteMenu 
+                                    title="Delete Menu?" 
+                                    text="Are you sure you want to permanently remove this menu?"
+                                    type="question"
+                                    [showCancelButton]="true" 
+                                    [focusCancel]="true" 
+                                    confirmButtonText="Yes, Delete it"
+                                    confirmButtonColor="#f44336">
+                                </swal>
                         </div>
                     </div>
                 </section>
@@ -97,9 +77,9 @@
                                         <th width="17%">Address</th>
                                         <th width="15%">Cooking Style</th>
                                         <th width="20%">Description</th>
-                                        <th widht="5%">Guests</th>
+                                        <th width="5%">Guests</th>
                                         <th width="10%">Status</th>
-                                        <th widht="18%">Action</th>
+                                        <th width="18%" class="text-center">Action</th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -113,16 +93,28 @@
                                         <td>Over 30 years of culinary delight experience (4 Main Courses & 2 Desserts)</td>
                                         <td>50 PAX</td>
                                         <td>FULL PAID</td>
-                                        <td class="action-buttons">
+                                        <td class="action-buttons text-center">
                                             <button class="btn-view"><i class="material-icons">description</i>View</button>
                                             <button class="btn-print"><i class="material-icons">print</i>Print</button>
-                                            <button class="btn-cancel"><i class="material-icons">delete</i>Cancel</button>
+                                            <button class="btn-cancel" [swal]="cancelOrder" (confirm)="cancelOrder()"><i class="material-icons">delete</i>Cancel</button>
                                         </td>
                                     </tr>
                                 </tbody>
                             </table>
                         </div>
                     </div>
+
+                    <swal 
+                        #cancelOrder 
+                        title="Cancel Order?" 
+                        text="Are you sure you want to cancel this order?"
+                        type="question"
+                        [showCancelButton]="true" 
+                        [focusCancel]="true" 
+                        confirmButtonText="Yes, Cancel it"
+                        confirmButtonColor="#f44336"
+                        cancelButtonText="No">
+                    </swal>
 
                     <div class="date-order-container">
                         <p class="title">View Calendar of Orders</p>
