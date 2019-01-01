@@ -8,7 +8,7 @@
 		<version>2.1.1.RELEASE</version>
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
-	<groupId>com.package</groupId>
+	<groupId>com.shoook</groupId>
 	<artifactId>ShoookREST</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<name>ShoookREST</name>
@@ -31,8 +31,8 @@
 		<dependency>
 			<groupId>mysql</groupId>
 			<artifactId>mysql-connector-java</artifactId>
-			<scope>runtime</scope>
 		</dependency>
+		
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-test</artifactId>
