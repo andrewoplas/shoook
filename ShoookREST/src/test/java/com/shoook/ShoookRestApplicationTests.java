@@ -1,4 +1,4 @@
-package com.package;
+package com.shoook;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;

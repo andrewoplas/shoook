@@ -1,4 +1,4 @@
-package com.package;
+package com.shoook;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
