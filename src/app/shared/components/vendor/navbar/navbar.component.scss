@@ -1,0 +1,73 @@
+@import '../../../../../assets/scss/styles.scss';
+
+.navbar {
+    background-color: transparent;
+    border: none;
+    height: 80px;
+    margin-bottom: 0;
+    
+    .navbar-brand {
+        padding-left: 0;
+    }
+
+    #logo {
+        width: 200px;
+    }
+
+    .navbar-nav {
+        display: flex;
+        align-items: center;
+
+        & > li {
+            font-family: $font-body;
+            font-size: 15px;
+            color: $black-o-8;
+            margin-left: 15px;
+            margin-right: 15px;
+
+            a {
+                padding-left: 0;
+                padding-right: 0;
+            }
+        }
+        
+        .active {
+            a {
+                background-color: transparent;
+                border-bottom: 3px solid $dark-green;
+                color: $dark-green;
+            }
+        }
+    }
+
+    ul.nav li.dropdown.hover:hover > ul.dropdown-menu {
+        display: block;    
+    }
+
+    .monthly-potential-text {
+        font-size: 13px;
+    }
+
+    .monthly-potential-money {
+        margin-left: 7px;
+        font-size: 18px;
+        font-weight: bold;
+        font-family: $font-number;
+        color: $black-o-9;
+
+        .peso-sign {
+            font-family: Calibri;
+        }
+    }
+
+    
+
+    .btn-get-started {
+        font-size: 12px;
+        font-family: $font-body;
+        font-weight: bold;
+        padding: 6px 15px;
+        background-color: #ff5a5f;
+        color: white;
+    }
+}

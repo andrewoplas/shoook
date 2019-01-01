@@ -1,8 +1,8 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
-import { LandingComponent } from '@vendor/landing.component';
-import { RegisterComponent } from '@vendor/register.component';
-import { MenuComponent } from '@vendor/menu.component';
+import { LandingComponent } from 'src/app/modules/vendor/landing/landing.component';
+import { RegisterComponent } from 'src/app/modules/vendor/register/register.component';
+import { MenuComponent } from 'src/app/modules/vendor/menu/menu.component';
 
 const routes: Routes = [
   { path: '', component: LandingComponent },

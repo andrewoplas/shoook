@@ -1,6 +1,6 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { LandingComponent } from '@user/landing.component';
+import { LandingComponent } from 'src/app/modules/user/landing/landing.component';
 
 describe('LandingComponent', () => {
   let component: LandingComponent;

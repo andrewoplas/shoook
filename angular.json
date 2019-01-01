@@ -30,15 +30,15 @@
               "src/styles.scss"
             ],
             "scripts": [
-              "../shoook/src/plugins/jquery/dist/jquery.min.js",
-              "../shoook/src/plugins/bootstrap/dist/js/bootstrap.min.js",
-              "../shoook/src/plugins/slick/slick.min.js",
-              "../shoook/src/plugins/Timepicki/js/timepicki.js",
-              "../shoook/src/plugins/datepicker/js/datepicker.js",
-              "../shoook/src/plugins/datepicker/js/i18n/datepicker.en.js",
-              "../shoook/src/plugins/slide-to-captcha-master/js/slide-to-captcha.js",
-              "../shoook/src/plugins/stylishTabs/main.js",
-              "../shoook/src/plugins/dropzone/dropzone.min.js"
+              "../shoook/src/assets/plugins/jquery/dist/jquery.min.js",
+              "../shoook/src/assets/plugins/bootstrap/dist/js/bootstrap.min.js",
+              "../shoook/src/assets/plugins/slick/slick.min.js",
+              "../shoook/src/assets/plugins/Timepicki/js/timepicki.js",
+              "../shoook/src/assets/plugins/datepicker/js/datepicker.js",
+              "../shoook/src/assets/plugins/datepicker/js/i18n/datepicker.en.js",
+              "../shoook/src/assets/plugins/slide-to-captcha-master/js/slide-to-captcha.js",
+              "../shoook/src/assets/plugins/stylishTabs/main.js",
+              "../shoook/src/assets/plugins/dropzone/dropzone.min.js"
             ]
           },
           "configurations": {

@@ -3,11 +3,9 @@
   "compilerOptions": {
     "baseUrl": "./",
     "paths": {
-      "@vendor/*" : ["./src/assets/vendor/ts/*"],
-      "@user/*" : ["./src/assets/user/ts/*"],
-      "@services/*" : ["./src/app/core/services/*"],
-      "@models/*" : ["./src/app/models/*"],
-      "@pipe/*" : ["./src/app/core/pipe/*"],
+      "@shared/*" : ["./src/app/shared/*"],
+      "@modules/*" : ["./src/app/modules/*"],
+      "@core/*" : ["./src/app/core/*"],
     },
     "outDir": "./dist/out-tsc",
     "sourceMap": true,
