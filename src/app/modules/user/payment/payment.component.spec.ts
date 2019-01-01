@@ -1,6 +1,6 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { PaymentComponent } from '@user/payment.component';
+import { PaymentComponent } from 'src/app/modules/user/payment/payment.component';
 
 describe('PaymentComponent', () => {
   let component: PaymentComponent;

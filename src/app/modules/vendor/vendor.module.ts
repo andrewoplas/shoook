@@ -1,24 +1,20 @@
 import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
 import { SweetAlert2Module } from '@toverux/ngx-sweetalert2';
 
 import { VendorRoutingModule } from './vendor-routing.module';
-import { LandingComponent } from '@vendor/landing.component';
-import { NavbarComponent } from '@vendor/navbar.component';
-import { FooterComponent } from '@vendor/footer.component';
-import { RegisterComponent } from '@vendor/register.component';
-import { MenuComponent } from '@vendor/menu.component';
+import { LandingComponent } from 'src/app/modules/vendor/landing/landing.component';
+import { RegisterComponent } from 'src/app/modules/vendor/register/register.component';
+import { MenuComponent } from 'src/app/modules/vendor/menu/menu.component';
+import { SharedModule } from '@shared/shared.module';
 
 @NgModule({
   declarations: [
     LandingComponent,
-    NavbarComponent,
-    FooterComponent,
     RegisterComponent,
     MenuComponent
   ],
   imports: [
-    CommonModule,
+    SharedModule,
     VendorRoutingModule,
     SweetAlert2Module.forRoot()
   ]

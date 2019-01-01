@@ -1,0 +1,91 @@
+<!-- Navigation Bar -->
+<nav class="navbar navbar-default">
+    <div class="container-fluid">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" routerLink="">
+                <img id="logo" src="assets/image/logo-edited.png">
+            </a>
+        </div>
+
+        <form class="navbar-form navbar-left" [hidden]="landing">
+            <div class="col-md-12">
+                <input type="search" class="form-control" placeholder="e.g. Cebu City" />
+                <span class="glyphicon glyphicon-search"></span>
+            </div>
+        </form>
+    
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">                
+            <ul class="nav navbar-nav navbar-right">
+                <li class="dropdown hover">
+                    <a routerLink="/vendor" href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+                        Be a vendor
+                    </a>
+                    <ul class="dropdown-menu be-a-vendor">
+                        <li>
+                            <img src="assets/image/chef.jpg" />
+                            <h4 class="font-heading">Be a vendor</h4>
+                            <p class="font-body">Earn up to P100,000 a month being a vendor.</p>
+                        </li>
+                    </ul>
+                </li>
+
+                <li class="dropdown hover">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+                        <u>Earn while you share</u>
+                    </a>
+                    <ul class="dropdown-menu earn">
+                        <li>
+                            <p class="font-body">
+                                Up to ₱600 booking credit will automatically be applied to your next booking of ₱3500 or more. 
+                                <a routerLink="invite">Invite friends to earn more!</a> <br/><br/>
+                                
+                                <small>Exp. 04/05/2019 ® <a href="#">See Terms</a></small>
+                            </p>
+                        </li>
+                    </ul>
+                </li>
+                
+                <li class="dropdown hover">
+                    <a href="sharing.html" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+                        Message
+                    </a>
+                    <ul class="dropdown-menu message">
+                        <li class="line-item">
+                            <span class="item">Messages(0)</span> <span class="pull-right">View All</span>
+                        </li>
+                        <li class="line-item">
+                            <span class="item">Notifications(0)</span> <span class="pull-right">View All</span>
+                        </li>
+                        <li class="line-item-offer">
+                            <i class="material-icons">card_giftcard</i>
+                            Invite a friend and earn P800!
+                        </li>
+                    </ul>
+                </li>
+
+                <li class="dropdown user-dropdown">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+                        <img src="assets/image/user.png" class="user">
+                    </a>
+                    <ul class="dropdown-menu">
+                        <li><a href="#"><i class="material-icons">edit</i> Edit Profile</a></li>
+                        <li><a href="#"><i class="material-icons">person_add</i> Invite Friends</a></li>
+                        <li><a href="#"><i class="material-icons">record_voice_over</i> Refer Vendor</a></li>
+                        <li><a href="#"><i class="material-icons">settings</i> Account Settings</a></li>
+                        <li><a href="#"><i class="material-icons">assignment_turned_in</i> My Guidebook</a></li>
+                        <li><a href="#"><i class="material-icons">assignment</i> Gift Cards</a></li>
+                        <li><a href="#"><i class="material-icons">arrow_back</i> Logout</a></li>
+                    </ul>
+                </li>
+            </ul>
+        </div><!-- /.navbar-collapse -->
+    </div><!-- /.container-fluid -->
+</nav>

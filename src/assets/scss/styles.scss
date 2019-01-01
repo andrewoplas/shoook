@@ -1,0 +1,11 @@
+@import './partials/default';
+@import './partials/mixins';
+@import './partials/variable';
+
+.font-heading {
+    font-family: $font-heading;
+}
+
+.font-body {
+    font-family: $font-body;
+}
