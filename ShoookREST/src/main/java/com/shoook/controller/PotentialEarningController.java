@@ -1,6 +1,7 @@
 package com.shoook.controller;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -21,8 +22,8 @@ public class PotentialEarningController {
 	@Autowired
 	private PotentialEarningService service;
 	
-	
-	@GetMapping(path = "get-potential-earnings", produces = MediaType.APPLICATION_JSON_VALUE)
+	@CrossOrigin
+	@GetMapping(path = "get-potential-earnings", produces = MediaType.APPLICATION_JSON_VALUE)	
 	public RequestResult retrieve() {
 		return service.retrieve();
 	}

@@ -1,6 +1,6 @@
 <div class="add-border-bottom">
     <div class="container">
-        <vendor-navbar [activeLink]="link"></vendor-navbar>
+        <vendor-navbar [activeLink]="link" [potentialEarning]="potentialEarning.earnings | number: '2.'"></vendor-navbar>
     </div>    
 </div>
 
@@ -18,21 +18,28 @@
 
                 <form>
                     <div class="form-group m-t-30 m-b-10">
-                        <input type="text" class="form-control" id="txtLocation" value="Metro Cebu">
+                        <label class="select">
+                            <select class="form-control" #place (change)="choosePlace(place.value)">
+                                <option *ngFor="let place of potentialEarningPlaceList">
+                                    {{ place | titlecase }}
+                                </option>
+                            </select>
+                        </label>
                     </div>
         
                     <div class="form-group m-b-0">
                         <label class="select">
-                            <select class="form-control" id="txtChoose">
-                                <option>Be a fiesta caterer</option>
-                                <option>Be a fiesta something</option>
+                            <select class="form-control" #type (change)="chooseType(place.value, type.value)">
+                                <option *ngFor="let type of potentialEarningTypeList">
+                                    {{ type | titlecase }}
+                                </option>
                             </select>
                         </label>
                     </div>
                 </form>
 
                 <div class="p-l-15 p-r-15">
-                    <p class="earnings m-b-0"><span class="peso-sign">₱</span>19,817 <span class="per-month-text">per month <i class="far fa-question-circle"></i></span></p>
+                    <p class="earnings m-b-0"><span class="peso-sign">₱</span>{{ potentialEarning.earnings | number: '2.' }} <span class="per-month-text">per month <i class="far fa-question-circle"></i></span></p>
                     <a routerLink="register">
                         <button class="btn btn-get-started">Get Started</button>
                     </a>
