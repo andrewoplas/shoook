@@ -10,6 +10,9 @@ import { VendorNavbarComponent } from '@shared/components/vendor/navbar/navbar.c
 import { FooterComponent } from './components/user/footer/footer.component';
 import { NavbarComponent } from './components/user/navbar/navbar.component';
 
+// Global
+import { Globals } from './models/Global';
+
 @NgModule({
   declarations: [
     VendorNavbarComponent,
@@ -30,6 +33,9 @@ import { NavbarComponent } from './components/user/navbar/navbar.component';
     VendorFooterComponent,
     NavbarComponent,
     FooterComponent
+  ],
+  providers: [
+    Globals
   ]
 })
 export class SharedModule { }

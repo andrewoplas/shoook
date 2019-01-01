@@ -7,6 +7,7 @@ import { Component, OnInit, Input } from '@angular/core';
 })
 export class VendorNavbarComponent implements OnInit {
   @Input() activeLink;
+  @Input() potentialEarning;
 
   constructor() { }
 

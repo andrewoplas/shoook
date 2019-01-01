@@ -5,6 +5,7 @@ import { catchError, tap } from "rxjs/operators";
 import { Globals } from '@shared/models/Global';
 import { PotentialEarning } from '@shared/models/PotentialEarning.model';
 import { ErrorHandlerService } from './error-handler.service';
+import { RequestResult } from '@shared/models/RequestResult';
 
 const httpOptions = {
   headers: new HttpHeaders({
@@ -16,15 +17,15 @@ const httpOptions = {
   providedIn: 'root'
 })
 export class PotentialEarningService {
-  private Global: Globals;
   private baseUrl: string;
   private _list: Array<PotentialEarning>;
 
   constructor(
     private http: HttpClient,
+    private global: Globals,
     private errHandler: ErrorHandlerService
   ) {
-    this.baseUrl = 'http://localhost:8080/potential-earning';    
+    this.baseUrl = global.BASE_URL + 'potential-earning';    
   }
 
   get list(): Array<PotentialEarning> {
@@ -32,9 +33,9 @@ export class PotentialEarningService {
   }
 
   /** GET: retrieve entities from the server */
-  public getPotentialEarnings(): Observable<PotentialEarning[]> {
+  public getPotentialEarnings(): Observable<RequestResult> {
     return this.http
-      .get<PotentialEarning[]>(`${this.baseUrl}/get-potential-earnings`, httpOptions)
+      .get<RequestResult>(`${this.baseUrl}/get-potential-earnings`, httpOptions)
       .pipe(
         tap(() => this.log("get-potential-earnings")),
         catchError(this.errHandler.handleError)
