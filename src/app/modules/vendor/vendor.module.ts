@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { SweetAlert2Module } from '@toverux/ngx-sweetalert2';
+import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 
 import { VendorRoutingModule } from './vendor-routing.module';
 import { LandingComponent } from 'src/app/modules/vendor/landing/landing.component';
@@ -16,7 +17,9 @@ import { SharedModule } from '@shared/shared.module';
   imports: [
     SharedModule,
     VendorRoutingModule,
-    SweetAlert2Module.forRoot()
+    SweetAlert2Module.forRoot(),
+    ReactiveFormsModule,
+    FormsModule
   ]
 })
 export class VendorModule { }

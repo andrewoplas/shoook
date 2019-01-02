@@ -13,7 +13,7 @@
                     <div class="register-box">
                         <div>
                             <!-- multistep form -->
-                            <form id="msform">
+                            <form id="msform" [formGroup]="forms" (ngSubmit)="onSubmit()">
                                 <!-- progressbar -->
                                 <ul id="eliteregister">
                                     <li class="active">Account Setup</li>
@@ -23,12 +23,12 @@
                                 </ul>
 
                                 <!-- fieldsets -->
-                                <fieldset class="active first-fieldset">
+                                <fieldset class="active first-fieldset" formGroupName="first">
                                     <h2 class="fs-title">What kind of caterer are you listing?</h2>
                                     <h3 class="fs-subtitle">First. Let's narrow things down.</h3>
 
-                                    <label class="select">
-                                        <select class="form-control" id="txtChoose">
+                                    <label class="select" [ngClass]="displayFieldCss('first.choose')">
+                                        <select class="form-control" id="txtChoose" formControlName="choose">
                                             <option selected disabled>Select one</option>
                                             <option>Be a fiesta something</option>
                                         </select>
@@ -65,9 +65,9 @@
                                                 </span>
                                             </div>
                                             <div class="col-md-8">
-                                                <label class="country-select">
-                                                    <select class="form-control">
-                                                        <option>Philippines</option>
+                                                <label class="country-select"  [ngClass]="displayFieldCss('first.shopBasedIn')">
+                                                    <select class="form-control" formControlName="shopBasedIn">
+                                                        <option selected>Philippines</option>
                                                         <option>China</option>
                                                         <option>Japan</option>
                                                     </select>
@@ -83,14 +83,14 @@
                                                 </span>
                                             </div>
                                             <div class="col-md-8">
-                                                <div class="input-group">
+                                                <div class="input-group" [ngClass]="displayFieldCss('first.mobileNumber')">
                                                     <span class="input-group-addon" id="sizing-addon1">+63</span>
-                                                    <input type="text" class="form-control mobile-number">
+                                                    <input type="text" class="form-control mobile-number" formControlName="mobileNumber">
                                                 </div>
                                             </div>                                    
                                         </div>
 
-                                        <div class="row m-b-20">
+                                        <!-- <div class="row m-b-20">
                                             <div class="col-md-4">
                                                 <span class="form-label">
                                                     Slide to verify
@@ -102,13 +102,13 @@
                                                     <div class="handle"></div>
                                                 </div>
                                             </div>                                    
-                                        </div>
+                                        </div> -->
                                     </div>
 
-                                    <input type="button" name="next" class="next action-button" value="Next" />
+                                    <input type="button" name="next" class="next action-button" value="Next" (click)="next($event, 'first')" />
                                 </fieldset>
 
-                                <fieldset class="second-fieldset">
+                                <fieldset class="second-fieldset" formGroupName="second">
                                     <h2 class="fs-title">Vendor Account Information</h2>
                                     
                                     <div class="m-t-40 m-b-30">
@@ -120,8 +120,8 @@
                                                 </span>
                                             </div>
                                             <div class="col-md-8">
-                                                <div class="form-group">
-                                                    <input type="text" class="form-control" disabled value="PH1XOWOJ">
+                                                <div class="form-group" [ngClass]="displayFieldCss('second.vendorId')">
+                                                    <input type="text" class="form-control" formControlName="vendorId">
                                                 </div>
                                             </div>                                    
                                         </div>
@@ -134,8 +134,8 @@
                                                 </span>
                                             </div>
                                             <div class="col-md-8">
-                                                <div class="form-group">
-                                                    <input type="text" class="form-control">
+                                                <div class="form-group has-error" [ngClass]="displayFieldCss('second.name')">
+                                                    <input type="text" class="form-control" formControlName="name">
                                                 </div>
                                             </div>                                    
                                         </div>
@@ -148,8 +148,8 @@
                                                 </span>
                                             </div>
                                             <div class="col-md-8">
-                                                <div class="form-group">
-                                                    <input type="text" class="form-control">
+                                                <div class="form-group" [ngClass]="displayFieldCss('second.emailAddress')">
+                                                    <input type="text" class="form-control" formControlName="emailAddress">
                                                 </div>
                                             </div>                                    
                                         </div>
@@ -162,8 +162,8 @@
                                                 </span>
                                             </div>
                                             <div class="col-md-8">
-                                                <div class="form-group">
-                                                    <input type="text" class="form-control">
+                                                <div class="form-group" [ngClass]="displayFieldCss('second.phoneNumber')">
+                                                    <input type="text" class="form-control" formControlName="phoneNumber">
                                                 </div>
                                             </div>                                    
                                         </div>
@@ -176,26 +176,26 @@
                                                 </span>
                                             </div>
                                             <div class="col-md-8">
-                                                <div class="form-group">
-                                                    <input type="text" class="form-control">
+                                                <div class="form-group" [ngClass]="displayFieldCss('second.businessName')">
+                                                    <input type="text" class="form-control" formControlName="businessName">
                                                 </div>
                                             </div>                                    
                                         </div>
                                     </div>
 
                                     <input type="button" name="previous" class="previous action-button" value="Previous" />
-                                    <input type="button" name="next" class="next action-button" value="Next" />
+                                    <input type="button" name="next" class="next action-button" value="Next" (click)="next($event, 'second')" />
                                 </fieldset>
 
-                                <fieldset class="third-fieldset">
+                                <fieldset class="third-fieldset" formGroupName="third">
                                     <h2 class="fs-title">Business Information</h2>
                                     
                                     <div class="m-t-40 m-b-30">
                                         <div class="row m-b-10">
                                             <div class="col-md-4"><span class="form-label">Legal Name/Company Name</span></div>
                                             <div class="col-md-8">
-                                                <div class="form-group">
-                                                    <input type="text" class="form-control">
+                                                <div class="form-group" [ngClass]="displayFieldCss('third.legalCompanyName')">
+                                                    <input type="text" class="form-control" formControlName="legalCompanyName">
                                                 </div>
                                             </div>                                    
                                         </div>
@@ -203,8 +203,8 @@
                                         <div class="row m-b-10">
                                             <div class="col-md-4"><span class="form-label">Address<span class="required">*</span></span></div>
                                             <div class="col-md-8">
-                                                <div class="form-group">
-                                                    <input type="text" class="form-control">
+                                                <div class="form-group" [ngClass]="displayFieldCss('third.address')">
+                                                    <input type="text" class="form-control" formControlName="address">
                                                 </div>
                                             </div>                                    
                                         </div>
@@ -212,8 +212,12 @@
                                         <div class="row m-b-10">
                                             <div class="col-md-4"><span class="form-label">Country<span class="required">*</span></span></div>
                                             <div class="col-md-8">
-                                                <div class="form-group">
-                                                    <input type="text" class="form-control">
+                                                <div class="form-group" [ngClass]="displayFieldCss('third.country')">
+                                                    <select class="form-control" formControlName="country">
+                                                        <option selected>Philippines</option>
+                                                        <option>China</option>
+                                                        <option>Japan</option>
+                                                    </select>
                                                 </div>
                                             </div>                                    
                                         </div>
@@ -221,8 +225,8 @@
                                         <div class="row m-b-10">
                                             <div class="col-md-4"><span class="form-label">Postal Code<span class="required">*</span></span></div>
                                             <div class="col-md-8">
-                                                <div class="form-group">
-                                                    <input type="text" class="form-control">
+                                                <div class="form-group" [ngClass]="displayFieldCss('third.postalCode')">
+                                                    <input type="text" class="form-control" formControlName="postalCode">
                                                 </div>
                                             </div>                                    
                                         </div>
@@ -230,8 +234,8 @@
                                         <div class="row m-b-10">
                                             <div class="col-md-4"><span class="form-label">Person in Charge</span></div>
                                             <div class="col-md-8">
-                                                <div class="form-group">
-                                                    <input type="text" class="form-control">
+                                                <div class="form-group" [ngClass]="displayFieldCss('third.personInCharge')">
+                                                    <input type="text" class="form-control" formControlName="personInCharge">
                                                 </div>
                                             </div>                                    
                                         </div>
@@ -239,8 +243,8 @@
                                         <div class="row m-b-10">
                                             <div class="col-md-4"><span class="form-label">Business Registration No.</span></div>
                                             <div class="col-md-8">
-                                                <div class="form-group">
-                                                    <input type="text" class="form-control">
+                                                <div class="form-group" [ngClass]="displayFieldCss('third.businessRegistration')">
+                                                    <input type="text" class="form-control" formControlName="businessRegistration">
                                                 </div>
                                             </div>                                    
                                         </div>
@@ -248,8 +252,8 @@
                                         <div class="row m-b-10">
                                             <div class="col-md-4"><span class="form-label">Upoad ID - Front Side<span class="required">*</span></span></div>
                                             <div class="col-md-8">
-                                                <div class="form-group">
-                                                    <input type="text" class="form-control">
+                                                <div class="form-group" [ngClass]="displayFieldCss('third.uploadIdFrontSide')">
+                                                    <input type="text" class="form-control" formControlName="uploadIdFrontSide">
                                                 </div>
                                             </div>                                    
                                         </div>
@@ -257,8 +261,8 @@
                                         <div class="row m-b-10">
                                             <div class="col-md-4"><span class="form-label">Seller VAT</span></div>
                                             <div class="col-md-8">
-                                                <div class="form-group">
-                                                    <input type="text" class="form-control">
+                                                <div class="form-group" [ngClass]="displayFieldCss('third.sellerVat')">
+                                                    <input type="text" class="form-control" formControlName="sellerVat">
                                                 </div>
                                             </div>                                    
                                         </div>
@@ -268,12 +272,12 @@
                                             <div class="col-md-8">
                                                 <div class="vat-registered-container">
                                                     <div>
-                                                        <input class="magic-radio" type="radio" name="radio" id="yes" checked>
+                                                        <input class="magic-radio" type="radio" name="vat-registered" id="yes" checked>
                                                         <label for="yes">Yes</label>
                                                     </div>
         
                                                     <div>
-                                                        <input class="magic-radio" type="radio" name="radio" id="no">
+                                                        <input class="magic-radio" type="radio" name="vat-registered" id="no">
                                                         <label for="no">No</label>
                                                     </div>
                                                 </div>
@@ -287,8 +291,8 @@
                                         <div class="row m-b-10">
                                             <div class="col-md-4"><span class="form-label">First Name</span></div>
                                             <div class="col-md-8">
-                                                <div class="form-group">
-                                                    <input type="text" class="form-control">
+                                                <div class="form-group" [ngClass]="displayFieldCss('third.firstName')">
+                                                    <input type="text" class="form-control" formControlName="firstName">
                                                 </div>
                                             </div>                                    
                                         </div>
@@ -296,8 +300,8 @@
                                         <div class="row m-b-10">
                                             <div class="col-md-4"><span class="form-label">Last Name</span></div>
                                             <div class="col-md-8">
-                                                <div class="form-group">
-                                                    <input type="text" class="form-control">
+                                                <div class="form-group" [ngClass]="displayFieldCss('third.lastName')">
+                                                    <input type="text" class="form-control" formControlName="lastName">
                                                 </div>
                                             </div>                                    
                                         </div>
@@ -305,17 +309,17 @@
                                         <div class="row m-b-10">
                                             <div class="col-md-4"><span class="form-label">ID Number<span class="required">*</span></span></div>
                                             <div class="col-md-8">
-                                                <div class="form-group">
-                                                    <input type="text" class="form-control">
+                                                <div class="form-group" [ngClass]="displayFieldCss('third.idNumber')">
+                                                    <input type="text" class="form-control" formControlName="idNumber">
                                                 </div>
                                             </div>                                    
                                         </div>
 
                                         <div class="row m-b-10">
-                                            <div class="col-md-4"><span class="form-label">Religion<span class="required">*</span></span></div>
+                                            <div class="col-md-4"><span class="form-label">Region<span class="required">*</span></span></div>
                                             <div class="col-md-8">
-                                                <div class="form-group">
-                                                    <input type="text" class="form-control">
+                                                <div class="form-group" [ngClass]="displayFieldCss('third.region')">
+                                                    <input type="text" class="form-control" formControlName="region">
                                                 </div>
                                             </div>                                    
                                         </div>
@@ -323,8 +327,8 @@
                                         <div class="row m-b-10">
                                             <div class="col-md-4"><span class="form-label">City<span class="required">*</span></span></div>
                                             <div class="col-md-8">
-                                                <div class="form-group">
-                                                    <input type="text" class="form-control">
+                                                <div class="form-group" [ngClass]="displayFieldCss('third.city')">
+                                                    <input type="text" class="form-control" formControlName="city">
                                                 </div>
                                             </div>                                    
                                         </div>
@@ -332,8 +336,8 @@
                                         <div class="row m-b-10">
                                             <div class="col-md-4"><span class="form-label">Barangay<span class="required">*</span></span></div>
                                             <div class="col-md-8">
-                                                <div class="form-group">
-                                                    <input type="text" class="form-control">
+                                                <div class="form-group" [ngClass]="displayFieldCss('third.barangay')">
+                                                    <input type="text" class="form-control" formControlName="barangay">
                                                 </div>
                                             </div>                                    
                                         </div>
@@ -341,8 +345,8 @@
                                         <div class="row m-b-10">
                                             <div class="col-md-4"><span class="form-label">Country Region</span></div>
                                             <div class="col-md-8">
-                                                <div class="form-group">
-                                                    <input type="text" class="form-control">
+                                                <div class="form-group" [ngClass]="displayFieldCss('third.countryRegion')">
+                                                    <input type="text" class="form-control" formControlName="countryRegion">
                                                 </div>
                                             </div>                                    
                                         </div>
@@ -350,8 +354,8 @@
                                         <div class="row m-b-10">
                                             <div class="col-md-4"><span class="form-label">Upload ID - Back Side</span></div>
                                             <div class="col-md-8">
-                                                <div class="form-group">
-                                                    <input type="text" class="form-control">
+                                                <div class="form-group" [ngClass]="displayFieldCss('third.uploadIdBackSide')">
+                                                    <input type="text" class="form-control" formControlName="uploadIdBackSide">
                                                 </div>
                                             </div>                                    
                                         </div>
@@ -359,26 +363,26 @@
                                         <div class="row m-b-10">
                                             <div class="col-md-4"><span class="form-label">ID Type<span class="required">*</span></span></div>
                                             <div class="col-md-8">
-                                                <div class="form-group">
-                                                    <input type="text" class="form-control">
+                                                <div class="form-group" [ngClass]="displayFieldCss('third.idType')">
+                                                    <input type="text" class="form-control" formControlName="idType">
                                                 </div>
                                             </div>                                    
                                         </div>
                                     </div>
 
                                     <input type="button" name="previous" class="previous action-button" value="Previous" />
-                                    <input type="button" name="next" class="next action-button" value="Next" />
+                                    <input type="button" name="next" class="next action-button" value="Next" (click)="next($event, 'third')" />
                                 </fieldset>
 
-                                <fieldset class="fourth-fieldset">
+                                <fieldset class="fourth-fieldset" formGroupName="fourth">
                                     <h2 class="fs-title">Bank Account Information</h2>
                                     
                                     <div class="m-t-40 m-b-30">
                                         <div class="row m-b-20">
                                             <div class="col-md-4"><span class="form-label">Account Name<span class="required">*</span></span></div>
                                             <div class="col-md-8">
-                                                <div class="form-group">
-                                                    <input type="text" class="form-control">
+                                                <div class="form-group" [ngClass]="displayFieldCss('fourth.accountName')">
+                                                    <input type="text" class="form-control" formControlName="accountName">
                                                 </div>
                                             </div>                                    
                                         </div>
@@ -386,8 +390,8 @@
                                         <div class="row m-b-20">
                                             <div class="col-md-4"><span class="form-label">Account Number<span class="required">*</span></span></div>
                                             <div class="col-md-8">
-                                                <div class="form-group">
-                                                    <input type="text" class="form-control">
+                                                <div class="form-group" [ngClass]="displayFieldCss('fourth.accountNumber')">
+                                                    <input type="text" class="form-control" formControlName="accountNumber">
                                                 </div>
                                             </div>                                    
                                         </div>
@@ -395,8 +399,8 @@
                                         <div class="row m-b-20">
                                             <div class="col-md-4"><span class="form-label">Bank Name<span class="required">*</span></span></div>
                                             <div class="col-md-8">
-                                                <div class="form-group">
-                                                    <input type="text" class="form-control">
+                                                <div class="form-group" [ngClass]="displayFieldCss('fourth.bankName')">
+                                                    <input type="text" class="form-control" formControlName="bankName">
                                                 </div>
                                             </div>                                    
                                         </div>
@@ -404,8 +408,8 @@
                                         <div class="row m-b-20">
                                             <div class="col-md-4"><span class="form-label">Branch Name<span class="required">*</span></span></div>
                                             <div class="col-md-8">
-                                                <div class="form-group">
-                                                    <input type="text" class="form-control">
+                                                <div class="form-group" [ngClass]="displayFieldCss('fourth.branchName')">
+                                                    <input type="text" class="form-control" formControlName="branchName">
                                                 </div>
                                             </div>                                    
                                         </div>
@@ -413,8 +417,8 @@
                                         <div class="row m-b-20">
                                             <div class="col-md-4"><span class="form-label">Bank Code<span class="required">*</span></span></div>
                                             <div class="col-md-8">
-                                                <div class="form-group">
-                                                    <input type="text" class="form-control">
+                                                <div class="form-group" [ngClass]="displayFieldCss('fourth.bankCode')">
+                                                    <input type="text" class="form-control" formControlName="bankCode">
                                                 </div>
                                             </div>                                    
                                         </div>
@@ -422,8 +426,8 @@
                                         <div class="row m-b-20">
                                             <div class="col-md-4"><span class="form-label">SWIFT<span class="required">*</span></span></div>
                                             <div class="col-md-8">
-                                                <div class="form-group">
-                                                    <input type="text" class="form-control">
+                                                <div class="form-group" [ngClass]="displayFieldCss('fourth.swift')">
+                                                    <input type="text" class="form-control" formControlName="swift">
                                                 </div>
                                             </div>                                    
                                         </div>
@@ -431,8 +435,8 @@
                                         <div class="row m-b-20">
                                             <div class="col-md-4"><span class="form-label">Bank Information Document</span></div>
                                             <div class="col-md-8">
-                                                <div class="form-group">
-                                                    <input type="text" class="form-control">
+                                                <div class="form-group" [ngClass]="displayFieldCss('fourth.bankInformationDocument')">
+                                                    <input type="text" class="form-control" formControlName="bankInformationDocument">
                                                     <span class="help-block">Accepts image files, PDF and MS Word</span>
                                                 </div>
                                             </div>                                    
