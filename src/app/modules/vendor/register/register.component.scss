@@ -138,6 +138,43 @@
         }
 
         &.second-fieldset, &.third-fieldset, &.fourth-fieldset {
+            .country-select {
+                width: 100%;
+                overflow: hidden;         
+                position: relative;
+                display: block;
+                font-weight: normal;
+                margin-left: auto;
+                margin-right: auto;
+    
+                &:after {
+                    content:"\f078";
+                    font-family: 'Font Awesome 5 Free';
+                    color: $black-o-7;
+                    padding: 6px 8px;
+                    position: absolute; right: 0; top: 0;
+                    z-index: 1;
+                    text-align: center;
+                    width: 10%;
+                    height: 100%;      
+                    pointer-events: none;
+                    box-sizing: border-box;   
+                    font-weight: bold;
+                    font-size: 15px;
+                }
+
+                select {
+                    border-radius: 0;
+                    padding: 5px 10px;
+                    height: auto;
+                    font-size: 15px;
+                    box-shadow: none !important;
+                    font-family: $font-body;
+                    color: rgba(0, 0, 0, 0.9);
+                    appearance: none;
+                }
+            }
+
             .magic-radio + label {
                 font-family: $font-body;
                 font-weight: normal !important;
@@ -201,6 +238,14 @@
     // #eliteregister .active:before, #eliteregister .active:after {
     //     background-color: $dark-green !important;
     // }
+}
+
+.has-error .form-control {
+    border: 1px solid #d9534f !important;
+}
+
+.has-success .form-control {
+    border: 1px solid #2ecc71 !important;
 }
 
 /deep/ {

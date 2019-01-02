@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import * as $ from 'jquery';
 import swal from 'sweetalert2';
 import { Router } from '@angular/router';
+import { FormBuilder, Validators, FormGroup } from '@angular/forms';
 
 @Component({
   selector: 'app-register',
@@ -9,10 +10,59 @@ import { Router } from '@angular/router';
   styleUrls: ['./register.component.scss']
 })
 export class RegisterComponent implements OnInit {
+  forms = this.formBuilder.group({
+    first: this.formBuilder.group({
+      choose: ["", Validators.required],
+      shopBasedIn: ["", Validators.required],
+      mobileNumber: ["", Validators.required]
+    }),
+    second: this.formBuilder.group({
+      vendorId: [{value: 'PH1XOWOJ', disabled: true}],
+      name: ["", Validators.required],
+      emailAddress: ["", Validators.required],
+      phoneNumber: ["", Validators.required],
+      businessName: ["", Validators.required],
+    }),
+    third: this.formBuilder.group({
+      legalCompanyName: [""],
+      address: ["", Validators.required],
+      country: ["", Validators.required],
+      postalCode: ["", Validators.required],
+      personInCharge: [""],
+      businessRegistration: [""],
+      uploadIdFrontSide: ["", Validators.required],
+      sellerVat: [""],
+      vatRegistered: [""],
+
+      firstName: [""],
+      lastName: [""],
+      idNumber: ["", Validators.required],
+      region: ["", Validators.required],
+      city: ["", Validators.required],
+      barangay: ["", Validators.required],
+      countryRegion: [""],
+      uploadIdBackSide: [""],
+      idType: ["", Validators.required],
+    }),
+    fourth: this.formBuilder.group({
+      accountName: ["", Validators.required],
+      accountNumber: ["", Validators.required],
+      bankName: ["", Validators.required],
+      branchName: [""],
+      bankCode: [""],
+      swift: [""],
+      bankInformationDocument: ["", Validators.required]
+    }),
+  });
 
   constructor(
-    private router:Router
+    private router:Router,
+    private formBuilder: FormBuilder
   ) { }
+
+  get first() {
+    return this.forms.get("first");
+  }
 
   ngOnInit() {
     this.initializeRegisterSteps();
@@ -20,7 +70,7 @@ export class RegisterComponent implements OnInit {
     eval("$('.captcha').slideToCAPTCHA();");
   }
 
-  initializeRegisterSteps() {
+  initializeRegisterSteps() {    
     $(function() {
 
       //jQuery time
@@ -28,74 +78,21 @@ export class RegisterComponent implements OnInit {
       var left, opacity, scale; //fieldset properties which we will animate
       var animating; //flag to prevent quick multi-click glitches
 
-      $(".next").click(function(){
-        if(animating) return false;
-        animating = true;
-
-        $('html, body').animate({
-            scrollTop: $('#eliteregister').offset().top - 10
-        }, 750);
-        
-        current_fs = $(this).parent();
-        next_fs = $(this).parent().next();
-        
-        //activate next step on progressbar using the index of next_fs
-        $("#eliteregister li").eq($("fieldset").index(next_fs)).addClass("active");
-        
-        //show the next fieldset
-        next_fs.show(); 
-        next_fs.addClass('active');
-        current_fs.removeClass('active');
-        //hide the current fieldset with style
-        current_fs.animate({opacity: 0}, {
-          step: function(now, mx) {
-            //as the opacity of current_fs reduces to 0 - stored in "now"
-            //1. scale current_fs down to 80%
-            scale = 1 - (1 - now) * 0.2;
-            //2. bring next_fs from the right(50%)
-            left = (now * 50)+"%";
-            //3. increase opacity of next_fs to 1 as it moves in
-            opacity = 1 - now;
-            current_fs.css({'transform': 'scale('+scale+')'});
-            next_fs.css({'left': left, 'opacity': opacity});
-          }, 
-          duration: 300, 
-          complete: function(){
-            current_fs.hide();
-            animating = false;
-          }, 
-          //this comes from the custom easing plugin
-          // easing: 'easeInOutBack'
-        });
-      });
-      
       $(".previous").click(function(){
         if(animating) return false;
         animating = true;
-
-        $('html, body').animate({
-          scrollTop: $('#eliteregister').offset().top - 10
-        }, 750);
+        $('html, body').animate({scrollTop: $('#eliteregister').offset().top - 10}, 750);
         
         current_fs = $(this).parent();
         previous_fs = $(this).parent().prev();
-        
-        //de-activate current step on progressbar
         $("#eliteregister li").eq($("fieldset").index(current_fs)).removeClass("active");
-        
-        //show the previous fieldset
         previous_fs.show(); 
         previous_fs.addClass('active');
         current_fs.removeClass('active');
-        //hide the current fieldset with style
         current_fs.animate({opacity: 0}, {
           step: function(now, mx) {
-            //as the opacity of current_fs reduces to 0 - stored in "now"
-            //1. scale previous_fs from 80% to 100%
             scale = 0.8 + (1 - now) * 0.2;
-            //2. take current_fs to the right(50%) - from 0%
             left = ((1-now) * 50)+"%";
-            //3. increase opacity of previous_fs to 1 as it moves in
             opacity = 1 - now;
             current_fs.css({'left': left});
             previous_fs.css({'transform': 'scale('+scale+')', 'opacity': opacity});
@@ -105,8 +102,6 @@ export class RegisterComponent implements OnInit {
             current_fs.hide();
             animating = false;
           }, 
-          //this comes from the custom easing plugin
-          // easing: 'easeInBack'
         });
       });
     });
@@ -139,5 +134,61 @@ export class RegisterComponent implements OnInit {
         },3000)
       }
     })
+  }
+
+  hasError(field: string) {
+    return this.forms.get(field).invalid && (this.forms.get(field).dirty || this.forms.get(field).touched);
+  }
+
+  hasSuccess(field: string) {
+    return this.forms.get(field).valid && (this.forms.get(field).dirty || this.forms.get(field).touched);
+  }
+  
+  displayFieldCss(field: string) {
+    let test = !this.forms.get(field).valid && this.forms.get(field).touched;
+    return {
+      'has-error': this.hasError(field),
+      'has-success': this.hasSuccess(field)
+    };
+  }
+
+  next(event: Event, fieldset: string) {   
+    let element = (event.target as Element);
+    Object.keys((<FormGroup>(this.forms.get(fieldset))).controls).forEach(field => {
+      const control = this.forms.get(fieldset).get(field);
+      console.log(control);
+      control.markAsTouched({ onlySelf: true });
+    });
+
+    let current_fs, next_fs, previous_fs;
+    let left, opacity, scale;
+    let animating;
+
+    if(!animating && !this.forms.get(fieldset).invalid) {
+      animating = true;
+
+      $('html, body').animate({scrollTop: $('#eliteregister').offset().top - 10}, 750);
+      current_fs = $(element).parent();
+      next_fs = $(element).parent().next();
+      $("#eliteregister li").eq($("fieldset").index(next_fs)).addClass("active");
+      
+      next_fs.show(); 
+      next_fs.addClass('active');
+      current_fs.removeClass('active');
+      current_fs.animate({opacity: 0}, {
+        step: function(now, mx) {
+          scale = 1 - (1 - now) * 0.2;
+          left = (now * 50)+"%";
+          opacity = 1 - now;
+          current_fs.css({'transform': 'scale('+scale+')'});
+          next_fs.css({'left': left, 'opacity': opacity});
+        }, 
+        duration: 300, 
+        complete: function(){
+          current_fs.hide();
+          animating = false;
+        }, 
+      });
+    }
   }
 }
