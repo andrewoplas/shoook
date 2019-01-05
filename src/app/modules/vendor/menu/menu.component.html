@@ -18,13 +18,14 @@
             </nav>
             <div class="content-wrap">
                 <section id="add-menu">
+                    <form [formGroup]="forms" (ngSubmit)="publishMenu()">
                     <div class="row">
                         <div class="col-md-4 col-xs-12">
                             <div class="row">
                                 <div class="col-md-8"><span class="form-label">Minimum Customers Required</span></div>
                                 <div class="col-md-4">
-                                    <div class="form-group">
-                                        <input type="text" class="form-control">
+                                    <div class="form-group" [ngClass]="displayFieldCss('customers')">
+                                        <input type='text' class="form-control" mask="0000" formControlName="customers" />
                                     </div>
                                 </div>    
                             </div>
@@ -32,8 +33,8 @@
                             <div class="row">
                                 <div class="col-md-8"><span class="form-label">Price for four(4) main course</span></div>
                                 <div class="col-md-4">
-                                    <div class="form-group">
-                                        <input type="text" class="form-control">
+                                    <div class="form-group" [ngClass]="displayFieldCss('mainCourse')">
+                                        <input type='text' class="form-control" prefix="₱ " mask="000000.00" formControlName="mainCourse" />
                                     </div>
                                 </div>    
                             </div>
@@ -41,8 +42,8 @@
                             <div class="row">
                                 <div class="col-md-8"><span class="form-label">Price for additional menu</span></div>
                                 <div class="col-md-4">
-                                    <div class="form-group">
-                                        <input type="text" class="form-control">
+                                    <div class="form-group" [ngClass]="displayFieldCss('additionalMenu')">
+                                        <input type='text' class="form-control" prefix="₱ " mask="00000.00" formControlName="additionalMenu" />
                                     </div>
                                 </div>    
                             </div>
@@ -50,8 +51,8 @@
                             <div class="row">
                                 <div class="col-md-8"><span class="form-label">Price for additional dessert</span></div>
                                 <div class="col-md-4">
-                                    <div class="form-group">
-                                        <input type="text" class="form-control">
+                                    <div class="form-group" [ngClass]="displayFieldCss('additionalDessert')">
+                                        <input type='text' class="form-control" prefix="₱ " mask="00000.00" formControlName="additionalDessert" />
                                     </div>
                                 </div>    
                             </div>
@@ -59,8 +60,8 @@
                             <div class="row">
                                 <div class="col-md-8"><span class="form-label">Price for additional lechon</span></div>
                                 <div class="col-md-4">
-                                    <div class="form-group">
-                                        <input type="text" class="form-control">
+                                    <div class="form-group" [ngClass]="displayFieldCss('additionalLechon')">
+                                        <input type='text' class="form-control" prefix="₱ " mask="00000.00" formControlName="additionalLechon" />
                                     </div>
                                 </div>    
                             </div>
@@ -76,6 +77,9 @@
                                             {{ dish }} <i class="remove-icon fas fa-times" (click)="removeDish(dish)"></i>
                                         </p>
                                     </div>
+                                    <small [ngClass]="{hide: (dishes.length > 0 || !submitted)}" class="error-block">
+                                        <i class="far fa-times-circle"></i> Please add item before submitting
+                                    </small>
         
                                     <span class="btn-add" (click)="addDish()"><i class="fas fa-plus"></i>Add Dish</span>
                                 </div>
@@ -89,6 +93,9 @@
                                             {{ dessert }} <i class="remove-icon fas fa-times" (click)="removeDessert(dessert)"></i>
                                         </p>
                                     </div>
+                                    <small [ngClass]="{hide: (desserts.length > 0 || !submitted)}" class="error-block">
+                                        <i class="far fa-times-circle"></i> Please add item before submitting 
+                                    </small>
     
                                     <span class="btn-add" (click)="addDessert()"><i class="fas fa-plus"></i>Add Dessert</span>
                                 </div>
@@ -96,7 +103,10 @@
                             <div class="col-md-12 p-l-10 p-r-10">
                                 <div class="locations-container">
                                     <span class="title">LOCATIONS COVERED</span>
-    
+                                    
+                                    <small [ngClass]="{hide: (locations.length > 0 || !submitted)}" class="error-block m-b-5">
+                                        <i class="far fa-times-circle"></i> Please add item before submitting 
+                                    </small>
                                     <div class="locations-item-container">
                                         <p *ngFor="let location of locations" class="item" >
                                             {{ location }} <i class="remove-icon fas fa-times" (click)="removeLocation(location)"></i>
@@ -111,27 +121,32 @@
 
                     <div class="row m-t-20">
                         <div class="col-md-12">
-                            <form action="/upload-target" class="dropzone" id="dropzone">
-                                <div class="fallback">
-                                    <input name="file" type="file" multiple />
-                                </div>
-                            </form>
+                            <div class="dropzone dropzone-container" [dropzone]="config" (error)="onUploadError($event)" (success)="onUploadSuccess($event)"></div>
+                        </div>
+                    </div>
+
+                    <div class="row m-t-40">
+                        <div class="col-md-12 col-lg-6">
+                            <div class="form-group m-b-30" [ngClass]="displayFieldCss('styleOfCooking')">
+                                <label class="form-label form-label-textarea"><i class="fas fa-pencil-alt"></i> Describe the Style of Cooking</label>
+                                <textarea class="form-control" formControlName="styleOfCooking"></textarea>
+                            </div>
+                        </div>
+                        <div class="col-md-12 col-lg-6">
+                            <div class="form-group" [ngClass]="displayFieldCss('specialty')">
+                                <label class="form-label form-label-textarea"><i class="fas fa-pencil-alt"></i> Describe your specialty / Years of experience</label>
+                                <textarea class="form-control" formControlName="specialty"></textarea>
+                            </div>
                         </div>
                     </div>
 
                     <div class="row m-t-40">
                         <div class="col-md-12">
-                            <div class="form-group m-b-30">
-                                <label class="form-label form-label-textarea"><i class="fas fa-pencil-alt"></i> Describe the Style of Cooking</label>
-                                <textarea class="form-control"></textarea>
-                            </div>
-
-                            <div class="form-group">
-                                <label class="form-label form-label-textarea"><i class="fas fa-pencil-alt"></i> Describe your specialty / Years of experience</label>
-                                <textarea class="form-control"></textarea>
-                            </div>
+                            <button type="submit" class="btn btn-add-menu">Submit</button>
                         </div>
                     </div>
+
+                    </form>
                 </section>
 
                 <section id="manage-menu">
@@ -149,32 +164,32 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <tr *ngFor="let item of [1,2,3,4,5]">
+                                    <tr *ngFor="let menu of menuList">
                                         <td>Image</td>
-                                        <td>Western Style Dishes</td>
-                                        <td class="text-justify">Over 30 years of culinary delight experience (4 Main Courses & 2 Desserts)</td>
-                                        <td class="text-center">20-Aug-2018</td>
+                                        <td>{{ menu.styleOfCookingDescription }}</td>
+                                        <td class="text-justify">{{ menu.specialtyDescription }}</td>
+                                        <td class="text-center">{{ menu.dateCreated | date:'dd-MMM-yyyy' }}</td>
                                         <td class="text-center">
-                                            <span class="badge status-active">Active</span>
-                                            <!-- <span class="badge status-hidden">Hidden</span> -->
+                                            <span class="badge status-active" [ngClass]="{hide: menu.active==0}">Active</span>
+                                            <span class="badge status-hidden" [ngClass]="{hide: menu.active==1}">Hidden</span>
                                         </td>
                                         <td class="action-buttons text-center">
-                                            <button class="btn-print"><i class="material-icons">edit</i>Edit Menu</button>
-                                            <button class="btn-cancel" [swal]="deleteMenu" (confirm)="deleteMenu()"><i class="material-icons">delete</i>Delete Menu</button>
+                                            <button class="btn-print" ><i class="material-icons">edit</i>Edit Menu</button>
+                                            <button class="btn-cancel" [swal]="deleteMenuSwal" (confirm)="deleteMenu(menu.id)"><i class="material-icons">delete</i>Delete Menu</button>
                                         </td>
                                     </tr>
                                 </tbody>
                             </table>
-                                <swal 
-                                    #deleteMenu 
-                                    title="Delete Menu?" 
-                                    text="Are you sure you want to permanently remove this menu?"
-                                    type="question"
-                                    [showCancelButton]="true" 
-                                    [focusCancel]="true" 
-                                    confirmButtonText="Yes, Delete it"
-                                    confirmButtonColor="#f44336">
-                                </swal>
+                            <swal 
+                                #deleteMenuSwal
+                                title="Delete Menu?" 
+                                text="Are you sure you want to permanently remove this menu?"
+                                type="question"
+                                [showCancelButton]="true" 
+                                [focusCancel]="true" 
+                                confirmButtonText="Yes, Delete it"
+                                confirmButtonColor="#f44336">
+                            </swal>
                         </div>
                     </div>
                 </section>
@@ -209,7 +224,7 @@
                                         <td class="action-buttons text-center">
                                             <button class="btn-view"><i class="material-icons">description</i>View</button>
                                             <button class="btn-print"><i class="material-icons">print</i>Print</button>
-                                            <button class="btn-cancel" [swal]="cancelOrder" (confirm)="cancelOrder()"><i class="material-icons">delete</i>Cancel</button>
+                                            <button class="btn-cancel" [swal]="cancelOrderSwal" (confirm)="cancelOrder()"><i class="material-icons">delete</i>Cancel</button>
                                         </td>
                                     </tr>
                                 </tbody>
@@ -218,7 +233,7 @@
                     </div>
 
                     <swal 
-                        #cancelOrder 
+                        #cancelOrderSwal 
                         title="Cancel Order?" 
                         text="Are you sure you want to cancel this order?"
                         type="question"
@@ -275,6 +290,8 @@
         </div>
     </div>
 </div>
+
+
   
 
 <vendor-footer></vendor-footer>

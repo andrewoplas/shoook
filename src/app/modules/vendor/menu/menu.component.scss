@@ -1,7 +1,6 @@
 @import '../../../../assets/scss/styles.scss';
 @import '../../../../assets/plugins/dropzone/dropzone.scss';
 
-
 .material-design-bg-color {
     background-color: #edf1f5;
 }
@@ -313,112 +312,157 @@
     }
 }
 
-.form-label {
-    font-size: 13px;
-    font-family: $font-body;
-    font-weight: bold;
-    color: $black-o-8;
-    display: block;
-    text-align: right;
-    padding-right: 10px;
-
-    &.form-label-textarea {
-        text-align: left;
-        font-size: 15px;
-
-        i {
-            margin-right: 5px;
+#add-menu {
+    .form-label {
+        font-size: 13px;
+        font-family: $font-body;
+        font-weight: bold;
+        color: $black-o-8;
+        display: block;
+        text-align: right;
+        padding-right: 10px;
+    
+        &.form-label-textarea {
+            text-align: left;
             font-size: 15px;
-        }
-    }
-}
-
-input.form-control {
-    border-radius: 0;
-    padding: 5px 10px;
-    font-size: 15px;
-    box-shadow: none !important;
-    font-family: $font-body;
-    color: rgba(0, 0, 0, 0.9);
-    margin: 0;
-}
-
-textarea.form-control {
-    border-radius: 0;
-    padding: 5px 10px;
-    font-size: 15px;
-    box-shadow: none !important;
-    font-family: $font-body;
-    color: rgba(0, 0, 0, 0.9);
-    margin: 0;
-    resize: vertical;
-    height: 100px;
-}
-
-.dishes-container, .desserts-container, .locations-container {
-    border-radius: 8px;
-    padding: 10px;
-    box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.1);
-    margin-bottom: 20px;
-
-    .title {
-        font-family: $font-heading;
-        font-size: 17px;
-        margin-bottom: 10px;
-        display: block;
-    }
-
-    .btn-add {
-        cursor: pointer;
-        display: block;
-        margin-top: 20px;
-        text-align: center;
-        font-family: $font-heading;
-        font-size: 15px;
-        background-color: $pink;
-        border-radius: 4px;
-        color: white;
-        padding: 5px;
-
-        &.btn-add-location {
-            display: inline-block;
-            padding: 5px 10px;
-            margin-top: 0;
-        }
-
-        i {
-            vertical-align: middle;
-            margin-right: 5px;
-        }
-    }
-
-    .desserts-item-container, .dishes-item-container, .locations-item-container{
-        .item {
-            padding: 5px 7px !important;
-            font-family: $font-body;
-            font-size: 14px;
-            border: 1px solid $pink;
-            margin-right: 5px !important;
-            margin-bottom: 5px !important;
-            border-radius: 4px;
-            color: $pink;
-            display: inline-block;
-
-            .remove-icon {
-                margin-left: 5px;
-                color: $pink;
-                cursor: pointer;
+    
+            i {
+                margin-right: 5px;
+                font-size: 15px;
             }
         }
     }
-}
 
-/deep/ {
-    .dropzone {
-        border: 0 !important;
-        box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.1);
+    input.form-control {
+        border-radius: 0;
+        padding: 5px 10px;
+        font-size: 15px;
+        box-shadow: none !important;
+        font-family: $font-body;
+        color: rgba(0, 0, 0, 0.9);
+        margin: 0;
     }
 
+    textarea.form-control {
+        border-radius: 0;
+        padding: 5px 10px;
+        font-size: 15px;
+        box-shadow: none !important;
+        font-family: $font-body;
+        color: rgba(0, 0, 0, 0.9);
+        margin: 0;
+        resize: vertical;
+        height: 100px;
+    }
+
+    .dishes-container, .desserts-container, .locations-container {
+        border-radius: 8px;
+        padding: 10px;
+        box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.1);
+        margin-bottom: 20px;
+    
+        .title {
+            font-family: $font-heading;
+            font-size: 17px;
+            margin-bottom: 10px;
+            display: block;
+        }
+    
+        .btn-add {
+            cursor: pointer;
+            display: block;
+            margin-top: 20px;
+            text-align: center;
+            font-family: $font-heading;
+            font-size: 15px;
+            background-color: $pink;
+            border-radius: 4px;
+            color: white;
+            padding: 5px;
+    
+            &.btn-add-location {
+                display: inline-block;
+                padding: 5px 10px;
+                margin-top: 0;
+            }
+    
+            i {
+                vertical-align: middle;
+                margin-right: 5px;
+            }
+        }
+    
+        .desserts-item-container, .dishes-item-container, .locations-item-container{
+            .item {
+                padding: 5px 7px !important;
+                font-family: $font-body;
+                font-size: 14px;
+                border: 1px solid $pink;
+                margin-right: 5px !important;
+                margin-bottom: 5px !important;
+                border-radius: 4px;
+                color: $pink;
+                display: inline-block;
+    
+                .remove-icon {
+                    margin-left: 5px;
+                    color: $pink;
+                    cursor: pointer;
+                }
+            }
+        }
+    }
+    
+    .dropzone {
+        border: 2px dashed $black-o-2;
+        border-radius: 5px;
+        background: white;
+
+        &.error { 
+            border-color: #d9534f;
+        }
+    }
+    
+    .has-error .form-control {
+        border: 1px solid #d9534f !important;
+    }
+    
+    .has-success .form-control {
+        border: 1px solid #2ecc71 !important;
+    }
+
+    .error-block {
+        color: #d9534f;
+        font-family: $font-body;
+        display: block;
+    }
+    
+    .btn-add-menu {
+        display: block;
+        width: 350px;
+        padding: 13px;
+        font-weight: bold;
+        background-color: $pink;
+        color: $white;
+        font-size: 15px;
+        font-family: $font-body;
+        margin-left: auto;
+        margin-right: auto;
+    }
+}
+
+
+/deep/ {
+    .dz-message {
+        span {
+            font-family: $font-heading !important;
+            font-size: 30px !important;
+            font-weight: bold !important;
+            color: $black-o-2 !important;
+            text-transform: uppercase;
+        }
+    }
+    
     .swal2-popup {
         font-size: 1.5rem;
         

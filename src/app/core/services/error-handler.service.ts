@@ -1,8 +1,8 @@
 import { Injectable } from '@angular/core';
-import {ErrorHandler} from "@angular/core";
-import 'rxjs/add/observable/throw';
+import { ErrorHandler } from "@angular/core";
 import { Observable } from 'rxjs/Observable';
 import { HttpErrorResponse } from '@angular/common/http';
+import 'rxjs/add/observable/throw';
 import * as Status  from 'http-status-codes';
 
 @Injectable({
@@ -261,7 +261,7 @@ export class ErrorHandlerService implements ErrorHandler {
           break;
       }
     }
-  
+    
     return Observable.throw({
       title: title,
       message:message

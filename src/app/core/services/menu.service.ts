@@ -1,11 +1,12 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders, HttpResponse } from "@angular/common/http";
+import { Globals } from '@shared/models/Global';
+import { ErrorHandlerService } from './error-handler.service';
 import { Observable } from "rxjs/Observable";
 import { catchError, tap } from "rxjs/operators";
-import { Globals } from '@shared/models/Global';
 import { PotentialEarning } from '@shared/models/PotentialEarning.model';
-import { ErrorHandlerService } from './error-handler.service';
 import { RequestResult } from '@shared/models/RequestResult';
+import { Menu } from '@shared/models/Menu.model';
 
 const httpOptions = {
   headers: new HttpHeaders({
@@ -16,68 +17,64 @@ const httpOptions = {
 @Injectable({
   providedIn: 'root'
 })
-export class PotentialEarningService {
+export class MenuService {
   private baseUrl: string;
-  private _list: Array<PotentialEarning>;
+  private menuList: Array<Menu>;
 
   constructor(
     private http: HttpClient,
     private global: Globals,
     private errHandler: ErrorHandlerService
   ) {
-    this.baseUrl = this.global.BASE_URL + 'potential-earning';    
-  }
-
-  get list(): Array<PotentialEarning> {
-    return this._list;
+    this.baseUrl = this.global.BASE_URL + 'menu';    
   }
 
   /** GET: retrieve entities from the server */
-  public getPotentialEarnings(): Observable<RequestResult> {
+  public getMenus(): Observable<RequestResult> {
     return this.http
-      .get<RequestResult>(`${this.baseUrl}/get-potential-earnings`, httpOptions)
+      .get<RequestResult>(`${this.baseUrl}/get-menus`, httpOptions)
       .pipe(
-        tap(() => this.log("get-potential-earnings")),
+        tap(() => this.log("get-menus")),
         catchError(this.errHandler.handleError)
       );
   }
 
   /** GET: retrieve single entity from the server */
-  public getPotentialEarningById(id: number): Observable<PotentialEarning> {
+  public getMenuById(id: number): Observable<RequestResult> {
     return this.http
-      .get<PotentialEarning>(`${this.baseUrl}/get-potential-earning/${id}`, httpOptions)
+      .get<RequestResult>(`${this.baseUrl}/get-menu/${id}`, httpOptions)
       .pipe(
-        tap(() => this.log("get-potential-earning")),
+        tap(() => this.log("get-menu")),
         catchError(this.errHandler.handleError)
       );
   }
 
   /** POST: create a new entity to the server */
-  public createPotentialEarning(potentialEarning: PotentialEarning): Observable<any> {
+  public createMenu(menu): Observable<any> {
     return this.http
-      .post<PotentialEarning>(`${this.baseUrl}/create-potential-earning`, potentialEarning, httpOptions)
+      .post<RequestResult>(`${this.baseUrl}/create-menu`, menu, httpOptions)
       .pipe(
-        tap(_ => this.log(`create potential earning with id=${potentialEarning.id}`)),
+        tap(_ => this.log(`create menu with id=${menu.id}`)),
         catchError(this.errHandler.handleError)
       );
   }
 
   /** DELETE: delete the entity from the server */
-  public deletePotentialEarning(pe: string | number): Observable<any> {
+  public deleteMenu(menu: string | number): Observable<RequestResult> {
     return this.http
-      .delete<PotentialEarning>(`${this.baseUrl}/delete-potential-earning/${pe}`)
+      .delete<RequestResult>(`${this.baseUrl}/delete-menu/${menu}`)
       .pipe(
-        tap(_ => this.log(`deleted potential earning id=${pe}`)),
+        tap(_ => this.log(`deleted menu id=${menu}`)),
         catchError(this.errHandler.handleError)
       );
   }
 
   /** PUT: update the entity on the server */
-  public updateMenu(potentialEarning: PotentialEarning): Observable<any> {
+  public updateMenu(menu: Menu): Observable<RequestResult> {
     return this.http
-      .put(`${this.baseUrl}/update-potential-earning`, potentialEarning, httpOptions)
+      .put<RequestResult>(`${this.baseUrl}/update-menu`, menu, httpOptions)
       .pipe(
-        tap(_ => this.log(`updated potential earning id=${potentialEarning.id}`)),
+        tap(_ => this.log(`updated menu id=${menu.id}`)),
         catchError(this.errHandler.handleError)
       );
   }
