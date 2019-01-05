@@ -11,43 +11,43 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.shoook.entity.PotentialEarning;
+import com.shoook.entity.Menu;
 import com.shoook.entity.RequestResult;
-import com.shoook.service.PotentialEarningService;
+import com.shoook.service.MenuService;
 
 @RestController
-@RequestMapping("/potential-earning")
-public class PotentialEarningController {
+@RequestMapping("/menu")
+public class MenuController {
 	
 	@Autowired
-	private PotentialEarningService service;
+	private MenuService service;
 	
 	@CrossOrigin
-	@GetMapping(path = "get-potential-earnings", produces = MediaType.APPLICATION_JSON_VALUE)	
+	@GetMapping(path = "get-menus", produces = MediaType.APPLICATION_JSON_VALUE)	
 	public RequestResult retrieve() {
 		return service.retrieve();
 	}
 	
 	@CrossOrigin
-    @GetMapping(path = "get-potential-earning/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
+    @GetMapping(path = "get-menu/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
 	public RequestResult retrieveById(@PathVariable(name = "id", required = true)String id) {
 		return service.retrieveById(id);
 	}
 	
 	@CrossOrigin
-	@PostMapping(path = "create-potential-earning", produces = MediaType.APPLICATION_JSON_VALUE)
-	public RequestResult create(@RequestBody PotentialEarning data) {
+	@PostMapping(path = "create-menu", produces = MediaType.APPLICATION_JSON_VALUE)
+	public RequestResult create(@RequestBody Menu data) {		
 		return service.create(data);
 	}
 	
 	@CrossOrigin
-    @PutMapping(path = "update-potential-earning", produces = MediaType.APPLICATION_JSON_VALUE)
-	public RequestResult update(@RequestBody PotentialEarning data) {
+    @PutMapping(path = "update-menu", produces = MediaType.APPLICATION_JSON_VALUE)
+	public RequestResult update(@RequestBody Menu data) {
     	return service.update(data);
 	}
 	
 	@CrossOrigin
-    @DeleteMapping(path = "delete-potential-earning/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
+    @DeleteMapping(path = "delete-menu/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
 	public RequestResult delete(@PathVariable(name = "id", required = true) String id) {
     	return service.delete(id);
 	}

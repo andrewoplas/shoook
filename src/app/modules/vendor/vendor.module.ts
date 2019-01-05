@@ -16,7 +16,7 @@ import { SharedModule } from '@shared/shared.module';
     LandingComponent,
     RegisterComponent,
     MenuComponent
-  ],
+  ], 
   imports: [
     SharedModule,
     VendorRoutingModule,

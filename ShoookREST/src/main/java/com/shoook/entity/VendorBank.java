@@ -2,7 +2,6 @@ package com.shoook.entity;
 
 import java.io.Serializable;
 import javax.persistence.*;
-import java.util.List;
 
 
 /**
@@ -37,8 +36,8 @@ public class VendorBank implements Serializable {
 	private String swift;
 
 	//bi-directional many-to-one association to Vendor
-	@OneToMany(mappedBy="vendorBank")
-	private List<Vendor> vendors;
+	@ManyToOne
+	private Vendor vendor;
 
 	public VendorBank() {
 	}
@@ -99,26 +98,12 @@ public class VendorBank implements Serializable {
 		this.swift = swift;
 	}
 
-	public List<Vendor> getVendors() {
-		return this.vendors;
+	public Vendor getVendor() {
+		return this.vendor;
 	}
 
-	public void setVendors(List<Vendor> vendors) {
-		this.vendors = vendors;
-	}
-
-	public Vendor addVendor(Vendor vendor) {
-		getVendors().add(vendor);
-		vendor.setVendorBank(this);
-
-		return vendor;
-	}
-
-	public Vendor removeVendor(Vendor vendor) {
-		getVendors().remove(vendor);
-		vendor.setVendorBank(null);
-
-		return vendor;
+	public void setVendor(Vendor vendor) {
+		this.vendor = vendor;
 	}
 
 }

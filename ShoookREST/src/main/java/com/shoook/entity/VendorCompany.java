@@ -2,7 +2,6 @@ package com.shoook.entity;
 
 import java.io.Serializable;
 import javax.persistence.*;
-import java.util.List;
 
 
 /**
@@ -41,8 +40,8 @@ public class VendorCompany implements Serializable {
 	private int vatRegistered;
 
 	//bi-directional many-to-one association to Vendor
-	@OneToMany(mappedBy="vendorCompany")
-	private List<Vendor> vendors;
+	@ManyToOne
+	private Vendor vendor;
 
 	public VendorCompany() {
 	}
@@ -119,26 +118,12 @@ public class VendorCompany implements Serializable {
 		this.vatRegistered = vatRegistered;
 	}
 
-	public List<Vendor> getVendors() {
-		return this.vendors;
+	public Vendor getVendor() {
+		return this.vendor;
 	}
 
-	public void setVendors(List<Vendor> vendors) {
-		this.vendors = vendors;
-	}
-
-	public Vendor addVendor(Vendor vendor) {
-		getVendors().add(vendor);
-		vendor.setVendorCompany(this);
-
-		return vendor;
-	}
-
-	public Vendor removeVendor(Vendor vendor) {
-		getVendors().remove(vendor);
-		vendor.setVendorCompany(null);
-
-		return vendor;
+	public void setVendor(Vendor vendor) {
+		this.vendor = vendor;
 	}
 
 }

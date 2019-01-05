@@ -3,6 +3,8 @@ import * as $ from 'jquery';
 import swal from 'sweetalert2';
 import { DropzoneConfigInterface, DropzoneComponent, DropzoneDirective } from 'ngx-dropzone-wrapper';
 import { FormBuilder, Validators } from '@angular/forms';
+import { MenuService } from '@core/services/menu.service';
+import { Menu } from '@shared/models/Menu.model';
 
 @Component({
   selector: 'app-menu',
@@ -13,6 +15,8 @@ export class MenuComponent implements OnInit {
   dishes = []
   desserts = []
   locations = []
+  submitted = false;
+  menuList = Array<any>();
 
   forms = this.fb.group({
     customers: ["", Validators.required],
@@ -25,16 +29,50 @@ export class MenuComponent implements OnInit {
   });
 
   constructor(
-    private fb: FormBuilder
+    private fb: FormBuilder,
+    private menuService: MenuService
   ) { }
 
   ngOnInit() {
     eval("[].slice.call(document.querySelectorAll('.sttabs')).forEach(function(el) {new CBPFWTabs(el);});");
+
+    this.menuService.getMenus().subscribe(
+      data => { 
+        if(data.success && data.body.length > 0) {
+          this.menuList = data.body;
+        }        
+      }
+    );
   }
 
-  public deleteMenu() { }
+  public deleteMenu(id) {
+    this.menuService.deleteMenu(id).subscribe(
+      data => { 
+        if(data.success) { 
+          this.menuList = data.body;
 
-  public cancelOrder() { }
+          swal({
+            title: 'Success!',
+            text: "Menu has successfully deleted.",
+            type: 'success',
+            showCancelButton: false,
+            confirmButtonText: 'OK',
+          })
+        } else {
+          swal({
+            title: 'Ooops!',
+            text: "An error occured while processing your request",
+            type: 'error',
+            showCancelButton: false,
+            confirmButtonText: 'OK',
+          })
+        }
+      }
+    );
+  }
+
+  public cancelOrder() {
+  }
 
   public chooseYear(year: Event) {
     let element = $(event.target as Element);
@@ -58,18 +96,56 @@ export class MenuComponent implements OnInit {
 
   /* Add Menu  */
   public publishMenu() {
+    this.submitted = true;
+
     Object.keys(this.forms.controls).forEach(field => {
       const control = this.forms.get(field);
       control.markAsTouched({ onlySelf: true });
     });
 
-    swal({
-      title: 'Ready for Review',
-      text: "Thank you for uploading your product & services. Kindly sit and relax while our marketing team reviews your portfolio.",
-      type: 'success',
-      showCancelButton: false,
-      confirmButtonText: 'OK',
-    })
+    if(this.forms.valid && this.validateItems()) {
+      let menu = {
+        vendor: {id: 1},
+        minimumCustomersRequired: this.forms.value.customers.trim(),
+        priceFourMainCourse: this.forms.value.mainCourse.trim(),
+        priceAdditionalDessert: this.forms.value.additionalDessert.trim(),
+        priceAdditionalMenu: this.forms.value.additionalMenu.trim(),
+        priceAdditionalLechon: this.forms.value.additionalLechon.trim(),
+        dishes: this.dishes.join(","),
+        desserts: this.desserts.join(","),
+        locations: this.locations.join(","),
+        styleOfCookingDescription: this.forms.value.styleOfCooking.trim(),
+        specialtyDescription: this.forms.value.specialty.trim(),
+        dateCreated: Date.now(),
+        dateUpdated: Date.now()
+      }
+
+      this.menuService.createMenu(menu).subscribe(
+        data => { 
+          if(data.success) { 
+            this.menuList = data.body;
+            
+            swal({
+              title: 'Ready for Review',
+              text: "Thank you for uploading your product & services. Kindly sit and relax while our marketing team reviews your portfolio.",
+              type: 'success',
+              showCancelButton: false,
+              confirmButtonText: 'OK',
+            })
+          } else {
+            swal({
+              title: 'Ooops!',
+              text: data.body.message,
+              type: 'error',
+              showCancelButton: false,
+              confirmButtonText: 'OK',
+            })
+          }
+        }
+      );
+    } else {
+      // this.upload();
+    }
   }
 
   public addDish() {
@@ -77,7 +153,7 @@ export class MenuComponent implements OnInit {
       title: 'Input name of dish to add.',
       input: 'text',
     }).then((result) => {
-      if(result.value.length > 0) {
+      if(result.value && result.value.length > 0) {
         if(this.dishes.indexOf(result.value) != -1) {
           swal({
             title: 'Ooops!',
@@ -87,11 +163,10 @@ export class MenuComponent implements OnInit {
           })
         } else {
           this.dishes.push(result.value)
+          this.submitted = false;
         }
       }
     })
-
-    console.log(this.dishes);
   }
 
   public addDessert() {
@@ -99,7 +174,7 @@ export class MenuComponent implements OnInit {
       title: 'Input name of dessert to add.',
       input: 'text',
     }).then((result) => {
-        if(result.value.length > 0) {
+        if(result.value && result.value.length > 0) {
           if(this.desserts.indexOf(result.value) != -1) {
             swal({
               title: 'Ooops!',
@@ -109,6 +184,7 @@ export class MenuComponent implements OnInit {
             })
           } else {
             this.desserts.push(result.value)
+            this.submitted = false;
           }
         }
     })
@@ -119,7 +195,7 @@ export class MenuComponent implements OnInit {
       title: 'Input name of location to add.',
       input: 'text',
     }).then((result) => {
-        if(result.value.length > 0) {
+        if(result.value && result.value.length > 0) {
           if(this.locations.indexOf(result.value) != -1) {
             swal({
               title: 'Ooops!',
@@ -129,6 +205,7 @@ export class MenuComponent implements OnInit {
             })
           } else {
             this.locations.push(result.value)
+            this.submitted = false;
           }
         }
     })
@@ -155,6 +232,10 @@ export class MenuComponent implements OnInit {
     }
   } 
 
+  public validateItems() {
+    return this.dishes.length > 0 && this.desserts.length > 0 && this.locations.length > 0;
+  }
+
   /* Forms Validation  */
   public displayFieldCss(field: string) {
     let test = !this.forms.get(field).valid && this.forms.get(field).touched;
@@ -178,13 +259,22 @@ export class MenuComponent implements OnInit {
     clickable: true,
     url: '/',
     acceptedFiles: 'image/*',
-    maxFiles: 10,
+    maxFiles: 5,
+    autoProcessQueue: false,
     autoReset: null,
     errorReset: null,
     cancelReset: null
   };
 
-  @ViewChild(DropzoneComponent) componentRef?: DropzoneComponent;
+  @ViewChild(DropzoneDirective) directiveRef?: DropzoneDirective;
+
+  public upload() {
+    let dropzone = this.directiveRef.dropzone();
+
+    let files = dropzone.files;
+    console.log(dropzone);
+    console.log(files);
+  }
 
   public toggleAutoReset(): void {
     this.config.autoReset = this.config.autoReset ? null : 5000;
@@ -193,8 +283,8 @@ export class MenuComponent implements OnInit {
   }
 
   public resetDropzoneUploads(): void {
-    if (this.componentRef && this.componentRef.directiveRef) {
-      this.componentRef.directiveRef.reset();
+    if (this.directiveRef && this.directiveRef) {
+      this.directiveRef.reset();
     }
   }
 
@@ -205,5 +295,4 @@ export class MenuComponent implements OnInit {
   public onUploadSuccess(args: any): void {
     console.log('onUploadSuccess:', args);
   }
-  
 }

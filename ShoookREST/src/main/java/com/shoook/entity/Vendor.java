@@ -1,9 +1,18 @@
 package com.shoook.entity;
 
 import java.io.Serializable;
-import javax.persistence.*;
 import java.util.Date;
 import java.util.List;
+
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.NamedQuery;
+import javax.persistence.OneToMany;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 
 
 /**
@@ -16,15 +25,19 @@ public class Vendor implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
-	@Column(name="vendor_id")
-	private String vendorId;
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
+	private int id;
 
 	@Column(name="account_type")
 	private String accountType;
 
+	private int approved;
+
 	private String barangay;
 
 	private String city;
+
+	private String code;
 
 	@Temporal(TemporalType.TIMESTAMP)
 	@Column(name="date_created")
@@ -51,31 +64,27 @@ public class Vendor implements Serializable {
 
 	private int region;
 
-	private String religion;
-
 	//bi-directional many-to-one association to Menu
 	@OneToMany(mappedBy="vendor")
 	private List<Menu> menus;
 
 	//bi-directional many-to-one association to VendorBank
-	@ManyToOne
-	@JoinColumn(name="bank")
-	private VendorBank vendorBank;
+	@OneToMany(mappedBy="vendor")
+	private List<VendorBank> vendorBanks;
 
 	//bi-directional many-to-one association to VendorCompany
-	@ManyToOne
-	@JoinColumn(name="company")
-	private VendorCompany vendorCompany;
+	@OneToMany(mappedBy="vendor")
+	private List<VendorCompany> vendorCompanies;
 
 	public Vendor() {
 	}
 
-	public String getVendorId() {
-		return this.vendorId;
+	public int getId() {
+		return this.id;
 	}
 
-	public void setVendorId(String vendorId) {
-		this.vendorId = vendorId;
+	public void setId(int id) {
+		this.id = id;
 	}
 
 	public String getAccountType() {
@@ -84,6 +93,14 @@ public class Vendor implements Serializable {
 
 	public void setAccountType(String accountType) {
 		this.accountType = accountType;
+	}
+
+	public int getApproved() {
+		return this.approved;
+	}
+
+	public void setApproved(int approved) {
+		this.approved = approved;
 	}
 
 	public String getBarangay() {
@@ -100,6 +117,14 @@ public class Vendor implements Serializable {
 
 	public void setCity(String city) {
 		this.city = city;
+	}
+
+	public String getCode() {
+		return this.code;
+	}
+
+	public void setCode(String code) {
+		this.code = code;
 	}
 
 	public Date getDateCreated() {
@@ -166,14 +191,6 @@ public class Vendor implements Serializable {
 		this.region = region;
 	}
 
-	public String getReligion() {
-		return this.religion;
-	}
-
-	public void setReligion(String religion) {
-		this.religion = religion;
-	}
-
 	public List<Menu> getMenus() {
 		return this.menus;
 	}
@@ -196,20 +213,48 @@ public class Vendor implements Serializable {
 		return menus;
 	}
 
-	public VendorBank getVendorBank() {
-		return this.vendorBank;
+	public List<VendorBank> getVendorBanks() {
+		return this.vendorBanks;
 	}
 
-	public void setVendorBank(VendorBank vendorBank) {
-		this.vendorBank = vendorBank;
+	public void setVendorBanks(List<VendorBank> vendorBanks) {
+		this.vendorBanks = vendorBanks;
 	}
 
-	public VendorCompany getVendorCompany() {
-		return this.vendorCompany;
+	public VendorBank addVendorBank(VendorBank vendorBank) {
+		getVendorBanks().add(vendorBank);
+		vendorBank.setVendor(this);
+
+		return vendorBank;
 	}
 
-	public void setVendorCompany(VendorCompany vendorCompany) {
-		this.vendorCompany = vendorCompany;
+	public VendorBank removeVendorBank(VendorBank vendorBank) {
+		getVendorBanks().remove(vendorBank);
+		vendorBank.setVendor(null);
+
+		return vendorBank;
+	}
+
+	public List<VendorCompany> getVendorCompanies() {
+		return this.vendorCompanies;
+	}
+
+	public void setVendorCompanies(List<VendorCompany> vendorCompanies) {
+		this.vendorCompanies = vendorCompanies;
+	}
+
+	public VendorCompany addVendorCompany(VendorCompany vendorCompany) {
+		getVendorCompanies().add(vendorCompany);
+		vendorCompany.setVendor(this);
+
+		return vendorCompany;
+	}
+
+	public VendorCompany removeVendorCompany(VendorCompany vendorCompany) {
+		getVendorCompanies().remove(vendorCompany);
+		vendorCompany.setVendor(null);
+
+		return vendorCompany;
 	}
 
 }

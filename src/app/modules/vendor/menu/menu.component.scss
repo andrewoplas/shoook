@@ -414,9 +414,13 @@
     }
     
     .dropzone {
-        border: 2px dashed $pink;
+        border: 2px dashed $black-o-2;
         border-radius: 5px;
         background: white;
+
+        &.error { 
+            border-color: #d9534f;
+        }
     }
     
     .has-error .form-control {

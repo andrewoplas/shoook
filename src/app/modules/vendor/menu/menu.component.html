@@ -77,8 +77,8 @@
                                             {{ dish }} <i class="remove-icon fas fa-times" (click)="removeDish(dish)"></i>
                                         </p>
                                     </div>
-                                    <small [hidden]="dishes.length > 0" class="error-block">
-                                        <i class="far fa-times-circle"></i> Please add item before submitting 
+                                    <small [ngClass]="{hide: (dishes.length > 0 || !submitted)}" class="error-block">
+                                        <i class="far fa-times-circle"></i> Please add item before submitting
                                     </small>
         
                                     <span class="btn-add" (click)="addDish()"><i class="fas fa-plus"></i>Add Dish</span>
@@ -93,8 +93,7 @@
                                             {{ dessert }} <i class="remove-icon fas fa-times" (click)="removeDessert(dessert)"></i>
                                         </p>
                                     </div>
-                                    <!-- TODO:: Make this thing work (Form validation) -->
-                                    <small [hidden]="desserts != null || desserts.length > 0" class="error-block">
+                                    <small [ngClass]="{hide: (desserts.length > 0 || !submitted)}" class="error-block">
                                         <i class="far fa-times-circle"></i> Please add item before submitting 
                                     </small>
     
@@ -105,7 +104,7 @@
                                 <div class="locations-container">
                                     <span class="title">LOCATIONS COVERED</span>
                                     
-                                    <small [hidden]="locations.length > 0" class="error-block m-b-5">
+                                    <small [ngClass]="{hide: (locations.length > 0 || !submitted)}" class="error-block m-b-5">
                                         <i class="far fa-times-circle"></i> Please add item before submitting 
                                     </small>
                                     <div class="locations-item-container">
@@ -165,32 +164,32 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <tr *ngFor="let item of [1,2,3,4,5]">
+                                    <tr *ngFor="let menu of menuList">
                                         <td>Image</td>
-                                        <td>Western Style Dishes</td>
-                                        <td class="text-justify">Over 30 years of culinary delight experience (4 Main Courses & 2 Desserts)</td>
-                                        <td class="text-center">20-Aug-2018</td>
+                                        <td>{{ menu.styleOfCookingDescription }}</td>
+                                        <td class="text-justify">{{ menu.specialtyDescription }}</td>
+                                        <td class="text-center">{{ menu.dateCreated | date:'dd-MMM-yyyy' }}</td>
                                         <td class="text-center">
-                                            <span class="badge status-active">Active</span>
-                                            <!-- <span class="badge status-hidden">Hidden</span> -->
+                                            <span class="badge status-active" [ngClass]="{hide: menu.active==0}">Active</span>
+                                            <span class="badge status-hidden" [ngClass]="{hide: menu.active==1}">Hidden</span>
                                         </td>
                                         <td class="action-buttons text-center">
-                                            <button class="btn-print"><i class="material-icons">edit</i>Edit Menu</button>
-                                            <button class="btn-cancel" [swal]="deleteMenu" (confirm)="deleteMenu()"><i class="material-icons">delete</i>Delete Menu</button>
+                                            <button class="btn-print" ><i class="material-icons">edit</i>Edit Menu</button>
+                                            <button class="btn-cancel" [swal]="deleteMenuSwal" (confirm)="deleteMenu(menu.id)"><i class="material-icons">delete</i>Delete Menu</button>
                                         </td>
                                     </tr>
                                 </tbody>
                             </table>
-                                <swal 
-                                    #deleteMenu 
-                                    title="Delete Menu?" 
-                                    text="Are you sure you want to permanently remove this menu?"
-                                    type="question"
-                                    [showCancelButton]="true" 
-                                    [focusCancel]="true" 
-                                    confirmButtonText="Yes, Delete it"
-                                    confirmButtonColor="#f44336">
-                                </swal>
+                            <swal 
+                                #deleteMenuSwal
+                                title="Delete Menu?" 
+                                text="Are you sure you want to permanently remove this menu?"
+                                type="question"
+                                [showCancelButton]="true" 
+                                [focusCancel]="true" 
+                                confirmButtonText="Yes, Delete it"
+                                confirmButtonColor="#f44336">
+                            </swal>
                         </div>
                     </div>
                 </section>
@@ -225,7 +224,7 @@
                                         <td class="action-buttons text-center">
                                             <button class="btn-view"><i class="material-icons">description</i>View</button>
                                             <button class="btn-print"><i class="material-icons">print</i>Print</button>
-                                            <button class="btn-cancel" [swal]="cancelOrder" (confirm)="cancelOrder()"><i class="material-icons">delete</i>Cancel</button>
+                                            <button class="btn-cancel" [swal]="cancelOrderSwal" (confirm)="cancelOrder()"><i class="material-icons">delete</i>Cancel</button>
                                         </td>
                                     </tr>
                                 </tbody>
@@ -234,7 +233,7 @@
                     </div>
 
                     <swal 
-                        #cancelOrder 
+                        #cancelOrderSwal 
                         title="Cancel Order?" 
                         text="Are you sure you want to cancel this order?"
                         type="question"
@@ -291,6 +290,8 @@
         </div>
     </div>
 </div>
+
+
   
 
 <vendor-footer></vendor-footer>

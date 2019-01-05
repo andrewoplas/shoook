@@ -8,19 +8,19 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.ManyToOne;
+import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
-
 /**
- * The persistent class for the menu database table.
- * 
+ * Entity implementation class for Entity: MenuLite
+ *
  */
 @Entity
-public class Menu implements Serializable {
+@Table(name="Menu")
+public class MenuDTO implements Serializable {
 	private static final long serialVersionUID = 1L;
-
+   
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private int id;
@@ -63,12 +63,10 @@ public class Menu implements Serializable {
 
 	@Column(name="style_of_cooking_description")
 	private String styleOfCookingDescription;
+	
+	private String vendor;
 
-	//bi-directional many-to-one association to Vendor
-	@ManyToOne
-	private Vendor vendor;
-
-	public Menu() {
+	public MenuDTO() {
 	}
 
 	public int getId() {
@@ -191,11 +189,11 @@ public class Menu implements Serializable {
 		this.styleOfCookingDescription = styleOfCookingDescription;
 	}
 
-	public Vendor getVendor() {
-		return this.vendor;
+	public String getVendor() {
+		return vendor;
 	}
 
-	public void setVendor(Vendor vendor) {
+	public void setVendor(String vendor) {
 		this.vendor = vendor;
 	}
 }
