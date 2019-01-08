@@ -45,6 +45,10 @@ export class MenuComponent implements OnInit {
     );
   }
 
+  public addMenuClick() {
+    $('.add-menu-tab').parent().trigger('click');
+  }
+
   public deleteMenu(id) {
     this.menuService.deleteMenu(id).subscribe(
       data => { 
