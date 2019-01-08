@@ -9,11 +9,11 @@
         <div class="sttabs tabs-style-bar">
             <nav>
                 <ul>
-                    <li><a href="#add-menu" class="sticon"><span><i class="material-icons">add</i>Add Menu</span></a></li>
-                    <li><a href="#manage-menu" class="sticon"><span><i class="material-icons">restaurant_menu</i>Manage Menu</span></a></li>
-                    <li><a href="#orders" class="sticon"><span><i class="material-icons">room_service</i>Orders</span></a></li>
-                    <li><a href="#finance" class="sticon"><span><i class="fas fa-money-bill"></i>Finance</span></a></li>
-                    <li><a href="#history" class="sticon"><span><i class="material-icons">history</i>History</span></a></li>     
+                    <li><a href="#add-menu" class="sticon add-menu-tab"><i class="material-icons">add</i><span>Add Menu</span></a></li>
+                    <li><a href="#manage-menu" class="sticon"><i class="material-icons">restaurant_menu</i><span>Manage Menu</span></a></li>
+                    <li><a href="#orders" class="sticon"><i class="material-icons">room_service</i><span>Orders</span></a></li>
+                    <li><a href="#finance" class="sticon"><i class="fas fa-money-bill"></i><span>Finance</span></a></li>
+                    <li><a href="#history" class="sticon"><i class="material-icons">history</i><span>History</span></a></li>     
                 </ul>
             </nav>
             <div class="content-wrap">
@@ -22,8 +22,8 @@
                     <div class="row">
                         <div class="col-md-4 col-xs-12">
                             <div class="row">
-                                <div class="col-md-8"><span class="form-label">Minimum Customers Required</span></div>
-                                <div class="col-md-4">
+                                <div class="col-sm-6 col-md-8"><span class="form-label">Minimum Customers Required</span></div>
+                                <div class="col-sm-6 col-md-4">
                                     <div class="form-group" [ngClass]="displayFieldCss('customers')">
                                         <input type='text' class="form-control" mask="0000" formControlName="customers" />
                                     </div>
@@ -31,8 +31,8 @@
                             </div>
 
                             <div class="row">
-                                <div class="col-md-8"><span class="form-label">Price for four(4) main course</span></div>
-                                <div class="col-md-4">
+                                <div class="col-sm-6 col-md-8"><span class="form-label">Price for four(4) main course</span></div>
+                                <div class="col-sm-6 col-md-4">
                                     <div class="form-group" [ngClass]="displayFieldCss('mainCourse')">
                                         <input type='text' class="form-control" prefix="₱ " mask="000000.00" formControlName="mainCourse" />
                                     </div>
@@ -40,8 +40,8 @@
                             </div>
                             
                             <div class="row">
-                                <div class="col-md-8"><span class="form-label">Price for additional menu</span></div>
-                                <div class="col-md-4">
+                                <div class="col-sm-6 col-md-8"><span class="form-label">Price for additional menu</span></div>
+                                <div class="col-sm-6 col-md-4">
                                     <div class="form-group" [ngClass]="displayFieldCss('additionalMenu')">
                                         <input type='text' class="form-control" prefix="₱ " mask="00000.00" formControlName="additionalMenu" />
                                     </div>
@@ -49,8 +49,8 @@
                             </div>
 
                             <div class="row">
-                                <div class="col-md-8"><span class="form-label">Price for additional dessert</span></div>
-                                <div class="col-md-4">
+                                <div class="col-sm-6 col-md-8"><span class="form-label">Price for additional dessert</span></div>
+                                <div class="col-sm-6 col-md-4">
                                     <div class="form-group" [ngClass]="displayFieldCss('additionalDessert')">
                                         <input type='text' class="form-control" prefix="₱ " mask="00000.00" formControlName="additionalDessert" />
                                     </div>
@@ -58,8 +58,8 @@
                             </div>
 
                             <div class="row">
-                                <div class="col-md-8"><span class="form-label">Price for additional lechon</span></div>
-                                <div class="col-md-4">
+                                <div class="col-sm-6 col-md-8"><span class="form-label">Price for additional lechon</span></div>
+                                <div class="col-sm-6 col-md-4">
                                     <div class="form-group" [ngClass]="displayFieldCss('additionalLechon')">
                                         <input type='text' class="form-control" prefix="₱ " mask="00000.00" formControlName="additionalLechon" />
                                     </div>
@@ -68,7 +68,7 @@
                         </div>
 
                         <div class="col-md-8 col-xs-12">
-                            <div class="col-md-6 col-xs-12 p-l-10 p-r-10">
+                            <div class="col-sm-4 col-md-6 col-xs-12 remove-padding-xs p-l-10 p-r-10">
                                 <div class="dishes-container">
                                     <span class="title">DISHES</span>
                                     
@@ -84,7 +84,7 @@
                                     <span class="btn-add" (click)="addDish()"><i class="fas fa-plus"></i>Add Dish</span>
                                 </div>
                             </div>
-                            <div class="col-md-6 col-xs-12 p-l-10 p-r-10">
+                            <div class="col-sm-4 col-md-6 col-xs-12 remove-padding-xs p-l-10 p-r-10">
                                 <div class="desserts-container">
                                     <span class="title">DESSERTS</span>
     
@@ -100,8 +100,8 @@
                                     <span class="btn-add" (click)="addDessert()"><i class="fas fa-plus"></i>Add Dessert</span>
                                 </div>
                             </div>
-                            <div class="col-md-12 p-l-10 p-r-10">
-                                <div class="locations-container">
+                            <div class="col-sm-4 col-md-12 col-xs-12 remove-padding-xs p-l-10 p-r-10">
+                                <div class="locations-container hidden-xs hidden-sm">
                                     <span class="title">LOCATIONS COVERED</span>
                                     
                                     <small [ngClass]="{hide: (locations.length > 0 || !submitted)}" class="error-block m-b-5">
@@ -114,6 +114,22 @@
 
                                         <span class="btn-add btn-add-location" (click)="addLocation()"><i class="fas fa-plus"></i>Add Location</span>
                                     </div>                                    
+                                </div>
+
+                                <div class="locations-container hidden-lg hidden-md">
+                                    <span class="title">LOCATIONS COVERED</span>
+    
+                                    <div class="locations-item-container">
+                                        <p *ngFor="let location of locations" class="item" >
+                                            {{ location }} <i class="remove-icon fas fa-times" (click)="removeLocation(location)"></i>
+                                        </p>
+                                    </div>     
+                                                                            
+                                    <small [ngClass]="{hide: (locations.length > 0 || !submitted)}" class="error-block m-b-5">
+                                        <i class="far fa-times-circle"></i> Please add item before submitting 
+                                    </small>
+
+                                    <span class="btn-add" (click)="addLocation()"><i class="fas fa-plus"></i>Add Location</span>                      
                                 </div>
                             </div>
                         </div>
@@ -150,7 +166,7 @@
                 </section>
 
                 <section id="manage-menu">
-                    <div class="table-ver1">
+                    <div class="table-ver1" [ngClass]="{hide: menuList.length==0}">
                         <div class="table-head">
                             <table>
                                 <thead>
@@ -191,6 +207,18 @@
                                 confirmButtonColor="#f44336">
                             </swal>
                         </div>
+                    </div>
+
+                    <div class="empty-menu-container">
+                        <img src="assets/image/empty_dish.svg" class="image" />
+                        <p class="title">
+                            EMPTY MENU LIST
+                        </p>
+                        <p class="description">
+                            Click the 'Add Menu' button below to start adding mouthwatering menu.
+                        </p>
+
+                        <button (click)="addMenuClick()" class="btn btn-add-menu" type="submit">Add Menu</button>
                     </div>
                 </section>
 

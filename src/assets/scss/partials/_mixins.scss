@@ -47,23 +47,30 @@
     }
 }
 
-/* Medium Devices, Desktops */
+/* Wide Screens */
 @mixin desktops-and-Below() {
     @media only screen and (max-width : 1199px) {
         @content;
     }
 }
 
-/* Small Devices, Tablets */
+/* Medium Devices, Desktops */
 @mixin tablets-and-Below() {
     @media only screen and (max-width : 991px) {
         @content;
     }
 }
 
-/* Extra Small Devices, Phones */ 
+/* Small Devices, Tablets */
 @mixin HSphones-and-Below() {
     @media only screen and (max-width : 767px) {
+        @content;
+    }
+}
+
+/* Extra Small Devices, Phones */ 
+@mixin phones-and-Below() {
+    @media only screen and (max-width : 480px) {
         @content;
     }
 }
