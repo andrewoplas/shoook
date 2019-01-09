@@ -63,6 +63,10 @@ public class Vendor implements Serializable {
 	private String phoneNumber;
 
 	private int region;
+	
+	private String username;
+
+	private String password;
 
 	//bi-directional many-to-one association to Menu
 	@OneToMany(mappedBy="vendor")
@@ -257,4 +261,19 @@ public class Vendor implements Serializable {
 		return vendorCompany;
 	}
 
+	public String getUsername() {
+		return username;
+	}
+
+	public void setUsername(String username) {
+		this.username = username;
+	}
+
+	public String getPassword() {
+		return password;
+	}
+
+	public void setPassword(String password) {
+		this.password = password;
+	}
 }

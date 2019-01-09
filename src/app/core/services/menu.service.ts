@@ -4,7 +4,6 @@ import { Globals } from '@shared/models/Global';
 import { ErrorHandlerService } from './error-handler.service';
 import { Observable } from "rxjs/Observable";
 import { catchError, tap } from "rxjs/operators";
-import { PotentialEarning } from '@shared/models/PotentialEarning.model';
 import { RequestResult } from '@shared/models/RequestResult';
 import { Menu } from '@shared/models/Menu.model';
 

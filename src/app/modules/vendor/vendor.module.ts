@@ -9,13 +9,15 @@ import { LandingComponent } from 'src/app/modules/vendor/landing/landing.compone
 import { RegisterComponent } from 'src/app/modules/vendor/register/register.component';
 import { MenuComponent } from 'src/app/modules/vendor/menu/menu.component';
 import { SharedModule } from '@shared/shared.module';
+import { LoginComponent } from './login/login.component';
 
 
 @NgModule({
   declarations: [
     LandingComponent,
     RegisterComponent,
-    MenuComponent
+    MenuComponent,
+    LoginComponent
   ], 
   imports: [
     SharedModule,

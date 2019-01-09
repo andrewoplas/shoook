@@ -30,7 +30,6 @@ public class MenuService {
 		}
 	}
 	
-	
 	public RequestResult retrieveById(String id) {
 		try {
 			int parsedId = Integer.parseInt(id);
@@ -50,8 +49,7 @@ public class MenuService {
 			return error("code", "message");
 		}
 	}
-	
-	
+		
 	public RequestResult create(Menu menu) {
 		try {			
 			repository.create(em, menu);
@@ -61,8 +59,7 @@ public class MenuService {
 			return error("code", ex.getMessage());
 		}
 	}
-	
-	
+		
 	public RequestResult update(Menu pe) {
 		try {
 			if(repository.contains(em, pe.getId())) {
@@ -79,9 +76,7 @@ public class MenuService {
 			return error("code", "does not exists");
 		}
 	}
-	
-	
-	
+		
 	public RequestResult delete(String id) {
 		try {
 			int parsedId = Integer.parseInt(id);
@@ -105,7 +100,6 @@ public class MenuService {
 			return error("code", ex.getMessage());
 		}
 	}
-	
 	
 	// Helper Functions
 	private RequestResult result(Object body, boolean success) {
