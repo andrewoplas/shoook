@@ -525,6 +525,53 @@
     }
 }
 
+#orders {
+    .empty-order-container {
+        padding-top: 50px;
+        padding-bottom: 80px;
+        margin-left: auto;
+        margin-right: auto;
+        
+        @include large-and-below() {
+            width: 400px !important;
+        }
+
+        @include phones-and-Below() {
+            width: 100% !important;
+        }
+
+        .image {
+            width: 175px;
+            margin-left: auto;
+            margin-right: auto;
+            display: block;
+
+            @include phones-and-Below() {
+                width: 130px !important;
+            }
+        }
+        
+        .title {
+            font-size: 40px;
+            font-family: $font-heading;
+            color: $black-o-4;
+            text-align: center;
+            padding-bottom: 0;
+
+            @include phones-and-Below() {
+                font-size: 30px !important;
+            }
+        }
+
+        .description {
+            font-size: 16px;
+            font-family: $font-body;
+            color: $black-o-3;
+            text-align: center;
+        }
+    }
+}
+
 
 /deep/ {
     .dz-message {

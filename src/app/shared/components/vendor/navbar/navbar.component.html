@@ -34,7 +34,7 @@
 
             </ul>
 
-            <ul class="nav navbar-nav navbar-right m-t-10">
+            <ul class="nav navbar-nav navbar-right m-t-10" *ngIf="!loggedIn">
                 <li>
                     <a>
                         <span class="monthly-potential-text">
@@ -48,6 +48,20 @@
                     <a routerLink="register">
                         <button class="btn btn-get-started">Get Started</button>
                     </a>
+                </li>
+            </ul>
+
+            <ul class="nav navbar-nav navbar-right m-t-10" *ngIf="loggedIn">
+                <li class="dropdown user-dropdown">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+                        <img src="assets/image/user.png" class="user">
+                    </a>
+                    <ul class="dropdown-menu">
+                        <li><a href="#"><i class="material-icons">edit</i> Menu</a></li>
+                        <li><a href="#"><i class="material-icons">edit</i> Order</a></li>
+                        <li><a href="#"><i class="material-icons">edit</i> Edit Profile</a></li>
+                        <li><a (click)="logout()"><i class="material-icons">arrow_back</i> Logout</a></li>
+                    </ul>
                 </li>
             </ul>
         </div><!-- /.navbar-collapse -->

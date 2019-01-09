@@ -1,0 +1,31 @@
+<div class="limiter">
+    <div class="container-login100">
+        <div class="wrap-login100">
+            <form class="login100-form" [formGroup]="forms" #formDirective="ngForm" (submit)="login()">
+                <span class="login100-form-title p-b-40">Welcome</span>
+
+                <div class="wrap-input100">
+                    <input type="text" class="input100" placeholder="Username" formControlName="username">
+                </div>
+
+                <div class="wrap-input100">
+                    <input type="password" class="input100" placeholder="Password" formControlName="password">
+                </div>
+
+                <div class="container-login100-form-btn">
+                    <button class="login100-form-btn" [disabled]="!forms.valid">Login</button>
+                </div>
+
+                <div class="text-center p-t-30 p-b-20">
+                    <span class="txt1">
+                        Don’t have an account?
+                    </span>
+
+                    <a class="txt2" routerLink="/vendor/register">
+                        Register as vendor
+                    </a>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
