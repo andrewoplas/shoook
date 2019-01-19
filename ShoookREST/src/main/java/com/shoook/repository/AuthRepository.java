@@ -31,7 +31,7 @@ public class AuthRepository {
 		if(results.size() == 1) {
 			//vendor = results.get(0);
 		}
-				
+		
 		return ulr; 
 	}
 		

@@ -1,6 +1,6 @@
 import { TestBed, async, inject } from '@angular/core/testing';
 
-import { VendorGuard } from './vendor.guard';
+import { VendorGuard } from '../vendor.guard';
 
 describe('VendorGuard', () => {
   beforeEach(() => {
