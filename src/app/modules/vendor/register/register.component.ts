@@ -1,8 +1,9 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import * as $ from 'jquery';
 import swal from 'sweetalert2';
 import { Router } from '@angular/router';
 import { FormBuilder, Validators, FormGroup } from '@angular/forms';
+import { DropzoneConfigInterface, DropzoneComponent, DropzoneDirective } from 'ngx-dropzone-wrapper';
 
 @Component({
   selector: 'app-register',
@@ -12,37 +13,34 @@ import { FormBuilder, Validators, FormGroup } from '@angular/forms';
 export class RegisterComponent implements OnInit {
   forms = this.formBuilder.group({
     first: this.formBuilder.group({
-      choose: ["", Validators.required],
-      shopBasedIn: ["", Validators.required],
-      mobileNumber: ["", Validators.required]
-    }),
-    second: this.formBuilder.group({
-      vendorId: [{value: 'PH1XOWOJ', disabled: true}],
-      name: ["", Validators.required],
+      firstName: ["", Validators.required],
+      lastName: ["", Validators.required],
       emailAddress: ["", Validators.required],
       phoneNumber: ["", Validators.required],
-      businessName: ["", Validators.required],
+
+      barangay: ["", Validators.required],
+      city: ["", Validators.required],
+      region: ["", Validators.required],
+
+      username: ["", Validators.required],
+      password: ["", Validators.required],
+      confirmPassword: ["", Validators.required]
+    }),
+    second: this.formBuilder.group({
+      idNumber: ["", Validators.required],
+      idName: ["", Validators.required],
+      idType: ["", Validators.required],
     }),
     third: this.formBuilder.group({
+      accountType: ["", Validators.required],
       legalCompanyName: [""],
       address: ["", Validators.required],
       country: ["", Validators.required],
       postalCode: ["", Validators.required],
       personInCharge: [""],
       businessRegistration: [""],
-      uploadIdFrontSide: ["", Validators.required],
       sellerVat: [""],
       vatRegistered: [""],
-
-      firstName: [""],
-      lastName: [""],
-      idNumber: ["", Validators.required],
-      region: ["", Validators.required],
-      city: ["", Validators.required],
-      barangay: ["", Validators.required],
-      countryRegion: [""],
-      uploadIdBackSide: [""],
-      idType: ["", Validators.required],
     }),
     fourth: this.formBuilder.group({
       accountName: ["", Validators.required],
@@ -51,7 +49,6 @@ export class RegisterComponent implements OnInit {
       branchName: [""],
       bankCode: [""],
       swift: [""],
-      bankInformationDocument: ["", Validators.required]
     }),
   });
 
@@ -60,9 +57,10 @@ export class RegisterComponent implements OnInit {
     private formBuilder: FormBuilder
   ) { }
 
-  get first() {
-    return this.forms.get("first");
-  }
+  get first() { return this.forms.get("first"); }
+  get second() { return this.forms.get("second"); }
+  get third() { return this.forms.get("third"); }
+  get fourth() { return this.forms.get("fourth"); }
 
   ngOnInit() {
     this.initializeRegisterSteps();
@@ -108,6 +106,16 @@ export class RegisterComponent implements OnInit {
   }
 
   registerVendor() {
+    let first = this.first
+    let second = this.second
+    let third = this.third
+    let fourth = this.fourth
+
+    console.log(first.value);
+    console.log(second.value);
+    console.log(third.value);
+    console.log(fourth.value);
+
     swal({
       title: 'Thank you for signing up!',
       text: "Would you like to upload your first menu?",
@@ -156,7 +164,6 @@ export class RegisterComponent implements OnInit {
     let element = (event.target as Element);
     Object.keys((<FormGroup>(this.forms.get(fieldset))).controls).forEach(field => {
       const control = this.forms.get(fieldset).get(field);
-      console.log(control);
       control.markAsTouched({ onlySelf: true });
     });
 
@@ -189,6 +196,62 @@ export class RegisterComponent implements OnInit {
           animating = false;
         }, 
       });
+    } else {
+      $('html, body').animate({scrollTop: $('.has-error').first().offset().top - 50}, 750);
     }
+  }
+
+  /* Dropzone Directive  */
+  public type: string = 'component';
+  public config: DropzoneConfigInterface = {
+    clickable: true, url: '/', acceptedFiles: 'image/*, application/pdf, .doc, .docx', maxFiles: 10, autoProcessQueue: false,
+    autoReset: null,
+    errorReset: null,
+    cancelReset: null,
+    dictDefaultMessage: 'Drop files here'
+  };
+
+  public configBack: DropzoneConfigInterface = {
+    clickable: true, url: '/', acceptedFiles: 'image/*', maxFiles: 1, autoProcessQueue: false,
+    autoReset: null,
+    errorReset: null,
+    cancelReset: null,
+    dictDefaultMessage: 'Drop file of the back side of your ID'
+  };
+
+  public configFront: DropzoneConfigInterface = {
+    clickable: true, url: '/', acceptedFiles: 'image/*', maxFiles: 1, autoProcessQueue: false,
+    autoReset: null,
+    errorReset: null,
+    cancelReset: null,
+    dictDefaultMessage: 'Drop file of the front side of your ID'
+  };
+
+  @ViewChild(DropzoneDirective) directiveRef?: DropzoneDirective;
+
+  public upload() {
+    let dropzone = this.directiveRef.dropzone();
+
+    let files = dropzone.files;
+  }
+
+  public toggleAutoReset(): void {
+    this.config.autoReset = this.config.autoReset ? null : 5000;
+    this.config.errorReset = this.config.errorReset ? null : 5000;
+    this.config.cancelReset = this.config.cancelReset ? null : 5000;
+  }
+
+  public resetDropzoneUploads(): void {
+    if (this.directiveRef && this.directiveRef) {
+      this.directiveRef.reset();
+    }
+  }
+
+  public onUploadError(args: any): void {
+    console.log('onUploadError:', args);
+  }
+
+  public onUploadSuccess(args: any): void {
+    console.log('onUploadSuccess:', args);
   }
 }

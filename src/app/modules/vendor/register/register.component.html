@@ -13,7 +13,7 @@
                     <div class="register-box">
                         <div>
                             <!-- multistep form -->
-                            <form id="msform" [formGroup]="forms" (ngSubmit)="onSubmit()">
+                            <form id="msform" [formGroup]="forms" (ngSubmit)="registerVendor()">
                                 <!-- progressbar -->
                                 <ul id="eliteregister">
                                     <li class="active">Account Setup</li>
@@ -24,68 +24,110 @@
 
                                 <!-- fieldsets -->
                                 <fieldset class="active first-fieldset" formGroupName="first">
-                                    <h2 class="fs-title">What kind of caterer are you listing?</h2>
-                                    <h3 class="fs-subtitle">First. Let's narrow things down.</h3>
-
-                                    <label class="select" [ngClass]="displayFieldCss('first.choose')">
-                                        <select class="form-control" id="txtChoose" formControlName="choose">
-                                            <option selected disabled>Select one</option>
-                                            <option>Be a fiesta something</option>
-                                        </select>
-                                    </label>
+                                    <h2 class="fs-title">Basic Information</h2>
 
                                     <div class="m-t-40 m-b-30">
-                                        <div class="row m-b-20">
-                                            <div class="col-md-4">
-                                                <span class="form-label">
-                                                    Account Type
-                                                    <span class="required">*</span>
-                                                </span>
+                                        <div class="row">
+                                            <div class="col-md-4"><span class="form-label">First Name<span class="required">*</span></span>
                                             </div>
                                             <div class="col-md-8">
-                                                <div class="account-type-container">
-                                                    <div>
-                                                        <input class="magic-radio" type="radio" name="radio" id="individual" checked>
-                                                        <label for="individual">Individual</label>
-                                                    </div>
-        
-                                                    <div>
-                                                        <input class="magic-radio" type="radio" name="radio" id="corporate">
-                                                        <label for="corporate">Corporate</label>
-                                                    </div>
+                                                <div class="form-group has-error" [ngClass]="displayFieldCss('first.firstName')">
+                                                    <input type="text" class="form-control" formControlName="firstName">
                                                 </div>
                                             </div>                                    
                                         </div>
 
-                                        <div class="row m-b-20">
-                                            <div class="col-md-4">
-                                                <span class="form-label">
-                                                    Shop based in
-                                                    <span class="required">*</span>
-                                                </span>
+                                        <div class="row">
+                                            <div class="col-md-4"><span class="form-label">Last Name<span class="required">*</span></span>
                                             </div>
                                             <div class="col-md-8">
-                                                <label class="country-select"  [ngClass]="displayFieldCss('first.shopBasedIn')">
-                                                    <select class="form-control" formControlName="shopBasedIn">
-                                                        <option selected>Philippines</option>
-                                                        <option>China</option>
-                                                        <option>Japan</option>
-                                                    </select>
-                                                </label>
+                                                <div class="form-group has-error" [ngClass]="displayFieldCss('first.lastName')">
+                                                    <input type="text" class="form-control" formControlName="lastName">
+                                                </div>
                                             </div>                                    
                                         </div>
 
-                                        <div class="row m-b-20">
-                                            <div class="col-md-4">
-                                                <span class="form-label">
-                                                    Mobile Number
-                                                    <span class="required">*</span>
-                                                </span>
+                                        <div class="row">
+                                            <div class="col-md-4"><span class="form-label">Email Address<span class="required">*</span></span>
                                             </div>
                                             <div class="col-md-8">
-                                                <div class="input-group" [ngClass]="displayFieldCss('first.mobileNumber')">
-                                                    <span class="input-group-addon" id="sizing-addon1">+63</span>
-                                                    <input type="text" class="form-control mobile-number" formControlName="mobileNumber">
+                                                <div class="form-group has-error" [ngClass]="displayFieldCss('first.emailAddress')">
+                                                    <input type="text" class="form-control" formControlName="emailAddress">
+                                                </div>
+                                            </div>                                    
+                                        </div>
+
+                                        <div class="row">
+                                            <div class="col-md-4"><span class="form-label">Phone Number<span class="required">*</span></span>
+                                            </div>
+                                            <div class="col-md-8">
+                                                <div class="form-group has-error" [ngClass]="displayFieldCss('first.phoneNumber')">
+                                                    <input type="text" class="form-control" formControlName="phoneNumber">
+                                                </div>
+                                            </div>                                    
+                                        </div>  
+                                        
+                                        <hr />
+                                        
+                                        <div class="row">
+                                            <div class="col-md-4"><span class="form-label">Barangay<span class="required">*</span></span>
+                                            </div>
+                                            <div class="col-md-8">
+                                                <div class="form-group has-error" [ngClass]="displayFieldCss('first.barangay')">
+                                                    <input type="text" class="form-control" formControlName="barangay">
+                                                </div>
+                                            </div>                                    
+                                        </div>
+
+                                        <div class="row">
+                                            <div class="col-md-4"><span class="form-label">City<span class="required">*</span></span>
+                                            </div>
+                                            <div class="col-md-8">
+                                                <div class="form-group has-error" [ngClass]="displayFieldCss('first.city')">
+                                                    <input type="text" class="form-control" formControlName="city">
+                                                </div>
+                                            </div>                                    
+                                        </div>
+
+                                        <div class="row">
+                                            <div class="col-md-4"><span class="form-label">Region<span class="required">*</span></span>
+                                            </div>
+                                            <div class="col-md-8">
+                                                <div class="form-group has-error" [ngClass]="displayFieldCss('first.region')">
+                                                    <input type="text" class="form-control" formControlName="region">
+                                                </div>
+                                            </div>                                    
+                                        </div>
+
+                                        <hr />
+                                        <h2 class="fs-title">Account Credentials</h2>
+
+                                        <div class="row">
+                                            <div class="col-md-4"><span class="form-label">Username<span class="required">*</span></span>
+                                            </div>
+                                            <div class="col-md-8">
+                                                <div class="form-group has-error" [ngClass]="displayFieldCss('first.username')">
+                                                    <input type="text" class="form-control" formControlName="username">
+                                                </div>
+                                            </div>                                    
+                                        </div>
+
+                                        <div class="row">
+                                            <div class="col-md-4"><span class="form-label">Password<span class="required">*</span></span>
+                                            </div>
+                                            <div class="col-md-8">
+                                                <div class="form-group has-error" [ngClass]="displayFieldCss('first.password')">
+                                                    <input type="text" class="form-control" formControlName="password">
+                                                </div>
+                                            </div>                                    
+                                        </div>
+
+                                        <div class="row">
+                                            <div class="col-md-4"><span class="form-label">Confirm Password<span class="required">*</span></span>
+                                            </div>
+                                            <div class="col-md-8">
+                                                <div class="form-group has-error" [ngClass]="displayFieldCss('first.confirmPassword')">
+                                                    <input type="text" class="form-control" formControlName="confirmPassword">
                                                 </div>
                                             </div>                                    
                                         </div>
@@ -109,75 +151,57 @@
                                 </fieldset>
 
                                 <fieldset class="second-fieldset" formGroupName="second">
-                                    <h2 class="fs-title">Vendor Account Information</h2>
+                                    <h2 class="fs-title">Vendor Information</h2>
                                     
                                     <div class="m-t-40 m-b-30">
-                                        <div class="row m-b-20">
-                                            <div class="col-md-4">
-                                                <span class="form-label">
-                                                    Vendor ID
-                                                    <span class="required">*</span>
-                                                </span>
+                                        <div class="row">
+                                            <div class="col-md-4"><span class="form-label">ID Number<span class="required">*</span></span>
                                             </div>
                                             <div class="col-md-8">
-                                                <div class="form-group" [ngClass]="displayFieldCss('second.vendorId')">
-                                                    <input type="text" class="form-control" formControlName="vendorId">
+                                                <div class="form-group has-error" [ngClass]="displayFieldCss('second.idNumber')">
+                                                    <input type="text" class="form-control" formControlName="idNumber">
                                                 </div>
                                             </div>                                    
                                         </div>
 
-                                        <div class="row m-b-20">
-                                            <div class="col-md-4">
-                                                <span class="form-label">
-                                                    Name on ID
-                                                    <span class="required">*</span>
-                                                </span>
+                                        <div class="row">
+                                            <div class="col-md-4"><span class="form-label">Name on ID<span class="required">*</span></span>
                                             </div>
                                             <div class="col-md-8">
-                                                <div class="form-group has-error" [ngClass]="displayFieldCss('second.name')">
-                                                    <input type="text" class="form-control" formControlName="name">
+                                                <div class="form-group has-error" [ngClass]="displayFieldCss('second.idName')">
+                                                    <input type="text" class="form-control" formControlName="idName">
                                                 </div>
                                             </div>                                    
                                         </div>
 
-                                        <div class="row m-b-20">
-                                            <div class="col-md-4">
-                                                <span class="form-label">
-                                                    Email Address
-                                                    <span class="required">*</span>
-                                                </span>
+                                        <div class="row">
+                                            <div class="col-md-4"><span class="form-label">ID Type<span class="required">*</span></span>
                                             </div>
                                             <div class="col-md-8">
-                                                <div class="form-group" [ngClass]="displayFieldCss('second.emailAddress')">
-                                                    <input type="text" class="form-control" formControlName="emailAddress">
+                                                <div class="form-group has-error" [ngClass]="displayFieldCss('second.idType')">
+                                                    <input type="text" class="form-control" formControlName="idType">
                                                 </div>
                                             </div>                                    
                                         </div>
 
-                                        <div class="row m-b-20">
-                                            <div class="col-md-4">
-                                                <span class="form-label">
-                                                    Phone Number
-                                                    <span class="required">*</span>
-                                                </span>
+                                        <div class="row">
+                                            <div class="col-md-4"><span class="form-label">Upload ID - Front Side<span class="required">*</span></span>
                                             </div>
                                             <div class="col-md-8">
-                                                <div class="form-group" [ngClass]="displayFieldCss('second.phoneNumber')">
-                                                    <input type="text" class="form-control" formControlName="phoneNumber">
+                                                <div class="form-group has-error">
+                                                        <div class="dropzone dropzone-container" [dropzone]="configFront"
+                                                        (error)="onUploadError($event)" (success)="onUploadSuccess($event)"></div>
                                                 </div>
                                             </div>                                    
                                         </div>
 
-                                        <div class="row m-b-20">
-                                            <div class="col-md-4">
-                                                <span class="form-label">
-                                                    Business Name
-                                                    <span class="required">*</span>
-                                                </span>
+                                        <div class="row">
+                                            <div class="col-md-4"><span class="form-label">Upload ID - Back Side<span class="required">*</span></span>
                                             </div>
                                             <div class="col-md-8">
-                                                <div class="form-group" [ngClass]="displayFieldCss('second.businessName')">
-                                                    <input type="text" class="form-control" formControlName="businessName">
+                                                <div class="form-group has-error">
+                                                        <div class="dropzone dropzone-container" [dropzone]="configBack"
+                                                        (error)="onUploadError($event)" (success)="onUploadSuccess($event)"></div>
                                                 </div>
                                             </div>                                    
                                         </div>
@@ -192,6 +216,23 @@
                                     
                                     <div class="m-t-40 m-b-30">
                                         <div class="row m-b-10">
+                                            <div class="col-md-4"><span class="form-label">Account Type<span class="required">*</span></span></div>
+                                            <div class="col-md-8">
+                                                <div class="vat-registered-container" [ngClass]="displayFieldCss('third.accountType')">
+                                                    <div class="m-t-5">
+                                                        <input class="magic-radio" type="radio" value="0" id="individual" name="accountType" formControlName="accountType">
+                                                        <label for="individual">Individual</label>
+                                                    </div>
+        
+                                                    <div class="m-t-5">
+                                                        <input class="magic-radio" type="radio" value="1" id="corporate" name="accountType" formControlName="accountType">
+                                                        <label for="corporate">Corporate</label>
+                                                    </div>
+                                                </div>
+                                            </div>                                    
+                                        </div>
+
+                                        <div class="row">
                                             <div class="col-md-4"><span class="form-label">Legal Name/Company Name</span></div>
                                             <div class="col-md-8">
                                                 <div class="form-group" [ngClass]="displayFieldCss('third.legalCompanyName')">
@@ -200,7 +241,7 @@
                                             </div>                                    
                                         </div>
 
-                                        <div class="row m-b-10">
+                                        <div class="row">
                                             <div class="col-md-4"><span class="form-label">Address<span class="required">*</span></span></div>
                                             <div class="col-md-8">
                                                 <div class="form-group" [ngClass]="displayFieldCss('third.address')">
@@ -209,7 +250,7 @@
                                             </div>                                    
                                         </div>
 
-                                        <div class="row m-b-10">
+                                        <div class="row">
                                             <div class="col-md-4"><span class="form-label">Country<span class="required">*</span></span></div>
                                             <div class="col-md-8">
                                                 <div class="form-group" [ngClass]="displayFieldCss('third.country')">
@@ -222,7 +263,7 @@
                                             </div>                                    
                                         </div>
 
-                                        <div class="row m-b-10">
+                                        <div class="row">
                                             <div class="col-md-4"><span class="form-label">Postal Code<span class="required">*</span></span></div>
                                             <div class="col-md-8">
                                                 <div class="form-group" [ngClass]="displayFieldCss('third.postalCode')">
@@ -231,7 +272,7 @@
                                             </div>                                    
                                         </div>
 
-                                        <div class="row m-b-10">
+                                        <div class="row">
                                             <div class="col-md-4"><span class="form-label">Person in Charge</span></div>
                                             <div class="col-md-8">
                                                 <div class="form-group" [ngClass]="displayFieldCss('third.personInCharge')">
@@ -240,7 +281,7 @@
                                             </div>                                    
                                         </div>
 
-                                        <div class="row m-b-10">
+                                        <div class="row">
                                             <div class="col-md-4"><span class="form-label">Business Registration No.</span></div>
                                             <div class="col-md-8">
                                                 <div class="form-group" [ngClass]="displayFieldCss('third.businessRegistration')">
@@ -249,16 +290,7 @@
                                             </div>                                    
                                         </div>
 
-                                        <div class="row m-b-10">
-                                            <div class="col-md-4"><span class="form-label">Upoad ID - Front Side<span class="required">*</span></span></div>
-                                            <div class="col-md-8">
-                                                <div class="form-group" [ngClass]="displayFieldCss('third.uploadIdFrontSide')">
-                                                    <input type="text" class="form-control" formControlName="uploadIdFrontSide">
-                                                </div>
-                                            </div>                                    
-                                        </div>
-
-                                        <div class="row m-b-10">
+                                        <div class="row">
                                             <div class="col-md-4"><span class="form-label">Seller VAT</span></div>
                                             <div class="col-md-8">
                                                 <div class="form-group" [ngClass]="displayFieldCss('third.sellerVat')">
@@ -267,104 +299,19 @@
                                             </div>                                    
                                         </div>
 
-                                        <div class="row m-b-10">
+                                        <div class="row">
                                             <div class="col-md-4"><span class="form-label">VAT Registered</span></div>
                                             <div class="col-md-8">
                                                 <div class="vat-registered-container">
                                                     <div>
-                                                        <input class="magic-radio" type="radio" name="vat-registered" id="yes" checked>
+                                                        <input class="magic-radio" type="radio" id="yes" value="1" name="vatRegistered" formControlName="vatRegistered">
                                                         <label for="yes">Yes</label>
                                                     </div>
         
                                                     <div>
-                                                        <input class="magic-radio" type="radio" name="vat-registered" id="no">
+                                                        <input class="magic-radio" type="radio" id="no" value="0" name="vatRegistered" formControlName="vatRegistered">
                                                         <label for="no">No</label>
                                                     </div>
-                                                </div>
-                                            </div>                                    
-                                        </div>
-                                    </div>
-
-                                    <h2 class="fs-title">Business Information Pt 2</h2>
-
-                                    <div class="m-t-40 m-b-30">
-                                        <div class="row m-b-10">
-                                            <div class="col-md-4"><span class="form-label">First Name</span></div>
-                                            <div class="col-md-8">
-                                                <div class="form-group" [ngClass]="displayFieldCss('third.firstName')">
-                                                    <input type="text" class="form-control" formControlName="firstName">
-                                                </div>
-                                            </div>                                    
-                                        </div>
-
-                                        <div class="row m-b-10">
-                                            <div class="col-md-4"><span class="form-label">Last Name</span></div>
-                                            <div class="col-md-8">
-                                                <div class="form-group" [ngClass]="displayFieldCss('third.lastName')">
-                                                    <input type="text" class="form-control" formControlName="lastName">
-                                                </div>
-                                            </div>                                    
-                                        </div>
-
-                                        <div class="row m-b-10">
-                                            <div class="col-md-4"><span class="form-label">ID Number<span class="required">*</span></span></div>
-                                            <div class="col-md-8">
-                                                <div class="form-group" [ngClass]="displayFieldCss('third.idNumber')">
-                                                    <input type="text" class="form-control" formControlName="idNumber">
-                                                </div>
-                                            </div>                                    
-                                        </div>
-
-                                        <div class="row m-b-10">
-                                            <div class="col-md-4"><span class="form-label">Region<span class="required">*</span></span></div>
-                                            <div class="col-md-8">
-                                                <div class="form-group" [ngClass]="displayFieldCss('third.region')">
-                                                    <input type="text" class="form-control" formControlName="region">
-                                                </div>
-                                            </div>                                    
-                                        </div>
-
-                                        <div class="row m-b-10">
-                                            <div class="col-md-4"><span class="form-label">City<span class="required">*</span></span></div>
-                                            <div class="col-md-8">
-                                                <div class="form-group" [ngClass]="displayFieldCss('third.city')">
-                                                    <input type="text" class="form-control" formControlName="city">
-                                                </div>
-                                            </div>                                    
-                                        </div>
-
-                                        <div class="row m-b-10">
-                                            <div class="col-md-4"><span class="form-label">Barangay<span class="required">*</span></span></div>
-                                            <div class="col-md-8">
-                                                <div class="form-group" [ngClass]="displayFieldCss('third.barangay')">
-                                                    <input type="text" class="form-control" formControlName="barangay">
-                                                </div>
-                                            </div>                                    
-                                        </div>
-
-                                        <div class="row m-b-10">
-                                            <div class="col-md-4"><span class="form-label">Country Region</span></div>
-                                            <div class="col-md-8">
-                                                <div class="form-group" [ngClass]="displayFieldCss('third.countryRegion')">
-                                                    <input type="text" class="form-control" formControlName="countryRegion">
-                                                </div>
-                                            </div>                                    
-                                        </div>
-
-                                        <div class="row m-b-10">
-                                            <div class="col-md-4"><span class="form-label">Upload ID - Back Side</span></div>
-                                            <div class="col-md-8">
-                                                <div class="form-group" [ngClass]="displayFieldCss('third.uploadIdBackSide')">
-                                                    <input type="text" class="form-control" formControlName="uploadIdBackSide">
-                                                </div>
-                                            </div>                                    
-                                        </div>
-
-                                        <div class="row m-b-10">
-                                            <div class="col-md-4"><span class="form-label">ID Type<span class="required">*</span></span></div>
-                                            <div class="col-md-8">
-                                                <div class="form-group" [ngClass]="displayFieldCss('third.idType')">
-                                                    <input type="text" class="form-control" formControlName="idType">
                                                 </div>
                                             </div>                                    
                                         </div>
@@ -378,7 +325,7 @@
                                     <h2 class="fs-title">Bank Account Information</h2>
                                     
                                     <div class="m-t-40 m-b-30">
-                                        <div class="row m-b-20">
+                                        <div class="row">
                                             <div class="col-md-4"><span class="form-label">Account Name<span class="required">*</span></span></div>
                                             <div class="col-md-8">
                                                 <div class="form-group" [ngClass]="displayFieldCss('fourth.accountName')">
@@ -387,7 +334,7 @@
                                             </div>                                    
                                         </div>
 
-                                        <div class="row m-b-20">
+                                        <div class="row">
                                             <div class="col-md-4"><span class="form-label">Account Number<span class="required">*</span></span></div>
                                             <div class="col-md-8">
                                                 <div class="form-group" [ngClass]="displayFieldCss('fourth.accountNumber')">
@@ -396,7 +343,7 @@
                                             </div>                                    
                                         </div>
 
-                                        <div class="row m-b-20">
+                                        <div class="row">
                                             <div class="col-md-4"><span class="form-label">Bank Name<span class="required">*</span></span></div>
                                             <div class="col-md-8">
                                                 <div class="form-group" [ngClass]="displayFieldCss('fourth.bankName')">
@@ -405,7 +352,7 @@
                                             </div>                                    
                                         </div>
 
-                                        <div class="row m-b-20">
+                                        <div class="row">
                                             <div class="col-md-4"><span class="form-label">Branch Name<span class="required">*</span></span></div>
                                             <div class="col-md-8">
                                                 <div class="form-group" [ngClass]="displayFieldCss('fourth.branchName')">
@@ -414,7 +361,7 @@
                                             </div>                                    
                                         </div>
 
-                                        <div class="row m-b-20">
+                                        <div class="row">
                                             <div class="col-md-4"><span class="form-label">Bank Code<span class="required">*</span></span></div>
                                             <div class="col-md-8">
                                                 <div class="form-group" [ngClass]="displayFieldCss('fourth.bankCode')">
@@ -423,7 +370,7 @@
                                             </div>                                    
                                         </div>
 
-                                        <div class="row m-b-20">
+                                        <div class="row">
                                             <div class="col-md-4"><span class="form-label">SWIFT<span class="required">*</span></span></div>
                                             <div class="col-md-8">
                                                 <div class="form-group" [ngClass]="displayFieldCss('fourth.swift')">
@@ -432,19 +379,20 @@
                                             </div>                                    
                                         </div>
 
-                                        <div class="row m-b-20">
+                                        <div class="row">
                                             <div class="col-md-4"><span class="form-label">Bank Information Document</span></div>
                                             <div class="col-md-8">
-                                                <div class="form-group" [ngClass]="displayFieldCss('fourth.bankInformationDocument')">
-                                                    <input type="text" class="form-control" formControlName="bankInformationDocument">
-                                                    <span class="help-block">Accepts image files, PDF and MS Word</span>
+                                                <div class="form-group">
+                                                    <div class="dropzone dropzone-container" [dropzone]="config"
+                                                    (error)="onUploadError($event)" (success)="onUploadSuccess($event)"></div>
+                                                    <small class="help-block m-t-10">Allows image, PDF and MS word files</small>
                                                 </div>
                                             </div>                                    
                                         </div>
                                     </div>
 
                                     <input type="button" name="previous" class="previous action-button" value="Previous" />
-                                    <input type="submit" name="submit" class="submit action-button" value="Submit" (click)="registerVendor()"/>
+                                    <input type="submit" name="submit" class="submit action-button" value="Submit"/>
                                 </fieldset>
                             </form>
 
