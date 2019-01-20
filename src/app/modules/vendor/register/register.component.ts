@@ -162,7 +162,7 @@ export class RegisterComponent implements OnInit {
     this.vendorService.createVendor(v).subscribe(
       data => {
         if(!isNull(data) && data.success) {
-          this.upload()
+          this.upload(data.body);
         }
       }
     )
@@ -282,16 +282,22 @@ export class RegisterComponent implements OnInit {
 
   @ViewChildren(DropzoneDirective) directiveRef?: QueryList<DropzoneDirective>;
   
-  public upload() {
-    let dropzones = this.directiveRef.toArray();
-    let dropzoneFront = dropzones[0].dropzone();
-    let dropzoneBack = dropzones[1].dropzone();
-    let dropzoneBank = dropzones[2].dropzone();
+  public upload(id) {
+    const md5 = new Md5();
+    let location = md5.appendStr(id).end().toString();
 
+    let dropzones = this.directiveRef.toArray();
+    let idFront = dropzones[0].dropzone().files[0];
+    let idBack = dropzones[1].dropzone().files[0];
+    let documents = dropzones[2].dropzone().files;
+    
     const formdata: FormData = new FormData(); 
-    formdata.append('idFront', dropzoneFront.files[0]);
-    formdata.append('idBack', dropzoneBack.files[0]);
-    formdata.append('documents', dropzoneBank.files);
+    formdata.append('location', location);
+    formdata.append('idFront', idFront);
+    formdata.append('idBack', idBack);
+    for(let document of documents) {
+      formdata.append('documents', document);
+    }    
 
     this.vendorService.pushFileToStorage(formdata).subscribe(event => {
       if (event.type === HttpEventType.UploadProgress) {

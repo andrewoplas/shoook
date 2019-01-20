@@ -2,8 +2,6 @@ package com.shoook.controller;
 import java.io.File;
 import java.nio.file.Path;
 import java.nio.file.Paths;
-import java.util.ArrayList;
-import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
@@ -35,34 +33,34 @@ public class VendorController {
 	@Autowired
 	private StorageService storageService;
 	
-	List<String> files = new ArrayList<String>();
-	 
 	@CrossOrigin
 	@PostMapping("/uploadImage")
 	public RequestResult handleFileUpload(
 			@RequestParam("idFront") MultipartFile idFront,
 			@RequestParam("idBack") MultipartFile idBack,
-			@RequestParam("documents") MultipartFile documents[],
+			@RequestParam("documents") MultipartFile[] documents,
 			@RequestParam("location") String location) {
 		
+			System.out.println("DOCUMENTS: " + documents.length);
 		try {
 			// Set and Get directories
 			Path pathId = Paths.get("../src/assets/uploads/id/" + location);
 			Path pathDocuments = Paths.get("../src/assets/uploads/documents/" + location);
-			File directory = new File("../src/assets/uploads/id/" + location);
-			if (!directory.exists()){
-		        directory.mkdir();
-		    }
+			File directoryId = new File("../src/assets/uploads/id/" + location);
+			File directoryDocuments = new File("../src/assets/uploads/documents/" + location);
+			if (!directoryId.exists()){ directoryId.mkdir(); }
+			if (!directoryDocuments.exists()){ directoryDocuments.mkdir(); }
 			
 			// Store Front ID
-			storageService.store(idFront, pathId);
-			files.add(idFront.getOriginalFilename());
+			storageService.store(idFront, pathId, "front.jpg");
 			
 			// Store Back ID
-			storageService.store(idBack, pathId);
-			files.add(idBack.getOriginalFilename());
+			storageService.store(idBack, pathId, "back.jpg");
 			
-			System.out.println("Documents:" + documents.length);  
+			// Store Documents
+			for(MultipartFile document : documents) {
+				storageService.store(document, pathDocuments, document.getOriginalFilename());
+		    }
 			
 			String message = "You successfully uploaded " + idFront.getOriginalFilename() + "!";
 			RequestResult result = new RequestResult();
@@ -70,7 +68,7 @@ public class VendorController {
 			result.setSuccess(true);
 			return result;
 		} catch (Exception e) {
-			String message = "FAIL to upload " + file.getOriginalFilename() + "!";
+			String message = "FAIL to upload " + idFront.getOriginalFilename() + "!";
 			RequestResult result = new RequestResult();
 			result.setBody(message);
 			result.setSuccess(false);
@@ -78,6 +76,7 @@ public class VendorController {
 			return result;
 		}
 	}
+	
 	@CrossOrigin
 	@GetMapping(path = "get-menus", produces = MediaType.APPLICATION_JSON_VALUE)	
 	public RequestResult retrieve() {

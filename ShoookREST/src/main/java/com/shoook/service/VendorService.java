@@ -73,7 +73,7 @@ public class VendorService {
 				repository.createVendorCompany(em, company);
 			}	
 			
-			return result(null, true);
+			return result(vendor.getId(), true);
 		} catch (Exception ex) {
 			// Log the error
 			return error("code", ex.getMessage());
