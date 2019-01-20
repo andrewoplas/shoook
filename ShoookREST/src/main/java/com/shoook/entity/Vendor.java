@@ -28,9 +28,6 @@ public class Vendor implements Serializable {
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private int id;
 
-	@Column(name="account_type")
-	private String accountType;
-
 	private int approved;
 
 	private String barangay;
@@ -52,9 +49,6 @@ public class Vendor implements Serializable {
 
 	@Column(name="first_name")
 	private String firstName;
-
-	@Column(name="id_type")
-	private String idType;
 
 	@Column(name="last_name")
 	private String lastName;
@@ -89,14 +83,6 @@ public class Vendor implements Serializable {
 
 	public void setId(int id) {
 		this.id = id;
-	}
-
-	public String getAccountType() {
-		return this.accountType;
-	}
-
-	public void setAccountType(String accountType) {
-		this.accountType = accountType;
 	}
 
 	public int getApproved() {
@@ -161,14 +147,6 @@ public class Vendor implements Serializable {
 
 	public void setFirstName(String firstName) {
 		this.firstName = firstName;
-	}
-
-	public String getIdType() {
-		return this.idType;
-	}
-
-	public void setIdType(String idType) {
-		this.idType = idType;
 	}
 
 	public String getLastName() {

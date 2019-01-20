@@ -189,8 +189,8 @@
                                             </div>
                                             <div class="col-md-8">
                                                 <div class="form-group has-error">
-                                                        <div class="dropzone dropzone-container" [dropzone]="configFront"
-                                                        (error)="onUploadError($event)" (success)="onUploadSuccess($event)"></div>
+                                                    <div class="dropzone dropzone-container" [dropzone]="configFront"
+                                                        (addedFile)="addedFile($event, 0)" (error)="onUploadError($event)" (success)="onUploadSuccess($event)"></div>
                                                 </div>
                                             </div>                                    
                                         </div>
@@ -200,8 +200,8 @@
                                             </div>
                                             <div class="col-md-8">
                                                 <div class="form-group has-error">
-                                                        <div class="dropzone dropzone-container" [dropzone]="configBack"
-                                                        (error)="onUploadError($event)" (success)="onUploadSuccess($event)"></div>
+                                                    <div class="dropzone dropzone-container" [dropzone]="configBack"
+                                                    (addedFile)="addedFile($event, 1)" (error)="onUploadError($event)" (success)="onUploadSuccess($event)"></div>
                                                 </div>
                                             </div>                                    
                                         </div>

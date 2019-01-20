@@ -1,9 +1,14 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { DropzoneConfigInterface, DropzoneComponent, DropzoneDirective } from 'ngx-dropzone-wrapper';
+import { Component, OnInit, ViewChild, QueryList, ViewChildren } from '@angular/core';
+import { FormBuilder, Validators, FormGroup } from '@angular/forms';
+import { HttpEventType, HttpResponse } from '@angular/common/http';
+import { Router } from '@angular/router';
+import { VendorService } from '@core/services/vendor.service';
+import { isNull } from 'util';
+
+import { Md5 } from 'ts-md5/dist/md5';
 import * as $ from 'jquery';
 import swal from 'sweetalert2';
-import { Router } from '@angular/router';
-import { FormBuilder, Validators, FormGroup } from '@angular/forms';
-import { DropzoneConfigInterface, DropzoneComponent, DropzoneDirective } from 'ngx-dropzone-wrapper';
 
 @Component({
   selector: 'app-register',
@@ -54,7 +59,8 @@ export class RegisterComponent implements OnInit {
 
   constructor(
     private router:Router,
-    private formBuilder: FormBuilder
+    private formBuilder: FormBuilder,
+    private vendorService: VendorService
   ) { }
 
   get first() { return this.forms.get("first"); }
@@ -110,38 +116,83 @@ export class RegisterComponent implements OnInit {
     let second = this.second
     let third = this.third
     let fourth = this.fourth
+    
+    let vendor = {
+      firstName: first.value.firstName,
+      lastName: first.value.lastName,
+      approved: first.value.approved,
+      emailAddress: first.value.emailAddress,
+      phoneNumber: first.value.phoneNumber,
+      barangay: first.value.barangay,
+      city: first.value.city,
+      region: first.value.region,
+      username: first.value.username,
+      password: first.value.password,
+      dateCreated: Date.now(),
+      dateUpdated: Date.now()
+    }
 
-    console.log(first.value);
-    console.log(second.value);
-    console.log(third.value);
-    console.log(fourth.value);
+    let company = {      
+      accountType: third.value.accountType,
+      address: third.value.address,
+      businessNo: third.value.businessRegistration,
+      country: third.value.country,
+      name: third.value.legalCompanyName,
+      personInCharge: third.value.personInCharge,
+      postalCode: third.value.postalCode,
+      sellerVat: third.value.sellerVat,
+      vatRegistered: third.value.vatRegistered
+    }
 
-    swal({
-      title: 'Thank you for signing up!',
-      text: "Would you like to upload your first menu?",
-      type: 'success',
-      showCancelButton: true,
-      cancelButtonText: 'LATER',
-      cancelButtonClass: 'cancel-swal',
-      confirmButtonText: 'YES',
-      confirmButtonClass: 'confirm-swal'
-    }).then((result) => {
-      if (result.value) {
-        this.router.navigate(['/vendor/menu']);
-      } else {
-        swal({
-          title: 'Redirecting',
-          text: 'You will be redirected to the vendor page',
-          showConfirmButton: false,
-          timer: 2800
-        })
+    let bank = {
+	    accountName: fourth.value.accountName,
+	    accountNumber: fourth.value.accountNumber,
+	    bankCode: fourth.value.bankCode,
+	    bankName: fourth.value.bankName,
+	    branchName: fourth.value.branchName,
+      swift: fourth.value.swift,
+    }  
 
-        setTimeout(()=>{
-          $('html, body').animate({scrollTop: 0}, 1);
-          this.router.navigate(['/vendor']);  
-        },3000)
+    let v = {
+      vendor: vendor,
+      company: company,
+      bank: bank
+    }
+    
+    this.vendorService.createVendor(v).subscribe(
+      data => {
+        if(!isNull(data) && data.success) {
+          this.upload()
+        }
       }
-    })
+    )
+
+    // swal({
+    //   title: 'Thank you for signing up!',
+    //   text: "Would you like to upload your first menu?",
+    //   type: 'success',
+    //   showCancelButton: true,
+    //   cancelButtonText: 'LATER',
+    //   cancelButtonClass: 'cancel-swal',
+    //   confirmButtonText: 'YES',
+    //   confirmButtonClass: 'confirm-swal'
+    // }).then((result) => {
+    //   if (result.value) {
+    //     this.router.navigate(['/vendor/menu']);
+    //   } else {
+    //     swal({
+    //       title: 'Redirecting',
+    //       text: 'You will be redirected to the vendor page',
+    //       showConfirmButton: false,
+    //       timer: 2800
+    //     })
+
+    //     setTimeout(()=>{
+    //       $('html, body').animate({scrollTop: 0}, 1);
+    //       this.router.navigate(['/vendor']);  
+    //     },3000)
+    //   }
+    // })
   }
 
   hasError(field: string) {
@@ -213,6 +264,7 @@ export class RegisterComponent implements OnInit {
 
   public configBack: DropzoneConfigInterface = {
     clickable: true, url: '/', acceptedFiles: 'image/*', maxFiles: 1, autoProcessQueue: false,
+    uploadMultiple: false,
     autoReset: null,
     errorReset: null,
     cancelReset: null,
@@ -221,31 +273,46 @@ export class RegisterComponent implements OnInit {
 
   public configFront: DropzoneConfigInterface = {
     clickable: true, url: '/', acceptedFiles: 'image/*', maxFiles: 1, autoProcessQueue: false,
+    uploadMultiple: false,
     autoReset: null,
     errorReset: null,
     cancelReset: null,
     dictDefaultMessage: 'Drop file of the front side of your ID'
   };
 
-  @ViewChild(DropzoneDirective) directiveRef?: DropzoneDirective;
-
+  @ViewChildren(DropzoneDirective) directiveRef?: QueryList<DropzoneDirective>;
+  
   public upload() {
-    let dropzone = this.directiveRef.dropzone();
+    let dropzones = this.directiveRef.toArray();
+    let dropzoneFront = dropzones[0].dropzone();
+    let dropzoneBack = dropzones[1].dropzone();
+    let dropzoneBank = dropzones[2].dropzone();
 
-    let files = dropzone.files;
+    const formdata: FormData = new FormData(); 
+    formdata.append('idFront', dropzoneFront.files[0]);
+    formdata.append('idBack', dropzoneBack.files[0]);
+    formdata.append('documents', dropzoneBank.files);
+
+    this.vendorService.pushFileToStorage(formdata).subscribe(event => {
+      if (event.type === HttpEventType.UploadProgress) {
+        console.log('Percentage: ' + Math.round(100 * event.loaded / event.total));
+      } else if (event instanceof HttpResponse) {
+        console.log('File is completely uploaded!');
+      }
+    });
   }
-
+  
   public toggleAutoReset(): void {
     this.config.autoReset = this.config.autoReset ? null : 5000;
     this.config.errorReset = this.config.errorReset ? null : 5000;
     this.config.cancelReset = this.config.cancelReset ? null : 5000;
   }
 
-  public resetDropzoneUploads(): void {
-    if (this.directiveRef && this.directiveRef) {
-      this.directiveRef.reset();
-    }
-  }
+  // public resetDropzoneUploads(): void {
+  //   if (this.directiveRef && this.directiveRef) {
+  //     this.directiveRef.reset();
+  //   }
+  // }
 
   public onUploadError(args: any): void {
     console.log('onUploadError:', args);
@@ -254,4 +321,14 @@ export class RegisterComponent implements OnInit {
   public onUploadSuccess(args: any): void {
     console.log('onUploadSuccess:', args);
   }
+
+  public addedFile(args: any, type: number):void {
+    let dropzones = this.directiveRef.toArray();
+    let dz = dropzones[type].dropzone();
+    
+    if(dz.files[1] != null) {
+      dz.removeFile(dz.files[0]);
+    }
+  }
+
 }
