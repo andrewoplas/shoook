@@ -1,10 +1,17 @@
 package com.shoook.service;
 
+import java.io.File;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
+
+import org.apache.commons.codec.digest.DigestUtils;
 
 import com.shoook.entity.Menu;
 import com.shoook.entity.RequestError;
@@ -19,6 +26,9 @@ import com.shoook.repository.VendorRepository;
 public class VendorService {
 	@PersistenceContext
 	private EntityManager em;
+	
+	@Autowired
+	private StorageService storageService;
 	
 	@Autowired
 	private VendorRepository repository;
@@ -58,9 +68,11 @@ public class VendorService {
 		try {
 			
 			// Insert vendor
-			String code = "test";
 			Vendor vendor = vendorRegister.getVendor();
+			
+			String code = DigestUtils.md5Hex(vendor.getLastName() + vendor.getUsername() + vendor.getDateCreated().toString()).substring(0, 10);
 			vendor.setCode(code);
+			vendor.setPassword(DigestUtils.md5Hex(vendor.getPassword()));
 			repository.create(em, vendor);
 			
 			if(vendor.getId() > 0) {
@@ -115,6 +127,37 @@ public class VendorService {
 			// Log the error
 			return error("code", ex.getMessage());
 			
+		} catch (Exception ex) {
+			// Log the error
+			return error("code", ex.getMessage());
+		}
+	}
+
+	public RequestResult uploadFile(MultipartFile idFront, MultipartFile idBack, MultipartFile[] documents, String location) {
+		try {
+			// Set and Get directories
+			location = DigestUtils.md5Hex(location);
+			Path pathId = Paths.get("../uploads/id/" + location);
+			Path pathDocuments = Paths.get("../uploads/documents/" + location);
+			File directoryId = new File("../uploads/id/" + location);
+			File directoryDocuments = new File("../uploads/documents/" + location);
+			if (!directoryId.exists()){ directoryId.mkdir(); }
+			if (!directoryDocuments.exists()){ directoryDocuments.mkdir(); }
+			
+			System.out.println("LOCATION:  " + location);
+			
+			// Store Front ID
+			storageService.store(idFront, pathId, "front.jpg");
+			
+			// Store Back ID
+			storageService.store(idBack, pathId, "back.jpg");
+			
+			// Store Documents
+			for(MultipartFile document : documents) {
+				storageService.store(document, pathDocuments, document.getOriginalFilename());
+		    }
+			
+			return result(null, true);
 		} catch (Exception ex) {
 			// Log the error
 			return error("code", ex.getMessage());

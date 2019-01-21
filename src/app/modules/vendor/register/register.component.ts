@@ -6,9 +6,9 @@ import { Router } from '@angular/router';
 import { VendorService } from '@core/services/vendor.service';
 import { isNull } from 'util';
 
-import { Md5 } from 'ts-md5/dist/md5';
 import * as $ from 'jquery';
 import swal from 'sweetalert2';
+import { LoadingBarService } from '@ngx-loading-bar/core';
 
 @Component({
   selector: 'app-register',
@@ -16,19 +16,25 @@ import swal from 'sweetalert2';
   styleUrls: ['./register.component.scss']
 })
 export class RegisterComponent implements OnInit {
-  forms = this.formBuilder.group({
+  public pass: string;
+  public confirmPass: string;
+  public idFrontError: boolean;
+  public idBackError: boolean;
+  public documentsError: boolean;
+  public alphanumeric = {'0': { pattern: new RegExp('\[A-Za-zÑñ\.\,0-9 \]')}};
+  public forms = this.formBuilder.group({
     first: this.formBuilder.group({
       firstName: ["", Validators.required],
       lastName: ["", Validators.required],
-      emailAddress: ["", Validators.required],
-      phoneNumber: ["", Validators.required],
+      emailAddress: ["", [Validators.email, Validators.required]],
+      phoneNumber: ["", [Validators.required, Validators.minLength(10)]],
 
       barangay: ["", Validators.required],
       city: ["", Validators.required],
       region: ["", Validators.required],
 
       username: ["", Validators.required],
-      password: ["", Validators.required],
+      password: ["", [Validators.required, Validators.minLength(6)]],
       confirmPassword: ["", Validators.required]
     }),
     second: this.formBuilder.group({
@@ -52,21 +58,77 @@ export class RegisterComponent implements OnInit {
       accountNumber: ["", Validators.required],
       bankName: ["", Validators.required],
       branchName: [""],
-      bankCode: [""],
-      swift: [""],
+      bankCode: ["", Validators.required],
+      swift: ["", Validators.required],
     }),
   });
 
-  constructor(
-    private router:Router,
-    private formBuilder: FormBuilder,
-    private vendorService: VendorService
-  ) { }
 
   get first() { return this.forms.get("first"); }
   get second() { return this.forms.get("second"); }
   get third() { return this.forms.get("third"); }
   get fourth() { return this.forms.get("fourth"); }
+  get formValues() {
+    let first = this.first
+    let second = this.second
+    let third = this.third
+    let fourth = this.fourth
+    
+    let vendor = {
+      firstName: first.value.firstName.trim(),
+      lastName: first.value.lastName.trim(),
+      approved: 0,
+      emailAddress: first.value.emailAddress.trim(),
+      phoneNumber: first.value.phoneNumber.trim(),
+      barangay: first.value.barangay.trim(),
+      city: first.value.city.trim(),
+      region: first.value.region.trim(),
+      username: first.value.username.trim(),
+      password: first.value.password,
+      dateCreated: Date.now(),
+      dateUpdated: Date.now()
+    }
+
+    let company = {      
+      accountType: third.value.accountType.trim(),
+      address: third.value.address.trim(),
+      businessNo: third.value.businessRegistration.trim(),
+      country: third.value.country.trim(),
+      name: third.value.legalCompanyName.trim(),
+      personInCharge: third.value.personInCharge.trim(),
+      postalCode: third.value.postalCode.trim(),
+      sellerVat: third.value.sellerVat.trim(),
+      vatRegistered: third.value.vatRegistered.trim()
+    }
+
+    let bank = {
+	    accountName: fourth.value.accountName.trim(),
+	    accountNumber: fourth.value.accountNumber.trim(),
+	    bankCode: fourth.value.bankCode.trim(),
+	    bankName: fourth.value.bankName.trim(),
+	    branchName: fourth.value.branchName.trim(),
+      swift: fourth.value.swift.trim(),
+    }  
+
+    let v = {
+      vendor: vendor,
+      company: company,
+      bank: bank
+    }
+
+    return v;
+  }
+
+  constructor(
+    private router:Router,
+    private formBuilder: FormBuilder,
+    private vendorService: VendorService,
+    private loadingBar: LoadingBarService
+  ) {
+    this.idFrontError = false;
+    this.idBackError = false;
+    this.documentsError = false;
+   }
 
   ngOnInit() {
     this.initializeRegisterSteps();
@@ -112,87 +174,74 @@ export class RegisterComponent implements OnInit {
   }
 
   registerVendor() {
-    let first = this.first
-    let second = this.second
-    let third = this.third
-    let fourth = this.fourth
+    let element = (event.target as Element);
+    Object.keys((<FormGroup>(this.forms.get('fourth'))).controls).forEach(field => {
+      const control = this.forms.get('fourth').get(field);
+      control.markAsTouched({ onlySelf: true });
+    });
+
+    let dropzones = this.directiveRef.toArray();
+
+    if (dropzones[2].dropzone().files.length <= 0) {
+        this.documentsError = true; 
+        return;
+    } else if (!this.forms.valid) {
+        return;
+    }
+
+    let vendor = this.formValues
+
+    swal({
+      title: 'Processing!',
+      text: 'Please wait a moment as we try to register you.',
+      showCancelButton: false,
+      showConfirmButton: false
+    });
     
-    let vendor = {
-      firstName: first.value.firstName,
-      lastName: first.value.lastName,
-      approved: first.value.approved,
-      emailAddress: first.value.emailAddress,
-      phoneNumber: first.value.phoneNumber,
-      barangay: first.value.barangay,
-      city: first.value.city,
-      region: first.value.region,
-      username: first.value.username,
-      password: first.value.password,
-      dateCreated: Date.now(),
-      dateUpdated: Date.now()
-    }
-
-    let company = {      
-      accountType: third.value.accountType,
-      address: third.value.address,
-      businessNo: third.value.businessRegistration,
-      country: third.value.country,
-      name: third.value.legalCompanyName,
-      personInCharge: third.value.personInCharge,
-      postalCode: third.value.postalCode,
-      sellerVat: third.value.sellerVat,
-      vatRegistered: third.value.vatRegistered
-    }
-
-    let bank = {
-	    accountName: fourth.value.accountName,
-	    accountNumber: fourth.value.accountNumber,
-	    bankCode: fourth.value.bankCode,
-	    bankName: fourth.value.bankName,
-	    branchName: fourth.value.branchName,
-      swift: fourth.value.swift,
-    }  
-
-    let v = {
-      vendor: vendor,
-      company: company,
-      bank: bank
-    }
-    
-    this.vendorService.createVendor(v).subscribe(
+    this.vendorService.createVendor(vendor).subscribe(
       data => {
         if(!isNull(data) && data.success) {
-          this.upload(data.body);
+          let formdata = this.upload(data.body);
+          this.loadingBar.start();
+
+          this.vendorService.pushFileToStorage(formdata).subscribe(event => {
+            if (event.type === HttpEventType.UploadProgress) {
+              this.loadingBar.set(Math.round(100 * event.loaded / event.total));
+            } else if (event instanceof HttpResponse) {
+              this.loadingBar.stop();
+              console.log(event);
+
+              swal({
+                title: 'Thank you for signing up!',
+                text: "Would you like to upload your first menu?",
+                type: 'success',
+                showCancelButton: true,
+                cancelButtonText: 'LATER',
+                cancelButtonClass: 'cancel-swal',
+                confirmButtonText: 'YES',
+                confirmButtonClass: 'confirm-swal'
+              }).then((result) => {
+                if (result.value) {
+                  this.router.navigate(['/vendor/menu']);
+                } else {
+                  swal({
+                    title: 'Redirecting',
+                    text: 'You will be redirected to the vendor page',
+                    showConfirmButton: false,
+                    timer: 2800
+                  })
+          
+                  setTimeout(()=>{
+                    $('html, body').animate({scrollTop: 0}, 1);
+                    this.router.navigate(['/vendor']);  
+                  },3000)
+                }
+              })
+            }
+          });
         }
       }
     )
-
-    // swal({
-    //   title: 'Thank you for signing up!',
-    //   text: "Would you like to upload your first menu?",
-    //   type: 'success',
-    //   showCancelButton: true,
-    //   cancelButtonText: 'LATER',
-    //   cancelButtonClass: 'cancel-swal',
-    //   confirmButtonText: 'YES',
-    //   confirmButtonClass: 'confirm-swal'
-    // }).then((result) => {
-    //   if (result.value) {
-    //     this.router.navigate(['/vendor/menu']);
-    //   } else {
-    //     swal({
-    //       title: 'Redirecting',
-    //       text: 'You will be redirected to the vendor page',
-    //       showConfirmButton: false,
-    //       timer: 2800
-    //     })
-
-    //     setTimeout(()=>{
-    //       $('html, body').animate({scrollTop: 0}, 1);
-    //       this.router.navigate(['/vendor']);  
-    //     },3000)
-    //   }
-    // })
   }
 
   hasError(field: string) {
@@ -204,11 +253,20 @@ export class RegisterComponent implements OnInit {
   }
   
   displayFieldCss(field: string) {
-    let test = !this.forms.get(field).valid && this.forms.get(field).touched;
     return {
       'has-error': this.hasError(field),
       'has-success': this.hasSuccess(field)
     };
+  }
+
+  samePassword() {
+    let same = this.first.value.password == this.first.value.confirmPassword;
+    let result = {
+      'has-error': this.hasError('first.confirmPassword') || !same,
+      'has-success': this.hasSuccess('first.confirmPassword') && same
+    }
+
+    return result;
   }
 
   next(event: Event, fieldset: string) {   
@@ -221,8 +279,18 @@ export class RegisterComponent implements OnInit {
     let current_fs, next_fs, previous_fs;
     let left, opacity, scale;
     let animating;
+    let error = false;
 
-    if(!animating && !this.forms.get(fieldset).invalid) {
+    if(fieldset == 'first' && this.first.value.password != this.first.value.confirmPassword) {
+      error = true;
+    } else if (fieldset == 'second') {
+      let dropzones = this.directiveRef.toArray();
+      if (dropzones[0].dropzone().files.length <= 0) { this.idFrontError = true; }
+      if (dropzones[1].dropzone().files.length <= 0) { this.idBackError = true; }
+      error = this.idFrontError || this.idBackError;
+    }
+
+    if(!animating && !this.forms.get(fieldset).invalid && !error) {
       animating = true;
 
       $('html, body').animate({scrollTop: $('#eliteregister').offset().top - 10}, 750);
@@ -283,29 +351,20 @@ export class RegisterComponent implements OnInit {
   @ViewChildren(DropzoneDirective) directiveRef?: QueryList<DropzoneDirective>;
   
   public upload(id) {
-    const md5 = new Md5();
-    let location = md5.appendStr(id).end().toString();
-
     let dropzones = this.directiveRef.toArray();
     let idFront = dropzones[0].dropzone().files[0];
     let idBack = dropzones[1].dropzone().files[0];
     let documents = dropzones[2].dropzone().files;
     
     const formdata: FormData = new FormData(); 
-    formdata.append('location', location);
+    formdata.append('location', id);
     formdata.append('idFront', idFront);
     formdata.append('idBack', idBack);
     for(let document of documents) {
       formdata.append('documents', document);
     }    
 
-    this.vendorService.pushFileToStorage(formdata).subscribe(event => {
-      if (event.type === HttpEventType.UploadProgress) {
-        console.log('Percentage: ' + Math.round(100 * event.loaded / event.total));
-      } else if (event instanceof HttpResponse) {
-        console.log('File is completely uploaded!');
-      }
-    });
+    return formdata;
   }
   
   public toggleAutoReset(): void {
@@ -314,11 +373,10 @@ export class RegisterComponent implements OnInit {
     this.config.cancelReset = this.config.cancelReset ? null : 5000;
   }
 
-  // public resetDropzoneUploads(): void {
-  //   if (this.directiveRef && this.directiveRef) {
-  //     this.directiveRef.reset();
-  //   }
-  // }
+  public resetDocumentsDropzone(): void {
+    let dropzones = this.directiveRef.toArray();
+    dropzones[2].reset();
+  }
 
   public onUploadError(args: any): void {
     console.log('onUploadError:', args);
@@ -335,6 +393,28 @@ export class RegisterComponent implements OnInit {
     if(dz.files[1] != null) {
       dz.removeFile(dz.files[0]);
     }
+
+    if (type == 0) {
+      this.idFrontError = false;
+    } else if (type == 1) {
+      this.idBackError = false;
+    }
   }
 
+  public addedFileDocuments(args: any):void {
+    let dropzones = this.directiveRef.toArray();
+    let dz = dropzones[2].dropzone();
+    
+    if(dz.files.length > 10) {
+      dz.removeFile(dz.files[10]);
+
+      swal({
+        title: "Ooops!",
+        text: "Maximum of 10 files are allowed to be uploaded. You may reset your files.",
+        type: 'warning'
+      })
+    }
+
+    this.documentsError = false;
+  }
 }
