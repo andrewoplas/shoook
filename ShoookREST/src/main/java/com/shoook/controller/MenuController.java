@@ -9,7 +9,9 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.shoook.entity.Menu;
 import com.shoook.entity.RequestResult;
@@ -21,6 +23,16 @@ public class MenuController {
 	
 	@Autowired
 	private MenuService service;
+	
+	@CrossOrigin
+	@PostMapping("/uploadImage")
+	public RequestResult handleFileUpload(
+			@RequestParam("images") MultipartFile[] images,
+			@RequestParam("vendorID") String vendorID,
+			@RequestParam("menuID") String menuID
+	) {
+		return service.uploadFile(images, vendorID, menuID);		
+	}
 	
 	@CrossOrigin
 	@GetMapping(path = "get-menus", produces = MediaType.APPLICATION_JSON_VALUE)	

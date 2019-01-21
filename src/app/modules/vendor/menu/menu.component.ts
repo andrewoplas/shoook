@@ -5,6 +5,9 @@ import { DropzoneConfigInterface, DropzoneComponent, DropzoneDirective } from 'n
 import { FormBuilder, Validators } from '@angular/forms';
 import { MenuService } from '@core/services/menu.service';
 import { Menu } from '@shared/models/Menu.model';
+import { AuthService } from '@core/services/auth.service';
+import { HttpEventType, HttpResponse } from '@angular/common/http';
+import { LoadingBarService } from '@ngx-loading-bar/core';
 
 @Component({
   selector: 'app-menu',
@@ -12,9 +15,10 @@ import { Menu } from '@shared/models/Menu.model';
   styleUrls: ['./menu.component.scss']
 })
 export class MenuComponent implements OnInit {
-  dishes = []
-  desserts = []
-  locations = []
+  menuImagesError;
+  dishes = [];
+  desserts = [];
+  locations = [];
   submitted = false;
   menuList = Array<any>();
 
@@ -30,8 +34,12 @@ export class MenuComponent implements OnInit {
 
   constructor(
     private fb: FormBuilder,
-    private menuService: MenuService
-  ) { }
+    private auth: AuthService,
+    private menuService: MenuService,
+    private loadingBar: LoadingBarService
+  ) {
+    this.menuImagesError = false;
+   }
 
   ngOnInit() {
     eval("[].slice.call(document.querySelectorAll('.sttabs')).forEach(function(el) {new CBPFWTabs(el);});");
@@ -107,9 +115,23 @@ export class MenuComponent implements OnInit {
       control.markAsTouched({ onlySelf: true });
     });
 
+    if (this.directiveRef.dropzone().files.length == 0) {
+      this.menuImagesError = true;
+      return;
+    }
+
+    swal({
+      title: 'Processing!',
+      text: 'Please wait a moment as we try to register you.',
+      showCancelButton: false,
+      showConfirmButton: false
+    });
+
+    let id = this.auth.getUser().id;
+    
     if(this.forms.valid && this.validateItems()) {
       let menu = {
-        vendor: {id: 1},
+        vendor: {id: id},
         minimumCustomersRequired: this.forms.value.customers.trim(),
         priceFourMainCourse: this.forms.value.mainCourse.trim(),
         priceAdditionalDessert: this.forms.value.additionalDessert.trim(),
@@ -126,16 +148,34 @@ export class MenuComponent implements OnInit {
 
       this.menuService.createMenu(menu).subscribe(
         data => { 
-          if(data.success) { 
-            this.menuList = data.body;
-            
-            swal({
-              title: 'Ready for Review',
-              text: "Thank you for uploading your product & services. Kindly sit and relax while our marketing team reviews your portfolio.",
-              type: 'success',
-              showCancelButton: false,
-              confirmButtonText: 'OK',
-            })
+          if(data!= null && data.success) { 
+            let formdata = this.upload(id, data.body.id);            
+            this.menuService.pushFileToStorage(formdata).subscribe(event => {
+              if (event.type === HttpEventType.UploadProgress) {
+                this.loadingBar.set(Math.round(100 * event.loaded / event.total));
+              } else if (event instanceof HttpResponse) {
+                this.loadingBar.stop();
+                let result = JSON.parse(event.body.toString());
+                
+                if(result.success) {
+                  swal({
+                    title: 'Ready for Review',
+                    text: "Thank you for uploading your product & services. Kindly sit and relax while our marketing team reviews your portfolio.",
+                    type: 'success',
+                    showCancelButton: false,
+                    confirmButtonText: 'OK',
+                  })
+                } else {
+                  swal({
+                    title: 'Ooops!',
+                    text: "Something went wrong as we process your request. Please try again later.",
+                    type: 'error',
+                    showCancelButton: false,
+                    confirmButtonText: 'OK',
+                  })
+                }
+              }
+            });
           } else {
             swal({
               title: 'Ooops!',
@@ -147,8 +187,6 @@ export class MenuComponent implements OnInit {
           }
         }
       );
-    } else {
-      // this.upload();
     }
   }
 
@@ -272,11 +310,19 @@ export class MenuComponent implements OnInit {
 
   @ViewChild(DropzoneDirective) directiveRef?: DropzoneDirective;
 
-  public upload() {
-    let dropzone = this.directiveRef.dropzone();
+  public upload(vendorID, menuID) {
+    let images = this.directiveRef.dropzone().files;
 
-    let files = dropzone.files;
+    const formdata: FormData = new FormData(); 
+    formdata.append('vendorID', vendorID);
+    formdata.append('menuID', menuID);
+    for(let image of images) {
+      formdata.append('images', image);
+    }    
+
+    return formdata;
   }
+
 
   public toggleAutoReset(): void {
     this.config.autoReset = this.config.autoReset ? null : 5000;
@@ -296,5 +342,19 @@ export class MenuComponent implements OnInit {
 
   public onUploadSuccess(args: any): void {
     console.log('onUploadSuccess:', args);
+  }
+
+  public addedFileDocuments(args: any):void {
+    let dz = this.directiveRef.dropzone();
+    
+    if(dz.files.length > 5) {
+      dz.removeFile(dz.files[5]);
+
+      swal({
+        title: "Ooops!",
+        text: "Maximum of 5 files are allowed to be uploaded. You may reset your files.",
+        type: 'warning'
+      })
+    }    
   }
 }

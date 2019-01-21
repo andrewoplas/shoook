@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpHeaders, HttpResponse } from "@angular/common/http";
+import { HttpClient, HttpHeaders, HttpResponse, HttpEvent, HttpRequest } from "@angular/common/http";
 import { Globals } from '@shared/models/Global';
 import { ErrorHandlerService } from './error-handler.service';
 import { Observable } from "rxjs/Observable";
@@ -75,6 +75,16 @@ export class MenuService {
         tap(_ => this.log(`updated menu id=${menu.id}`)),
         catchError(this.errHandler.handleError)
       );
+  }
+
+  /** POST: Upload image on the server */
+  public pushFileToStorage(formdata: FormData): Observable<HttpEvent<{}>> { 
+    const req = new HttpRequest('POST', `${this.baseUrl}/uploadImage`, formdata, {
+      reportProgress: true,
+      responseType: 'text'
+    });
+ 
+    return this.http.request(req);
   }
 
   /** Log a MenuService message with the MessageService */

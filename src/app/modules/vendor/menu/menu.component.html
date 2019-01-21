@@ -137,7 +137,12 @@
 
                     <div class="row m-t-20">
                         <div class="col-md-12">
-                            <div class="dropzone dropzone-container" [dropzone]="config" (error)="onUploadError($event)" (success)="onUploadSuccess($event)"></div>
+                            <div class="dropzone dropzone-container" [dropzone]="config" (error)="onUploadError($event)" (success)="onUploadSuccess($event)"
+                                (addedFile)="addedFileDocuments($event)"></div>
+
+                            <small [ngClass]="{hide: !menuImagesError}" class="error-block">
+                                <i class="far fa-times-circle"></i> Please upload images of your menu.
+                            </small>
                         </div>
                     </div>
 
@@ -209,7 +214,7 @@
                         </div>
                     </div>
 
-                    <div class="empty-menu-container">
+                    <div class="empty-menu-container" [ngClass]="{hide: menuList.length > 0}">
                         <img src="assets/image/empty_dish.svg" class="image" />
                         <p class="title">
                             EMPTY MENU LIST
