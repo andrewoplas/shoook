@@ -33,7 +33,8 @@ export class LoginComponent implements OnInit {
 
     this.auth.login(user).subscribe(
       response => {
-        if(response != null && response.success == true) {
+        console.log(response);
+        if(response != null && response.body != null && response.success == true) {
           this.auth.successLogin(response.body);
         } else {
           swal({
@@ -41,7 +42,7 @@ export class LoginComponent implements OnInit {
             text: "Invalid Email Address or Password!",
             type: "error",
             confirmButtonText: "Try Again",
-            confirmButtonColor: "#A40020"
+            confirmButtonColor: "#ff5a5f"
           });
         }
       }, 

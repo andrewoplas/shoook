@@ -210,7 +210,6 @@ export class RegisterComponent implements OnInit {
               this.loadingBar.set(Math.round(100 * event.loaded / event.total));
             } else if (event instanceof HttpResponse) {
               this.loadingBar.stop();
-              console.log(event);
 
               swal({
                 title: 'Thank you for signing up!',

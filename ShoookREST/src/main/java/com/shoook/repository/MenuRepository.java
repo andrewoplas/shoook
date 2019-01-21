@@ -53,6 +53,16 @@ public class MenuRepository {
 		em.remove(menu);
 	}
 	
+	public boolean updateImageFileName(EntityManager em, int menuID, String fileNames) {
+		StringBuilder stringQuery = new StringBuilder("UPDATE Menu SET images = :images WHERE id = :id");
+		Query query = em.createQuery(stringQuery.toString());
+		query.setParameter("id", menuID);
+		query.setParameter("images", fileNames);
+		int count = query.executeUpdate();
+		
+		return count > 0;
+	}
+	
 	public boolean contains(EntityManager em, int id) {
 		StringBuilder stringQuery = new StringBuilder("FROM Menu WHERE id = :id");
 		Query query = em.createQuery(stringQuery.toString());

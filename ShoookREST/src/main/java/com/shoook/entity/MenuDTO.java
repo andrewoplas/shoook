@@ -65,6 +65,8 @@ public class MenuDTO implements Serializable {
 	private String styleOfCookingDescription;
 	
 	private String vendor;
+	
+	private String images;
 
 	public MenuDTO() {
 	}
@@ -196,4 +198,14 @@ public class MenuDTO implements Serializable {
 	public void setVendor(String vendor) {
 		this.vendor = vendor;
 	}
+
+	public String getImages() {
+		return images;
+	}
+
+	public void setImages(String images) {
+		this.images = images;
+	}
+	
+	
 }

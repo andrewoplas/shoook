@@ -1,5 +1,29 @@
 @import '../../../../assets/scss/styles.scss';
   
+
+
+/deep/ {
+  .swal2-popup {
+      font-size: 1.5rem;
+      
+      .swal2-title {
+          font-family: $font-heading;
+      }
+      
+      .swal2-content {
+          font-family: $font-body;
+      }
+
+      button {
+          font-family: $font-body;
+      }
+
+      .swal2-input {
+          text-align: center;
+      }
+  }
+}
+
 a {
     font-family: $font-body;
     font-size: 14px;
