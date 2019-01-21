@@ -511,7 +511,7 @@
                                                 <div class="form-group">
                                                     <div class="dropzone dropzone-container" [dropzone]="config"
                                                     (error)="onUploadError($event)" (success)="onUploadSuccess($event)" (addedFile)="addedFileDocuments($event)"></div>
-                                                    <button class="btn btn-info m-t-5 m-b-5 btn-reset-documents" (click)="resetDocumentsDropzone()">RESET FILES</button>
+                                                    <button class="btn p-5 m-t-5 m-b-5 btn-reset-documents" (click)="resetDocumentsDropzone()">RESET FILES</button>
                                                     <small class="help-block m-t-10">Allows image, PDF and MS word files</small>
                                                     <small class="error-information" *ngIf="documentsError">  
                                                         Please upload a file/s of your bank information
