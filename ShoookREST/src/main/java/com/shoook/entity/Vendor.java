@@ -56,10 +56,8 @@ public class Vendor implements Serializable {
 	@Column(name="phone_number")
 	private String phoneNumber;
 
-	private int region;
+	private String region;
 	
-	private String username;
-
 	private String password;
 
 	//bi-directional many-to-one association to Menu
@@ -165,11 +163,11 @@ public class Vendor implements Serializable {
 		this.phoneNumber = phoneNumber;
 	}
 
-	public int getRegion() {
+	public String getRegion() {
 		return this.region;
 	}
 
-	public void setRegion(int region) {
+	public void setRegion(String region) {
 		this.region = region;
 	}
 
@@ -237,14 +235,6 @@ public class Vendor implements Serializable {
 		vendorCompany.setVendor(null);
 
 		return vendorCompany;
-	}
-
-	public String getUsername() {
-		return username;
-	}
-
-	public void setUsername(String username) {
-		this.username = username;
 	}
 
 	public String getPassword() {

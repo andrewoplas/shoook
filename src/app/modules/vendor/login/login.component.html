@@ -5,11 +5,24 @@
                 <span class="login100-form-title p-b-40">Welcome</span>
 
                 <div class="wrap-input100">
-                    <input type="text" class="input100" placeholder="Username" formControlName="username">
+                    <input type="text" class="input100" placeholder="Email Address" formControlName="emailAddress">
+                    <div *ngIf="forms.controls['emailAddress'].touched && !forms.controls['emailAddress'].valid">  
+                        <small class="error-information" *ngIf="forms.controls['emailAddress'].hasError('required') ">  
+                            Email address is required  
+                        </small>  
+                        <small class="error-information" *ngIf="forms.controls['emailAddress'].hasError('email') ">  
+                            It is not a valid email address
+                        </small>  
+                    </div>  
                 </div>
 
                 <div class="wrap-input100">
                     <input type="password" class="input100" placeholder="Password" formControlName="password">
+                    <div *ngIf="forms.controls['password'].touched && !forms.controls['password'].valid">  
+                        <small class="error-information" *ngIf="forms.controls['password'].hasError('required') ">  
+                            Password is required  
+                        </small>  
+                    </div>  
                 </div>
 
                 <div class="container-login100-form-btn">

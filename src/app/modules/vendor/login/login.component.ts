@@ -12,7 +12,7 @@ import { Role } from '@shared/models/UserLogin.model';
 })
 export class LoginComponent implements OnInit {
   forms = this.fb.group({
-    username: ["", [Validators.required]],
+    emailAddress: ["", [Validators.required, Validators.email]],
     password: ["", [Validators.required]],
   });
 
@@ -26,7 +26,7 @@ export class LoginComponent implements OnInit {
 
   login() {
     let user = {
-      username: this.forms.value.username.trim(),
+      emailAddress: this.forms.value.emailAddress.trim(),
       password: this.forms.value.password.trim(),
       role: Role.VENDOR
     };    
@@ -38,7 +38,7 @@ export class LoginComponent implements OnInit {
         } else {
           swal({
             title: "Error",
-            text: "Invalid Username or Password!",
+            text: "Invalid Email Address or Password!",
             type: "error",
             confirmButtonText: "Try Again",
             confirmButtonColor: "#A40020"

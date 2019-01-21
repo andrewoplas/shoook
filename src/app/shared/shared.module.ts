@@ -12,6 +12,7 @@ import { NavbarComponent } from './components/user/navbar/navbar.component';
 
 // Global
 import { Globals } from './models/Global';
+import { EmailAddressValidator } from './validator/email-address';
 
 @NgModule({
   declarations: [
@@ -35,7 +36,8 @@ import { Globals } from './models/Global';
     FooterComponent
   ],
   providers: [
-    Globals
+    Globals,
+    EmailAddressValidator
   ]
 })
 export class SharedModule { }

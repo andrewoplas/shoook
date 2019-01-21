@@ -22,9 +22,9 @@ public class AuthRepository {
 	
 	public UserLoginResponse loginAdmin(EntityManager em, UserLogin user) {
 		UserLoginResponse ulr = null;
-		StringBuilder stringQuery = new StringBuilder("FROM Admin WHERE username = :username AND password = :password");
+		StringBuilder stringQuery = new StringBuilder("FROM Admin WHERE email_address = :email_address AND password = :password");
 		Query query = em.createQuery(stringQuery.toString());
-		query.setParameter("username", user.getUsername());
+		query.setParameter("email_address", user.getEmailAddress());
 		query.setParameter("password", user.getPassword());
 		List<Vendor> results = query.getResultList();
 		
@@ -37,9 +37,9 @@ public class AuthRepository {
 		
 	public UserLoginResponse loginVendor(EntityManager em, UserLogin user) {
 		UserLoginResponse ulr = null;
-		StringBuilder stringQuery = new StringBuilder("FROM Vendor WHERE username = :username AND password = :password");
+		StringBuilder stringQuery = new StringBuilder("FROM Vendor WHERE email_address = :email_address AND password = :password");
 		Query query = em.createQuery(stringQuery.toString());
-		query.setParameter("username", user.getUsername());
+		query.setParameter("email_address", user.getEmailAddress());
 		query.setParameter("password", user.getPassword());
 		List<Vendor> results = query.getResultList();
 		
@@ -54,9 +54,9 @@ public class AuthRepository {
 	
 	public UserLoginResponse loginCustomer(EntityManager em, UserLogin user) {
 		UserLoginResponse ulr = null;
-		StringBuilder stringQuery = new StringBuilder("FROM Customer WHERE username = :username AND password = :password");
+		StringBuilder stringQuery = new StringBuilder("FROM Customer WHERE email_address = :email_address AND password = :password");
 		Query query = em.createQuery(stringQuery.toString());
-		query.setParameter("username", user.getUsername());
+		query.setParameter("email_address", user.getEmailAddress());
 		query.setParameter("password", user.getPassword());
 		List<Vendor> results = query.getResultList();
 		
@@ -65,5 +65,14 @@ public class AuthRepository {
 		}
 				
 		return ulr; 
+	}
+
+	public boolean checkVendorEmailAddress(EntityManager em, String emailAddress) {
+		StringBuilder stringQuery = new StringBuilder("FROM Vendor WHERE email_address = :email_address");
+		Query query = em.createQuery(stringQuery.toString());
+		query.setParameter("email_address", emailAddress);
+		List<Vendor> results = query.getResultList();
+		
+		return results.size() >= 1; 
 	}
 }
