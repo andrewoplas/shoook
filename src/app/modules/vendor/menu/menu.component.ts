@@ -276,8 +276,6 @@ export class MenuComponent implements OnInit {
     let dropzone = this.directiveRef.dropzone();
 
     let files = dropzone.files;
-    console.log(dropzone);
-    console.log(files);
   }
 
   public toggleAutoReset(): void {

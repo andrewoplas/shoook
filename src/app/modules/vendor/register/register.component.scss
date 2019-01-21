@@ -3,6 +3,7 @@
 @import '../../../../assets/plugins/register-steps/animate.css';
 @import '../../../../assets/plugins/register-steps/steps.css';
 @import '../../../../assets/plugins/magic-check/css/magic-check.min.css';
+@import '../../../../assets/plugins/dropzone/dropzone.scss';
 
 .material-design-bg-color {
     background-color: #edf1f5;
@@ -22,6 +23,14 @@
             color: red;
             font-family: $font-body;
             font-weight: bold;
+        }
+
+        .error-information {
+            display: block;
+            text-align: left;
+            color: #d9534f;
+            font-family: $font-body;
+            margin-bottom: 5px;
         }
 
         &.active {
@@ -75,16 +84,26 @@
                 padding-right: 10px;
             }
 
-            .magic-radio + label {
-                font-family: $font-body;
-                font-weight: normal !important;
-            }
+            .password-requirements {
+                text-align: left;
 
-            .account-type-container {
-                display: flex;
-                justify-content: space-evenly;
-            }
+                .password-requirement-title {
+                    font-family: $font-body;
+                    font-size: 15px;
+                    font-weight: bold;
+                    color: $black-o-7;
+                }
 
+                .password-item {
+                    display: block;
+                    font-family: $font-body;
+                    font-size: 14px;
+                    color: $black-o-6;
+                }
+            }
+        }
+
+        &.first-fieldset, &.second-fieldset, &.third-fieldset, &.fourth-fieldset {
             .country-select {
                 width: 100%;
                 overflow: hidden;         
@@ -122,22 +141,6 @@
                 }
             }
 
-            .mobile-number {
-                border-radius: 0;
-                padding: 5px 10px;
-                font-size: 15px;
-                box-shadow: none !important;
-                font-family: $font-body;
-                color: rgba(0, 0, 0, 0.9);
-                margin: 0;
-            }
-
-            #sizing-addon1 {
-                border-radius: 0;
-            }
-        }
-
-        &.second-fieldset, &.third-fieldset, &.fourth-fieldset {
             .magic-radio + label {
                 font-family: $font-body;
                 font-weight: normal !important;
@@ -170,8 +173,6 @@
                 color: rgba(0, 0, 0, 0.9);
                 margin: 0;
             }
-
-
         }
 
         .fs-title {
@@ -184,6 +185,20 @@
         border-radius: 3px;
         background-color: $pink;
         font-family: $font-body;
+    }
+
+    .previous {
+        border-radius: 3px;
+        font-family: $font-body;
+    }
+
+    .btn-reset-documents {
+        font-family: $font-body;
+        font-weight: bold;
+        border-radius: 3px;
+        background-color: #4c5667;
+        display: block;
+        width: 100%;
     }
 
     #eliteregister {
@@ -201,6 +216,18 @@
     // #eliteregister .active:before, #eliteregister .active:after {
     //     background-color: $dark-green !important;
     // }
+}
+
+.has-error{
+    .form-control, &.vat-registered-container {
+        border: 1px solid #d9534f !important;
+    }
+}
+
+.has-success {
+    .form-control, &.vat-registered-container {
+        border: 1px solid #2ecc71 !important;
+    }
 }
 
 /deep/ {
@@ -227,4 +254,18 @@
             font-family: $font-body;
         }
     }
+
+    .dropzone {
+        border: 1px solid #ccc;
+
+        .dz-message {
+            font-family: $font-heading !important;
+            font-size: 18px !important;
+            font-weight: bold !important;
+            color: $black-o-4 !important;
+            text-transform: uppercase;
+        }
+    }
+
+    
 }

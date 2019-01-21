@@ -18,7 +18,7 @@ import { Globals } from './models/Global';
     VendorNavbarComponent,
     VendorFooterComponent,
     NavbarComponent,
-    FooterComponent
+    FooterComponent,
   ],
   imports: [
     CommonModule,

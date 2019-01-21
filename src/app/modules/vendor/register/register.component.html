@@ -13,7 +13,7 @@
                     <div class="register-box">
                         <div>
                             <!-- multistep form -->
-                            <form id="msform">
+                            <form id="msform" [formGroup]="forms" (ngSubmit)="registerVendor()">
                                 <!-- progressbar -->
                                 <ul id="eliteregister">
                                     <li class="active">Account Setup</li>
@@ -23,257 +23,394 @@
                                 </ul>
 
                                 <!-- fieldsets -->
-                                <fieldset class="active first-fieldset">
-                                    <h2 class="fs-title">What kind of caterer are you listing?</h2>
-                                    <h3 class="fs-subtitle">First. Let's narrow things down.</h3>
-
-                                    <label class="select">
-                                        <select class="form-control" id="txtChoose">
-                                            <option selected disabled>Select one</option>
-                                            <option>Be a fiesta something</option>
-                                        </select>
-                                    </label>
+                                <fieldset class="active first-fieldset" formGroupName="first">
+                                    <h2 class="fs-title">Basic Information</h2>
 
                                     <div class="m-t-40 m-b-30">
-                                        <div class="row m-b-20">
-                                            <div class="col-md-4">
-                                                <span class="form-label">
-                                                    Account Type
-                                                    <span class="required">*</span>
-                                                </span>
+                                        <div class="row">
+                                            <div class="col-md-4"><span class="form-label">First Name<span class="required">*</span></span>
                                             </div>
                                             <div class="col-md-8">
-                                                <div class="account-type-container">
-                                                    <div>
-                                                        <input class="magic-radio" type="radio" name="radio" id="individual" checked>
-                                                        <label for="individual">Individual</label>
-                                                    </div>
-        
-                                                    <div>
-                                                        <input class="magic-radio" type="radio" name="radio" id="corporate">
-                                                        <label for="corporate">Corporate</label>
-                                                    </div>
+                                                <div class="form-group" [ngClass]="displayFieldCss('first.firstName')">
+                                                    <input type="text" class="form-control" formControlName="firstName"  [patterns]="alphanumeric" mask="0*">
+                                                    <div *ngIf="forms.controls['first'].controls['firstName'].touched && !forms.controls['first'].controls['firstName'].valid">  
+                                                        <small class="error-information" *ngIf="forms.controls['first'].controls['firstName'].hasError('required') ">  
+                                                            First name is required  
+                                                        </small>  
+                                                    </div>  
                                                 </div>
                                             </div>                                    
                                         </div>
 
-                                        <div class="row m-b-20">
-                                            <div class="col-md-4">
-                                                <span class="form-label">
-                                                    Shop based in
-                                                    <span class="required">*</span>
-                                                </span>
+                                        <div class="row">
+                                            <div class="col-md-4"><span class="form-label">Last Name<span class="required">*</span></span>
                                             </div>
                                             <div class="col-md-8">
-                                                <label class="country-select">
-                                                    <select class="form-control">
-                                                        <option>Philippines</option>
-                                                        <option>China</option>
-                                                        <option>Japan</option>
-                                                    </select>
-                                                </label>
-                                            </div>                                    
-                                        </div>
-
-                                        <div class="row m-b-20">
-                                            <div class="col-md-4">
-                                                <span class="form-label">
-                                                    Mobile Number
-                                                    <span class="required">*</span>
-                                                </span>
-                                            </div>
-                                            <div class="col-md-8">
-                                                <div class="input-group">
-                                                    <span class="input-group-addon" id="sizing-addon1">+63</span>
-                                                    <input type="text" class="form-control mobile-number">
+                                                <div class="form-group" [ngClass]="displayFieldCss('first.lastName')">
+                                                    <input type="text" class="form-control" formControlName="lastName"  [patterns]="alphanumeric" mask="0*">
+                                                    <div *ngIf="forms.controls['first'].controls['lastName'].touched && !forms.controls['first'].controls['lastName'].valid">  
+                                                        <small class="error-information" *ngIf="forms.controls['first'].controls['lastName'].hasError('required') ">  
+                                                            Last name is required  
+                                                        </small>  
+                                                    </div>  
                                                 </div>
                                             </div>                                    
                                         </div>
 
-                                        <div class="row m-b-20">
-                                            <div class="col-md-4">
-                                                <span class="form-label">
-                                                    Slide to verify
-                                                    <span class="required">*</span>
-                                                </span>
+                                        <div class="row">
+                                            <div class="col-md-4"><span class="form-label">Email Address<span class="required">*</span></span>
                                             </div>
                                             <div class="col-md-8">
-                                                <div class="captcha">
-                                                    <div class="handle"></div>
+                                                <div class="form-group" [ngClass]="displayFieldCss('first.emailAddress')">
+                                                    <input type="email" class="form-control" formControlName="emailAddress">
+                                                    <div *ngIf="forms.controls['first'].controls['emailAddress'].touched && !forms.controls['first'].controls['emailAddress'].valid">  
+                                                        <small class="error-information" *ngIf="forms.controls['first'].controls['emailAddress'].hasError('required') ">  
+                                                            Email address is required  
+                                                        </small>  
+                                                        <small class="error-information" *ngIf="forms.controls['first'].controls['emailAddress'].hasError('email') ">  
+                                                            It is not a valid email address
+                                                        </small>  
+                                                    </div>  
                                                 </div>
                                             </div>                                    
+                                        </div>
+
+                                        <div class="row">
+                                            <div class="col-md-4"><span class="form-label">Phone Number<span class="required">*</span></span>
+                                            </div>
+                                            <div class="col-md-8">
+                                                <div class="form-group" [ngClass]="displayFieldCss('first.phoneNumber')">
+                                                    <input type="text" mask="000-000-0000" prefix="(+63) " [showMaskTyped] = "true" class="form-control" formControlName="phoneNumber">
+                                                    <div *ngIf="forms.controls['first'].controls['phoneNumber'].touched && !forms.controls['first'].controls['phoneNumber'].valid">  
+                                                        <small class="error-information" *ngIf="forms.controls['first'].controls['phoneNumber'].hasError('required') ">  
+                                                            Phone number is required  
+                                                        </small>  
+                                                        <small class="error-information" *ngIf="forms.controls['first'].controls['phoneNumber'].hasError('minlength') ">  
+                                                            Invalid phone number is required  
+                                                        </small>  
+                                                    </div>  
+                                                </div>
+                                            </div>                                    
+                                        </div>  
+                                        
+                                        <hr />
+                                        
+                                        <div class="row">
+                                            <div class="col-md-4"><span class="form-label">Barangay<span class="required">*</span></span>
+                                            </div>
+                                            <div class="col-md-8">
+                                                <div class="form-group" [ngClass]="displayFieldCss('first.barangay')">
+                                                    <input type="text" class="form-control" formControlName="barangay" [patterns]="alphanumeric" mask="0*">
+                                                    <div *ngIf="forms.controls['first'].controls['barangay'].touched && !forms.controls['first'].controls['barangay'].valid">  
+                                                        <small class="error-information" *ngIf="forms.controls['first'].controls['barangay'].hasError('required') ">  
+                                                            Barangay is required  
+                                                        </small>  
+                                                    </div>  
+                                                </div>
+                                            </div>                                    
+                                        </div>
+
+                                        <div class="row">
+                                            <div class="col-md-4"><span class="form-label">City<span class="required">*</span></span>
+                                            </div>
+                                            <div class="col-md-8">
+                                                <div class="form-group" [ngClass]="displayFieldCss('first.city')">
+                                                    <input type="text" class="form-control" formControlName="city" [patterns]="alphanumeric" mask="0*">
+                                                    <div *ngIf="forms.controls['first'].controls['city'].touched && !forms.controls['first'].controls['city'].valid">  
+                                                        <small class="error-information" *ngIf="forms.controls['first'].controls['city'].hasError('required') ">  
+                                                            City is required  
+                                                        </small>  
+                                                    </div>  
+                                                </div>
+                                            </div>                                    
+                                        </div>
+
+                                        <div class="row">
+                                            <div class="col-md-4"><span class="form-label">Region<span class="required">*</span></span>
+                                            </div>
+                                            <div class="col-md-8">
+                                                <div class="form-group" [ngClass]="displayFieldCss('first.region')">
+                                                    <input type="text" class="form-control" formControlName="region" [patterns]="alphanumeric" mask="0*">
+                                                    <div *ngIf="forms.controls['first'].controls['region'].touched && !forms.controls['first'].controls['region'].valid">  
+                                                        <small class="error-information" *ngIf="forms.controls['first'].controls['region'].hasError('required') ">  
+                                                            Region is required  
+                                                        </small>  
+                                                    </div>  
+                                                </div>
+                                            </div>                                    
+                                        </div>
+
+                                        <hr />
+                                        <h2 class="fs-title">Account Credentials</h2>
+
+                                        <div class="row">
+                                            <div class="col-md-4"><span class="form-label">Username<span class="required">*</span></span>
+                                            </div>
+                                            <div class="col-md-8">
+                                                <div class="form-group" [ngClass]="displayFieldCss('first.username')">
+                                                    <input type="text" class="form-control" formControlName="username">
+                                                    <div *ngIf="forms.controls['first'].controls['username'].touched && !forms.controls['first'].controls['username'].valid">  
+                                                        <small class="error-information" *ngIf="forms.controls['first'].controls['username'].hasError('required') ">  
+                                                            Username is required  
+                                                        </small>  
+                                                    </div>  
+                                                </div>
+                                            </div>                                    
+                                        </div>
+
+                                        <div class="row">
+                                            <div class="col-md-4"><span class="form-label">Password<span class="required">*</span></span>
+                                            </div>
+                                            <div class="col-md-8">
+                                                <div class="form-group" [ngClass]="displayFieldCss('first.password')">
+                                                    <input type="password" class="form-control" formControlName="password">
+                                                    <div *ngIf="forms.controls['first'].controls['password'].touched && !forms.controls['first'].controls['password'].valid">  
+                                                        <small class="error-information" *ngIf="forms.controls['first'].controls['password'].hasError('required') ">  
+                                                            Password is required  
+                                                        </small>  
+                                                        <small class="error-information" *ngIf="forms.controls['first'].controls['password'].hasError('minlength') ">  
+                                                            Password must be at least 6 characters long
+                                                        </small>  
+                                                    </div>  
+                                                </div>
+                                            </div>                                    
+                                        </div>
+
+                                        <div class="row">
+                                            <div class="col-md-4"><span class="form-label">Confirm Password<span class="required">*</span></span>
+                                            </div>
+                                            <div class="col-md-8">
+                                                <div class="form-group" [ngClass]="samePassword()">
+                                                    <input type="password" class="form-control" formControlName="confirmPassword">
+                                                    <div *ngIf="forms.controls['first'].controls['confirmPassword'].touched && !forms.controls['first'].controls['confirmPassword'].valid">  
+                                                        <small class="error-information" *ngIf="forms.controls['first'].controls['confirmPassword'].hasError('required') ">  
+                                                            Confirming the password is required  
+                                                        </small>  
+                                                    </div>  
+
+                                                    <small class="error-information" *ngIf="forms.controls['first'].controls['confirmPassword'].touched && forms.controls['first'].controls['confirmPassword'].value != forms.controls['first'].controls['password'].value">  
+                                                        Passwords does not match
+                                                    </small>  
+                                                </div>
+                                            </div>                                    
+                                            <small></small>
+                                        </div>
+
+                                        <div class="row">
+                                            <div class="col-md-4 col-xs-12"></div>
+                                            <div class="col-md-8 col-xs-12">
+                                                <div class="password-requirements">
+                                                    <p class="password-requirement-title">Requirements:</p>
+                                                    <span class="password-item"><i class="fas fa-info-circle"></i> Password length must be atleast 6 characters long</span>
+                                                </div>
+                                            </div> 
                                         </div>
                                     </div>
 
-                                    <input type="button" name="next" class="next action-button" value="Next" />
+                                    <input type="button" name="next" class="next action-button" value="Next" (click)="next($event, 'first')" />
                                 </fieldset>
 
-                                <fieldset class="second-fieldset">
-                                    <h2 class="fs-title">Vendor Account Information</h2>
+                                <fieldset class="second-fieldset" formGroupName="second">
+                                    <h2 class="fs-title">Vendor Information</h2>
                                     
                                     <div class="m-t-40 m-b-30">
-                                        <div class="row m-b-20">
-                                            <div class="col-md-4">
-                                                <span class="form-label">
-                                                    Vendor ID
-                                                    <span class="required">*</span>
-                                                </span>
+                                        <div class="row">
+                                            <div class="col-md-4"><span class="form-label">ID Number<span class="required">*</span></span>
                                             </div>
                                             <div class="col-md-8">
-                                                <div class="form-group">
-                                                    <input type="text" class="form-control" disabled value="PH1XOWOJ">
+                                                <div class="form-group has-error" [ngClass]="displayFieldCss('second.idNumber')">
+                                                    <input type="text" class="form-control" formControlName="idNumber">
+                                                    <div *ngIf="forms.controls['second'].controls['idNumber'].touched && !forms.controls['second'].controls['idNumber'].valid">  
+                                                        <small class="error-information" *ngIf="forms.controls['second'].controls['idNumber'].hasError('required') ">  
+                                                            ID Number is required  
+                                                        </small>  
+                                                    </div>  
                                                 </div>
                                             </div>                                    
                                         </div>
 
-                                        <div class="row m-b-20">
-                                            <div class="col-md-4">
-                                                <span class="form-label">
-                                                    Name on ID
-                                                    <span class="required">*</span>
-                                                </span>
+                                        <div class="row">
+                                            <div class="col-md-4"><span class="form-label">Name on ID<span class="required">*</span></span>
                                             </div>
                                             <div class="col-md-8">
-                                                <div class="form-group">
-                                                    <input type="text" class="form-control">
+                                                <div class="form-group has-error" [ngClass]="displayFieldCss('second.idName')">
+                                                    <input type="text" class="form-control" formControlName="idName">
+                                                    <div *ngIf="forms.controls['second'].controls['idName'].touched && !forms.controls['second'].controls['idName'].valid">  
+                                                        <small class="error-information" *ngIf="forms.controls['second'].controls['idName'].hasError('required') ">  
+                                                            Name on ID is required  
+                                                        </small>  
+                                                    </div>  
                                                 </div>
                                             </div>                                    
                                         </div>
 
-                                        <div class="row m-b-20">
-                                            <div class="col-md-4">
-                                                <span class="form-label">
-                                                    Email Address
-                                                    <span class="required">*</span>
-                                                </span>
+                                        <div class="row">
+                                            <div class="col-md-4"><span class="form-label">ID Type<span class="required">*</span></span>
                                             </div>
                                             <div class="col-md-8">
-                                                <div class="form-group">
-                                                    <input type="text" class="form-control">
+                                                <div class="form-group has-error" [ngClass]="displayFieldCss('second.idType')">
+                                                    <input type="text" class="form-control" formControlName="idType">
+                                                    <div *ngIf="forms.controls['second'].controls['idType'].touched && !forms.controls['second'].controls['idType'].valid">  
+                                                        <small class="error-information" *ngIf="forms.controls['second'].controls['idType'].hasError('required') ">  
+                                                            ID Type is required  
+                                                        </small>  
+                                                    </div>  
                                                 </div>
                                             </div>                                    
                                         </div>
 
-                                        <div class="row m-b-20">
-                                            <div class="col-md-4">
-                                                <span class="form-label">
-                                                    Phone Number
-                                                    <span class="required">*</span>
-                                                </span>
+                                        <div class="row">
+                                            <div class="col-md-4"><span class="form-label">Upload ID - Front Side<span class="required">*</span></span>
                                             </div>
                                             <div class="col-md-8">
                                                 <div class="form-group">
-                                                    <input type="text" class="form-control">
+                                                    <div class="dropzone dropzone-container" [dropzone]="configFront"
+                                                        (addedFile)="addedFile($event, 0)" (error)="onUploadError($event)" (success)="onUploadSuccess($event)"></div>
+                                                        <small class="error-information" *ngIf="idFrontError">  
+                                                            Please upload a photo of the front side of your valid ID
+                                                        </small>  
                                                 </div>
                                             </div>                                    
                                         </div>
 
-                                        <div class="row m-b-20">
-                                            <div class="col-md-4">
-                                                <span class="form-label">
-                                                    Business Name
-                                                    <span class="required">*</span>
-                                                </span>
+                                        <div class="row">
+                                            <div class="col-md-4"><span class="form-label">Upload ID - Back Side<span class="required">*</span></span>
                                             </div>
                                             <div class="col-md-8">
                                                 <div class="form-group">
-                                                    <input type="text" class="form-control">
+                                                    <div class="dropzone dropzone-container" [dropzone]="configBack"
+                                                    (addedFile)="addedFile($event, 1)" (error)="onUploadError($event)" (success)="onUploadSuccess($event)"></div>
+                                                    <small class="error-information" *ngIf="idBackError">  
+                                                        Please upload a photo of the back side of your valid ID
+                                                    </small>  
                                                 </div>
                                             </div>                                    
                                         </div>
                                     </div>
 
                                     <input type="button" name="previous" class="previous action-button" value="Previous" />
-                                    <input type="button" name="next" class="next action-button" value="Next" />
+                                    <input type="button" name="next" class="next action-button" value="Next" (click)="next($event, 'second')" />
                                 </fieldset>
 
-                                <fieldset class="third-fieldset">
+                                <fieldset class="third-fieldset" formGroupName="third">
                                     <h2 class="fs-title">Business Information</h2>
                                     
                                     <div class="m-t-40 m-b-30">
                                         <div class="row m-b-10">
+                                            <div class="col-md-4"><span class="form-label">Account Type<span class="required">*</span></span></div>
+                                            <div class="col-md-8">
+                                                <div class="vat-registered-container" [ngClass]="displayFieldCss('third.accountType')">
+                                                    <div class="m-t-5">
+                                                        <input class="magic-radio" type="radio" value="0" id="individual" name="accountType" formControlName="accountType">
+                                                        <label for="individual">Individual</label>
+                                                    </div>
+        
+                                                    <div class="m-t-5">
+                                                        <input class="magic-radio" type="radio" value="1" id="corporate" name="accountType" formControlName="accountType">
+                                                        <label for="corporate">Corporate</label>
+                                                        <div *ngIf="forms.controls['third'].controls['accountType'].touched && !forms.controls['third'].controls['accountType'].valid">  
+                                                            <small class="error-information" *ngIf="forms.controls['third'].controls['accountType'].hasError('required') ">  
+                                                                Account Type is required  
+                                                            </small>  
+                                                        </div>  
+                                                    </div>
+                                                </div>
+                                            </div>                                    
+                                        </div>
+
+                                        <div class="row">
                                             <div class="col-md-4"><span class="form-label">Legal Name/Company Name</span></div>
                                             <div class="col-md-8">
-                                                <div class="form-group">
-                                                    <input type="text" class="form-control">
+                                                <div class="form-group" [ngClass]="displayFieldCss('third.legalCompanyName')">
+                                                    <input type="text" class="form-control" formControlName="legalCompanyName">
                                                 </div>
                                             </div>                                    
                                         </div>
 
-                                        <div class="row m-b-10">
+                                        <div class="row">
                                             <div class="col-md-4"><span class="form-label">Address<span class="required">*</span></span></div>
                                             <div class="col-md-8">
-                                                <div class="form-group">
-                                                    <input type="text" class="form-control">
+                                                <div class="form-group" [ngClass]="displayFieldCss('third.address')">
+                                                    <input type="text" class="form-control" formControlName="address">
+                                                    <div *ngIf="forms.controls['third'].controls['address'].touched && !forms.controls['third'].controls['address'].valid">  
+                                                        <small class="error-information" *ngIf="forms.controls['third'].controls['address'].hasError('required') ">  
+                                                            Address is required  
+                                                        </small>  
+                                                    </div>  
                                                 </div>
                                             </div>                                    
                                         </div>
 
-                                        <div class="row m-b-10">
+                                        <div class="row">
                                             <div class="col-md-4"><span class="form-label">Country<span class="required">*</span></span></div>
                                             <div class="col-md-8">
-                                                <div class="form-group">
-                                                    <input type="text" class="form-control">
+                                                <div class="form-group" [ngClass]="displayFieldCss('third.country')">
+                                                    <select class="form-control" formControlName="country">
+                                                        <option selected>Philippines</option>
+                                                        <option>China</option>
+                                                        <option>Japan</option>
+                                                    </select>
+                                                    <div *ngIf="forms.controls['third'].controls['country'].touched && !forms.controls['third'].controls['country'].valid">  
+                                                        <small class="error-information" *ngIf="forms.controls['third'].controls['country'].hasError('required') ">  
+                                                            Country is required  
+                                                        </small>  
+                                                    </div>  
                                                 </div>
                                             </div>                                    
                                         </div>
 
-                                        <div class="row m-b-10">
+                                        <div class="row">
                                             <div class="col-md-4"><span class="form-label">Postal Code<span class="required">*</span></span></div>
                                             <div class="col-md-8">
-                                                <div class="form-group">
-                                                    <input type="text" class="form-control">
+                                                <div class="form-group" [ngClass]="displayFieldCss('third.postalCode')">
+                                                    <input type="text" class="form-control" formControlName="postalCode">
+                                                    <div *ngIf="forms.controls['third'].controls['postalCode'].touched && !forms.controls['third'].controls['postalCode'].valid">  
+                                                        <small class="error-information" *ngIf="forms.controls['third'].controls['postalCode'].hasError('required') ">  
+                                                            Postal code is required  
+                                                        </small>  
+                                                    </div>  
                                                 </div>
                                             </div>                                    
                                         </div>
 
-                                        <div class="row m-b-10">
+                                        <div class="row">
                                             <div class="col-md-4"><span class="form-label">Person in Charge</span></div>
                                             <div class="col-md-8">
-                                                <div class="form-group">
-                                                    <input type="text" class="form-control">
+                                                <div class="form-group" [ngClass]="displayFieldCss('third.personInCharge')">
+                                                    <input type="text" class="form-control" formControlName="personInCharge">
                                                 </div>
                                             </div>                                    
                                         </div>
 
-                                        <div class="row m-b-10">
+                                        <div class="row">
                                             <div class="col-md-4"><span class="form-label">Business Registration No.</span></div>
                                             <div class="col-md-8">
-                                                <div class="form-group">
-                                                    <input type="text" class="form-control">
+                                                <div class="form-group" [ngClass]="displayFieldCss('third.businessRegistration')">
+                                                    <input type="text" class="form-control" formControlName="businessRegistration">
                                                 </div>
                                             </div>                                    
                                         </div>
 
-                                        <div class="row m-b-10">
-                                            <div class="col-md-4"><span class="form-label">Upoad ID - Front Side<span class="required">*</span></span></div>
-                                            <div class="col-md-8">
-                                                <div class="form-group">
-                                                    <input type="text" class="form-control">
-                                                </div>
-                                            </div>                                    
-                                        </div>
-
-                                        <div class="row m-b-10">
+                                        <div class="row">
                                             <div class="col-md-4"><span class="form-label">Seller VAT</span></div>
                                             <div class="col-md-8">
-                                                <div class="form-group">
-                                                    <input type="text" class="form-control">
+                                                <div class="form-group" [ngClass]="displayFieldCss('third.sellerVat')">
+                                                    <input type="text" class="form-control" formControlName="sellerVat">
                                                 </div>
                                             </div>                                    
                                         </div>
 
-                                        <div class="row m-b-10">
+                                        <div class="row">
                                             <div class="col-md-4"><span class="form-label">VAT Registered</span></div>
                                             <div class="col-md-8">
                                                 <div class="vat-registered-container">
                                                     <div>
-                                                        <input class="magic-radio" type="radio" name="radio" id="yes" checked>
+                                                        <input class="magic-radio" type="radio" id="yes" value="1" name="vatRegistered" formControlName="vatRegistered">
                                                         <label for="yes">Yes</label>
                                                     </div>
         
                                                     <div>
-                                                        <input class="magic-radio" type="radio" name="radio" id="no">
+                                                        <input class="magic-radio" type="radio" id="no" value="0" name="vatRegistered" formControlName="vatRegistered">
                                                         <label for="no">No</label>
                                                     </div>
                                                 </div>
@@ -281,166 +418,111 @@
                                         </div>
                                     </div>
 
-                                    <h2 class="fs-title">Business Information Pt 2</h2>
-
-                                    <div class="m-t-40 m-b-30">
-                                        <div class="row m-b-10">
-                                            <div class="col-md-4"><span class="form-label">First Name</span></div>
-                                            <div class="col-md-8">
-                                                <div class="form-group">
-                                                    <input type="text" class="form-control">
-                                                </div>
-                                            </div>                                    
-                                        </div>
-
-                                        <div class="row m-b-10">
-                                            <div class="col-md-4"><span class="form-label">Last Name</span></div>
-                                            <div class="col-md-8">
-                                                <div class="form-group">
-                                                    <input type="text" class="form-control">
-                                                </div>
-                                            </div>                                    
-                                        </div>
-
-                                        <div class="row m-b-10">
-                                            <div class="col-md-4"><span class="form-label">ID Number<span class="required">*</span></span></div>
-                                            <div class="col-md-8">
-                                                <div class="form-group">
-                                                    <input type="text" class="form-control">
-                                                </div>
-                                            </div>                                    
-                                        </div>
-
-                                        <div class="row m-b-10">
-                                            <div class="col-md-4"><span class="form-label">Religion<span class="required">*</span></span></div>
-                                            <div class="col-md-8">
-                                                <div class="form-group">
-                                                    <input type="text" class="form-control">
-                                                </div>
-                                            </div>                                    
-                                        </div>
-
-                                        <div class="row m-b-10">
-                                            <div class="col-md-4"><span class="form-label">City<span class="required">*</span></span></div>
-                                            <div class="col-md-8">
-                                                <div class="form-group">
-                                                    <input type="text" class="form-control">
-                                                </div>
-                                            </div>                                    
-                                        </div>
-
-                                        <div class="row m-b-10">
-                                            <div class="col-md-4"><span class="form-label">Barangay<span class="required">*</span></span></div>
-                                            <div class="col-md-8">
-                                                <div class="form-group">
-                                                    <input type="text" class="form-control">
-                                                </div>
-                                            </div>                                    
-                                        </div>
-
-                                        <div class="row m-b-10">
-                                            <div class="col-md-4"><span class="form-label">Country Region</span></div>
-                                            <div class="col-md-8">
-                                                <div class="form-group">
-                                                    <input type="text" class="form-control">
-                                                </div>
-                                            </div>                                    
-                                        </div>
-
-                                        <div class="row m-b-10">
-                                            <div class="col-md-4"><span class="form-label">Upload ID - Back Side</span></div>
-                                            <div class="col-md-8">
-                                                <div class="form-group">
-                                                    <input type="text" class="form-control">
-                                                </div>
-                                            </div>                                    
-                                        </div>
-
-                                        <div class="row m-b-10">
-                                            <div class="col-md-4"><span class="form-label">ID Type<span class="required">*</span></span></div>
-                                            <div class="col-md-8">
-                                                <div class="form-group">
-                                                    <input type="text" class="form-control">
-                                                </div>
-                                            </div>                                    
-                                        </div>
-                                    </div>
-
                                     <input type="button" name="previous" class="previous action-button" value="Previous" />
-                                    <input type="button" name="next" class="next action-button" value="Next" />
+                                    <input type="button" name="next" class="next action-button" value="Next" (click)="next($event, 'third')" />
                                 </fieldset>
 
-                                <fieldset class="fourth-fieldset">
+                                <fieldset class="fourth-fieldset" formGroupName="fourth">
                                     <h2 class="fs-title">Bank Account Information</h2>
                                     
                                     <div class="m-t-40 m-b-30">
-                                        <div class="row m-b-20">
+                                        <div class="row">
                                             <div class="col-md-4"><span class="form-label">Account Name<span class="required">*</span></span></div>
                                             <div class="col-md-8">
-                                                <div class="form-group">
-                                                    <input type="text" class="form-control">
+                                                <div class="form-group" [ngClass]="displayFieldCss('fourth.accountName')">
+                                                    <input type="text" class="form-control" formControlName="accountName">
+                                                    <div *ngIf="forms.controls['fourth'].controls['accountName'].touched && !forms.controls['fourth'].controls['accountName'].valid">  
+                                                        <small class="error-information" *ngIf="forms.controls['fourth'].controls['accountName'].hasError('required') ">  
+                                                            Account name is required  
+                                                        </small>  
+                                                    </div>  
                                                 </div>
                                             </div>                                    
                                         </div>
 
-                                        <div class="row m-b-20">
+                                        <div class="row">
                                             <div class="col-md-4"><span class="form-label">Account Number<span class="required">*</span></span></div>
                                             <div class="col-md-8">
-                                                <div class="form-group">
-                                                    <input type="text" class="form-control">
+                                                <div class="form-group" [ngClass]="displayFieldCss('fourth.accountNumber')">
+                                                    <input type="text" class="form-control" formControlName="accountNumber">
+                                                    <div *ngIf="forms.controls['fourth'].controls['accountNumber'].touched && !forms.controls['fourth'].controls['accountNumber'].valid">  
+                                                        <small class="error-information" *ngIf="forms.controls['fourth'].controls['accountNumber'].hasError('required') ">  
+                                                            Account number is required  
+                                                        </small>  
+                                                    </div>  
                                                 </div>
                                             </div>                                    
                                         </div>
 
-                                        <div class="row m-b-20">
+                                        <div class="row">
                                             <div class="col-md-4"><span class="form-label">Bank Name<span class="required">*</span></span></div>
                                             <div class="col-md-8">
-                                                <div class="form-group">
-                                                    <input type="text" class="form-control">
+                                                <div class="form-group" [ngClass]="displayFieldCss('fourth.bankName')">
+                                                    <input type="text" class="form-control" formControlName="bankName">
+                                                    <div *ngIf="forms.controls['fourth'].controls['bankName'].touched && !forms.controls['fourth'].controls['bankName'].valid">  
+                                                        <small class="error-information" *ngIf="forms.controls['fourth'].controls['bankName'].hasError('required') ">  
+                                                            Bank name is required  
+                                                        </small>  
+                                                    </div>                            
                                                 </div>
-                                            </div>                                    
+                                            </div>          
                                         </div>
 
-                                        <div class="row m-b-20">
-                                            <div class="col-md-4"><span class="form-label">Branch Name<span class="required">*</span></span></div>
+                                        <div class="row">
+                                            <div class="col-md-4"><span class="form-label">Branch Name</span></div>
                                             <div class="col-md-8">
-                                                <div class="form-group">
-                                                    <input type="text" class="form-control">
+                                                <div class="form-group" [ngClass]="displayFieldCss('fourth.branchName')">
+                                                    <input type="text" class="form-control" formControlName="branchName">
                                                 </div>
                                             </div>                                    
                                         </div>
 
-                                        <div class="row m-b-20">
+                                        <div class="row">
                                             <div class="col-md-4"><span class="form-label">Bank Code<span class="required">*</span></span></div>
                                             <div class="col-md-8">
-                                                <div class="form-group">
-                                                    <input type="text" class="form-control">
+                                                <div class="form-group" [ngClass]="displayFieldCss('fourth.bankCode')">
+                                                    <input type="text" class="form-control" formControlName="bankCode">
+                                                    <div *ngIf="forms.controls['fourth'].controls['bankCode'].touched && !forms.controls['fourth'].controls['bankCode'].valid">  
+                                                        <small class="error-information" *ngIf="forms.controls['fourth'].controls['bankCode'].hasError('required') ">  
+                                                            Bank code is required  
+                                                        </small>  
+                                                    </div>     
                                                 </div>
                                             </div>                                    
                                         </div>
 
-                                        <div class="row m-b-20">
+                                        <div class="row">
                                             <div class="col-md-4"><span class="form-label">SWIFT<span class="required">*</span></span></div>
                                             <div class="col-md-8">
-                                                <div class="form-group">
-                                                    <input type="text" class="form-control">
+                                                <div class="form-group" [ngClass]="displayFieldCss('fourth.swift')">
+                                                    <input type="text" class="form-control" formControlName="swift">
+                                                    <div *ngIf="forms.controls['fourth'].controls['swift'].touched && !forms.controls['fourth'].controls['swift'].valid">  
+                                                        <small class="error-information" *ngIf="forms.controls['fourth'].controls['swift'].hasError('required') ">  
+                                                            Swift is required  
+                                                        </small>  
+                                                    </div>    
                                                 </div>
                                             </div>                                    
                                         </div>
 
-                                        <div class="row m-b-20">
+                                        <div class="row">
                                             <div class="col-md-4"><span class="form-label">Bank Information Document</span></div>
                                             <div class="col-md-8">
                                                 <div class="form-group">
-                                                    <input type="text" class="form-control">
-                                                    <span class="help-block">Accepts image files, PDF and MS Word</span>
+                                                    <div class="dropzone dropzone-container" [dropzone]="config"
+                                                    (error)="onUploadError($event)" (success)="onUploadSuccess($event)" (addedFile)="addedFileDocuments($event)"></div>
+                                                    <button class="btn p-5 m-t-5 m-b-5 btn-reset-documents" (click)="resetDocumentsDropzone()">RESET FILES</button>
+                                                    <small class="help-block m-t-10">Allows image, PDF and MS word files</small>
+                                                    <small class="error-information" *ngIf="documentsError">  
+                                                        Please upload a file/s of your bank information
+                                                    </small>  
                                                 </div>
                                             </div>                                    
                                         </div>
                                     </div>
 
                                     <input type="button" name="previous" class="previous action-button" value="Previous" />
-                                    <input type="submit" name="submit" class="submit action-button" value="Submit" (click)="registerVendor()"/>
+                                    <input type="submit" name="submit" class="submit action-button" value="Submit"/>
                                 </fieldset>
                             </form>
 

@@ -3,6 +3,7 @@ package com.shoook.service;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 
+import org.apache.commons.codec.digest.DigestUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -29,6 +30,7 @@ public class AuthService {
 	public RequestResult login(UserLogin user) {
 		try {
 			Object userResponse = null;
+			user.setPassword(DigestUtils.md5Hex(user.getPassword()));
 			
 			if(user.getRole() == ADMIN) {
 				userResponse = repository.loginAdmin(em, user);
