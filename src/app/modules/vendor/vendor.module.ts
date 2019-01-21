@@ -27,7 +27,6 @@ import { LoginComponent } from './login/login.component';
     NgxMaskModule.forRoot(),
     FormsModule,
     ReactiveFormsModule
-    FormsModule
   ]
 })
 export class VendorModule { }

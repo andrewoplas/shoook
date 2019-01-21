@@ -58,24 +58,6 @@
                                         </div>
 
                                         <div class="row">
-                                            <div class="col-md-4"><span class="form-label">Email Address<span class="required">*</span></span>
-                                            </div>
-                                            <div class="col-md-8">
-                                                <div class="form-group" [ngClass]="displayFieldCss('first.emailAddress')">
-                                                    <input type="email" class="form-control" formControlName="emailAddress">
-                                                    <div *ngIf="forms.controls['first'].controls['emailAddress'].touched && !forms.controls['first'].controls['emailAddress'].valid">  
-                                                        <small class="error-information" *ngIf="forms.controls['first'].controls['emailAddress'].hasError('required') ">  
-                                                            Email address is required  
-                                                        </small>  
-                                                        <small class="error-information" *ngIf="forms.controls['first'].controls['emailAddress'].hasError('email') ">  
-                                                            It is not a valid email address
-                                                        </small>  
-                                                    </div>  
-                                                </div>
-                                            </div>                                    
-                                        </div>
-
-                                        <div class="row">
                                             <div class="col-md-4"><span class="form-label">Phone Number<span class="required">*</span></span>
                                             </div>
                                             <div class="col-md-8">
@@ -144,14 +126,20 @@
                                         <h2 class="fs-title">Account Credentials</h2>
 
                                         <div class="row">
-                                            <div class="col-md-4"><span class="form-label">Username<span class="required">*</span></span>
+                                            <div class="col-md-4"><span class="form-label">Email Address<span class="required">*</span></span>
                                             </div>
                                             <div class="col-md-8">
-                                                <div class="form-group" [ngClass]="displayFieldCss('first.username')">
-                                                    <input type="text" class="form-control" formControlName="username">
-                                                    <div *ngIf="forms.controls['first'].controls['username'].touched && !forms.controls['first'].controls['username'].valid">  
-                                                        <small class="error-information" *ngIf="forms.controls['first'].controls['username'].hasError('required') ">  
-                                                            Username is required  
+                                                <div class="form-group" [ngClass]="displayFieldCss('first.emailAddress')">
+                                                    <input type="email" class="form-control" formControlName="emailAddress">
+                                                    <div *ngIf="forms.controls['first'].controls['emailAddress'].touched && !forms.controls['first'].controls['emailAddress'].valid">  
+                                                        <small class="error-information" *ngIf="forms.controls['first'].controls['emailAddress'].hasError('required') ">  
+                                                            Email address is required  
+                                                        </small>  
+                                                        <small class="error-information" *ngIf="forms.controls['first'].controls['emailAddress'].hasError('email') ">  
+                                                            It is not a valid email address
+                                                        </small>
+                                                        <small class="error-information" *ngIf="forms.controls['first'].controls['emailAddress'].hasError('emailAddressInUse') ">  
+                                                            Email already exists. Please input a unique one.
                                                         </small>  
                                                     </div>  
                                                 </div>
@@ -363,7 +351,7 @@
                                             <div class="col-md-4"><span class="form-label">Postal Code<span class="required">*</span></span></div>
                                             <div class="col-md-8">
                                                 <div class="form-group" [ngClass]="displayFieldCss('third.postalCode')">
-                                                    <input type="text" class="form-control" formControlName="postalCode">
+                                                    <input type="text" class="form-control" formControlName="postalCode" mask="0*">
                                                     <div *ngIf="forms.controls['third'].controls['postalCode'].touched && !forms.controls['third'].controls['postalCode'].valid">  
                                                         <small class="error-information" *ngIf="forms.controls['third'].controls['postalCode'].hasError('required') ">  
                                                             Postal code is required  

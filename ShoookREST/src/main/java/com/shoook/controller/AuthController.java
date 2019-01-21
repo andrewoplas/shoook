@@ -23,6 +23,12 @@ public class AuthController {
 	public RequestResult login(@RequestBody UserLogin user) {
 		return service.login(user);
 	}
+	
+	@CrossOrigin
+	@PostMapping(path = "vendor-email-address", produces = MediaType.APPLICATION_JSON_VALUE)
+	public RequestResult login(@RequestBody String emailAddress) {
+		return service.checkVendorEmailAddress(emailAddress);
+	}
 }
 
 

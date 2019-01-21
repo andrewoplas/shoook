@@ -6,6 +6,7 @@ import { Observable } from "rxjs/Observable";
 import { catchError, tap } from "rxjs/operators";
 import { ErrorHandlerService } from './error-handler.service';
 import { UserLogin, Role } from '@shared/models/UserLogin.model';
+import { RequestResult } from '@shared/models/RequestResult';
 
 
 const httpOptions = {
@@ -28,6 +29,16 @@ export class AuthService {
     private router: Router
   ) {
     this.baseUrl = this.global.BASE_URL + 'auth';    
+  }
+
+  /** POST: Check if email address exists */
+  public validateEmailAddress(emailAddress): Observable<RequestResult> {
+    return this.http
+      .post<RequestResult>(`${this.baseUrl}/vendor-email-address`, emailAddress, httpOptions)
+      .pipe(
+        tap(_ => this.log(`Check email address availability =${emailAddress}`)),
+        catchError(this.errHandler.handleError)
+      );
   }
 
   /** POST: Retrieve user */

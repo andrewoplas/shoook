@@ -1,6 +1,6 @@
 import { DropzoneConfigInterface, DropzoneComponent, DropzoneDirective } from 'ngx-dropzone-wrapper';
 import { Component, OnInit, ViewChild, QueryList, ViewChildren } from '@angular/core';
-import { FormBuilder, Validators, FormGroup } from '@angular/forms';
+import { FormBuilder, Validators, FormGroup, EmailValidator } from '@angular/forms';
 import { HttpEventType, HttpResponse } from '@angular/common/http';
 import { Router } from '@angular/router';
 import { VendorService } from '@core/services/vendor.service';
@@ -9,6 +9,7 @@ import { isNull } from 'util';
 import * as $ from 'jquery';
 import swal from 'sweetalert2';
 import { LoadingBarService } from '@ngx-loading-bar/core';
+import { EmailAddressValidator } from '@shared/validator/email-address';
 
 @Component({
   selector: 'app-register',
@@ -26,14 +27,14 @@ export class RegisterComponent implements OnInit {
     first: this.formBuilder.group({
       firstName: ["", Validators.required],
       lastName: ["", Validators.required],
-      emailAddress: ["", [Validators.email, Validators.required]],
+      
+      emailAddress: ["", [Validators.email, Validators.required], this.emailValidator.checkEmailAddress.bind(this.emailValidator)],
       phoneNumber: ["", [Validators.required, Validators.minLength(10)]],
 
       barangay: ["", Validators.required],
       city: ["", Validators.required],
       region: ["", Validators.required],
 
-      username: ["", Validators.required],
       password: ["", [Validators.required, Validators.minLength(6)]],
       confirmPassword: ["", Validators.required]
     }),
@@ -83,7 +84,6 @@ export class RegisterComponent implements OnInit {
       barangay: first.value.barangay.trim(),
       city: first.value.city.trim(),
       region: first.value.region.trim(),
-      username: first.value.username.trim(),
       password: first.value.password,
       dateCreated: Date.now(),
       dateUpdated: Date.now()
@@ -123,7 +123,8 @@ export class RegisterComponent implements OnInit {
     private router:Router,
     private formBuilder: FormBuilder,
     private vendorService: VendorService,
-    private loadingBar: LoadingBarService
+    private loadingBar: LoadingBarService,
+    private emailValidator: EmailAddressValidator
   ) {
     this.idFrontError = false;
     this.idBackError = false;
@@ -190,7 +191,7 @@ export class RegisterComponent implements OnInit {
     }
 
     let vendor = this.formValues
-
+    
     swal({
       title: 'Processing!',
       text: 'Please wait a moment as we try to register you.',

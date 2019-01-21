@@ -70,7 +70,7 @@ public class VendorService {
 			// Insert vendor
 			Vendor vendor = vendorRegister.getVendor();
 			
-			String code = DigestUtils.md5Hex(vendor.getLastName() + vendor.getUsername() + vendor.getDateCreated().toString()).substring(0, 10);
+			String code = DigestUtils.md5Hex(vendor.getLastName() + vendor.getEmailAddress() + vendor.getDateCreated().toString()).substring(0, 10);
 			vendor.setCode(code);
 			vendor.setPassword(DigestUtils.md5Hex(vendor.getPassword()));
 			repository.create(em, vendor);
@@ -143,8 +143,6 @@ public class VendorService {
 			File directoryDocuments = new File("../uploads/documents/" + location);
 			if (!directoryId.exists()){ directoryId.mkdir(); }
 			if (!directoryDocuments.exists()){ directoryDocuments.mkdir(); }
-			
-			System.out.println("LOCATION:  " + location);
 			
 			// Store Front ID
 			storageService.store(idFront, pathId, "front.jpg");

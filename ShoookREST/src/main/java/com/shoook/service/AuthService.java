@@ -65,6 +65,11 @@ public class AuthService {
 		error.setMessage(message);
 		return result(error, false);
 	}
+
+
+	public RequestResult checkVendorEmailAddress(String emailAddress) {
+		return result(null, repository.checkVendorEmailAddress(em, emailAddress));
+	}
 }
 	
 	
