@@ -7,13 +7,11 @@ import java.nio.file.Paths;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 
+import org.apache.commons.codec.digest.DigestUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
-import org.apache.commons.codec.digest.DigestUtils;
-
-import com.shoook.entity.Menu;
 import com.shoook.entity.RequestError;
 import com.shoook.entity.RequestResult;
 import com.shoook.entity.Vendor;
@@ -92,7 +90,7 @@ public class VendorService {
 		}
 	}
 		
-	public RequestResult update(Menu pe) {
+	public RequestResult update(Vendor pe) {
 		try {
 			if(repository.contains(em, pe.getId())) {
 				repository.update(em, pe);
@@ -114,8 +112,8 @@ public class VendorService {
 			int parsedId = Integer.parseInt(id);
 			
 			if(repository.contains(em, parsedId)) {
-				Menu menu = repository.retrieveById(em, parsedId);
-				repository.delete(em, menu);
+				Vendor vendor = repository.retrieveById(em, parsedId);
+				repository.delete(em, vendor);
 				
 				return retrieve();
 			} else {

@@ -47,6 +47,12 @@ public class MenuController {
 	}
 	
 	@CrossOrigin
+    @GetMapping(path = "get-menu-vendor/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
+	public RequestResult retrieveByVendor(@PathVariable(name = "id", required = true)String id) {
+		return service.retrieveByVendor(id);
+	}
+	
+	@CrossOrigin
 	@PostMapping(path = "create-menu", produces = MediaType.APPLICATION_JSON_VALUE)
 	public RequestResult create(@RequestBody Menu data) {		
 		return service.create(data);

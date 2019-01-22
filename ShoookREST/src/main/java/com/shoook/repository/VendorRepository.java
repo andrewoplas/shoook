@@ -9,7 +9,6 @@ import javax.transaction.Transactional;
 
 import org.springframework.stereotype.Repository;
 
-import com.shoook.entity.Menu;
 import com.shoook.entity.MenuDTO;
 import com.shoook.entity.Vendor;
 import com.shoook.entity.VendorBank;
@@ -33,9 +32,9 @@ public class VendorRepository {
 		return data;
 	}
 	
-	public Menu retrieveById(EntityManager em, int id) {
-		Menu menu = em.find(Menu.class, id);
-		return menu;
+	public Vendor retrieveById(EntityManager em, int id) {
+		Vendor vendor = em.find(Vendor.class, id);
+		return vendor;
 	}
 	
 	public MenuDTO retrieveByIdDTO(EntityManager em, int id) {
@@ -58,16 +57,16 @@ public class VendorRepository {
 		em.flush();
 	}
 	
-	public void update(EntityManager em, Menu menu) {
-		em.merge(menu);
+	public void update(EntityManager em, Vendor vendor) {
+		em.merge(vendor);
 	}
 	
-	public void delete(EntityManager em, Menu menu) {
-		em.remove(menu);
+	public void delete(EntityManager em, Vendor vendor) {
+		em.remove(vendor);
 	}
 	
 	public boolean contains(EntityManager em, int id) {
-		StringBuilder stringQuery = new StringBuilder("FROM Menu WHERE id = :id");
+		StringBuilder stringQuery = new StringBuilder("FROM Vendor WHERE id = :id");
 		Query query = em.createQuery(stringQuery.toString());
 		query.setParameter("id", id);
 		

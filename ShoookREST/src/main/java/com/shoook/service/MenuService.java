@@ -8,6 +8,7 @@ import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 
 import org.apache.commons.codec.digest.DigestUtils;
+import org.apache.tomcat.util.http.fileupload.FileUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
@@ -16,6 +17,7 @@ import com.shoook.entity.Menu;
 import com.shoook.entity.RequestError;
 import com.shoook.entity.RequestResult;
 import com.shoook.repository.MenuRepository;
+import com.shoook.repository.VendorRepository;
 
 @Service
 public class MenuService {
@@ -24,6 +26,9 @@ public class MenuService {
 	
 	@Autowired
 	private MenuRepository repository;
+	
+	@Autowired
+	private VendorRepository vendorRepository;
 	
 	@Autowired
 	private StorageService storageService;
@@ -45,6 +50,26 @@ public class MenuService {
 			
 			if(repository.contains(em, parsedId)) {
 				return result(repository.retrieveById(em, parsedId), true);
+			} else {
+				// Log the error
+				return error("code", "message");
+			}
+			
+		} catch (NumberFormatException ex) {
+			// Log the error
+			return error("code", "message");
+		} catch (Exception ex) {
+			// Log the error
+			return error("code", "message");
+		}
+	}
+	
+	public RequestResult retrieveByVendor(String id) {
+		try {
+			int vendorID = Integer.parseInt(id);
+			
+			if(vendorRepository.contains(em, vendorID)) {
+				return result(repository.retrieve(em, vendorID), true);
 			} else {
 				// Log the error
 				return error("code", "message");
@@ -86,15 +111,22 @@ public class MenuService {
 		}
 	}
 		
-	public RequestResult delete(String id) {
+	public RequestResult delete(String menuID) {
 		try {
-			int parsedId = Integer.parseInt(id);
+			int parsedId = Integer.parseInt(menuID);
+			Menu menu = repository.retrieveById(em, parsedId);
 			
 			if(repository.contains(em, parsedId)) {
-				Menu menu = repository.retrieveById(em, parsedId);
+				String vendorID = Integer.toString(menu.getVendor().getId());
+				String location = DigestUtils.md5Hex(vendorID + menuID);
+				
 				repository.delete(em, menu);
 				
-				return retrieve();
+				// Set and Delete it
+				File directory = new File("../uploads/menus/" + location);
+				if (directory.exists()){ FileUtils.deleteDirectory(directory); }
+				
+				return retrieveByVendor(vendorID);
 			} else {
 				// Log the error
 				return error("code", "does not exists");
