@@ -18,18 +18,18 @@
         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">                
             <ul class="nav navbar-nav navbar-left m-t-10">
                 <li [ngClass]="{'active': activeLink == 'overview'}">
-                    <a href="#">Overview</a>
+                    <a href="javascript:void(0)" (click)="scroll('#overview')">Overview</a>
                 </li>
-                <li [ngClass]="{'active': activeLink == 'setup'}">
-                    <a href="#">Setup</a>
-                </li>
-
-                <li [ngClass]="{'active': activeLink == 'safety'}">
-                    <a href="#">Safety</a>
+                <li [ngClass]="{'active': activeLink == 'About'}">
+                    <a href="javascript:void(0)" (click)="scroll('#about')">About</a>
                 </li>
 
-                <li [ngClass]="{'active': activeLink == 'financials'}">
-                    <a href="#">Financials</a>
+                <li [ngClass]="{'active': activeLink == 'Vendor'}">
+                    <a href="javascript:void(0)" (click)="scroll('#vendor')">Vendor</a>
+                </li>
+
+                <li [ngClass]="{'active': activeLink == 'Payment'}">
+                    <a href="javascript:void(0)" (click)="scroll('#payment')">Payment</a>
                 </li>
 
             </ul>
