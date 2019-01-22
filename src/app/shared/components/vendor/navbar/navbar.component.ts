@@ -1,5 +1,6 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { AuthService } from '@core/services/auth.service';
+import * as $ from 'jquery';
 
 @Component({
   selector: 'vendor-navbar',
@@ -18,6 +19,10 @@ export class VendorNavbarComponent implements OnInit {
 
   ngOnInit() { 
     this.loggedIn = this.auth.isloggedIn() && this.auth.isVendor();
+  }
+
+  scroll(tab) {
+    $('html, body').animate({scrollTop: $(tab).offset().top - 100}, 750);
   }
 
   logout() {

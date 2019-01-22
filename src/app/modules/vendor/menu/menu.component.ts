@@ -8,6 +8,7 @@ import { Menu } from '@shared/models/Menu.model';
 import { AuthService } from '@core/services/auth.service';
 import { HttpEventType, HttpResponse } from '@angular/common/http';
 import { LoadingBarService } from '@ngx-loading-bar/core';
+import { VendorFooterComponent } from '@shared/components/vendor/footer/footer.component';
 
 @Component({
   selector: 'app-menu',
@@ -21,6 +22,7 @@ export class MenuComponent implements OnInit {
   locations = [];
   submitted = false;
   menuList = Array<any>();
+  vendorID;
 
   forms = this.fb.group({
     customers: ["", Validators.required],
@@ -43,8 +45,9 @@ export class MenuComponent implements OnInit {
 
   ngOnInit() {
     eval("[].slice.call(document.querySelectorAll('.sttabs')).forEach(function(el) {new CBPFWTabs(el);});");
-
-    this.menuService.getMenus().subscribe(
+    this.vendorID = this.auth.getUser().id;
+    
+    this.menuService.getMenusByVendor(this.vendorID).subscribe(
       data => { 
         if(data.success && data.body.length > 0) {
           this.menuList = data.body;
@@ -62,6 +65,8 @@ export class MenuComponent implements OnInit {
       data => { 
         if(data.success) { 
           this.menuList = data.body;
+          console.log(this.menuList);
+          console.log(data.body);
 
           swal({
             title: 'Success!',
@@ -126,12 +131,10 @@ export class MenuComponent implements OnInit {
       showCancelButton: false,
       showConfirmButton: false
     });
-
-    let id = this.auth.getUser().id;
-    
+   
     if(this.forms.valid && this.validateItems()) {
       let menu = {
-        vendor: {id: id},
+        vendor: {id: this.vendorID},
         minimumCustomersRequired: this.forms.value.customers.trim(),
         priceFourMainCourse: this.forms.value.mainCourse.trim(),
         priceAdditionalDessert: this.forms.value.additionalDessert.trim(),
@@ -149,7 +152,7 @@ export class MenuComponent implements OnInit {
       this.menuService.createMenu(menu).subscribe(
         data => { 
           if(data!= null && data.success) { 
-            let formdata = this.upload(id, data.body.id);            
+            let formdata = this.upload(this.vendorID, data.body.id);            
             this.menuService.pushFileToStorage(formdata).subscribe(event => {
               if (event.type === HttpEventType.UploadProgress) {
                 this.loadingBar.set(Math.round(100 * event.loaded / event.total));
@@ -158,6 +161,16 @@ export class MenuComponent implements OnInit {
                 let result = JSON.parse(event.body.toString());
                 
                 if(result.success) {
+                  this.menuService.getMenusByVendor(this.vendorID).subscribe(
+                    data => { 
+                      if(data.success && data.body.length > 0) {
+                        this.menuList = data.body;
+                      }        
+                    }
+                  );
+
+                  this.resetForm();
+
                   swal({
                     title: 'Ready for Review',
                     text: "Thank you for uploading your product & services. Kindly sit and relax while our marketing team reviews your portfolio.",
@@ -276,6 +289,14 @@ export class MenuComponent implements OnInit {
 
   public validateItems() {
     return this.dishes.length > 0 && this.desserts.length > 0 && this.locations.length > 0;
+  }
+
+  public resetForm() {
+    this.forms.reset();
+    this.dishes = [];
+    this.desserts = [];
+    this.locations = [];
+    this.resetDropzoneUploads();
   }
 
   /* Forms Validation  */

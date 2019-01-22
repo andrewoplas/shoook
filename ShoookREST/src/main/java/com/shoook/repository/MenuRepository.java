@@ -30,6 +30,22 @@ public class MenuRepository {
 		return data;
 	}
 	
+	public List<MenuDTO> retrieve(EntityManager em, int vendorID) {
+		List<MenuDTO> data = new ArrayList<MenuDTO>();	
+		
+		StringBuilder sql = new StringBuilder("FROM MenuDTO WHERE vendor_id = :vendor_id");		
+		Query query = em.createQuery(sql.toString());
+		query.setParameter("vendor_id", vendorID);
+		List<?> results = query.getResultList();
+		
+		for(Object result: results) {
+			data.add(MenuDTO.class.cast(result));
+		}
+		
+		return data;
+	}
+	
+	
 	public Menu retrieveById(EntityManager em, int id) {
 		Menu menu = em.find(Menu.class, id);
 		return menu;

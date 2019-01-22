@@ -13,8 +13,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 
-import com.shoook.entity.Menu;
 import com.shoook.entity.RequestResult;
+import com.shoook.entity.Vendor;
 import com.shoook.entity.VendorRegister;
 import com.shoook.service.VendorService;
 
@@ -55,13 +55,13 @@ public class VendorController {
 	}
 	
 	@CrossOrigin
-    @PutMapping(path = "update-menu", produces = MediaType.APPLICATION_JSON_VALUE)
-	public RequestResult update(@RequestBody Menu data) {
+    @PutMapping(path = "update-vendor", produces = MediaType.APPLICATION_JSON_VALUE)
+	public RequestResult update(@RequestBody Vendor data) {
     	return service.update(data);
 	}
 	
 	@CrossOrigin
-    @DeleteMapping(path = "delete-menu/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
+    @DeleteMapping(path = "delete-vendor/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
 	public RequestResult delete(@PathVariable(name = "id", required = true) String id) {
     	return service.delete(id);
 	}

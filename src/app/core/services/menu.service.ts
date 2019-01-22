@@ -47,6 +47,16 @@ export class MenuService {
       );
   }
 
+  /** GET: retrieve single entity from the server */
+  public getMenusByVendor(id: number): Observable<RequestResult> {
+    return this.http
+      .get<RequestResult>(`${this.baseUrl}/get-menu-vendor/${id}`, httpOptions)
+      .pipe(
+        tap(() => this.log("get-menu-vendor")),
+        catchError(this.errHandler.handleError)
+      );
+  }
+
   /** POST: create a new entity to the server */
   public createMenu(menu): Observable<any> {
     return this.http
