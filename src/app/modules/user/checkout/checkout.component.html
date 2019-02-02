@@ -17,12 +17,17 @@
                             <div class="col-md-6">
                                 <div class="form-group">
                                     <span class="gender-label">Gender</span>
-                                    <label class="radio-inline">
-                                        <input type="radio" name="optradio" checked>Male
-                                    </label>
-                                    <label class="radio-inline">
-                                        <input type="radio" name="optradio">Female
-                                    </label>
+                                    <div class="row">
+                                        <div class="col-xs-12 col-sm-6">
+                                            <input class="magic-radio" type="radio" value="0" id="male" name="gender" formControlName="gender">
+                                            <label class="gender-label-radio" for="male">Male</label>
+                                        </div>
+
+                                        <div class="col-xs-12 col-sm-6">
+                                            <input class="magic-radio" type="radio" value="1" id="female" name="gender" formControlName="gender">
+                                            <label class="gender-label-radio" for="female">Female</label>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
                             <div class="col-md-6"></div>
