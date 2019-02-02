@@ -77,7 +77,7 @@
                     <span class="option m-t-10">Option 1</span>
                     <span class="title">{{ menu.styleOfCookingDescription }}</span>
                     <span class="description">{{ menu.specialtyDescription }}</span>
-                    <span class="price">P{{ menu.priceFourMainCourse }}</span>
+                    <span class="price">P{{ menu.priceFourMainCourse | number: '2.' }}</span>
                     <span class="lay-away">*Available on Lay Away</span>
                     
                     {{last && menus.length > 0? initSlick() : ''}}
