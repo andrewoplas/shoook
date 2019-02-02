@@ -14,6 +14,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.shoook.entity.Menu;
+import com.shoook.entity.MenuSearch;
 import com.shoook.entity.RequestError;
 import com.shoook.entity.RequestResult;
 import com.shoook.repository.MenuRepository;
@@ -32,6 +33,16 @@ public class MenuService {
 	
 	@Autowired
 	private StorageService storageService;
+	
+
+	public RequestResult search(MenuSearch data) {		
+		if(data.getGuests() > 0) {
+			System.out.println(data.getGuests());
+			return result(repository.search(em, data), true);
+		} else {
+			return result(repository.searchAll(em), true);
+		}
+	}
 		
 
 	public RequestResult retrieve() {
@@ -148,12 +159,12 @@ public class MenuService {
 			String location = DigestUtils.md5Hex(vendorID + menuID);
 			Path pathDocuments = Paths.get("../uploads/menus/" + location);
 			File directoryDocuments = new File("../uploads/menus/" + location);
-			if (!directoryDocuments.exists()){ directoryDocuments.mkdir(); }
+			if (!directoryDocuments.exists()){ directoryDocuments.mkdirs(); }
 			
 			// Store Documents
 			int counter = 0;
 			for(MultipartFile image : images) {
-				storageService.store(image, pathDocuments, (counter++) + ".jpg");
+				storageService.store(image, pathDocuments, location + (counter++) + ".jpg");
 		    }
 			
 			String imageFilenames =  location + "," + images.length;

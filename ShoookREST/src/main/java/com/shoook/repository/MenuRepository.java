@@ -11,6 +11,7 @@ import org.springframework.stereotype.Repository;
 
 import com.shoook.entity.Menu;
 import com.shoook.entity.MenuDTO;
+import com.shoook.entity.MenuSearch;
 
 @Repository
 @Transactional
@@ -85,5 +86,41 @@ public class MenuRepository {
 		query.setParameter("id", id);
 		
 		return !query.getResultList().isEmpty();
+	}
+
+	public List<MenuDTO> search(EntityManager em, MenuSearch menu) {
+		List<MenuDTO> data = new ArrayList<MenuDTO>();	
+		
+		StringBuilder sql = new StringBuilder("FROM MenuDTO WHERE minimum_customers_required = :guests AND locations LIKE CONCAT('%',:locations,'%') AND active = :active AND approved = :approved");		
+		Query query = em.createQuery(sql.toString());
+		query.setParameter("guests", menu.getGuests());
+		query.setParameter("locations", menu.getLocation());
+		query.setParameter("active", 1);
+		query.setParameter("approved", 1);
+		
+		List<?> results = query.getResultList();
+		
+		for(Object result: results) {
+			data.add(MenuDTO.class.cast(result));
+		}
+		
+		return data;
+	}
+	
+	public List<MenuDTO> searchAll(EntityManager em) {
+		List<MenuDTO> data = new ArrayList<MenuDTO>();	
+		
+		StringBuilder sql = new StringBuilder("FROM MenuDTO WHERE active = :active AND approved = :approved");		
+		Query query = em.createQuery(sql.toString());
+		query.setParameter("active", 1);
+		query.setParameter("approved", 1);
+		
+		List<?> results = query.getResultList();
+		
+		for(Object result: results) {
+			data.add(MenuDTO.class.cast(result));
+		}
+		
+		return data;
 	}
 }

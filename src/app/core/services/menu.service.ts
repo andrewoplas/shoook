@@ -27,6 +27,16 @@ export class MenuService {
     this.baseUrl = this.global.BASE_URL + 'menu';    
   }
 
+  /** POST: search menu to the server */
+  public search(menu): Observable<any> {
+    return this.http
+      .post<RequestResult>(`${this.baseUrl}/search`, menu, httpOptions)
+      .pipe(
+        tap(_ => this.log(`search menu`)),
+        catchError(this.errHandler.handleError)
+      );
+  }
+
   /** GET: retrieve entities from the server */
   public getMenus(): Observable<RequestResult> {
     return this.http

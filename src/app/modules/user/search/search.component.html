@@ -66,58 +66,21 @@
             </h3>
 
             <div class="results-container">
-                <div class="item" (click)="item_click()">
-                    <img src="assets/image/sample/dish1.png" />
+                <div *ngFor="let menu of menus; let i = index; let last = last" class="item" (click)="item_click(menu)">
+                    <div id="{{ menu_images[i].folder }}">
+                        <div *ngFor="let image of menu_images[i].images; let count = index">
+                            <div class="image-carousel">
+                                <img [src]="image" alt="Image of {{ menu.styleOfCookingDescription }}">
+                            </div>
+                        </div>
+                    </div>
                     <span class="option m-t-10">Option 1</span>
-                    <span class="title">Western Style Dishes</span>
-                    <span class="description">Over 30 years of culinary delight experience</span>
-                    <span class="price">P16.00</span>
+                    <span class="title">{{ menu.styleOfCookingDescription }}</span>
+                    <span class="description">{{ menu.specialtyDescription }}</span>
+                    <span class="price">P{{ menu.priceFourMainCourse }}</span>
                     <span class="lay-away">*Available on Lay Away</span>
-                </div>
-
-                <div class="item" (click)="item_click()">
-                    <img src="assets/image/sample/dish2.png" />
-                    <span class="option m-t-10">Option 1</span>
-                    <span class="title">Western Style Dishes</span>
-                    <span class="description">Over 30 years of culinary delight experience</span>
-                    <span class="price">P16.00</span>
-                    <span class="lay-away">*Available on Lay Away</span>
-                </div>
-
-                <div class="item" (click)="item_click()">
-                    <img src="assets/image/sample/dish3.png" />
-                    <span class="option m-t-10">Option 1</span>
-                    <span class="title">Western Style Dishes</span>
-                    <span class="description">Over 30 years of culinary delight experience</span>
-                    <span class="price">P16.00</span>
-                    <span class="lay-away">*Available on Lay Away</span>
-                </div>
-
-                <div class="item" (click)="item_click()">
-                    <img src="assets/image/sample/dish3.png" />
-                    <span class="option m-t-10">Option 1</span>
-                    <span class="title">Western Style Dishes</span>
-                    <span class="description">Over 30 years of culinary delight experience</span>
-                    <span class="price">P16.00</span>
-                    <span class="lay-away">*Available on Lay Away</span>
-                </div>
-
-                <div class="item" (click)="item_click()">
-                    <img src="assets/image/sample/dish2.png" />
-                    <span class="option m-t-10">Option 1</span>
-                    <span class="title">Western Style Dishes</span>
-                    <span class="description">Over 30 years of culinary delight experience</span>
-                    <span class="price">P16.00</span>
-                    <span class="lay-away">*Available on Lay Away</span>
-                </div>
-
-                <div class="item" (click)="item_click()">
-                    <img src="assets/image/sample/dish3.png" />
-                    <span class="option m-t-10">Option 1</span>
-                    <span class="title">Western Style Dishes</span>
-                    <span class="description">Over 30 years of culinary delight experience</span>
-                    <span class="price">P16.00</span>
-                    <span class="lay-away">*Available on Lay Away</span>
+                    
+                    {{last && menus.length > 0? initSlick() : ''}}
                 </div>
             </div>
         </div>
@@ -137,23 +100,20 @@
         <div class="modal-content">
             <div class="modal-body">
                 <h2 class="details-text">Detail</h2>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
                 <hr />
 
                 <p class="change-menu-text">Change Menu</p>
                 <div class="change-menu-container menu-container">
-                    <span class="badge">Kaldereta <i class="material-icons">close</i></span>
-                    <span class="badge">Chicken Roll <i class="material-icons">close</i></span>
-                    <span class="badge">Pansit <i class="material-icons">close</i></span>
-                    <span class="badge">Beef Steak <i class="material-icons">close</i></span>
+                    <span class="badge" *ngFor="let menu of changeMenu; let i = index" (click)="removeMenu(i)">{{ menu }} <i class="material-icons">close</i></span>
                 </div>
 
                 <hr/>
                 <p class="add-menu-text">Add Menu</p>
                 <div class="add-menu-container menu-container">
-                    <span class="badge">Kaldereta</span>
-                    <span class="badge">Chicken Roll</span>
-                    <span class="badge">Pansit</span>
-                    <span class="badge">Beef Steak</span>
+                    <span class="badge" *ngFor="let menu of addedMenu; let i = index" (click)="addMenu(i)">{{ menu }}</span>
                 </div>
 
                 <div class="btn btnBook">Book</div>

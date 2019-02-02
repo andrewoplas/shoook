@@ -46,9 +46,10 @@ export class MenuComponent implements OnInit {
   ngOnInit() {
     eval("[].slice.call(document.querySelectorAll('.sttabs')).forEach(function(el) {new CBPFWTabs(el);});");
     this.vendorID = this.auth.getUser().id;
-    
+    console.log(this.vendorID);
     this.menuService.getMenusByVendor(this.vendorID).subscribe(
       data => { 
+        console.log(data);
         if(data.success && data.body.length > 0) {
           this.menuList = data.body;
         }        

@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.shoook.entity.Menu;
+import com.shoook.entity.MenuSearch;
 import com.shoook.entity.RequestResult;
 import com.shoook.service.MenuService;
 
@@ -32,6 +33,12 @@ public class MenuController {
 			@RequestParam("menuID") String menuID
 	) {
 		return service.uploadFile(images, vendorID, menuID);		
+	}
+	
+	@CrossOrigin
+	@PostMapping(path = "search", produces = MediaType.APPLICATION_JSON_VALUE)	
+	public RequestResult search(@RequestBody MenuSearch data) {
+		return service.search(data);
 	}
 	
 	@CrossOrigin
