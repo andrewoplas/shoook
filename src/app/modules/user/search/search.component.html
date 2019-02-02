@@ -116,7 +116,7 @@
                     <span class="badge" *ngFor="let menu of addedMenu; let i = index" (click)="addMenu(i)">{{ menu }}</span>
                 </div>
 
-                <div class="btn btnBook">Book</div>
+                <div (click)="book()" class="btn btnBook">BOOK</div>
             </div>
         </div>
     </div>

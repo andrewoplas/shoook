@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import * as $ from 'jquery';
 import { MenuService } from '@core/services/menu.service';
-import { Router, ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
+import swal from 'sweetalert2';
 
 declare var require: any
 
@@ -22,7 +23,8 @@ export class SearchComponent implements OnInit {
 
   constructor(
     private menuService: MenuService,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    private router: Router
   ) { 
     let search = {
       occassion: this.route.snapshot.paramMap.get('occassion').trim(),
@@ -107,5 +109,24 @@ export class SearchComponent implements OnInit {
 
   date_click() {
     this.datePicker.show();
+  }
+
+  book() {
+    if(this.changeMenu.length > 0) {
+      let item = {
+        menu: this.currentMenu,
+        menu_items: this.changeMenu
+      }
+      sessionStorage.setItem("item", JSON.stringify(item));
+      this.router.navigate(['/checkout']);
+    } else {
+      swal({
+        title: 'Ooops!',
+        text: "Please have atleast 1 menu before booking.",
+        type: 'error',
+        showCancelButton: false,
+        confirmButtonText: 'OK',
+      })
+    }
   }
 }
