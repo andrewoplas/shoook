@@ -19,6 +19,7 @@ export interface Menu {
     specialtyDescription: string;
     active: number;
     approved: number;
+    images: string;
     dateCreated: Date;
     dateUpdated: Date;
 }

@@ -7,29 +7,29 @@
             <p class="tagline">Discover an entire lifestyle.</p>
             <br />
     
-            <form>
+            <form [formGroup]="forms" (ngSubmit)="search()">
                 <div class="form-group">
                     <label for="txtOccassion">Type of Occassion</label>
-                    <input type="text" class="form-control" id="txtOccassion" placeholder="e.g. weddings, fiesta, birthdays, debut" required>
+                    <input type="text" class="form-control" id="txtOccassion" placeholder="e.g. weddings, fiesta, birthdays, debut" required formControlName="occassion">
                 </div>
                 <div class="form-group">
                     <label for="txtDate">Date</label>
-                    <input type="text" class="form-control" id="txtDate" required>
+                    <input type="text" class="form-control" id="txtDate" required formControlName="date">
                 </div>
     
                 <div class="form-group">
                     <label for="txtTime">Time</label>
-                    <input type="text" class="form-control" id="txtTime" required>
+                    <input type="text" class="form-control" id="txtTime" required formControlName="time">
                 </div>
     
                 <div class="form-group">
                     <label for="txtLocation">Location</label>
-                    <input type="text" class="form-control" id="txtLocation" placeholder="e.g. Cebu City" required>
+                    <input type="text" class="form-control" id="txtLocation" placeholder="e.g. Cebu City" required formControlName="location">
                 </div>
     
                 <div class="form-group">
                     <label for="txtGuest">Number of guest</label>
-                    <select class="form-control" id="txtGuest" required>
+                    <select class="form-control" id="txtGuest" required formControlName="numberOfGuest">
                         <option selected disabled>-- Select Number of Guest --</option>
                         <option value="50">50 Guest</option>
                         <option value="100">100 Guest</option>

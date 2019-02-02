@@ -1,14 +1,12 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
-import * as $ from 'jquery';
-import swal from 'sweetalert2';
 import { DropzoneConfigInterface, DropzoneComponent, DropzoneDirective } from 'ngx-dropzone-wrapper';
 import { FormBuilder, Validators } from '@angular/forms';
 import { MenuService } from '@core/services/menu.service';
-import { Menu } from '@shared/models/Menu.model';
 import { AuthService } from '@core/services/auth.service';
 import { HttpEventType, HttpResponse } from '@angular/common/http';
 import { LoadingBarService } from '@ngx-loading-bar/core';
-import { VendorFooterComponent } from '@shared/components/vendor/footer/footer.component';
+import * as $ from 'jquery';
+import swal from 'sweetalert2';
 
 @Component({
   selector: 'app-menu',
@@ -46,7 +44,6 @@ export class MenuComponent implements OnInit {
   ngOnInit() {
     eval("[].slice.call(document.querySelectorAll('.sttabs')).forEach(function(el) {new CBPFWTabs(el);});");
     this.vendorID = this.auth.getUser().id;
-    
     this.menuService.getMenusByVendor(this.vendorID).subscribe(
       data => { 
         if(data.success && data.body.length > 0) {

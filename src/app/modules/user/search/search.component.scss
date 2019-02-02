@@ -1,4 +1,6 @@
 @import '../../../../assets/scss/styles.scss';
+@import '../../../../assets/plugins/slick/slick.scss';
+@import '../../../../assets/plugins/slick/slick-theme.scss';
 @import '../../../../assets/plugins/datepicker/scss/datepicker.scss';
 
 
@@ -324,6 +326,7 @@
         cursor: pointer;
         width: 245px;
         margin-bottom: 50px;
+        margin-right: 5px;
 
         span {
             display: block;
@@ -361,6 +364,10 @@
     text-align: center;
     padding: 0!important;
 
+    .close {
+        font-size: 35px;
+    }
+
     &:before {
         content: '';
         display: inline-block;
@@ -384,6 +391,7 @@
     .details-text {
         font-family: $font-heading;
         margin-top: 0;
+        display: inline-block;
     }
 
     .change-menu-text, .add-menu-text {
@@ -427,5 +435,53 @@
 
     .badge {
         margin-right: 5px;
+    }
+}
+
+/deep/ {
+    .slick-dots li button:before {
+        font-size: 10px !important;
+    }   
+    
+    .slick-slide {
+        position: relative;
+    }
+
+    .image-carousel {
+        height: 200px;
+        background: #eee no-repeat center;
+        border-radius: 3px;
+        display: flex;
+        align-items: center;
+
+        img {
+            border-radius: 3px;
+            vertical-align: middle;
+        }
+    }
+    
+    #testimonial {
+        img {
+            width: 100%;
+            filter: brightness(50%);
+        }
+    
+        .text-testimonial {
+            z-index: 1000;
+            color: $white;
+            font-family: $font-body;
+            font-size: 17px;
+            position: absolute;
+            padding: 20px;
+            text-align: center;
+            bottom: 0;
+    
+            .from {
+                font-family: $font-body;
+                margin-top: 10px;
+                display: block;
+                font-size: 12px;
+            }
+        }
     }
 }

@@ -139,8 +139,8 @@ public class VendorService {
 			Path pathDocuments = Paths.get("../uploads/documents/" + location);
 			File directoryId = new File("../uploads/id/" + location);
 			File directoryDocuments = new File("../uploads/documents/" + location);
-			if (!directoryId.exists()){ directoryId.mkdir(); }
-			if (!directoryDocuments.exists()){ directoryDocuments.mkdir(); }
+			if (!directoryId.exists()){ directoryId.mkdirs(); }
+			if (!directoryDocuments.exists()){ directoryDocuments.mkdirs(); }
 			
 			// Store Front ID
 			storageService.store(idFront, pathId, "front.jpg");

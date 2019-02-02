@@ -116,6 +116,26 @@
     }
 }
 
+.has-error{
+    .form-control {
+        border: 1px solid #d9534f !important;
+    }
+}
+
+.has-success {
+    .form-control {
+        border: 1px solid #2ecc71 !important;
+    }
+}
+
+.error-information {
+    display: block;
+    text-align: left;
+    color: #d9534f;
+    font-family: $font-body;
+    margin-bottom: 5px;
+}
+
 /deep/ {
     .slick-dots li button:before {
         font-size: 10px !important;
