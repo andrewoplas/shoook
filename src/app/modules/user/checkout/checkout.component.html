@@ -12,102 +12,101 @@
                 <hr />
     
                 <div class="form-container">
-                    <form>
+                    <form [formGroup]="forms" (ngSubmit)="checkout()">    
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group" [ngClass]="displayFieldCss('firstName')">
+                                    <label class="lblInputs" for="txtFirstName">First Name</label>
+                                    <input type="text" class="form-control" id="txtFirstName" formControlName="firstName">
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group" [ngClass]="displayFieldCss('lastName')">
+                                    <label class="lblInputs" for="txtLastName">Last Name</label>
+                                    <input type="text" class="form-control" id="txtLastName" formControlName="lastName">
+                                </div>
+                            </div>
+                        </div>
+    
                         <div class="row">
                             <div class="col-md-6">
                                 <div class="form-group">
                                     <span class="gender-label">Gender</span>
-                                    <div class="row">
-                                        <div class="col-xs-12 col-sm-6">
+                                    <div class="radio-button-container" [ngClass]="displayFieldCss('gender')">
+                                        <div>
                                             <input class="magic-radio" type="radio" value="0" id="male" name="gender" formControlName="gender">
                                             <label class="gender-label-radio" for="male">Male</label>
                                         </div>
 
-                                        <div class="col-xs-12 col-sm-6">
+                                        <div>
                                             <input class="magic-radio" type="radio" value="1" id="female" name="gender" formControlName="gender">
                                             <label class="gender-label-radio" for="female">Female</label>
                                         </div>
                                     </div>
                                 </div>
                             </div>
-                            <div class="col-md-6"></div>
-                        </div>
-    
-                        <div class="row">
+
                             <div class="col-md-6">
-                                <div class="form-group">
-                                    <label class="lblInputs" for="txtFirstName">First Name</label>
-                                    <input type="text" class="form-control" id="txtFirstName" required>
-                                </div>
-                            </div>
-                            <div class="col-md-6">
-                                <div class="form-group">
-                                    <label class="lblInputs" for="txtLastName">Last Name</label>
-                                    <input type="text" class="form-control" id="txtLastName" required>
-                                </div>
-                            </div>
-                        </div>
-    
-                        <div class="row">
-                            <div class="col-md-6">
-                                <div class="form-group">
+                                <div class="form-group" [ngClass]="displayFieldCss('address')">
                                     <label class="lblInputs" for="txtAddress">Address</label>
-                                    <input type="text" class="form-control" id="txtAddress" required>
+                                    <input type="text" class="form-control" id="txtAddress" formControlName="address">
                                 </div>
                             </div>
+                        </div>
+    
+                        <div class="row">
                             <div class="col-md-6">
-                                <div class="form-group">
+                                <div class="form-group" [ngClass]="displayFieldCss('city')">
                                     <label class="lblInputs" for="txtCity">City / Municipality</label>
-                                    <input type="text" class="form-control" id="txtCity" required>
+                                    <input type="text" class="form-control" id="txtCity" formControlName="city">
                                 </div>
                             </div>
-                        </div>
-    
-                        <div class="row">
                             <div class="col-md-6">
-                                <div class="form-group">
+                                <div class="form-group" [ngClass]="displayFieldCss('zipCode')">
                                     <label class="lblInputs" for="txtZipCode">Zip Code</label>
-                                    <input type="text" class="form-control" id="txtZipCode" required>
-                                </div>
-                            </div>
-                            <div class="col-md-6">
-                                <div class="form-group">
-                                    <label class="lblInputs" for="txtBirthdate">Birth date</label>
-                                    <input type="text" class="form-control" id="txtBirthdate" required>
+                                    <input type="text" class="form-control" id="txtZipCode" formControlName="zipCode">
                                 </div>
                             </div>
                         </div>
     
                         <div class="row">
                             <div class="col-md-6">
-                                <div class="form-group">
+                                <div class="form-group" [ngClass]="displayFieldCss('emailAddress')">
                                     <label class="lblInputs" for="txtEmailAddress">Email Address</label>
-                                    <input type="text" class="form-control" id="txtEmailAddress" required>
+                                    <input type="text" class="form-control" id="txtEmailAddress" formControlName="emailAddress">
                                 </div>
                             </div>
                             <div class="col-md-6">
-                                <div class="form-group">
+                                <div class="form-group" [ngClass]="displayFieldCss('contact')">
                                     <label class="lblInputs" for="txtContact">Contact No.</label>
-                                    <input type="text" class="form-control" id="txtContact" required>
+                                    <input type="text" class="form-control" id="txtContact" formControlName="contact">
                                 </div>
-    
-                                <button type="button" class="btn btn-block btnSubmit">Submit</button>
                             </div>
                         </div>
+
+                        <button type="submit" class="btn btn-block btnSubmit">Submit</button>
                     </form>
                 </div>
             </div>
         </div>
     
-        <div class="col-md-4">
+        <div class="col-md-4" *ngIf="menu != null">
             <div class="order-container">
                 <h2 class="title-text">You're almost done!</h2>
-                <img src="assets/image/sample/dish1.png" />
+                <div id="menu-images">
+                    <div *ngFor="let image of menu_images; let last = last">
+                        <div class="image-carousel">
+                            <img [src]="image" alt="Image of {{ menu.styleOfCookingDescription }}">
+                        </div>
+                    </div>
+
+                    {{ initSlick() }}
+                </div>
     
                 <span class="option">Option 1</span>
-                <span class="title">Western Style Dishes</span>
-                <span class="description">Over 30 years of culinary delight experience</span>
-                <span class="price">P16, 000</span>
+                <span class="title">{{ menu.styleOfCookingDescription }}</span>
+                <span class="description">{{ menu.specialtyDescription }}</span>
+                <span class="price">P{{ menu.priceFourMainCourse | number: '2.'  }}</span>
                 <span class="lay-away">*Available on Lay-Away</span>
             </div>
         </div>
