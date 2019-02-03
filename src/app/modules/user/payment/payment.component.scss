@@ -1,4 +1,6 @@
 @import '../../../../assets/scss/styles.scss';
+@import '../../../../assets/plugins/slick/slick.scss';
+@import '../../../../assets/plugins/slick/slick-theme.scss';
 @import '../../../../assets/plugins/magic-check/css/magic-check.min.css';
 
 .payment-details-container {
@@ -229,6 +231,221 @@
     .info-text {
         font-family: $font-body;
         font-size: 15px;
+    }
+}
+
+#content {
+    .heading-images {
+        display: flex;
+        justify-content: space-between;
+        align-items: center; 
+
+        .logo {
+            display: block;
+            height: 150px;
+            width: auto;
+        }
+        
+        .qr-code {
+            display: block;
+            height: 300px;
+            width: auto;
+        }
+    }
+
+    .account-container {
+        margin-top: 30px;
+
+        .account-label {
+            font-family: $font-heading;
+            font-size: 30px;
+        }
+    
+        .account-no-label {
+            font-family: $font-heading;
+            font-size: 40px;
+            padding: 20px 80px;
+            background-color: #eee;
+            display: inline-block;
+        }
+    }
+
+    .user-container {
+        margin-top: 20px;
+        margin-bottom: 20px;
+
+        .family-name-label, .first-name-label {
+            font-family: $font-heading;
+            font-size: 20px;
+        }
+    
+        .family-name, .first-name {
+            font-family: $font-body;
+            font-size: 30px;
+            padding: 25px;
+            border: 1px solid $black-o-6;
+        }
+    }
+    
+    .order-details-container {
+        margin-top: 50px;
+
+        .order-details-label {
+            font-family: $font-heading;
+            font-size: 30px;
+        }
+        
+        .order-details-left-container {
+            padding: 20px;
+            border: 1px solid $black-o-6;
+
+            img {
+                width: 100%;
+                height: auto;
+            }
+
+            table {
+                width: 100%;
+
+                tr td {
+                    &:nth-child(1) {
+                        font-weight: bold;
+                        font-family: $font-heading;
+                        font-size: 25px;
+                    }
+
+                    &:nth-child(2) {
+                        text-align: right;
+                        font-weight: bold;
+                        font-family: $font-body;
+                        font-size: 30px;
+                    }
+                }
+            }
+
+            .order-container {            
+                span {
+                    font-family: $font-body;
+                    display: block;
+                    color: $black-o-7;
+            
+                    &.option {
+                        margin-top: 10px;
+                    }
+            
+                    &.title {
+                        font-family: $font-heading;
+                        font-size: 30px;
+                        margin-top: 10px;
+                    }
+            
+                    &.description {
+                        font-size: 18px;
+                        margin-bottom: 10px;
+                    }
+            
+                    &.price {
+                        font-size: 25px;
+                        font-family: $font-heading;
+                    }
+            
+                    &.lay-away {
+                        font-weight: bold;
+                    }
+                }
+            }
+        }
+
+        .order-details-right-container {    
+            table {
+                width: 100%;
+                border: 1px solid $black-o-6;
+
+                thead {
+                    th {
+                        font-family: $font-heading;
+                        font-size: 20px;
+                    }
+                }
+
+                tbody {
+                    td {
+                        font-family: $font-body;
+                        font-size: 17px;
+
+                        &.total-label {
+                            font-family: $font-heading;
+                            font-size: 20px;
+                            text-align: center;
+                            font-weight: bold;
+                        }
+
+                        &.total-price {
+                            font-weight: bold;
+                            font-size: 23px;
+                            font-family: $font-heading;
+                        }
+
+                        &:nth-child(2), &:nth-child(3) {
+                            text-align: right;
+                        }
+                    }
+                }
+
+                td, th {
+                    border: 1px solid $black-o-6;
+                    padding: 5px 10px;
+                }
+            }
+        }
+
+    }
+}
+
+
+/deep/ {
+    .swal2-popup {
+        font-size: 1.5rem;
+        
+        .swal2-title {
+            font-family: $font-heading;
+        }
+        
+        .swal2-content {
+            font-family: $font-body;
+        }
+
+        button {
+            font-family: $font-body;
+        }
+
+        .swal2-input {
+            text-align: center;
+        }
+    }
+    
+    .slick-dots li button:before {
+        font-size: 10px !important;
+    }   
+    
+    .slick-slide {
+        position: relative;
+    }
+
+    .image-carousel {
+        height: 200px;
+        background: #eee no-repeat center;
+        border-radius: 3px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+
+        img {
+            border-radius: 3px;
+            display: block;
+            margin-left: auto;
+            margin-right: auto;
+        }
     }
 }
 
