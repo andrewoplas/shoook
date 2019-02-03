@@ -4,7 +4,7 @@
     </div>    
 </div>
 
-<div class="container">
+<div class="container m-t-30 m-b-40">
     <div class="row m-b-40">
         <div class="col-md-8">
             <div class="payment-details-container">
@@ -19,17 +19,11 @@
                                     <i class="material-icons">event_note</i><br/>Lay Away Option
                                 </a>
                                 <a href="#" class="list-group-item text-center">
-                                    <i class="material-icons">store</i><br/>Payment Partner
+                                    <i class="material-icons">store</i><br/>Extra Tab 1
                                 </a>
                                 <a href="#" class="list-group-item text-center">
                                     <i class="material-icons">desktop_windows</i><br/>
-                                    Internet Banking <br> (Direct debit)
-                                </a>
-                                <a href="#" class="list-group-item text-center">
-                                    <i class="material-icons">credit_card</i><br/>BigPay
-                                </a>
-                                <a href="#" class="list-group-item text-center">
-                                    <i class="material-icons">desktop_windows</i><br/>Union Pay
+                                    Extra Tab 2
                                 </a>
                             </div>
                         </div>
@@ -48,26 +42,26 @@
                                         <h4 class="font-heading m-t-30">Term of Payment</h4>
                                         <div class="info-container flex-radio-buttons">
                                             <div>
-                                                <input class="magic-radio" type="radio" name="radio" id="months-6">
+                                                <input class="magic-radio" type="radio" name="radio" [value]="6" id="months-6" [(ngModel)]="monthly" checked>
                                                 <label for="months-6">6 Months</label>
                                             </div>
 
                                             <div>
-                                                <input class="magic-radio" type="radio" name="radio" id="months-12">
+                                                <input class="magic-radio" type="radio" name="radio" [value]="12" id="months-12" [(ngModel)]="monthly">
                                                 <label for="months-12">12 Months</label>
                                             </div>
 
                                             <div>
-                                                <input class="magic-radio" type="radio" name="radio" id="months-15">
+                                                <input class="magic-radio" type="radio" name="radio" [value]="15" id="months-15" [(ngModel)]="monthly">
                                                 <label for="months-15">15 Months</label>
                                             </div>
                                         </div>
 
-                                        <h3 class="text-center font-heading">P1667.00/month</h3>
+                                        <h3 class="text-center font-heading">P{{ (menu.priceFourMainCourse / monthly) | number : '1.2-2' }}/month</h3>
 
                                         <h4 class="font-heading m-t-30">Your Reference Number</h4>
                                         <div class="info-container">
-                                            <input type="text" class="txtAccountNumber" />
+                                            <input type="text" class="txtAccountNumber" disabled value="#aD12CcAag3FfF4x" />
                                         </div>
 
                                         <p class="font-body m-t-20 m-b-15">Use the account number to pay to any branch of M Lhullier, Palawan Pawnshop or click this <a href="#">list to see more payment partner.</a></p>
@@ -77,39 +71,18 @@
                                 </div>
                             </div>
 
-                            <!-- Payment Partner -->
+                            <!-- Extra Tab 1 -->
                             <div class="bhoechie-tab-content">
                                 <div class="section-center">
-                                    <h1 class="glyphicon glyphicon-road" style="font-size:12em;color:#55518a"></h1>
-                                    <h2 style="margin-top: 0;color:#55518a">Comming Soon</h2>
-                                    <h3 style="margin-top: 0;color:#55518a">Train Reservation</h3>
                                 </div>
                             </div>
                 
-                            <!-- Internet Banking -->
+                            <!-- Extra Tab 2 -->
                             <div class="bhoechie-tab-content">
                                 <div class="section-center">
-                                    <h1 class="glyphicon glyphicon-home" style="font-size:12em;color:#55518a"></h1>
+                                    <!-- <h1 class="glyphicon glyphicon-home" style="font-size:12em;color:#55518a"></h1>
                                     <h2 style="margin-top: 0;color:#55518a">Comming Soon</h2>
-                                    <h3 style="margin-top: 0;color:#55518a">Hotel Directory</h3>
-                                </div>
-                            </div>
-
-                            <!-- BigPay -->
-                            <div class="bhoechie-tab-content">
-                                <div class="section-center">
-                                    <h1 class="glyphicon glyphicon-cutlery" style="font-size:12em;color:#55518a"></h1>
-                                    <h2 style="margin-top: 0;color:#55518a">Comming Soon</h2>
-                                    <h3 style="margin-top: 0;color:#55518a">Restaurant Diirectory</h3>
-                                </div>
-                            </div>
-
-                            <!-- UnionPay -->
-                            <div class="bhoechie-tab-content">
-                                <div class="section-center">
-                                    <h1 class="glyphicon glyphicon-credit-card" style="font-size:12em;color:#55518a"></h1>
-                                    <h2 style="margin-top: 0;color:#55518a">Comming Soon</h2>
-                                    <h3 style="margin-top: 0;color:#55518a">Credit Card</h3>
+                                    <h3 style="margin-top: 0;color:#55518a">Hotel Directory</h3> -->
                                 </div>
                             </div>
                         </div>
@@ -118,15 +91,23 @@
             </div>
         </div>
 
-        <div class="col-md-4">
+        <div class="col-md-4" *ngIf="menu != null">
             <div class="order-container">
                 <h2 class="title-text">You're almost done!</h2>
-                <img src="../image/sample/dish1.png" />
+                <div id="menu-images">
+                    <div *ngFor="let image of menu_images; let last = last">
+                        <div class="image-carousel">
+                            <img [src]="image" alt="Image of {{ menu.styleOfCookingDescription }}">
+                        </div>
+                    </div>
 
+                    {{ initSlick() }}
+                </div>
+    
                 <span class="option">Option 1</span>
-                <span class="title">Western Style Dishes</span>
-                <span class="description">Over 30 years of culinary delight experience</span>
-                <span class="price">P16, 000</span>
+                <span class="title">{{ menu.styleOfCookingDescription }}</span>
+                <span class="description">{{ menu.specialtyDescription }}</span>
+                <span class="price">P{{ menu.priceFourMainCourse | number: '2.'  }}</span>
                 <span class="lay-away">*Available on Lay-Away</span>
             </div>
         </div>
@@ -144,16 +125,121 @@
             <div class="modal-body">
                 <p class="text-center info-text">
                     Kindly Pay the minimum lay away amount <br />
-                    Within 48 hours (Aug 19, 2018 11:59PM)
+                    Within 48 hours ({{ pay_date | date : 'MMM d, y, h:mm a'}})
                 </p>
-                <h2 class="price text-center">P2,667.00</h2>
+                <h2 class="price text-center">P{{ (menu.priceFourMainCourse / monthly) | number : '1.2-2' }}</h2>
                 
                 <p class="text-center info-text">
                     Please click the list of our partner 
                     <a href="#"><u>payment center</u></a>.
                 </p>
-                <div class="btn btnPrintSave">Print/Save</div>
+                <div class="btn btnPrintSave" (click)="convertPdf()">Print/Save</div>
             </div>
         </div>
     </div>
+</div>
+
+
+<div id="content" class="m-40 hide">
+    <div class="heading-images">
+        <img src="/assets/image/logo.png" crossOrigin="Anonymous" class="logo img-fluid">
+        <img src="/assets/image/qr-code.png" crossOrigin="Anonymous" class="qr-code img-fluid">
+    </div>
+    
+    <div class="account-container">
+        <p class="account-label">ACCOUNT NO:</p>
+        <p class="account-no-label">001MSB11LA05671432</p> 
+    </div>
+
+    <div class="row user-container">
+        <div class="col-md-8">
+            <div class="row">
+                <div class="col-md-6"> 
+                    <p class="family-name-label">Family Name</p>
+                    <p class="family-name">MIOLE</p>
+                </div>
+                <div class="col-md-6"> 
+                    <p class="first-name-label">First Name</p>
+                    <p class="first-name">JAMES CARLO</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <div class="row order-details-container">
+        <div class="col-md-7">
+            <p class="order-details-label">ORDER DETAILS</p>
+            <div class="row m-0 order-details-left-container">
+                <div class="col-md-6"> 
+                    <img [src]="menu_images[0]" crossOrigin="Anonymous" class="img-fluid">
+                </div>
+                <div class="col-md-6"> 
+                    <table>
+                        <tr>
+                            <td width="50%">PAX</td>
+                            <td width="50%">50</td>
+                        </tr>
+                        <tr>
+                            <td width="50%">Main Menu</td>
+                            <td width="50%">4</td>
+                        </tr>
+                        <tr>
+                            <td width="50%">Free Dessert</td>
+                            <td width="50%">2</td>
+                        </tr>
+                        <tr>
+                            <td width="50%">Lechon</td>
+                            <td width="50%">0</td>
+                        </tr>
+                        <tr>
+                            <td width="50%">Event Date</td>
+                            <td width="50%">20-Aug-18</td>
+                        </tr>
+                        <tr>
+                            <td width="50%">Event Time</td>
+                            <td width="50%">02:00PM</td>
+                        </tr>
+                    </table>
+                </div>
+                <div class="col-md-12">
+                    <div class="order-container">                    
+                        <span class="option">Option 1</span>
+                        <span class="title">{{ menu.styleOfCookingDescription }}</span>
+                        <span class="description">{{ menu.specialtyDescription }}</span>
+                        <span class="price">P{{ menu.priceFourMainCourse | number: '2.'  }}</span>
+                        <span class="lay-away">*Available on Lay-Away</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-5">
+            <p class="order-details-label">PAYMENT SCHEDULES</p>
+            <div class="order-details-right-container">
+                <table>
+                    <thead>
+                        <tr>
+                            <th width="30%">Month</th>
+                            <th width="30%">Date</th>
+                            <th width="40%">Amount</th>
+                        </tr>
+                    </thead>
+
+                    <tbody>
+                        <tr *ngFor="let payment of getPayments()">
+                            <td>{{ payment.month }}</td>
+                            <td>{{ payment.date }}</td>
+                            <td>P{{ payment.amount | number: '2.2' }}</td>
+                        </tr>
+                        <tr>
+                            <td colspan="2" class="total-label">TOTAL</td>
+                            <td class="total-price">P{{ menu.priceFourMainCourse | number: '2.' }}</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
 </div>

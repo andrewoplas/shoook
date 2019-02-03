@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import * as $ from 'jquery';
 import { MenuService } from '@core/services/menu.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import swal from 'sweetalert2';
+import * as $ from 'jquery';
 
 declare var require: any
 
@@ -27,11 +27,11 @@ export class SearchComponent implements OnInit {
     private router: Router
   ) { 
     let search = {
-      occassion: this.route.snapshot.paramMap.get('occassion').trim(),
-      date: this.route.snapshot.paramMap.get('date').trim(),
-      time: this.route.snapshot.paramMap.get('time').trim(),
-      location: this.route.snapshot.paramMap.get('location').trim(),
-      guests: this.route.snapshot.paramMap.get('guests').trim(),
+      occassion: this.route.snapshot.paramMap.get('occassion') != null ? this.route.snapshot.paramMap.get('occassion').trim() : '',
+      date: this.route.snapshot.paramMap.get('date') != null ? this.route.snapshot.paramMap.get('date').trim() : '',
+      time: this.route.snapshot.paramMap.get('time') != null ? this.route.snapshot.paramMap.get('time').trim() : '',
+      location: this.route.snapshot.paramMap.get('location') != null ? this.route.snapshot.paramMap.get('location').trim() : '',
+      guests: this.route.snapshot.paramMap.get('guests') != null ? this.route.snapshot.paramMap.get('guests').trim() : '',
     }
 
     this.menuService.search(search).subscribe(
@@ -118,6 +118,7 @@ export class SearchComponent implements OnInit {
         menu_items: this.changeMenu
       }
       sessionStorage.setItem("item", JSON.stringify(item));
+      eval("$('#itemBook').modal('hide')");
       this.router.navigate(['/checkout']);
     } else {
       swal({

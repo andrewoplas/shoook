@@ -453,35 +453,13 @@
         border-radius: 3px;
         display: flex;
         align-items: center;
+        justify-content: center;
 
         img {
             border-radius: 3px;
-            vertical-align: middle;
-        }
-    }
-    
-    #testimonial {
-        img {
-            width: 100%;
-            filter: brightness(50%);
-        }
-    
-        .text-testimonial {
-            z-index: 1000;
-            color: $white;
-            font-family: $font-body;
-            font-size: 17px;
-            position: absolute;
-            padding: 20px;
-            text-align: center;
-            bottom: 0;
-    
-            .from {
-                font-family: $font-body;
-                margin-top: 10px;
-                display: block;
-                font-size: 12px;
-            }
+            display: block;
+            margin-left: auto;
+            margin-right: auto;
         }
     }
 }
