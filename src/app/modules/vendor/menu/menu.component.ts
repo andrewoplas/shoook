@@ -335,7 +335,7 @@ export class MenuComponent implements OnInit {
     formdata.append('vendorID', vendorID);
     formdata.append('menuID', menuID);
     for(let image of images) {
-      formdata.append('images', image);
+      formdata.append('images[]', image);
     }    
 
     return formdata;
