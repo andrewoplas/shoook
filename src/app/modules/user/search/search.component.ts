@@ -12,13 +12,13 @@ declare var require: any
   styleUrls: ['./search.component.scss']
 })
 export class SearchComponent implements OnInit {
-  private datePicker
-  private prevDay
-  private currentMenu = null;
-  private menus = []
-  private menu_images = []
-  private changeMenu = []
-  private addedMenu = []
+  public datePicker
+  public prevDay
+  public currentMenu = null;
+  public menus = []
+  public menu_images = []
+  public changeMenu = []
+  public addedMenu = []
   
 
   constructor(

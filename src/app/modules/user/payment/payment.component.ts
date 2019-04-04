@@ -18,11 +18,11 @@ declare var require: any;
   providers: [DatePipe]
 })
 export class PaymentComponent implements OnInit {
-  private menu: any;
-  private menu_items: any;
-  private menu_images = [];
-  private monthly = 6;
-  private pay_date
+  public menu: any;
+  public menu_items: any;
+  public menu_images = [];
+  public monthly = 6;
+  public pay_date
 
   constructor(
     private router: Router,

@@ -11,10 +11,10 @@ declare var require: any;
   styleUrls: ['./checkout.component.scss']
 })
 export class CheckoutComponent implements OnInit {
-  private menu: any;
-  private menu_items: any;
-  private menu_images = [];
-  private forms = this.formBuilder.group({
+  public menu: any;
+  public menu_items: any;
+  public menu_images = [];
+  public forms = this.formBuilder.group({
       firstName: ["", Validators.required],
       lastName: ["", Validators.required],
       gender: ["", Validators.required],
