@@ -11,7 +11,7 @@ import { Role } from '@shared/models/UserLogin.model';
   styleUrls: ['./login.component.scss']
 })
 export class LoginComponent implements OnInit {
-  forms = this.fb.group({
+  public forms = this.fb.group({
     emailAddress: ["", [Validators.required, Validators.email]],
     password: ["", [Validators.required]],
   });
@@ -31,10 +31,17 @@ export class LoginComponent implements OnInit {
       role: Role.VENDOR
     };    
 
+    swal({
+      title: 'Logging in',
+      text: 'Please wait a moment as we try to check your credentials.',
+      showCancelButton: false,
+      showConfirmButton: false
+    });
+
     this.auth.login(user).subscribe(
       response => {
-        console.log(response);
         if(response != null && response.body != null && response.success == true) {
+          swal.close();
           this.auth.successLogin(response.body);
         } else {
           swal({

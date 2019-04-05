@@ -14,15 +14,16 @@ import swal from 'sweetalert2';
   styleUrls: ['./menu.component.scss']
 })
 export class MenuComponent implements OnInit {
-  menuImagesError;
-  dishes = [];
-  desserts = [];
-  locations = [];
-  submitted = false;
-  menuList = Array<any>();
-  vendorID;
+  public link = "menu";
+  public menuImagesError;
+  public dishes = [];
+  public desserts = [];
+  public locations = [];
+  public submitted = false;
+  public menuList = Array<any>();
+  public vendorID;
 
-  forms = this.fb.group({
+  public forms = this.fb.group({
     customers: ["", Validators.required],
     mainCourse: ["", Validators.required],
     additionalMenu: ["", Validators.required],
