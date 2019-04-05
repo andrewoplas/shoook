@@ -176,7 +176,7 @@
                             <table>
                                 <thead>
                                     <tr>
-                                        <th width="17%">Image</th>
+                                        <th width="17%" class="text-center">Image</th>
                                         <th width="17%">Style</th>
                                         <th width="20%">Description</th>
                                         <th width="15%" class="text-center">Created</th>
@@ -185,8 +185,16 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <tr *ngFor="let menu of menuList">
-                                        <td>Image</td>
+                                    <tr #menus *ngFor="let menu of menuList; let i = index">
+                                        <td>
+                                            <div class="container-fix">
+                                                <div id="image{{i}}" class="image-container">
+                                                    <div class="image-div" *ngFor="let imageLink of menu.menuImages">
+                                                        <img src="{{imagePath + imageLink}}" />
+                                                    </div>    
+                                                </div>
+                                            </div>
+                                        </td>
                                         <td>{{ menu.styleOfCookingDescription }}</td>
                                         <td class="text-justify">{{ menu.specialtyDescription }}</td>
                                         <td class="text-center">{{ menu.dateCreated | date:'dd-MMM-yyyy' }}</td>

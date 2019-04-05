@@ -26,7 +26,7 @@ export class MenuService {
     private errHandler: ErrorHandlerService
   ) {
     this.baseUrl = this.global.BASE_URL + 'menu';
-    this.baseUrlFileUpload = "http://shoook.ph/images/upload.php";
+    this.baseUrlFileUpload = this.global.BASE_URL_FILE_UPLOAD;
   }
 
   /** POST: search menu to the server */

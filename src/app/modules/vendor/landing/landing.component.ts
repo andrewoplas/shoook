@@ -11,12 +11,12 @@ import { from } from 'rxjs';
   styleUrls: ['./landing.component.scss']
 })
 export class LandingComponent implements OnInit {
-  link = "overview";
+  public link = "landing";
 
-  potentialEarning: PotentialEarning = new PotentialEarning();
-  potentialEarningsList: Map<string, any>;
-  potentialEarningPlaceList: Array<string> = new Array<string>();
-  potentialEarningTypeList: Array<string> = new Array<string>();
+  public potentialEarning: PotentialEarning = new PotentialEarning();
+  public potentialEarningsList: Map<string, any>;
+  public potentialEarningPlaceList: Array<string> = new Array<string>();
+  public potentialEarningTypeList: Array<string> = new Array<string>();
 
   constructor(
     private potentialEarningService: PotentialEarningService

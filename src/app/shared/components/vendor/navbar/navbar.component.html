@@ -9,33 +9,22 @@
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
             </button>
-            <a class="navbar-brand" routerLink="">
+            <a class="navbar-brand" routerLink="/vendor">
                 <img id="logo" src="assets/image/logo-edited.png">
             </a>
         </div>
 
         <!-- Collect the nav links, forms, and other content for toggling -->
         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">                
-            <ul class="nav navbar-nav navbar-left m-t-10">
-                <li [ngClass]="{'active': activeLink == 'overview'}">
-                    <a href="javascript:void(0)" (click)="scroll('#overview')">Overview</a>
-                </li>
-                <li [ngClass]="{'active': activeLink == 'About'}">
-                    <a href="javascript:void(0)" (click)="scroll('#about')">About</a>
-                </li>
-
-                <li [ngClass]="{'active': activeLink == 'Vendor'}">
-                    <a href="javascript:void(0)" (click)="scroll('#vendor')">Vendor</a>
-                </li>
-
-                <li [ngClass]="{'active': activeLink == 'Payment'}">
-                    <a href="javascript:void(0)" (click)="scroll('#payment')">Payment</a>
-                </li>
-
+            <ul class="nav navbar-nav navbar-left m-t-10" *ngIf="activeLink == 'landing'">
+                <li><a href="javascript:void(0)" (click)="scroll('#overview')">Overview</a></li>
+                <li><a href="javascript:void(0)" (click)="scroll('#about')">About</a></li>
+                <li><a href="javascript:void(0)" (click)="scroll('#vendor')">Vendor</a></li>
+                <li><a href="javascript:void(0)" (click)="scroll('#payment')">Payment</a></li>
             </ul>
 
             <ul class="nav navbar-nav navbar-right m-t-10" *ngIf="!loggedIn">
-                <li>
+                <li *ngIf="activeLink == 'landing'">
                     <a>
                         <span class="monthly-potential-text">
                             Monthly potential 

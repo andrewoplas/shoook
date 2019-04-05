@@ -17,7 +17,7 @@ import { EmailAddressValidator } from '@shared/validator/email-address';
   styleUrls: ['./register.component.scss']
 })
 export class RegisterComponent implements OnInit {
-  public link;
+  public link = "register";
   public pass: string;
   public confirmPass: string;
   public idFrontError: boolean;

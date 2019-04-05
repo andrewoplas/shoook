@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit, ViewChild, ViewChildren, QueryList } from '@angular/core';
 import { DropzoneConfigInterface, DropzoneComponent, DropzoneDirective } from 'ngx-dropzone-wrapper';
 import { FormBuilder, Validators } from '@angular/forms';
 import { MenuService } from '@core/services/menu.service';
@@ -7,6 +7,7 @@ import { HttpEventType, HttpResponse } from '@angular/common/http';
 import { LoadingBarService } from '@ngx-loading-bar/core';
 import * as $ from 'jquery';
 import swal from 'sweetalert2';
+import { Globals } from '@shared/models/Global';
 
 @Component({
   selector: 'app-menu',
@@ -14,15 +15,19 @@ import swal from 'sweetalert2';
   styleUrls: ['./menu.component.scss']
 })
 export class MenuComponent implements OnInit {
-  menuImagesError;
-  dishes = [];
-  desserts = [];
-  locations = [];
-  submitted = false;
-  menuList = Array<any>();
-  vendorID;
+  public link = "menu";
+  public menuImagesError;
+  public dishes = [];
+  public desserts = [];
+  public locations = [];
+  public submitted = false;
+  public menuList = Array<any>();
+  public vendorID;
+  public imagePath;
 
-  forms = this.fb.group({
+  @ViewChildren('menus') menus: QueryList<any>;
+
+  public forms = this.fb.group({
     customers: ["", Validators.required],
     mainCourse: ["", Validators.required],
     additionalMenu: ["", Validators.required],
@@ -36,21 +41,57 @@ export class MenuComponent implements OnInit {
     private fb: FormBuilder,
     private auth: AuthService,
     private menuService: MenuService,
-    private loadingBar: LoadingBarService
+    private loadingBar: LoadingBarService,
+    private global: Globals
   ) {
     this.menuImagesError = false;
+    this.imagePath = global.MENU_IMAGE_PATH;
    }
 
   ngOnInit() {
     eval("[].slice.call(document.querySelectorAll('.sttabs')).forEach(function(el) {new CBPFWTabs(el);});");
     this.vendorID = this.auth.getUser().id;
+    this.getMenuList();
+  }
+
+  ngAfterViewInit() {
+    this.menus.changes.subscribe(t => {
+      this.initializeSlick();
+    })
+  }
+
+  public getMenuList() {
     this.menuService.getMenusByVendor(this.vendorID).subscribe(
       data => { 
         if(data.success && data.body.length > 0) {
           this.menuList = data.body;
+          
+          for(let i=0; i<this.menuList.length; i++) {
+            this.menuList[i]['menuImages'] = this.parseImages(this.menuList[i].images);
+          }
         }        
       }
     );
+  }
+
+  public initializeSlick() {
+    let count = this.menuList.length;
+    for(let i=0; i<count; i++) {
+      eval("$('#image" + i + "').not('.slick-initialized').slick({arrows: false, autoplay: true, autoplaySpeed: 2000, dots: true})");  
+    }
+  }
+
+  public parseImages(images) {
+    let arr = images.split(",");
+    let hash = arr[0];
+    let num = +arr[1];
+
+    let imageArr = new Array();
+    for(let i=0; i<num; i++) {
+      imageArr.push(hash + "/" + hash + i + ".jpg");
+    }
+
+    return imageArr;
   }
 
   public addMenuClick() {
@@ -61,9 +102,15 @@ export class MenuComponent implements OnInit {
     this.menuService.deleteMenu(id).subscribe(
       data => { 
         if(data.success) { 
-          this.menuList = data.body;
-          console.log(this.menuList);
-          console.log(data.body);
+          if(data.success && data.body.length > 0) {
+            this.menuList = data.body;
+            
+            for(let i=0; i<this.menuList.length; i++) {
+              this.menuList[i]['menuImages'] = this.parseImages(this.menuList[i].images);
+            }
+          }        
+
+          this.initializeSlick();
 
           swal({
             title: 'Success!',
@@ -158,15 +205,10 @@ export class MenuComponent implements OnInit {
                 let result = JSON.parse(event.body.toString());
                 
                 if(result.success) {
-                  this.menuService.getMenusByVendor(this.vendorID).subscribe(
-                    data => { 
-                      if(data.success && data.body.length > 0) {
-                        this.menuList = data.body;
-                      }        
-                    }
-                  );
-
+                  this.getMenuList();
                   this.resetForm();
+
+                  this.initializeSlick();
 
                   swal({
                     title: 'Ready for Review',
