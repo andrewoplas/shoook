@@ -1,4 +1,6 @@
 @import '../../../../assets/scss/styles.scss';
+@import '../../../../assets/plugins/slick/slick.scss';
+@import '../../../../assets/plugins/slick/slick-theme.scss';
 @import '../../../../assets/plugins/dropzone/dropzone.scss';
 
 .material-design-bg-color {
@@ -115,7 +117,7 @@
     }
 }
 
-.tabs-style-bar nav ul li a {
+.tabs-style-bar nav ul li a {   
     margin: 0 2px;
     background-color: #f7fafc;
     color: #686868;
@@ -606,6 +608,35 @@
         .swal2-input {
             text-align: center;
         }
+    }
+
+    .slick-dots li button:before {
+        font-size: 10px !important;
+    }
+
+    .image-container {
+        height: 100px;
+        width: 100%;
+
+        img {
+            height: 100px;
+            width: 100px;
+            display: block;
+            margin-left: auto;
+            margin-right: auto;
+        }
+    }
+
+    #carouseltest img {
+        height: 100px;
+        width: 100px;
+        display: block;
+        margin-left: auto;
+        margin-right: auto;
+    }
+
+    .container-fix {
+        width: 150px !important;
     }
 }
 
