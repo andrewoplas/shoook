@@ -18,13 +18,15 @@ const httpOptions = {
 })
 export class MenuService {
   private baseUrl: string;
+  private baseUrlFileUpload: string;
 
   constructor(
     private http: HttpClient,
     private global: Globals,
     private errHandler: ErrorHandlerService
   ) {
-    this.baseUrl = this.global.BASE_URL + 'menu';    
+    this.baseUrl = this.global.BASE_URL + 'menu';
+    this.baseUrlFileUpload = "http://shoook.ph/images/upload.php";
   }
 
   /** POST: search menu to the server */
@@ -99,7 +101,7 @@ export class MenuService {
 
   /** POST: Upload image on the server */
   public pushFileToStorage(formdata: FormData): Observable<HttpEvent<{}>> { 
-    const req = new HttpRequest('POST', `${this.baseUrl}/uploadImage`, formdata, {
+    const req = new HttpRequest('POST', `${this.baseUrlFileUpload}`, formdata, {
       reportProgress: true,
       responseType: 'text'
     });

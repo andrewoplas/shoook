@@ -33,8 +33,8 @@
                                             <div class="col-md-8">
                                                 <div class="form-group" [ngClass]="displayFieldCss('first.firstName')">
                                                     <input type="text" class="form-control" formControlName="firstName"  [patterns]="alphanumeric" mask="0*">
-                                                    <div *ngIf="forms.controls['first'].controls['firstName'].touched && !forms.controls['first'].controls['firstName'].valid">  
-                                                        <small class="error-information" *ngIf="forms.controls['first'].controls['firstName'].hasError('required') ">  
+                                                    <div *ngIf="forms.get('first').get('firstName').touched && !forms.get('first').get('firstName').valid">  
+                                                        <small class="error-information" *ngIf="forms.get('first').get('firstName').hasError('required') ">  
                                                             First name is required  
                                                         </small>  
                                                     </div>  
@@ -48,8 +48,8 @@
                                             <div class="col-md-8">
                                                 <div class="form-group" [ngClass]="displayFieldCss('first.lastName')">
                                                     <input type="text" class="form-control" formControlName="lastName"  [patterns]="alphanumeric" mask="0*">
-                                                    <div *ngIf="forms.controls['first'].controls['lastName'].touched && !forms.controls['first'].controls['lastName'].valid">  
-                                                        <small class="error-information" *ngIf="forms.controls['first'].controls['lastName'].hasError('required') ">  
+                                                    <div *ngIf="forms.get('first').get('lastName').touched && !forms.get('first').get('lastName').valid">  
+                                                        <small class="error-information" *ngIf="forms.get('first').get('lastName').hasError('required') ">  
                                                             Last name is required  
                                                         </small>  
                                                     </div>  
@@ -63,11 +63,11 @@
                                             <div class="col-md-8">
                                                 <div class="form-group" [ngClass]="displayFieldCss('first.phoneNumber')">
                                                     <input type="text" mask="000-000-0000" prefix="(+63) " [showMaskTyped] = "true" class="form-control" formControlName="phoneNumber">
-                                                    <div *ngIf="forms.controls['first'].controls['phoneNumber'].touched && !forms.controls['first'].controls['phoneNumber'].valid">  
-                                                        <small class="error-information" *ngIf="forms.controls['first'].controls['phoneNumber'].hasError('required') ">  
+                                                    <div *ngIf="forms.get('first').get('phoneNumber').touched && !forms.get('first').get('phoneNumber').valid">  
+                                                        <small class="error-information" *ngIf="forms.get('first').get('phoneNumber').hasError('required') ">  
                                                             Phone number is required  
                                                         </small>  
-                                                        <small class="error-information" *ngIf="forms.controls['first'].controls['phoneNumber'].hasError('minlength') ">  
+                                                        <small class="error-information" *ngIf="forms.get('first').get('phoneNumber').hasError('minlength') ">  
                                                             Invalid phone number is required  
                                                         </small>  
                                                     </div>  
@@ -83,8 +83,8 @@
                                             <div class="col-md-8">
                                                 <div class="form-group" [ngClass]="displayFieldCss('first.barangay')">
                                                     <input type="text" class="form-control" formControlName="barangay" [patterns]="alphanumeric" mask="0*">
-                                                    <div *ngIf="forms.controls['first'].controls['barangay'].touched && !forms.controls['first'].controls['barangay'].valid">  
-                                                        <small class="error-information" *ngIf="forms.controls['first'].controls['barangay'].hasError('required') ">  
+                                                    <div *ngIf="forms.get('first').get('barangay').touched && !forms.get('first').get('barangay').valid">  
+                                                        <small class="error-information" *ngIf="forms.get('first').get('barangay').hasError('required') ">  
                                                             Barangay is required  
                                                         </small>  
                                                     </div>  
@@ -98,8 +98,8 @@
                                             <div class="col-md-8">
                                                 <div class="form-group" [ngClass]="displayFieldCss('first.city')">
                                                     <input type="text" class="form-control" formControlName="city" [patterns]="alphanumeric" mask="0*">
-                                                    <div *ngIf="forms.controls['first'].controls['city'].touched && !forms.controls['first'].controls['city'].valid">  
-                                                        <small class="error-information" *ngIf="forms.controls['first'].controls['city'].hasError('required') ">  
+                                                    <div *ngIf="forms.get('first').get('city').touched && !forms.get('first').get('city').valid">  
+                                                        <small class="error-information" *ngIf="forms.get('first').get('city').hasError('required') ">  
                                                             City is required  
                                                         </small>  
                                                     </div>  
@@ -113,8 +113,8 @@
                                             <div class="col-md-8">
                                                 <div class="form-group" [ngClass]="displayFieldCss('first.region')">
                                                     <input type="text" class="form-control" formControlName="region" [patterns]="alphanumeric" mask="0*">
-                                                    <div *ngIf="forms.controls['first'].controls['region'].touched && !forms.controls['first'].controls['region'].valid">  
-                                                        <small class="error-information" *ngIf="forms.controls['first'].controls['region'].hasError('required') ">  
+                                                    <div *ngIf="forms.get('first').get('region').touched && !forms.get('first').get('region').valid">  
+                                                        <small class="error-information" *ngIf="forms.get('first').get('region').hasError('required') ">  
                                                             Region is required  
                                                         </small>  
                                                     </div>  
@@ -131,14 +131,14 @@
                                             <div class="col-md-8">
                                                 <div class="form-group" [ngClass]="displayFieldCss('first.emailAddress')">
                                                     <input type="email" class="form-control" formControlName="emailAddress">
-                                                    <div *ngIf="forms.controls['first'].controls['emailAddress'].touched && !forms.controls['first'].controls['emailAddress'].valid">  
-                                                        <small class="error-information" *ngIf="forms.controls['first'].controls['emailAddress'].hasError('required') ">  
+                                                    <div *ngIf="forms.get('first').get('emailAddress').touched && !forms.get('first').get('emailAddress').valid">  
+                                                        <small class="error-information" *ngIf="forms.get('first').get('emailAddress').hasError('required') ">  
                                                             Email address is required  
                                                         </small>  
-                                                        <small class="error-information" *ngIf="forms.controls['first'].controls['emailAddress'].hasError('email') ">  
+                                                        <small class="error-information" *ngIf="forms.get('first').get('emailAddress').hasError('email') ">  
                                                             It is not a valid email address
                                                         </small>
-                                                        <small class="error-information" *ngIf="forms.controls['first'].controls['emailAddress'].hasError('emailAddressInUse') ">  
+                                                        <small class="error-information" *ngIf="forms.get('first').get('emailAddress').hasError('emailAddressInUse') ">  
                                                             Email already exists. Please input a unique one.
                                                         </small>  
                                                     </div>  
@@ -152,11 +152,11 @@
                                             <div class="col-md-8">
                                                 <div class="form-group" [ngClass]="displayFieldCss('first.password')">
                                                     <input type="password" class="form-control" formControlName="password">
-                                                    <div *ngIf="forms.controls['first'].controls['password'].touched && !forms.controls['first'].controls['password'].valid">  
-                                                        <small class="error-information" *ngIf="forms.controls['first'].controls['password'].hasError('required') ">  
+                                                    <div *ngIf="forms.get('first').get('password').touched && !forms.get('first').get('password').valid">  
+                                                        <small class="error-information" *ngIf="forms.get('first').get('password').hasError('required') ">  
                                                             Password is required  
                                                         </small>  
-                                                        <small class="error-information" *ngIf="forms.controls['first'].controls['password'].hasError('minlength') ">  
+                                                        <small class="error-information" *ngIf="forms.get('first').get('password').hasError('minlength') ">  
                                                             Password must be at least 6 characters long
                                                         </small>  
                                                     </div>  
@@ -170,13 +170,13 @@
                                             <div class="col-md-8">
                                                 <div class="form-group" [ngClass]="samePassword()">
                                                     <input type="password" class="form-control" formControlName="confirmPassword">
-                                                    <div *ngIf="forms.controls['first'].controls['confirmPassword'].touched && !forms.controls['first'].controls['confirmPassword'].valid">  
-                                                        <small class="error-information" *ngIf="forms.controls['first'].controls['confirmPassword'].hasError('required') ">  
+                                                    <div *ngIf="forms.get('first').get('confirmPassword').touched && !forms.get('first').get('confirmPassword').valid">  
+                                                        <small class="error-information" *ngIf="forms.get('first').get('confirmPassword').hasError('required') ">  
                                                             Confirming the password is required  
                                                         </small>  
                                                     </div>  
 
-                                                    <small class="error-information" *ngIf="forms.controls['first'].controls['confirmPassword'].touched && forms.controls['first'].controls['confirmPassword'].value != forms.controls['first'].controls['password'].value">  
+                                                    <small class="error-information" *ngIf="forms.get('first').get('confirmPassword').touched && forms.get('first').get('confirmPassword').value != forms.get('first').get('password').value">  
                                                         Passwords does not match
                                                     </small>  
                                                 </div>
@@ -208,8 +208,8 @@
                                             <div class="col-md-8">
                                                 <div class="form-group has-error" [ngClass]="displayFieldCss('second.idNumber')">
                                                     <input type="text" class="form-control" formControlName="idNumber">
-                                                    <div *ngIf="forms.controls['second'].controls['idNumber'].touched && !forms.controls['second'].controls['idNumber'].valid">  
-                                                        <small class="error-information" *ngIf="forms.controls['second'].controls['idNumber'].hasError('required') ">  
+                                                    <div *ngIf="forms.get('second').get('idNumber').touched && !forms.get('second').get('idNumber').valid">  
+                                                        <small class="error-information" *ngIf="forms.get('second').get('idNumber').hasError('required') ">  
                                                             ID Number is required  
                                                         </small>  
                                                     </div>  
@@ -223,8 +223,8 @@
                                             <div class="col-md-8">
                                                 <div class="form-group has-error" [ngClass]="displayFieldCss('second.idName')">
                                                     <input type="text" class="form-control" formControlName="idName">
-                                                    <div *ngIf="forms.controls['second'].controls['idName'].touched && !forms.controls['second'].controls['idName'].valid">  
-                                                        <small class="error-information" *ngIf="forms.controls['second'].controls['idName'].hasError('required') ">  
+                                                    <div *ngIf="forms.get('second').get('idName').touched && !forms.get('second').get('idName').valid">  
+                                                        <small class="error-information" *ngIf="forms.get('second').get('idName').hasError('required') ">  
                                                             Name on ID is required  
                                                         </small>  
                                                     </div>  
@@ -238,8 +238,8 @@
                                             <div class="col-md-8">
                                                 <div class="form-group has-error" [ngClass]="displayFieldCss('second.idType')">
                                                     <input type="text" class="form-control" formControlName="idType">
-                                                    <div *ngIf="forms.controls['second'].controls['idType'].touched && !forms.controls['second'].controls['idType'].valid">  
-                                                        <small class="error-information" *ngIf="forms.controls['second'].controls['idType'].hasError('required') ">  
+                                                    <div *ngIf="forms.get('second').get('idType').touched && !forms.get('second').get('idType').valid">  
+                                                        <small class="error-information" *ngIf="forms.get('second').get('idType').hasError('required') ">  
                                                             ID Type is required  
                                                         </small>  
                                                     </div>  
@@ -296,8 +296,8 @@
                                                     <div class="m-t-5">
                                                         <input class="magic-radio" type="radio" value="1" id="corporate" name="accountType" formControlName="accountType">
                                                         <label for="corporate">Corporate</label>
-                                                        <div *ngIf="forms.controls['third'].controls['accountType'].touched && !forms.controls['third'].controls['accountType'].valid">  
-                                                            <small class="error-information" *ngIf="forms.controls['third'].controls['accountType'].hasError('required') ">  
+                                                        <div *ngIf="forms.get('third').get('accountType').touched && !forms.get('third').get('accountType').valid">  
+                                                            <small class="error-information" *ngIf="forms.get('third').get('accountType').hasError('required') ">  
                                                                 Account Type is required  
                                                             </small>  
                                                         </div>  
@@ -320,8 +320,8 @@
                                             <div class="col-md-8">
                                                 <div class="form-group" [ngClass]="displayFieldCss('third.address')">
                                                     <input type="text" class="form-control" formControlName="address">
-                                                    <div *ngIf="forms.controls['third'].controls['address'].touched && !forms.controls['third'].controls['address'].valid">  
-                                                        <small class="error-information" *ngIf="forms.controls['third'].controls['address'].hasError('required') ">  
+                                                    <div *ngIf="forms.get('third').get('address').touched && !forms.get('third').get('address').valid">  
+                                                        <small class="error-information" *ngIf="forms.get('third').get('address').hasError('required') ">  
                                                             Address is required  
                                                         </small>  
                                                     </div>  
@@ -338,8 +338,8 @@
                                                         <option>China</option>
                                                         <option>Japan</option>
                                                     </select>
-                                                    <div *ngIf="forms.controls['third'].controls['country'].touched && !forms.controls['third'].controls['country'].valid">  
-                                                        <small class="error-information" *ngIf="forms.controls['third'].controls['country'].hasError('required') ">  
+                                                    <div *ngIf="forms.get('third').get('country').touched && !forms.get('third').get('country').valid">  
+                                                        <small class="error-information" *ngIf="forms.get('third').get('country').hasError('required') ">  
                                                             Country is required  
                                                         </small>  
                                                     </div>  
@@ -352,8 +352,8 @@
                                             <div class="col-md-8">
                                                 <div class="form-group" [ngClass]="displayFieldCss('third.postalCode')">
                                                     <input type="text" class="form-control" formControlName="postalCode" mask="0*">
-                                                    <div *ngIf="forms.controls['third'].controls['postalCode'].touched && !forms.controls['third'].controls['postalCode'].valid">  
-                                                        <small class="error-information" *ngIf="forms.controls['third'].controls['postalCode'].hasError('required') ">  
+                                                    <div *ngIf="forms.get('third').get('postalCode').touched && !forms.get('third').get('postalCode').valid">  
+                                                        <small class="error-information" *ngIf="forms.get('third').get('postalCode').hasError('required') ">  
                                                             Postal code is required  
                                                         </small>  
                                                     </div>  
@@ -419,8 +419,8 @@
                                             <div class="col-md-8">
                                                 <div class="form-group" [ngClass]="displayFieldCss('fourth.accountName')">
                                                     <input type="text" class="form-control" formControlName="accountName">
-                                                    <div *ngIf="forms.controls['fourth'].controls['accountName'].touched && !forms.controls['fourth'].controls['accountName'].valid">  
-                                                        <small class="error-information" *ngIf="forms.controls['fourth'].controls['accountName'].hasError('required') ">  
+                                                    <div *ngIf="forms.get('fourth').get('accountName').touched && !forms.get('fourth').get('accountName').valid">  
+                                                        <small class="error-information" *ngIf="forms.get('fourth').get('accountName').hasError('required') ">  
                                                             Account name is required  
                                                         </small>  
                                                     </div>  
@@ -433,8 +433,8 @@
                                             <div class="col-md-8">
                                                 <div class="form-group" [ngClass]="displayFieldCss('fourth.accountNumber')">
                                                     <input type="text" class="form-control" formControlName="accountNumber">
-                                                    <div *ngIf="forms.controls['fourth'].controls['accountNumber'].touched && !forms.controls['fourth'].controls['accountNumber'].valid">  
-                                                        <small class="error-information" *ngIf="forms.controls['fourth'].controls['accountNumber'].hasError('required') ">  
+                                                    <div *ngIf="forms.get('fourth').get('accountNumber').touched && !forms.get('fourth').get('accountNumber').valid">  
+                                                        <small class="error-information" *ngIf="forms.get('fourth').get('accountNumber').hasError('required') ">  
                                                             Account number is required  
                                                         </small>  
                                                     </div>  
@@ -447,8 +447,8 @@
                                             <div class="col-md-8">
                                                 <div class="form-group" [ngClass]="displayFieldCss('fourth.bankName')">
                                                     <input type="text" class="form-control" formControlName="bankName">
-                                                    <div *ngIf="forms.controls['fourth'].controls['bankName'].touched && !forms.controls['fourth'].controls['bankName'].valid">  
-                                                        <small class="error-information" *ngIf="forms.controls['fourth'].controls['bankName'].hasError('required') ">  
+                                                    <div *ngIf="forms.get('fourth').get('bankName').touched && !forms.get('fourth').get('bankName').valid">  
+                                                        <small class="error-information" *ngIf="forms.get('fourth').get('bankName').hasError('required') ">  
                                                             Bank name is required  
                                                         </small>  
                                                     </div>                            
@@ -470,8 +470,8 @@
                                             <div class="col-md-8">
                                                 <div class="form-group" [ngClass]="displayFieldCss('fourth.bankCode')">
                                                     <input type="text" class="form-control" formControlName="bankCode">
-                                                    <div *ngIf="forms.controls['fourth'].controls['bankCode'].touched && !forms.controls['fourth'].controls['bankCode'].valid">  
-                                                        <small class="error-information" *ngIf="forms.controls['fourth'].controls['bankCode'].hasError('required') ">  
+                                                    <div *ngIf="forms.get('fourth').get('bankCode').touched && !forms.get('fourth').get('bankCode').valid">  
+                                                        <small class="error-information" *ngIf="forms.get('fourth').get('bankCode').hasError('required') ">  
                                                             Bank code is required  
                                                         </small>  
                                                     </div>     
@@ -484,8 +484,8 @@
                                             <div class="col-md-8">
                                                 <div class="form-group" [ngClass]="displayFieldCss('fourth.swift')">
                                                     <input type="text" class="form-control" formControlName="swift">
-                                                    <div *ngIf="forms.controls['fourth'].controls['swift'].touched && !forms.controls['fourth'].controls['swift'].valid">  
-                                                        <small class="error-information" *ngIf="forms.controls['fourth'].controls['swift'].hasError('required') ">  
+                                                    <div *ngIf="forms.get('fourth').get('swift').touched && !forms.get('fourth').get('swift').valid">  
+                                                        <small class="error-information" *ngIf="forms.get('fourth').get('swift').hasError('required') ">  
                                                             Swift is required  
                                                         </small>  
                                                     </div>    
