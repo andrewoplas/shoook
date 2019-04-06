@@ -15,6 +15,7 @@ import { AdminNavbarComponent } from '@shared/components/admin/navbar/navbar.com
 // Global
 import { Globals } from './models/Global';
 import { EmailAddressValidator } from './validator/email-address';
+import { SidebarComponent } from './components/admin/sidebar/sidebar.component';
 
 
 @NgModule({
@@ -23,6 +24,7 @@ import { EmailAddressValidator } from './validator/email-address';
     FooterComponent,
     AdminNavbarComponent,
     AdminFooterComponent,
+    SidebarComponent,
     VendorNavbarComponent,
     VendorFooterComponent,
   ],
@@ -37,10 +39,11 @@ import { EmailAddressValidator } from './validator/email-address';
     CommonModule,
     AdminNavbarComponent,
     AdminFooterComponent,
+    SidebarComponent,
     VendorNavbarComponent,
     VendorFooterComponent,
     NavbarComponent,
-    FooterComponent
+    FooterComponent,
   ],
   providers: [
     Globals,
