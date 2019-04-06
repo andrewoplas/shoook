@@ -7,19 +7,24 @@ import { RouterModule } from '@angular/router';
 // Shared Components
 import { VendorFooterComponent } from '@shared/components/vendor/footer/footer.component';
 import { VendorNavbarComponent } from '@shared/components/vendor/navbar/navbar.component';
-import { FooterComponent } from './components/user/footer/footer.component';
-import { NavbarComponent } from './components/user/navbar/navbar.component';
+import { FooterComponent } from '@shared/components/user/footer/footer.component';
+import { NavbarComponent } from '@shared/components/user/navbar/navbar.component';
+import { AdminFooterComponent } from '@shared/components/admin/footer/footer.component';
+import { AdminNavbarComponent } from '@shared/components/admin/navbar/navbar.component';
 
 // Global
 import { Globals } from './models/Global';
 import { EmailAddressValidator } from './validator/email-address';
 
+
 @NgModule({
   declarations: [
-    VendorNavbarComponent,
-    VendorFooterComponent,
     NavbarComponent,
     FooterComponent,
+    AdminNavbarComponent,
+    AdminFooterComponent,
+    VendorNavbarComponent,
+    VendorFooterComponent,
   ],
   imports: [
     CommonModule,
@@ -30,6 +35,8 @@ import { EmailAddressValidator } from './validator/email-address';
   ],
   exports: [
     CommonModule,
+    AdminNavbarComponent,
+    AdminFooterComponent,
     VendorNavbarComponent,
     VendorFooterComponent,
     NavbarComponent,

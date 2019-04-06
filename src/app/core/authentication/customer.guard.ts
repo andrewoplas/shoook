@@ -15,7 +15,7 @@ export class CustomerGuard implements CanActivate {
   canActivate(
     next: ActivatedRouteSnapshot,
     state: RouterStateSnapshot): Observable<boolean> | Promise<boolean> | boolean {
-      if (this.auth.isloggedIn() && this.auth.isVendor()) {
+      if (this.auth.isloggedIn() && this.auth.isCustomer()) {
         return true;
       } else {
         this.router.navigate(['/login']);
