@@ -66,21 +66,17 @@
             </h3>
 
             <div class="results-container">
-                <div *ngFor="let menu of menus; let i = index; let last = last" class="item" (click)="item_click(menu)">
-                    <div id="{{ menu_images[i].folder }}">
-                        <div *ngFor="let image of menu_images[i].images; let count = index">
-                            <div class="image-carousel">
-                                <img [src]="image" alt="Image of {{ menu.styleOfCookingDescription }}">
-                            </div>
-                        </div>
+                <div #menus *ngFor="let menu of menuList; let i = index;" class="item" (click)="item_click(menu)">
+                    <div id="image{{i}}">
+                        <div class="image-carousel" *ngFor="let imageLink of menu.menuImages">
+                            <img src="{{imagePath + imageLink}}" alt="Image of {{ menu.styleOfCookingDescription }}"/>
+                        </div>    
                     </div>
                     <span class="option m-t-10">Option 1</span>
                     <span class="title">{{ menu.styleOfCookingDescription }}</span>
                     <span class="description">{{ menu.specialtyDescription }}</span>
                     <span class="price">P{{ menu.priceFourMainCourse | number: '2.' }}</span>
                     <span class="lay-away">*Available on Lay Away</span>
-                    
-                    {{last && menus.length > 0? initSlick() : ''}}
                 </div>
             </div>
         </div>

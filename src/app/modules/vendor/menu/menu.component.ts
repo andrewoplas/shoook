@@ -45,7 +45,7 @@ export class MenuComponent implements OnInit {
     private global: Globals
   ) {
     this.menuImagesError = false;
-    this.imagePath = global.MENU_IMAGE_PATH;
+    this.imagePath = this.global.MENU_IMAGE_PATH;
    }
 
   ngOnInit() {

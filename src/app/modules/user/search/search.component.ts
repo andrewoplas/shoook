@@ -1,8 +1,9 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChildren, QueryList } from '@angular/core';
 import { MenuService } from '@core/services/menu.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import swal from 'sweetalert2';
 import * as $ from 'jquery';
+import { Globals } from '@shared/models/Global';
 
 declare var require: any
 
@@ -15,53 +16,27 @@ export class SearchComponent implements OnInit {
   public datePicker
   public prevDay
   public currentMenu = null;
-  public menus = []
-  public menu_images = []
+  public menuList = []
   public changeMenu = []
   public addedMenu = []
+  public imagePath;
   
+  @ViewChildren('menus') menus: QueryList<any>;
 
   constructor(
     private menuService: MenuService,
     private route: ActivatedRoute,
-    private router: Router
+    private router: Router,
+    private global: Globals
   ) { 
-    let search = {
-      occassion: this.route.snapshot.paramMap.get('occassion') != null ? this.route.snapshot.paramMap.get('occassion').trim() : '',
-      date: this.route.snapshot.paramMap.get('date') != null ? this.route.snapshot.paramMap.get('date').trim() : '',
-      time: this.route.snapshot.paramMap.get('time') != null ? this.route.snapshot.paramMap.get('time').trim() : '',
-      location: this.route.snapshot.paramMap.get('location') != null ? this.route.snapshot.paramMap.get('location').trim() : '',
-      guests: this.route.snapshot.paramMap.get('guests') != null ? this.route.snapshot.paramMap.get('guests').trim() : '',
-    }
-
-    this.menuService.search(search).subscribe(
-      data => { 
-        if(data.success && data.body.length > 0) {
-          this.menus = data.body;
-
-          for (let menu of this.menus) {
-            let images = menu.images.split(',');
-            let images_req = [], i, count = Number(images[1]);
-            
-            for(i = 0; i<count; i++) {
-              images_req.push(require('../../../../../uploads/menus/' + images[0] + '/' + images[0] + i + '.jpg'))
-             }
-            
-            this.menu_images.push({
-              folder: images[0],
-              images: images_req
-            });
-          }
-        }  
-      }
-    );
+    this.imagePath = this.global.MENU_IMAGE_PATH;
   }
 
-  ngOnInit() { }
+  ngOnInit() { 
+    this.getMenuList();
+  }
 
   ngAfterContentInit() {
-    this.initSlick();
-
     this.datePicker = eval(
       "$('.txtDate').datepicker({" +
       "  minDate: new Date()," +
@@ -76,6 +51,57 @@ export class SearchComponent implements OnInit {
       "}" +
       "}).data('datepicker');"
     );    
+  }
+
+  ngAfterViewInit() {
+    this.menus.changes.subscribe(t => {
+      this.initializeSlick();
+    })
+  }
+
+  
+  public getMenuList() {
+    let search = {
+      occassion: this.route.snapshot.paramMap.get('occassion') != null ? this.route.snapshot.paramMap.get('occassion').trim() : '',
+      date: this.route.snapshot.paramMap.get('date') != null ? this.route.snapshot.paramMap.get('date').trim() : '',
+      time: this.route.snapshot.paramMap.get('time') != null ? this.route.snapshot.paramMap.get('time').trim() : '',
+      location: this.route.snapshot.paramMap.get('location') != null ? this.route.snapshot.paramMap.get('location').trim() : '',
+      guests: this.route.snapshot.paramMap.get('guests') != null ? this.route.snapshot.paramMap.get('guests').trim() : '',
+    }
+
+    this.menuService.search(search).subscribe(
+      data => { 
+        if(data.success && data.body.length > 0) {
+          this.menuList = data.body;
+          
+          for(let i=0; i<this.menuList.length; i++) {
+            this.menuList[i]['menuImages'] = this.parseImages(this.menuList[i].images);
+          }
+
+          console.log(this.menuList);
+        }        
+      }
+    );
+  }
+
+  public parseImages(images) {
+    let arr = images.split(",");
+    let hash = arr[0];
+    let num = +arr[1];
+
+    let imageArr = new Array();
+    for(let i=0; i<num; i++) {
+      imageArr.push(hash + "/" + hash + i + ".jpg");
+    }
+
+    return imageArr;
+  }
+
+  public initializeSlick() {
+    let count = this.menus.length;
+    for(let i=0; i<count; i++) {
+      eval("$('#image" + i + "').not('.slick-initialized').slick({arrows: false, autoplay: true, autoplaySpeed: 2000, dots: true})");  
+    }
   }
 
   item_click(menu) {
@@ -96,15 +122,6 @@ export class SearchComponent implements OnInit {
   addMenu(index) {
     this.changeMenu.push(this.addedMenu[index]);
     this.addedMenu.splice(index, 1);
-  }
-
-  initSlick() {
-    for (let menu of this.menus) {
-      let folder = menu.images.split(',')[0];
-      if(!$('#' + folder).hasClass('slick-initialized')) {
-        eval("$('#"+ folder +"').slick({autoplay: true, autoplaySpeed: 2000, dots: true, arrows: false})");
-      }
-    }
   }
 
   date_click() {
