@@ -11,6 +11,80 @@
 <div class="row">
     <div class="col-md-12">
         <div class="white-box">
-            <h3 class="box-title">Vendors</h3> </div>
+            <div class="row">
+                <div class="col-md-6">
+                    <h3 class="box-title">Vendors</h3>    
+                </div>
+                <div class="col-md-6">
+                    <div class="dropdown show pull-right">
+                        <div class="dropdown">
+                            <button class="btn btn-info waves-effect waves-light btn-raised dropdown-toggle" type="button" data-toggle="dropdown">
+                                Filter Vendors: 
+                                <span class="filterLabel" *ngIf="currentFilter == 0">All</span>
+                                <span class="filterLabel" *ngIf="currentFilter == 1">Approved</span>
+                                <span class="filterLabel" *ngIf="currentFilter == 2">Needs Approval</span>
+                                <span class="caret"></span>
+                            </button>
+                            <ul class="dropdown-menu">
+                                <li (click)="filter(0)"><a href="javascript:void(0)">All</a></li>
+                                <li (click)="filter(1)"><a href="javascript:void(0)">Approved</a></li>
+                                <li (click)="filter(2)"><a href="javascript:void(0)">Needs Approval</a></li>
+                            </ul>
+                        </div>
+                     </div>
+                </div>
+
+                <hr>
+            
+                <div class="m-t-30">
+                    <div class="col-md-12">
+                        <table id="table" class="table table-striped">
+                            <thead>
+                                <tr>
+                                    <th>Name</th>
+                                    <th>Email Address</th>
+                                    <th class="text-center">Status</th>
+                                    <th>Action</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr #vendors *ngFor="let vendor of vendorsList">
+                                    <td>{{ vendor.firstName + " " + vendor.lastName }}</td>
+                                    <td>{{ vendor.emailAddress }}</td>
+                                    <td class="text-center">
+                                        <span *ngIf="vendor.approved == 0" class="label label-danger">Needs Approval</span>
+                                        <span *ngIf="vendor.approved == 1" class="label label-success">Approved</span>
+                                    </td>
+                                    <td>
+                                        <a routerLink="/admin/vendors/view/{{ vendor.id }}">
+                                            <button class="btn btn-success btn-outline btn-circle m-r-5 p-t-0 p-b-0"
+                                                data-toggle="tooltip" data-placement="top" title="View Vendor">
+                                                <i class="mdi mdi-account-card-details"></i>
+                                            </button>
+                                        </a>
+
+                                        <button [swal]="removeSwal" (confirm)="remove(vendor.id)" class="btn btn-danger btn-outline btn-circle m-r-5 p-t-0 p-b-0" 
+                                            data-toggle="tooltip" data-placement="top" title="Remove">
+                                            <i class="mdi mdi-delete"></i>
+                                        </button>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+
+                        <swal 
+                            #removeSwal 
+                            title="Remove?" 
+                            text="Are you sure you want to remove this vendor?" 
+                            type="question"
+                            [showCancelButton]="true" 
+                            confirmButtonText="Yes, Remove it"
+                            confirmButtonColor="#f44336">
+                        </swal>
+
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
 </div>
