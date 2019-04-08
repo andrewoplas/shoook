@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
+import { AuthService } from '@core/services/auth.service';
 
 @Component({
   selector: 'admin-navbar',
@@ -6,10 +7,16 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./navbar.component.scss']
 })
 export class AdminNavbarComponent implements OnInit {
+  @Input() firstName;
+  @Input() lastName;
 
-  constructor() { }
+  constructor(private auth: AuthService) { 
+  }
 
   ngOnInit() {
   }
 
+  public logout() {
+    this.auth.logout();
+  }
 }

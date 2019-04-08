@@ -1,1 +1,6 @@
 @import '../../../../../assets/plugins/sidebar-nav/dist/sidebar-nav.css';
+@import '../../../../../assets/scss/partials/variable';
+
+#side-menu > li > a.active {
+    background-color: $pink;
+}   

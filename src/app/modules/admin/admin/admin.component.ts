@@ -1,4 +1,5 @@
 import { Component, OnInit, ViewEncapsulation  } from '@angular/core';
+import { AuthService } from '@core/services/auth.service';
 import * as $ from 'jquery';
 
 @Component({
@@ -8,8 +9,13 @@ import * as $ from 'jquery';
   encapsulation: ViewEncapsulation.None
 })
 export class AdminComponent implements OnInit {
+  public admin;
 
-  constructor() { }
+  constructor(private auth: AuthService) { 
+    this.admin = this.auth.getUser();
+
+    console.log(this.admin)
+  }
 
   ngOnInit() {
     $('.preloader').fadeOut();

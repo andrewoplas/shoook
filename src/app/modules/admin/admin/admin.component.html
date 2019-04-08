@@ -5,8 +5,8 @@
 </div>
 
 <div id="wrapper">
-    <admin-navbar></admin-navbar>
-    <admin-sidebar></admin-sidebar>
+    <admin-navbar [firstName]="admin.firstName" [lastName]="admin.lastName"></admin-navbar>
+    <admin-sidebar [firstName]="admin.firstName" [lastName]="admin.lastName"></admin-sidebar>
     
     <div id="page-wrapper">
         <div class="container-fluid">
