@@ -38,7 +38,9 @@
               "../shoook/src/assets/plugins/datepicker/js/i18n/datepicker.en.js",
               "../shoook/src/assets/plugins/slide-to-captcha-master/js/slide-to-captcha.js",
               "../shoook/src/assets/plugins/stylishTabs/main.js",
-              "../shoook/src/assets/plugins/dropzone/dropzone.min.js"
+              "../shoook/src/assets/plugins/dropzone/dropzone.min.js",
+
+              "../shoook/src/assets/plugins/sidebar-nav/dist/sidebar-nav.min.js"
             ]
           },
           "configurations": {

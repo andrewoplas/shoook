@@ -83,8 +83,14 @@ export class AuthService {
   }
 
   public logout() {
+    let admin = this.isAdmin();
     localStorage.removeItem('user_credentials');
-    this.router.navigate(['/']);
+    
+    if(admin) {
+      this.router.navigate(['admin/login']);  
+    } else {
+      this.router.navigate(['/']);
+    }
   }
 
   public getUser() {

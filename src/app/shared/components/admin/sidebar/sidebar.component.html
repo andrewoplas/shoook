@@ -1,0 +1,52 @@
+<div class="navbar-default sidebar" role="navigation">
+    <div class="sidebar-nav slimscrollsidebar">
+        <div class="sidebar-head">
+            <h3>
+                <span class="fa-fw open-close">
+                    <i class="ti-menu hidden-xs"></i>
+                    <i class="ti-close visible-xs"></i>
+                </span>
+                <span class="hide-menu">Navigation</span>
+            </h3>
+        </div>
+        <ul class="nav" id="side-menu">
+                <li class="user-pro">
+                    <a href="javascript:void(0)" class="waves-effect">
+                        <img src="assets/image/s.png" alt="user-img" class="img-circle"> 
+                        <span class="hide-menu"> 
+                            {{ firstName + " " + lastName }}
+                            <span class="fa arrow"></span>
+                        </span>
+                    </a>
+                    <ul class="nav nav-second-level collapse" aria-expanded="false" style="height: 0px;">
+                        <li><a href="javascript:void(0)"><i class="ti-user"></i> <span class="hide-menu">My Profile</span></a></li>                       
+                        <li><a href="javascript:void(0)" (click)="logout()"><i class="fa fa-power-off"></i> <span class="hide-menu">Logout</span></a></li>
+                    </ul>
+                </li>   
+            <li>
+                <a routerLinkActive="active" routerLink="/admin/dashboard" class="waves-effect">
+                    <i class="mdi mdi-av-timer fa-fw"></i>
+                    <span class="hide-menu">Dashboard</span>
+                </a>
+            </li>
+            <li>
+                <a routerLinkActive="active" routerLink="/admin/vendors" class="waves-effect">
+                    <i class="mdi mdi-account-multiple-outline fa-fw"></i>
+                    <span class="hide-menu">Vendors</span>
+                </a>
+            </li>   
+            <li>
+                <a routerLinkActive="active" routerLink="/admin/menus" class="waves-effect">
+                    <i class="mdi mdi-silverware-variant fa-fw"></i>
+                    <span class="hide-menu">Menus</span>
+                </a>
+            </li>
+            <li>
+                <a routerLinkActive="active" routerLink="/admin/orders" class="waves-effect">
+                    <i class="mdi mdi-cart-outline fa-fw"></i>
+                    <span class="hide-menu">Orders</span>
+                </a>
+            </li>
+        </ul>
+    </div>
+</div>

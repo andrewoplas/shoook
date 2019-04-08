@@ -1,0 +1,50 @@
+<nav class="navbar navbar-default navbar-static-top m-b-0">
+    <div class="navbar-header">
+        <div class="top-left-part">
+            <a class="logo" routerLink="/admin">
+                <img src="assets/image/Logo_With_Stroke.png" alt="home" class="logo" />
+                <!-- Logo text image you can use text also -->
+                <span class="visible-xs">
+                    <span class="logo-text">SHOOOK</span>
+                </span>
+            </a>
+        </div>
+        <!-- /Logo -->
+        <!-- Search input and Toggle icon -->
+
+        <ul class="nav navbar-top-links navbar-right pull-right">
+            <li class="dropdown">
+                <a class="dropdown-toggle profile-pic" data-toggle="dropdown" href="#">
+                    <img src="assets/image/s.png" alt="user-img" width="36" class="img-circle">
+                    <b class="hidden-xs">{{ firstName }}</b>
+                    <span class="caret"></span>
+                </a>
+                <ul class="dropdown-menu dropdown-user animated flipInY">
+                    <li>
+                        <div class="dw-user-box">
+                            <div class="u-img">
+                                <img src="assets/images/users/varun.jpg" alt="user" />
+                            </div>
+                            <div class="u-text">
+                                <h4>{{ firstName + " " + lastName}}</h4>
+                                <p class="text-muted">Administrator</p>
+                            </div>
+                        </div>
+                    </li>
+                    <li role="separator" class="divider"></li>
+                    <li>
+                        <a href="#">
+                            <i class="ti-user"></i> My Profile</a>
+                    </li>
+                    <li role="separator" class="divider"></li>
+                    <li>
+                        <a (click)="logout()">
+                            <i class="fa fa-power-off"></i> Logout</a>
+                    </li>
+                </ul>
+                <!-- /.dropdown-user -->
+            </li>
+            <!-- /.dropdown -->
+        </ul>
+    </div>
+</nav>
