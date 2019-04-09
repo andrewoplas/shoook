@@ -1,0 +1,33 @@
+@import '../../../../assets/scss/partials/variable';
+
+.user-bg .overlay-box {
+    background: $pink;
+    opacity: 0.8;
+}
+
+.customtab li.active a, .customtab li.active a:hover, .customtab li.active a:focus {
+    border-bottom: 2px solid $pink;
+    color: $pink;
+}
+
+.custom-caret {
+    color: $pink;
+    font-size: 14px;
+    margin-right: 4px;
+}
+
+#company{
+    .info-value {
+        font-weight: bold;
+    }
+}
+
+#id {
+    img {
+        width: 100%;
+    }
+}
+
+.download-card {
+    margin-bottom: 10px;
+}

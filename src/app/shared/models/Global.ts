@@ -10,4 +10,6 @@ export class Globals {
 
   // Image Resources
   public MENU_IMAGE_PATH: string = "http://shoook.ph/uploads/menu/";
+  public ID_IMAGE_PATH: string = "http://shoook.ph/uploads/id/";
+  public DOCUMENT_FILE_PATH: string = "http://shoook.ph/uploads/documents/";  
 }
