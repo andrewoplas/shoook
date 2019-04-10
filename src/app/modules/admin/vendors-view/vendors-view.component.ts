@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChildren, QueryList } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { VendorService } from '@core/services/vendor.service';
 import { Globals } from '@shared/models/Global';
@@ -15,7 +15,10 @@ export class VendorsViewComponent implements OnInit {
   public id;
   public vendor;
   public idPath;
+  public imagePath;
   public documentPath;
+  
+  @ViewChildren('menus') menus: QueryList<any>;
 
   constructor(
     private route: ActivatedRoute,
@@ -24,12 +27,26 @@ export class VendorsViewComponent implements OnInit {
   ) {
     this.idPath = this.global.ID_IMAGE_PATH;
     this.documentPath = this.global.DOCUMENT_FILE_PATH;
+    this.imagePath = this.global.MENU_IMAGE_PATH;
    }
 
   ngOnInit() {
     this.route.params.subscribe(params => { this.id = params['id']; });
     this.vendor = null;
     this.getVendor();
+  }
+
+  ngAfterViewInit() {
+    this.menus.changes.subscribe(t => {
+      this.initializeSlick();
+    })
+  }
+
+  public initializeSlick() {
+    let count = this.vendor.menus.length;
+    for(let i=0; i<count; i++) {
+      eval("$('#image" + i + "').not('.slick-initialized').slick({arrows: false, autoplay: true, autoplaySpeed: 2000, dots: true})");  
+    }
   }
 
   public getVendor() {
@@ -41,6 +58,10 @@ export class VendorsViewComponent implements OnInit {
           for(let i=0; i<this.vendor.vendorBanks.length; i++) {
             this.vendor.vendorBanks[i]['documents'] = this.parseBankDocuments(
               this.vendor.vendorBanks[i].bankInformationDocuments, this.vendor.vendorBanks[i].id);
+          }
+          console.log(this.vendor);
+          for(let i=0; i<this.vendor.menus.length; i++) {
+            this.vendor.menus[i]['menuImages'] = this.parseImages(this.vendor.menus[i].images);
           }
         }
       }
@@ -62,6 +83,19 @@ export class VendorsViewComponent implements OnInit {
     }
 
     return documentPaths;
+  }
+
+  public parseImages(images) {
+    let arr = images.split(",");
+    let hash = arr[0];
+    let num = +arr[1];
+
+    let imageArr = new Array();
+    for(let i=0; i<num; i++) {
+      imageArr.push(hash + "/" + hash + i + ".jpg");
+    }
+
+    return imageArr;
   }
 
   public approve() {

@@ -143,24 +143,54 @@
                     
                     <!-- Menu Tab -->
                     <div class="tab-pane active" id="menu" [ngClass]="{'hide':vendor.approved == 0}">
-                        <div class="row">
-                            <div class="col-md-3 col-xs-6 b-r"> <strong>Full Name</strong>
-                                <br>
-                                <p class="text-muted">Johnathan Deo</p>
+                            <div class="table-ver1" [ngClass]="{hide: vendor.menus.length==0}">
+                                <div class="table-head">
+                                    <table>
+                                        <thead>
+                                            <tr>
+                                                <th width="17%" class="text-center">Image</th>
+                                                <th width="17%">Style</th>
+                                                <th width="20%">Description</th>
+                                                <th width="15%" class="text-center">Created</th>
+                                                <th width="10%" class="text-center">Status</th>
+                                                <th width="20%" class="text-center">Action</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr #menus *ngFor="let menu of vendor.menus; let i = index">
+                                                <td>
+                                                    <div class="container-fix">
+                                                        <div id="image{{i}}" class="image-container">
+                                                            <div class="image-div" *ngFor="let imageLink of menu.menuImages">
+                                                                <img src="{{imagePath + imageLink}}" />
+                                                            </div>    
+                                                        </div>
+                                                    </div>
+                                                </td>
+                                                <td>{{ menu.styleOfCookingDescription }}</td>
+                                                <td class="text-justify">{{ menu.specialtyDescription }}</td>
+                                                <td class="text-center">{{ menu.dateCreated | date:'dd-MMM-yyyy' }}</td>
+                                                <td class="text-center">
+                                                    <span class="badge status-active" [ngClass]="{hide: menu.active==0}">Active</span>
+                                                    <span class="badge status-hidden" [ngClass]="{hide: menu.active==1}">Hidden</span>
+                                                </td>
+                                                <td class="action-buttons text-center">
+                                                    <a href="/admin/menus/{{ menu.id }}">
+                                                        <button class="btn-print" ><i class="material-icons">visibility</i>View</button>
+                                                    </a>
+                                                </td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
                             </div>
-                            <div class="col-md-3 col-xs-6 b-r"> <strong>Mobile</strong>
-                                <br>
-                                <p class="text-muted">(123) 456 7890</p>
+        
+                            <div class="empty-menu-container" [ngClass]="{hide: vendor.menus.length > 0}">
+                                <img src="assets/image/empty_dish.svg" class="image" />
+                                <p class="title">
+                                    EMPTY MENU LIST
+                                </p>                               
                             </div>
-                            <div class="col-md-3 col-xs-6 b-r"> <strong>Email</strong>
-                                <br>
-                                <p class="text-muted">johnathan@admin.com</p>
-                            </div>
-                            <div class="col-md-3 col-xs-6"> <strong>Location</strong>
-                                <br>
-                                <p class="text-muted">London</p>
-                            </div>
-                        </div>
                     </div>
                     
                     <!-- Company -->
