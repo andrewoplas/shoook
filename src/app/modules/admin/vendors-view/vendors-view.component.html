@@ -1,0 +1,419 @@
+<div class="row bg-title">
+        <div class="col-lg-3 col-md-4 col-sm-4 col-xs-12">
+            <h4 class="page-title">Vendor Profile</h4> </div>
+        <div class="col-lg-9 col-sm-8 col-md-8 col-xs-12">
+            <ol class="breadcrumb">
+                <li><a routerLink="/admin/dashboard">Dashboard</a></li>
+                <li><a routerLink="/admin/vendors">Vendors</a></li>
+                <li class="active">Vendor Profile</li>
+            </ol>
+        </div>
+      </div>
+      
+      <div class="row" *ngIf="vendor != null">
+        <div class="col-md-4 col-xs-12">
+            <div class="white-box">
+                
+                <div class="user-bg"> <img width="100%" alt="user" src="assets/image/user-profile-background.jpg">
+                    <div class="overlay-box">
+                        <div class="user-content">
+                            <img src="assets/image/user-placeholder.png" class="thumb-lg img-circle" alt="img" />
+                            <h4 class="text-white">{{ vendor.firstName + " " + vendor.lastName }}</h4>
+                            <h5 class="text-white">{{ vendor.code }}</h5> 
+                        </div>
+                    </div>
+                </div>      
+
+                <div class="user-btm-box">
+                    
+                    <div class="row text-center m-t-10">
+                        <div class="col-md-6 b-r"><strong>First Name</strong>
+                            <p>{{ vendor.firstName }}</p>
+                        </div>
+                        <div class="col-md-6"><strong>Last Name</strong>
+                            <p>{{ vendor.lastName }}</p>
+                        </div>
+                    </div>
+                    
+                    <hr>
+
+                    <div class="row text-center m-t-10">
+                        <div class="col-md-6 b-r"><strong>Email Address</strong>
+                            <p>{{ vendor.emailAddress }}</p>
+                        </div>
+                        <div class="col-md-6"><strong>Phone Number</strong>
+                            <p>{{ vendor.phoneNumber }}</p>
+                        </div>
+                    </div>
+                        
+                    <hr>
+                    
+                    <div class="row text-center m-t-10">
+                        <div class="col-md-4 b-r"><strong>Barangay</strong>
+                            <p>{{ vendor.barangay }}</p>
+                        </div>
+                        <div class="col-md-4 b-r"><strong>City</strong>
+                            <p>{{ vendor.city }}</p>
+                        </div>
+                        <div class="col-md-4"><strong>Region</strong>
+                            <p>{{ vendor.region }}</p>
+                        </div>
+                    </div>
+                    
+                    <hr>
+                    
+                    <div class="row text-center m-t-10">
+                        <div class="col-md-12"><strong>Status</strong>
+                            <br/>
+                            <p *ngIf="vendor.approved == 0" class="label label-danger">Needs Approval</p>
+                            <p *ngIf="vendor.approved == 1" class="label label-success">Approved</p>
+                        </div>
+                    </div>
+
+                    <hr *ngIf="vendor.approved == 0">
+
+                    <div class="row text-center m-t-10" *ngIf="vendor.approved == 0">
+                        <div class="col-md-12">
+                            <button class="btn btn-md btn-success waves-effect waves-light btn-raised"
+                                [swal]="approveSwal" (confirm)="approve()">
+                                Approve Vendor
+                            </button>
+                        </div>
+                    </div>
+
+                    <swal 
+                        #approveSwal 
+                        title="Confirm Approval" 
+                        text="Please confirm to approve this vendor." 
+                        type="info"
+                        [showCancelButton]="true" 
+                        confirmButtonText="Yes, Approve it">
+                    </swal>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-8 col-xs-12">
+            <div class="p-t-15 p-b-15 white-box notification" *ngIf="vendor.approved == 0">
+                <p class="notification-message">
+                    <i class="fa fa-warning"></i>
+                    <span>{{ vendor.firstName + " " + vendor.lastName}} is not yet verified.</span>
+
+                    <button class="btn btn-sm btn-success waves-effect waves-light btn-raised btn-approve pull-right"
+                        [swal]="approveSwal" (confirm)="approve()">
+                        Approve Vendor
+                    </button>
+                </p>
+            </div>
+
+            <div class="white-box">
+                <!-- .tabs -->
+                <ul class="nav nav-tabs tabs customtab">
+                    <li class="active tab" [ngClass]="{'hide':vendor.approved == 0}">
+                        <a href="#menu" data-toggle="tab"> 
+                            <span class="visible-xs">
+                                <i class="fa fa-home"></i>
+                            </span> 
+                            <span class="hidden-xs">Menu</span> </a>
+                    </li>
+                    <li class="tab" [ngClass]="{'active':vendor.approved == 0}">
+                        <a href="#company" data-toggle="tab"> 
+                            <span class="visible-xs">
+                                <i class="fa fa-user"></i>
+                            </span> 
+                            <span class="hidden-xs">Company Information</span> </a>
+                    </li>
+                    <li class="tab">
+                        <a href="#bank" data-toggle="tab" aria-expanded="false"> 
+                            <span class="visible-xs">
+                                <i class="fa fa-cog"></i>
+                            </span> 
+                            <span class="hidden-xs">Bank Account</span> </a>
+                    </li>
+                    <li class="tab">
+                        <a href="#id" data-toggle="tab" aria-expanded="false"> 
+                            <span class="visible-xs">
+                                <i class="fa fa-cog"></i>
+                            </span> 
+                            <span class="hidden-xs">Vendor Identification</span> </a>
+                    </li>
+                </ul>
+                <!-- /.tabs -->
+                <div class="tab-content">
+                    
+                    <!-- Menu Tab -->
+                    <div class="tab-pane active" id="menu" [ngClass]="{'hide':vendor.approved == 0}">
+                            <div class="table-ver1" [ngClass]="{hide: vendor.menus.length==0}">
+                                <div class="table-head">
+                                    <table>
+                                        <thead>
+                                            <tr>
+                                                <th width="17%" class="text-center">Image</th>
+                                                <th width="17%">Style</th>
+                                                <th width="20%">Description</th>
+                                                <th width="15%" class="text-center">Created</th>
+                                                <th width="10%" class="text-center">Status</th>
+                                                <th width="20%" class="text-center">Action</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr #menus *ngFor="let menu of vendor.menus; let i = index">
+                                                <td>
+                                                    <div class="container-fix">
+                                                        <div id="image{{i}}" class="image-container">
+                                                            <div class="image-div" *ngFor="let imageLink of menu.menuImages">
+                                                                <img src="{{imagePath + imageLink}}" />
+                                                            </div>    
+                                                        </div>
+                                                    </div>
+                                                </td>
+                                                <td>{{ menu.styleOfCookingDescription }}</td>
+                                                <td class="text-justify">{{ menu.specialtyDescription }}</td>
+                                                <td class="text-center">{{ menu.dateCreated | date:'dd-MMM-yyyy' }}</td>
+                                                <td class="text-center">
+                                                    <span class="badge status-active" [ngClass]="{hide: menu.active==0}">Active</span>
+                                                    <span class="badge status-hidden" [ngClass]="{hide: menu.active==1}">Hidden</span>
+                                                </td>
+                                                <td class="action-buttons text-center">
+                                                    <a href="/admin/menus/{{ menu.id }}">
+                                                        <button class="btn-print" ><i class="material-icons">visibility</i>View</button>
+                                                    </a>
+                                                </td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+        
+                            <div class="empty-menu-container" [ngClass]="{hide: vendor.menus.length > 0}">
+                                <img src="assets/image/empty_dish.svg" class="image" />
+                                <p class="title">
+                                    EMPTY MENU LIST
+                                </p>                               
+                            </div>
+                    </div>
+                    
+                    <!-- Company -->
+                    <div class="tab-pane" id="company" [ngClass]="{'active':vendor.approved == 0}">
+                        <div class="companies-container" *ngFor="let company of vendor.vendorCompanies">
+                            <div class="row">
+                                <div class="col-md-6 col-xs-6 b-r"> <strong>Name</strong>
+                                    <br>
+                                    <p class="text-muted">{{ company.name }}</p>
+                                </div>
+                                <div class="col-md-6 col-xs-6 b-r"> <strong>Account Type</strong>
+                                    <br>
+                                    <p class="text-muted" *ngIf="company.accountType == 0">Individual</p>
+                                    <p class="text-muted" *ngIf="company.accountType == 1">Corporate</p>
+                                </div>
+                            </div>
+
+                            <hr />
+
+                            
+                            <div class="row">
+                                <div class="col-xs-12 col-sm-6">
+                                    <div class="row">
+                                        <div class="col-xs-6">
+                                            <p class="info-label text-muted">
+                                                <i class="fa fa-caret-right custom-caret"></i> 
+                                                Address: </p>
+                                        </div>
+                                        <div class="col-xs-6">
+                                            <p class="info-value">{{ company.address }}</p>
+                                        </div>
+                                    </div>
+        
+                                    <div class="row">
+                                        <div class="col-xs-6">
+                                            <p class="info-label text-muted">
+                                                <i class="fa fa-caret-right custom-caret"></i>
+                                                Country: </p>
+                                        </div>
+                                        <div class="col-xs-6">
+                                            <p class="info-value">{{ company.country }}</p>
+                                        </div>
+                                    </div>
+        
+                                    <div class="row">
+                                        <div class="col-xs-6">
+                                            <p class="info-label text-muted">
+                                                <i class="fa fa-caret-right custom-caret"></i>
+                                                Postal Code: </p>
+                                        </div>
+                                        <div class="col-xs-6">
+                                            <p class="info-value">{{ company.postalCode }}</p>
+                                        </div>
+                                    </div>
+        
+                                    <div class="row">
+                                        <div class="col-xs-6">
+                                            <p class="info-label text-muted">
+                                                <i class="fa fa-caret-right custom-caret"></i>
+                                                Person In Charge: </p>
+                                        </div>
+                                        <div class="col-xs-6">
+                                            <p class="info-value">{{ company.personInCharge }}</p>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="col-xs-12 col-sm-6">
+                                    <div class="row">
+                                        <div class="col-xs-6">
+                                            <p class="info-label text-muted">
+                                                <i class="fa fa-caret-right custom-caret"></i>
+                                                Business Registration No: </p>
+                                        </div>
+                                        <div class="col-xs-6">
+                                            <p class="info-value">{{ company.businessNo }}</p>
+                                        </div>
+                                    </div>
+        
+                                    <div class="row">
+                                        <div class="col-xs-6">
+                                            <p class="info-label text-muted">
+                                                <i class="fa fa-caret-right custom-caret"></i>
+                                                Seller VAT: </p>
+                                        </div>
+                                        <div class="col-xs-6">
+                                            <p class="info-value">{{ company.sellerVat }}</p>
+                                        </div>
+                                    </div>
+        
+                                        <div class="row">
+                                        <div class="col-xs-6">
+                                            <p class="info-label text-muted">
+                                                <i class="fa fa-caret-right custom-caret"></i>
+                                                VAT Registered: </p>
+                                        </div>
+                                        <div class="col-xs-6">
+                                            <p class="info-value">{{ company.vatRegistered == 1 ? "YES" : "NO" }}</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Bank -->
+                    <div class="tab-pane" id="bank">
+                        <div class="companies-container" *ngFor="let bank of vendor.vendorBanks">
+                            <div class="row">
+                                <div class="col-md-7 col-sm-6 col-xs-12">
+                                    <h4 class="font-bold m-t-30">Bank Details</h4>
+                                    <hr />
+        
+                                    <div class="row">
+                                        <div class="col-md-12">
+        
+                                            <div class="row">
+                                                <div class="col-xs-6 col-sm-5 col-md-4">
+                                                    <p class="info-label text-muted">
+                                                        <i class="fa fa-caret-right custom-caret"></i> 
+                                                        Account Name: </p>
+                                                </div>
+                                                <div class="col-xs-6 col-sm-7 col-md-8">
+                                                    <p class="info-value">{{ bank.accountName }}</p>
+                                                </div>
+                                            </div>
+        
+                                            <div class="row">
+                                                <div class="col-xs-6 col-sm-5 col-md-4">
+                                                    <p class="info-label text-muted">
+                                                        <i class="fa fa-caret-right custom-caret"></i> 
+                                                        Account Number: </p>
+                                                </div>
+                                                <div class="col-xs-6 col-sm-7 col-md-8">
+                                                    <p class="info-value">{{ bank.accountNumber }}</p>
+                                                </div>
+                                            </div>
+        
+                                            <div class="row">
+                                                <div class="col-xs-6 col-sm-5 col-md-4">
+                                                    <p class="info-label text-muted">
+                                                        <i class="fa fa-caret-right custom-caret"></i> 
+                                                        Bank Name: </p>
+                                                </div>
+                                                <div class="col-xs-6 col-sm-7 col-md-8">
+                                                    <p class="info-value">{{ bank.bankName }}</p>
+                                                </div>
+                                            </div>
+        
+                                            <div class="row">
+                                                <div class="col-xs-6 col-sm-5 col-md-4">
+                                                    <p class="info-label text-muted">
+                                                        <i class="fa fa-caret-right custom-caret"></i> 
+                                                        Branch Name: </p>
+                                                </div>
+                                                <div class="col-xs-6 col-sm-7 col-md-8">
+                                                    <p class="info-value">{{ bank.branchName }}</p>
+                                                </div>
+                                            </div>
+        
+                                            <div class="row">
+                                                <div class="col-xs-6 col-sm-5 col-md-4">
+                                                    <p class="info-label text-muted">
+                                                        <i class="fa fa-caret-right custom-caret"></i> 
+                                                        Bank Code: </p>
+                                                </div>
+                                                <div class="col-xs-6 col-sm-7 col-md-8">
+                                                    <p class="info-value">{{ bank.bankCode }}</p>
+                                                </div>
+                                            </div>
+        
+                                            <div class="row">
+                                                <div class="col-xs-6 col-sm-5 col-md-4">
+                                                    <p class="info-label text-muted">
+                                                        <i class="fa fa-caret-right custom-caret"></i> 
+                                                        SWIFT: </p>
+                                                </div>
+                                                <div class="col-xs-6 col-sm-7 col-md-8">
+                                                    <p class="info-value">{{ bank.swift }}</p>
+                                                </div>
+                                            </div>
+        
+                                        
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="col-md-5 col-sm-6 col-xs-12">
+                                    <h4 class="font-bold m-t-30">Bank Information Document</h4>
+                                    <hr />
+
+                                    
+
+                                    <div class="download-card" *ngFor="let document of bank.documents">
+                                        <i class="fa fa-caret-right custom-caret"></i> 
+                                        <a target="_blank" download href="{{ documentPath + document[0] }}" class="header"> {{ document[1] }}</a>
+
+                                        <a target="_blank" download href="{{ documentPath + document[0] }}">
+                                            <button class="btn label btn-success pull-right">Download</button>
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                            
+
+                        </div>
+                    </div>
+
+                    <!-- Vendor ID -->
+                    <div class="tab-pane" id="id">
+                        <div class="row">
+                            <div class="col-md-6 m-b-20">
+                                <p class="font-bold">Front ID</p>
+                                <img src="{{ idPath + hash(vendor.id) + '/front.jpg' }}" />
+                            </div>
+                            <div class="col-md-6 m-b-20">
+                                <p class="font-bold">Back ID</p>
+                                <img src="{{ idPath + hash(vendor.id) + '/back.jpg' }}" />      
+                            </div>
+                        </div>
+                    </div>
+                    
+                </div>
+            </div>
+        </div>
+    </div>

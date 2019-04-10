@@ -202,7 +202,9 @@ export class RegisterComponent implements OnInit {
     
     this.vendorService.createVendor(vendor).subscribe(
       data => {
+        console.log(data.body);
         if(!isNull(data) && data.success) {
+          console.log(data.body);
           let formdata = this.upload(data.body);
           this.loadingBar.start();
 
@@ -211,33 +213,36 @@ export class RegisterComponent implements OnInit {
               this.loadingBar.set(Math.round(100 * event.loaded / event.total));
             } else if (event instanceof HttpResponse) {
               this.loadingBar.stop();
+              let result = JSON.parse(event.body.toString());
 
-              swal({
-                title: 'Thank you for signing up!',
-                text: "Would you like to upload your first menu?",
-                type: 'success',
-                showCancelButton: true,
-                cancelButtonText: 'LATER',
-                cancelButtonClass: 'cancel-swal',
-                confirmButtonText: 'YES',
-                confirmButtonClass: 'confirm-swal'
-              }).then((result) => {
-                if (result.value) {
-                  this.router.navigate(['/vendor/menu']);
-                } else {
-                  swal({
-                    title: 'Redirecting',
-                    text: 'You will be redirected to the vendor page',
-                    showConfirmButton: false,
-                    timer: 2800
-                  })
-          
-                  setTimeout(()=>{
-                    $('html, body').animate({scrollTop: 0}, 1);
-                    this.router.navigate(['/vendor']);  
-                  },3000)
-                }
-              })
+              if(result.success) {
+                swal({
+                  title: 'Thank you for signing up!',
+                  text: "Would you like to upload your first menu?",
+                  type: 'success',
+                  showCancelButton: true,
+                  cancelButtonText: 'LATER',
+                  cancelButtonClass: 'cancel-swal',
+                  confirmButtonText: 'YES',
+                  confirmButtonClass: 'confirm-swal'
+                }).then((result) => {
+                  if (result.value) {
+                    this.router.navigate(['/vendor/menu']);
+                  } else {
+                    swal({
+                      title: 'Redirecting',
+                      text: 'You will be redirected to the vendor page',
+                      showConfirmButton: false,
+                      timer: 2800
+                    })
+            
+                    setTimeout(()=>{
+                      $('html, body').animate({scrollTop: 0}, 1);
+                      this.router.navigate(['/vendor']);  
+                    },3000)
+                  }
+                })
+              }
             }
           });
         }
@@ -351,18 +356,20 @@ export class RegisterComponent implements OnInit {
 
   @ViewChildren(DropzoneDirective) directiveRef?: QueryList<DropzoneDirective>;
   
-  public upload(id) {
+  public upload(vendorInfo) {
     let dropzones = this.directiveRef.toArray();
     let idFront = dropzones[0].dropzone().files[0];
     let idBack = dropzones[1].dropzone().files[0];
     let documents = dropzones[2].dropzone().files;
     
     const formdata: FormData = new FormData(); 
-    formdata.append('location', id);
+    formdata.append('type', 'documents');
+    formdata.append('vendorID', vendorInfo[0]);
+    formdata.append('vendorBankID', vendorInfo[1]);
     formdata.append('idFront', idFront);
     formdata.append('idBack', idBack);
     for(let document of documents) {
-      formdata.append('documents', document);
+      formdata.append('documents[]', document);
     }    
 
     return formdata;

@@ -18,6 +18,7 @@ const httpOptions = {
 })
 export class VendorService {
   private baseUrl: string;
+  private baseUrlFileUpload: string;
 
   constructor(
     private http: HttpClient,
@@ -25,6 +26,7 @@ export class VendorService {
     private errHandler: ErrorHandlerService
   ) {
     this.baseUrl = this.global.BASE_URL + 'vendor';    
+    this.baseUrlFileUpload = this.global.BASE_URL_FILE_UPLOAD;
   }
 
   /** GET: retrieve entities from the server */
@@ -53,6 +55,12 @@ export class VendorService {
       .post<RequestResult>(`${this.baseUrl}/create-vendor`, vendor, httpOptions)
   }
 
+  /** POST: Approve the vendor */
+  public approveVendor(id): Observable<any> {
+    return this.http
+      .post<RequestResult>(`${this.baseUrl}/approve`, id, httpOptions)
+  }
+
   /** DELETE: delete the entity from the server */
   public deleteVendor(vendor: string | number): Observable<RequestResult> {
     return this.http
@@ -73,9 +81,9 @@ export class VendorService {
       );
   }
 
-  /** POST: Upload image on the server */
+  /** POST: Upload documents on the server */
   public pushFileToStorage(formdata: FormData): Observable<HttpEvent<{}>> { 
-    const req = new HttpRequest('POST', `${this.baseUrl}/uploadImage`, formdata, {
+    const req = new HttpRequest('POST', `${this.baseUrlFileUpload}`, formdata, {
       reportProgress: true,
       responseType: 'text'
     });

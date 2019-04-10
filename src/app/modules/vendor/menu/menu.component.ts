@@ -374,6 +374,7 @@ export class MenuComponent implements OnInit {
     let images = this.directiveRef.dropzone().files;
 
     const formdata: FormData = new FormData(); 
+    formdata.append('type', 'images');
     formdata.append('vendorID', vendorID);
     formdata.append('menuID', menuID);
     for(let image of images) {

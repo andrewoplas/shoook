@@ -13,8 +13,6 @@ export class AdminComponent implements OnInit {
 
   constructor(private auth: AuthService) { 
     this.admin = this.auth.getUser();
-
-    console.log(this.admin)
   }
 
   ngOnInit() {
