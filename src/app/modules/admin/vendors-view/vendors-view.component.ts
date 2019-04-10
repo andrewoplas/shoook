@@ -42,8 +42,6 @@ export class VendorsViewComponent implements OnInit {
             this.vendor.vendorBanks[i]['documents'] = this.parseBankDocuments(
               this.vendor.vendorBanks[i].bankInformationDocuments, this.vendor.vendorBanks[i].id);
           }
-
-          console.log(this.vendor);
         }
       }
     )
@@ -67,7 +65,21 @@ export class VendorsViewComponent implements OnInit {
   }
 
   public approve() {
-    alert('approved!');
+    this.vendorService.approveVendor(this.vendor.id).subscribe(
+      data => {
+        if(data.success) {
+          this.vendor.approved = 1;
+
+          swal({
+            title: 'Vendor Approved!',
+            text: "Vendor has been successfully approved.",
+            type: 'success',
+            showCancelButton: false,
+            confirmButtonText: 'OK',
+          })
+        }
+      }
+    );
   }
 
 }

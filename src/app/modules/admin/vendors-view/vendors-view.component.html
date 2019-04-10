@@ -74,7 +74,7 @@
 
                     <div class="row text-center m-t-10" *ngIf="vendor.approved == 0">
                         <div class="col-md-12">
-                            <button class="btn btn-lg btn-info waves-effect waves-light btn-raised"
+                            <button class="btn btn-md btn-success waves-effect waves-light btn-raised"
                                 [swal]="approveSwal" (confirm)="approve()">
                                 Approve Vendor
                             </button>
@@ -94,6 +94,18 @@
         </div>
 
         <div class="col-md-8 col-xs-12">
+            <div class="p-t-15 p-b-15 white-box notification" *ngIf="vendor.approved == 0">
+                <p class="notification-message">
+                    <i class="fa fa-warning"></i>
+                    <span>{{ vendor.firstName + " " + vendor.lastName}} is not yet verified.</span>
+
+                    <button class="btn btn-sm btn-success waves-effect waves-light btn-raised btn-approve pull-right"
+                        [swal]="approveSwal" (confirm)="approve()">
+                        Approve Vendor
+                    </button>
+                </p>
+            </div>
+
             <div class="white-box">
                 <!-- .tabs -->
                 <ul class="nav nav-tabs tabs customtab">

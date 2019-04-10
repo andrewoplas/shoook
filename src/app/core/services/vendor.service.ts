@@ -55,6 +55,12 @@ export class VendorService {
       .post<RequestResult>(`${this.baseUrl}/create-vendor`, vendor, httpOptions)
   }
 
+  /** POST: Approve the vendor */
+  public approveVendor(id): Observable<any> {
+    return this.http
+      .post<RequestResult>(`${this.baseUrl}/approve`, id, httpOptions)
+  }
+
   /** DELETE: delete the entity from the server */
   public deleteVendor(vendor: string | number): Observable<RequestResult> {
     return this.http

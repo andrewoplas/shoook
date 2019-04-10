@@ -31,3 +31,24 @@
 .download-card {
     margin-bottom: 10px;
 }
+
+.notification {
+    .btn-approve {
+        max-width: 130px;
+    }
+
+    .notification-message {
+        display: flex;
+        align-items: center;
+        margin-bottom: 0;
+
+        span {
+            margin-right: 10px;
+        }
+
+        i {
+            font-size: 20px;
+            margin-right: 5px;
+        }    
+    }
+}
