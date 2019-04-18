@@ -1,0 +1,12 @@
+@import '../../../../assets/scss/partials/variable';
+@import '../../../../assets/plugins/datatables/dataTables.scss';
+
+.dropdown {
+    .caret {
+        margin-left: 5px;
+    }
+
+    .filterLabel {
+        font-weight: bold;
+    }
+}

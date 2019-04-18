@@ -49,6 +49,16 @@ export class MenuService {
       );
   }
 
+  /** GET: retrieve entities from the server */
+  public getMenusAdmin(): Observable<RequestResult> {
+    return this.http
+      .get<RequestResult>(`${this.baseUrl}/get-menus-admin`, httpOptions)
+      .pipe(
+        tap(() => this.log("get-menus")),
+        catchError(this.errHandler.handleError)
+      );
+  }
+
   /** GET: retrieve single entity from the server */
   public getMenuById(id: number): Observable<RequestResult> {
     return this.http
