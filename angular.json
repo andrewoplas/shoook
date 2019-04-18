@@ -40,6 +40,11 @@
               "../shoook/src/assets/plugins/stylishTabs/main.js",
               "../shoook/src/assets/plugins/dropzone/dropzone.min.js",
 
+              "../shoook/src/assets/plugins/gallery/js/animated-masonry-gallery.js",
+              "../shoook/src/assets/plugins/gallery/js/jquery.isotope.min.js",
+              "../shoook/src/assets/plugins/fancybox/ekko-lightbox.min.js",
+              "../shoook/src/assets/plugins/gallery/gallery.js",
+
               "../shoook/src/assets/plugins/sidebar-nav/dist/sidebar-nav.min.js"
             ]
           },

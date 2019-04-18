@@ -77,8 +77,6 @@ export class SearchComponent implements OnInit {
           for(let i=0; i<this.menuList.length; i++) {
             this.menuList[i]['menuImages'] = this.parseImages(this.menuList[i].images);
           }
-
-          console.log(this.menuList);
         }        
       }
     );
