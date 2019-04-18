@@ -29,6 +29,12 @@ export class MenuService {
     this.baseUrlFileUpload = this.global.BASE_URL_FILE_UPLOAD;
   }
 
+  /** POST: Approve the menu */
+  public approveMenu(id): Observable<any> {
+    return this.http
+      .post<RequestResult>(`${this.baseUrl}/approve`, id, httpOptions)
+  }
+
   /** POST: search menu to the server */
   public search(menu): Observable<any> {
     return this.http
@@ -65,6 +71,16 @@ export class MenuService {
       .get<RequestResult>(`${this.baseUrl}/get-menu/${id}`, httpOptions)
       .pipe(
         tap(() => this.log("get-menu")),
+        catchError(this.errHandler.handleError)
+      );
+  }
+
+  /** GET: retrieve single entity from the server */
+  public getMenuByIdAdmin(id: number): Observable<RequestResult> {
+    return this.http
+      .get<RequestResult>(`${this.baseUrl}/get-menu-admin/${id}`, httpOptions)
+      .pipe(
+        tap(() => this.log("get-menu-admin")),
         catchError(this.errHandler.handleError)
       );
   }

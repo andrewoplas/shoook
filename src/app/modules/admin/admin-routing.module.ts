@@ -5,6 +5,7 @@ import { VendorsComponent } from './vendors/vendors.component';
 import { OrdersComponent } from './orders/orders.component';
 import { MenusComponent } from './menus/menus.component';
 import { VendorsViewComponent } from './vendors-view/vendors-view.component';
+import { MenusViewComponent } from './menus-view/menus-view.component';
 
 const routes: Routes = [
   { path: '', redirectTo: 'dashboard', pathMatch: 'full'},
@@ -12,6 +13,7 @@ const routes: Routes = [
   { path: 'vendors', component: VendorsComponent },
   { path: 'vendors/view/:id', component: VendorsViewComponent },
   { path: 'menus', component: MenusComponent },
+  { path: 'menus/view/:id', component: MenusViewComponent },
   { path: 'orders', component: OrdersComponent },
 ];
 

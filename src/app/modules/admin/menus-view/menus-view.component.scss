@@ -1,0 +1,74 @@
+@import '../../../../assets/scss/partials/variable';
+@import '../../../../assets/scss/partials/mixins';
+@import '../../../../assets/plugins/slick/slick.scss';
+@import '../../../../assets/plugins/slick/slick-theme.scss';
+
+@import '../../../../assets/plugins/gallery/css/animated-masonry-gallery.css';
+@import '../../../../assets/plugins/fancybox/ekko-lightbox.min.css';
+
+.user-bg .overlay-box {
+    background: $pink;
+    opacity: 0.8;
+}
+
+.customtab li.active a, .customtab li.active a:hover, .customtab li.active a:focus {
+    border-bottom: 2px solid $pink;
+    color: $pink;
+}
+
+.custom-caret {
+    color: $pink;
+    font-size: 14px;
+    margin-right: 4px;
+}
+
+.btn-enum {
+    background-color: $pink;
+    color: $white;
+    cursor: context-menu;
+    margin-left: 5px;
+}
+
+.notification {
+    .btn-approve {
+        max-width: 130px;
+    }
+
+    .notification-message {
+        display: flex;
+        align-items: center;
+        margin-bottom: 0;
+
+        span {
+            margin-right: 10px;
+        }
+
+        i {
+            font-size: 20px;
+            margin-right: 5px;
+        }    
+    }
+}
+
+/deep/ {
+    .slick-dots li button:before {
+        font-size: 10px !important;
+    }
+
+    .image-container {
+        height: 100px;
+        width: 100%;
+
+        img {
+            height: 100px;
+            width: 100px;
+            display: block;
+            margin-left: auto;
+            margin-right: auto;
+        }
+    }
+
+    .container-fix {
+        width: 150px !important;
+    }
+}

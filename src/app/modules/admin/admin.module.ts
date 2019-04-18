@@ -9,6 +9,7 @@ import { MenusComponent } from './menus/menus.component';
 import { OrdersComponent } from './orders/orders.component';
 import { SweetAlert2Module } from '@toverux/ngx-sweetalert2';
 import { VendorsViewComponent } from './vendors-view/vendors-view.component';
+import { MenusViewComponent } from './menus-view/menus-view.component';
 
 @NgModule({
   declarations: [
@@ -17,6 +18,7 @@ import { VendorsViewComponent } from './vendors-view/vendors-view.component';
     VendorsViewComponent, 
     MenusComponent,
     OrdersComponent,
+    MenusViewComponent,
   ],
   imports: [
     SharedModule,

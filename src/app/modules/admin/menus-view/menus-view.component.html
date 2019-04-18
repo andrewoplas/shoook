@@ -1,0 +1,204 @@
+<div class="row bg-title">
+    <div class="col-lg-3 col-md-4 col-sm-4 col-xs-12">
+        <h4 class="page-title">Menu Information</h4> </div>
+    <div class="col-lg-9 col-sm-8 col-md-8 col-xs-12">
+        <ol class="breadcrumb">
+            <li><a routerLink="/admin/dashboard">Dashboard</a></li>
+            <li><a routerLink="/admin/menus">Menus</a></li>
+            <li class="active">Menu Information</li>
+        </ol>
+    </div>
+</div>
+
+<div class="row" *ngIf="menu != null">
+    <div class="col-md-4 col-xs-12">
+        <div class="white-box">
+            <div class="user-bg">
+                <div id="image" #menuImages>
+                    <div *ngFor="let imageLink of menu.menuImages">
+                        <img width="100%" src="{{imagePath + imageLink}}">
+                    </div>
+                </div>
+            </div>      
+
+            <div class="user-btm-box">
+                <div class="row text-center m-t-10" *ngIf="menu.approved == 0">
+                    <div class="col-md-12">
+                        <button class="btn btn-md btn-success waves-effect waves-light btn-raised"
+                            [swal]="approveSwal" (confirm)="approve()">
+                            Approve Menu
+                        </button>
+                    </div>
+                </div>
+
+                <swal 
+                    #approveSwal 
+                    title="Confirm Approval" 
+                    text="Please confirm to approve this menu." 
+                    type="info"
+                    [showCancelButton]="true" 
+                    confirmButtonText="Yes, Approve it">
+                </swal>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-md-8 col-xs-12">
+        <div class="p-t-15 p-b-15 white-box notification" *ngIf="menu.approved == 0">
+            <p class="notification-message">
+                <i class="fa fa-warning"></i>
+                <span>This menu is not yet verified.</span>
+
+                <button class="btn btn-sm btn-success waves-effect waves-light btn-raised btn-approve pull-right"
+                    [swal]="approveSwal" (confirm)="approve()">
+                    Approve Menu
+                </button>
+            </p>
+        </div>
+
+        <div class="white-box">
+            <!-- .tabs -->
+            <ul class="nav nav-tabs tabs customtab">
+                <li class="tab active">
+                    <a href="#details" data-toggle="tab"> 
+                        <span class="visible-xs">
+                            <i class="fa fa-user"></i>
+                        </span> 
+                        <span class="hidden-xs">Details</span> </a>
+                </li>
+                <li class="tab">
+                    <a href="#gallery-image" data-toggle="tab" aria-expanded="false"> 
+                        <span class="visible-xs">
+                            <i class="fa fa-cog"></i>
+                        </span> 
+                        <span class="hidden-xs">Gallery</span> </a>
+                </li>
+            </ul>
+            <!-- /.tabs -->
+            <div class="tab-content">
+
+                <!-- Details -->
+                <div class="tab-pane active" id="details">
+                    <div class="companies-container">
+                        <div class="row">
+                            <div class="col-md-4 col-xs-4 b-r"> <strong>Vendor</strong>
+                                <p class="text-muted">
+                                    {{ vendor.firstName + " " + vendor.lastName }}
+                                </p>
+                            </div>
+
+                            <div class="col-md-4 col-xs-4 b-r"> <strong>Min. Customers</strong>
+                                <p class="text-muted">
+                                    {{ menu.minimumCustomersRequired }}
+                                </p>
+                            </div>
+
+                            <div class="col-md-4 col-xs-4 b-r"> <strong>Date Created</strong>
+                                <p class="text-muted">
+                                    {{ menu.dateCreated | date:'MMMM dd, yyyy' }}
+                                </p>
+                            </div>
+                        </div>
+
+                        <hr />
+                        <h4 class="font-bold m-t-30">Prices</h4>
+
+                        <div class="row">
+                            <div class="col-xs-12 col-sm-6">
+                                <div class="row">
+                                    <div class="col-xs-6">
+                                        <p class="info-label text-muted">
+                                            <i class="fa fa-caret-right custom-caret"></i> 
+                                            Four Main Courses: </p>
+                                    </div>
+                                    <div class="col-xs-6">
+                                        <p class="info-value">₱ {{ menu.priceFourMainCourse }}</p>
+                                    </div>
+                                </div>
+    
+                                <div class="row">
+                                    <div class="col-xs-6">
+                                        <p class="info-label text-muted">
+                                            <i class="fa fa-caret-right custom-caret"></i>
+                                            Additional Menu: </p>
+                                    </div>
+                                    <div class="col-xs-6">
+                                        <p class="info-value">₱ {{ menu.priceAdditionalMenu }}</p>
+                                    </div>
+                                </div>
+    
+                                <div class="row">
+                                    <div class="col-xs-6">
+                                        <p class="info-label text-muted">
+                                            <i class="fa fa-caret-right custom-caret"></i>
+                                            Additional Dessert: </p>
+                                    </div>
+                                    <div class="col-xs-6">
+                                        <p class="info-value">₱ {{ menu.priceAdditionalDessert }}</p>
+                                    </div>
+                                </div>
+    
+                                <div class="row">
+                                    <div class="col-xs-6">
+                                        <p class="info-label text-muted">
+                                            <i class="fa fa-caret-right custom-caret"></i>
+                                            Additional Lechon: </p>
+                                    </div>
+                                    <div class="col-xs-6">
+                                        <p class="info-value">₱ {{ menu.priceAdditionalLechon }}</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <hr />
+
+                        <div class="row m-t-30">
+                            <div class="col-md-4 col-xs-12">
+                                <h5 class="font-bold">Dishes</h5>
+                                <button class="btn label btn-enum" *ngFor="let dish of menu.menuDishes">
+                                    {{ dish }}
+                                </button>
+                            </div>
+                            <div class="col-md-4 col-xs-12">
+                                <h5 class="font-bold">Desserts</h5>
+                                <button class="btn label btn-enum" *ngFor="let dessert of menu.menuDesserts">
+                                    {{ dessert }}
+                                </button>
+                            </div>
+                            <div class="col-md-4 col-xs-12">
+                                <h5 class="font-bold">Locations</h5>
+                                <button class="btn label btn-enum" *ngFor="let location of menu.menuLocations">
+                                    {{ location }}
+                                </button>
+                            </div>
+                        </div>
+
+                        <hr />
+                        <h4 class="font-bold m-t-30">Style of Cooking</h4>
+                        <p class="text-muted">{{ menu.styleOfCookingDescription }}</p>
+
+                        <hr />
+                        <h4 class="font-bold m-t-30">Specialty / Years of Experience</h4>
+                        <p class="text-muted">{{ menu.specialtyDescription }}</p>
+                    </div>
+                </div>
+                
+                <!-- Gallery -->
+                <div class="tab-pane" id="gallery-image">
+                    <div id="gallery">
+                        <div id="gallery-content">
+                            <div id="gallery-content-center">
+                                <a *ngFor="let imageLink of menu.menuImages" href="{{imagePath + imageLink}}" 
+                                    data-toggle="lightbox" data-gallery="multiimages" data-title="Menu Image">
+                                    <img src="{{imagePath + imageLink}}" alt="gallery" class="all landscape" /> 
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="clearfix"></div>
+                </div>
+            </div>
+        </div>
+  </div>
+</div>
