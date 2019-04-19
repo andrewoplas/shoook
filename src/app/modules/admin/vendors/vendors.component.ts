@@ -3,6 +3,8 @@ import { VendorService } from '@core/services/vendor.service';
 import swal from 'sweetalert2';
 import 'datatables.net';
 import * as $ from 'jquery';
+import { HttpResponse } from '@angular/common/http';
+import { SwalService } from '@core/services/swal.service';
 
 @Component({
   selector: 'app-vendors',
@@ -19,7 +21,8 @@ export class VendorsComponent implements OnInit {
   public currentFilter = 0;
 
   constructor(
-    private vendorService: VendorService
+    private vendorService: VendorService,
+    private swalService: SwalService
   ) { }
 
   ngOnInit() {
@@ -71,8 +74,43 @@ export class VendorsComponent implements OnInit {
     }
   }
 
-  public removeVendor(id) {
-    console.log(id);
+  public refresh() {
+    this.getVendors();
+  }
+
+  public remove(id) {
+    this.vendorService.deleteVendor(id).subscribe(
+      data => {
+        if(data.success) {
+          let bankIds = data.body;
+          console.log(bankIds);
+
+          // Remove files related to the vendor
+          const formdata: FormData = new FormData(); 
+          formdata.append('type', 'documents');
+          formdata.append('vendorID', 'documents');
+          for(let id of bankIds) {
+            formdata.append('vendorBankID[]', id);
+          }    
+
+          this.vendorService.removeFileToStorage(formdata).subscribe(event => {
+            if (event instanceof HttpResponse) {
+              let result = JSON.parse(event.body.toString());
+              console.log(result);
+              if(result.success) {
+                this.swalService.swalSuccess(
+                  "Success!",
+                  "Vendor has been successfully deleted."
+                );
+              } else {
+                this.swalService.swalError();
+              }
+            }
+          })
+
+        }
+      }
+    )
   }
 
 }

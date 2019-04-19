@@ -19,6 +19,7 @@ const httpOptions = {
 export class VendorService {
   private baseUrl: string;
   private baseUrlFileUpload: string;
+  private baseUrlRemoveFile: string;
 
   constructor(
     private http: HttpClient,
@@ -27,6 +28,7 @@ export class VendorService {
   ) {
     this.baseUrl = this.global.BASE_URL + 'vendor';    
     this.baseUrlFileUpload = this.global.BASE_URL_FILE_UPLOAD;
+    this.baseUrlRemoveFile = this.global.BASE_URL_FILE_REMOVE;
   }
 
   /** GET: retrieve entities from the server */
@@ -85,6 +87,15 @@ export class VendorService {
   public pushFileToStorage(formdata: FormData): Observable<HttpEvent<{}>> { 
     const req = new HttpRequest('POST', `${this.baseUrlFileUpload}`, formdata, {
       reportProgress: true,
+      responseType: 'text'
+    });
+ 
+    return this.http.request(req);
+  }
+
+  /** POST: Remove documents on the server */
+  public removeFileToStorage(formdata: FormData): Observable<HttpEvent<{}>> { 
+    const req = new HttpRequest('POST', `${this.baseUrlRemoveFile}`, formdata, {
       responseType: 'text'
     });
  

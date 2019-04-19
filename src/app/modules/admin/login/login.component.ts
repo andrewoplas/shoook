@@ -4,6 +4,7 @@ import * as $ from 'jquery';
 import swal from 'sweetalert2';
 import { AuthService } from '@core/services/auth.service';
 import { Role } from '@shared/models/UserLogin.model';
+import { SwalService } from '@core/services/swal.service';
 
 @Component({
   selector: 'app-login',
@@ -18,7 +19,8 @@ export class LoginComponent implements OnInit {
 
   constructor(
     private fb: FormBuilder,
-    private auth: AuthService
+    private auth: AuthService,
+    private swalService: SwalService
   ) { }
 
   ngOnInit() {
@@ -29,14 +31,12 @@ export class LoginComponent implements OnInit {
       emailAddress: this.forms.value.emailAddress.trim(),
       password: this.forms.value.password.trim(),
       role: Role.ADMIN
-    };    
-
-    swal({
-      title: 'Logging in',
-      text: 'Please wait a moment as we try to check your credentials.',
-      showCancelButton: false,
-      showConfirmButton: false
-    });
+    }; 
+    
+    this.swalService.swalLoading(
+      "Logging in",
+      "Please wait a moment as we try to check your credentials."
+    );
 
     this.auth.login(user).subscribe(
       response => {
@@ -44,13 +44,11 @@ export class LoginComponent implements OnInit {
           swal.close();
           this.auth.successLogin(response.body);
         } else {
-          swal({
-            title: "Error",
-            text: "Invalid Username or Password!",
-            type: "error",
-            confirmButtonText: "Try Again",
-            confirmButtonColor: "#ff5a5f"
-          });
+          this.swalService.swalError(
+            "Error",
+            "Invalid Username or Password!",
+            "Try Again"
+          );
         }
       }, 
     );

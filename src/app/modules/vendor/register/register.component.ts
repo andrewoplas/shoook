@@ -202,9 +202,7 @@ export class RegisterComponent implements OnInit {
     
     this.vendorService.createVendor(vendor).subscribe(
       data => {
-        console.log(data.body);
         if(!isNull(data) && data.success) {
-          console.log(data.body);
           let formdata = this.upload(data.body);
           this.loadingBar.start();
 
