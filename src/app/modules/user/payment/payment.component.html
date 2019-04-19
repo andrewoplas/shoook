@@ -95,13 +95,9 @@
             <div class="order-container">
                 <h2 class="title-text">You're almost done!</h2>
                 <div id="menu-images">
-                    <div *ngFor="let image of menu_images; let last = last">
-                        <div class="image-carousel">
-                            <img [src]="image" alt="Image of {{ menu.styleOfCookingDescription }}">
-                        </div>
+                    <div class="image-carousel" *ngFor="let image of menu.menuImages;">
+                        <img src="{{ imagePath + image }}" alt="Image of {{ menu.styleOfCookingDescription }}">
                     </div>
-
-                    {{ initSlick() }}
                 </div>
     
                 <span class="option">Option 1</span>

@@ -62,7 +62,7 @@
             </div>
 
             <h3 id="results-text">
-                <span>30</span> Caterers in <span>Cebu City</span>
+                <span>{{ menuList.length }}</span> Caterers Found
             </h3>
 
             <div class="results-container">
@@ -75,7 +75,7 @@
                     <span class="option m-t-10">Option 1</span>
                     <span class="title">{{ menu.styleOfCookingDescription }}</span>
                     <span class="description">{{ menu.specialtyDescription }}</span>
-                    <span class="price">P{{ menu.priceFourMainCourse | number: '2.' }}</span>
+                    <span class="price">₱ {{ menu.priceFourMainCourse | number: '2.' }}</span>
                     <span class="lay-away">*Available on Lay Away</span>
                 </div>
             </div>

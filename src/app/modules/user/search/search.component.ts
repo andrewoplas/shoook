@@ -4,6 +4,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import swal from 'sweetalert2';
 import * as $ from 'jquery';
 import { Globals } from '@shared/models/Global';
+import { SwalService } from '@core/services/swal.service';
 
 declare var require: any
 
@@ -25,6 +26,7 @@ export class SearchComponent implements OnInit {
 
   constructor(
     private menuService: MenuService,
+    private swalService: SwalService,
     private route: ActivatedRoute,
     private router: Router,
     private global: Globals
@@ -58,7 +60,6 @@ export class SearchComponent implements OnInit {
       this.initializeSlick();
     })
   }
-
   
   public getMenuList() {
     let search = {
@@ -77,7 +78,7 @@ export class SearchComponent implements OnInit {
           for(let i=0; i<this.menuList.length; i++) {
             this.menuList[i]['menuImages'] = this.parseImages(this.menuList[i].images);
           }
-        }        
+        }       
       }
     );
   }
@@ -102,7 +103,7 @@ export class SearchComponent implements OnInit {
     }
   }
 
-  item_click(menu) {
+  public item_click(menu) {
     if (this.currentMenu != menu) {
       this.addedMenu = []
       this.changeMenu = menu.dishes.split(',');
@@ -112,21 +113,21 @@ export class SearchComponent implements OnInit {
     eval("$('#itemBook').modal('show')");
   }
 
-  removeMenu(index) {
+  public removeMenu(index) {
     this.addedMenu.push(this.changeMenu[index]);
     this.changeMenu.splice(index, 1);
   }
 
-  addMenu(index) {
+  public addMenu(index) {
     this.changeMenu.push(this.addedMenu[index]);
     this.addedMenu.splice(index, 1);
   }
 
-  date_click() {
+  public date_click() {
     this.datePicker.show();
   }
 
-  book() {
+  public book() {
     if(this.changeMenu.length > 0) {
       let item = {
         menu: this.currentMenu,
@@ -135,14 +136,12 @@ export class SearchComponent implements OnInit {
       sessionStorage.setItem("item", JSON.stringify(item));
       eval("$('#itemBook').modal('hide')");
       this.router.navigate(['/checkout']);
+      
     } else {
-      swal({
-        title: 'Ooops!',
-        text: "Please have atleast 1 menu before booking.",
-        type: 'error',
-        showCancelButton: false,
-        confirmButtonText: 'OK',
-      })
+      this.swalService.swalError(
+        "Ooops!",
+        "Please have atleast 1 menu before booking."
+      );
     }
   }
 }
