@@ -5,6 +5,7 @@ import {Md5} from 'ts-md5/dist/md5';
 import swal from 'sweetalert2';
 import * as $ from 'jquery';
 import { MenuService } from '@core/services/menu.service';
+import { SwalService } from '@core/services/swal.service';
 
 @Component({
   selector: 'app-menus-view',
@@ -21,6 +22,7 @@ export class MenusViewComponent implements OnInit {
   constructor(
     private route: ActivatedRoute,
     private menuService: MenuService,
+    private swalService: SwalService,
     private global: Globals
   ) {
     this.imagePath = this.global.MENU_IMAGE_PATH;
@@ -78,18 +80,16 @@ export class MenusViewComponent implements OnInit {
   }
 
   public approve() {
+    this.swalService.swalLoading();
+
     this.menuService.approveMenu(this.menu.id).subscribe(
       data => {
         if(data.success) {
           this.menu.approved = 1;
-
-          swal({
-            title: 'Menu Approved!',
-            text: "Menu has been successfully approved.",
-            type: 'success',
-            showCancelButton: false,
-            confirmButtonText: 'OK',
-          })
+          this.swalService.swalSuccess(
+            "Menu Approved!",
+            "Menu has been successfully approved."
+          );
         }
       }
     );

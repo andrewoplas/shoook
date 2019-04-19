@@ -5,6 +5,7 @@ import { Globals } from '@shared/models/Global';
 import {Md5} from 'ts-md5/dist/md5';
 import swal from 'sweetalert2';
 import * as $ from 'jquery';
+import { SwalService } from '@core/services/swal.service';
 
 @Component({
   selector: 'app-vendors-view',
@@ -23,6 +24,7 @@ export class VendorsViewComponent implements OnInit {
   constructor(
     private route: ActivatedRoute,
     private vendorService: VendorService,
+    private swalService: SwalService,
     private global: Globals
   ) {
     this.idPath = this.global.ID_IMAGE_PATH;
@@ -59,7 +61,7 @@ export class VendorsViewComponent implements OnInit {
             this.vendor.vendorBanks[i]['documents'] = this.parseBankDocuments(
               this.vendor.vendorBanks[i].bankInformationDocuments, this.vendor.vendorBanks[i].id);
           }
-          console.log(this.vendor);
+          
           for(let i=0; i<this.vendor.menus.length; i++) {
             this.vendor.menus[i]['menuImages'] = this.parseImages(this.vendor.menus[i].images);
           }
@@ -99,18 +101,16 @@ export class VendorsViewComponent implements OnInit {
   }
 
   public approve() {
+    this.swalService.swalLoading();
+
     this.vendorService.approveVendor(this.vendor.id).subscribe(
       data => {
         if(data.success) {
           this.vendor.approved = 1;
-
-          swal({
-            title: 'Vendor Approved!',
-            text: "Vendor has been successfully approved.",
-            type: 'success',
-            showCancelButton: false,
-            confirmButtonText: 'OK',
-          })
+          this.swalService.swalSuccess(
+            "Vendor Approved!",
+            "Vendor has been successfully approved."
+          );
         }
       }
     );
