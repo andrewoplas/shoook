@@ -1,7 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChildren, QueryList } from '@angular/core';
 import { Router } from '@angular/router';
-import * as $ from 'jquery';
 import { FormBuilder, Validators } from '@angular/forms';
+import { Globals } from '@shared/models/Global';
+import * as $ from 'jquery';
 
 declare var require: any;
 
@@ -11,9 +12,10 @@ declare var require: any;
   styleUrls: ['./checkout.component.scss']
 })
 export class CheckoutComponent implements OnInit {
+  @ViewChildren('images') images: QueryList<any>;
   public menu: any;
   public menu_items: any;
-  public menu_images = [];
+  public imagePath;
   public forms = this.formBuilder.group({
       firstName: ["", Validators.required],
       lastName: ["", Validators.required],
@@ -28,36 +30,36 @@ export class CheckoutComponent implements OnInit {
 
   constructor(
     private router: Router,
+    private global: Globals,
     private formBuilder: FormBuilder
-  ) { 
+  ) { }
+
+  ngOnInit() { 
+    this.imagePath = this.global.MENU_IMAGE_PATH;
     this.retrieveItem();
   }
 
-  ngOnInit() { }
-
-  retrieveItem() {
-    if (sessionStorage.getItem("item") !== null) {
-      let item = JSON.parse(sessionStorage.getItem("item"));
-      this.menu = item.menu;
-      this.menu_items = item.menu_items
-      let images = this.menu.images.split(',');
-      let i, count = Number(images[1]);
-      for(i = 0; i<count; i++) { 
-        this.menu_images.push(require('../../../../../uploads/menus/' + images[0] + '/' + images[0] + i + '.jpg'))
-      }
-
-    } else {
-      this.router.navigate(['/search']);
-    }
+  ngAfterViewInit() {
+    this.initializeSlick();
   }
 
-  initSlick() {
+  public initializeSlick() {
     if(!$('#menu-images').hasClass('slick-initialized')) {
       eval("$('#menu-images').slick({autoplay: true, autoplaySpeed: 2000, dots: true, arrows: false})");
     }
   }
 
-  checkout() {
+  public retrieveItem() {
+    if (sessionStorage.getItem("item") !== null) {
+      let item = JSON.parse(sessionStorage.getItem("item"));
+      this.menu = item.menu;
+      this.menu_items = item.menu_items
+    } else {
+      this.router.navigate(['/search']);
+    }
+  }
+
+  public checkout() {
     Object.keys(this.forms.controls).forEach(field => {
       const control = this.forms.get(field);
       control.markAsTouched({ onlySelf: true });

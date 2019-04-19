@@ -6,8 +6,7 @@ import swal from 'sweetalert2';
 import * as jspdf from 'jspdf';  
 import * as $ from 'jquery';
 import { toBase64String } from '@angular/compiler/src/output/source_map';
-
-
+import { Globals } from '@shared/models/Global';
 
 declare var require: any;
 
@@ -22,16 +21,19 @@ export class PaymentComponent implements OnInit {
   public menu_items: any;
   public menu_images = [];
   public monthly = 6;
-  public pay_date
+  public pay_date;
+  public imagePath;
 
   constructor(
     private router: Router,
+    private global: Globals,
     private pipeDate: DatePipe
-  ) { 
-    this.retrieveItem();
-  }
+  ) { }
 
   ngOnInit() {
+    this.retrieveItem();
+    this.imagePath = this.global.MENU_IMAGE_PATH;
+
     $("div.bhoechie-tab-menu>div.list-group>a").click(function(e) {
       e.preventDefault();
       $(this).siblings('a.active').removeClass("active");
@@ -45,40 +47,39 @@ export class PaymentComponent implements OnInit {
     this.pay_date.setDate(this.pay_date.getDate()+2);
   }
 
-  retrieveItem() {
+  ngAfterViewInit() {
+    this.initializeSlick();
+  }
+
+  public retrieveItem() {
     if (sessionStorage.getItem("item") !== null) {
       let item = JSON.parse(sessionStorage.getItem("item"));
-      console.log(item.user);
+      
       if(item.user == null || item.user == undefined) {
         this.router.navigate(['/search']);
       }
 
       this.menu = item.menu;
       this.menu_items = item.menu_items
-      let images = this.menu.images.split(',');
-      let i, count = Number(images[1]);
-      for(i = 0; i<count; i++) { 
-        this.menu_images.push(require('../../../../../uploads/menus/' + images[0] + '/' + images[0] + i + '.jpg'))
-      }
 
     } else {
       this.router.navigate(['/search']);
     }
   }
 
-  initSlick() {
+  public initializeSlick() {
     if(!$('#menu-images').hasClass('slick-initialized')) {
       eval("$('#menu-images').slick({autoplay: true, autoplaySpeed: 2000, dots: true, arrows: false})");
     }
   }
 
-  pay() {
+  public pay() {
     this.pay_date = new Date();
     this.pay_date.setDate(this.pay_date.getDate()+2);
     eval("$('#printSave').modal('show')");    
   }
 
-  convertPdf() {  
+  public convertPdf() {  
     $('#content').removeClass('hide');
     swal({
       title: 'Processing!',
@@ -108,7 +109,7 @@ export class PaymentComponent implements OnInit {
     });  
   }  
 
-  getPayments() {
+  public getPayments() {
     this.pay_date = new Date();
     let amount = Math.round(this.menu.priceFourMainCourse / this.monthly);
     let months = [], i=0;
